@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>统计分析 - 系统信息汇总</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css'>
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background-color: #2a2a40;
+            min-height: 100vh;
+        }
+        .sidebar .nav-link {
+            color: #ccc;
+        }
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #3a3a50;
+        }
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #4a4a60;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .card {
+            background-color: #2a2a40;
+            border: none;
+            border-radius: 8px;
+        }
+        .form-control {
+            background-color: #3a3a50;
+            border: 1px solid #4a4a60;
+            color: #fff;
+        }
+        .form-control:focus {
+            background-color: #3a3a50;
+            border-color: #6a6a80;
+            color: #fff;
+            box-shadow: 0 0 0 0.2rem rgba(106, 106, 128, 0.25);
+        }
+        .btn-primary {
+            background-color: #6a6a80;
+            border-color: #6a6a80;
+        }
+        .btn-primary:hover {
+            background-color: #7a7a90;
+            border-color: #7a7a90;
+        }
+        .table {
+            color: #fff;
+        }
+        .table th {
+            background-color: #3a3a50;
+        }
+        .table tr:nth-child(even) {
+            background-color: #2a2a40;
+        }
+        .table tr:nth-child(odd) {
+            background-color: #303045;
+        }
+        .spinner-border {
+            color: #6a6a80;
+        }
+    </style>
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row'>
+            <!-- 侧边栏 -->
+            <div class='col-md-3 sidebar'>
+                <div class='p-4'>
+                    <h3 class='text-center mb-4'>统计分析</h3>
+                    <ul class='nav flex-column' id='statMenu'>
+                        <!-- 菜单将通过JavaScript动态加载 -->
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class='col-md-9 main-content'>
+                <div class='card mb-4'>
+                    <div class='card-body'>
+                        <h2 id='pageTitle'>系统信息汇总</h2>
+                        <div class='row mb-3' id='paramsContainer'>
+                            <!-- 参数将通过JavaScript动态加载 -->
+                        </div>
+                        <div class='row mb-3'>
+                            <div class='col-md-4 d-flex align-items-end'>
+                                <button class='btn btn-primary w-100' onclick='runAnalysis()'>查询统计</button>
+                            </div>
+                        </div>
+                        <div id='analysisResult' class='mt-3'>
+                            <div class='text-center'>请点击查询按钮开始统计</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+    <script>
+        var statType = 'system';
+        var pageConfig = null;
+        
+        // 加载页面配置
+        function loadPageConfig() {
+            $.ajax({
+                url: '/get-stat-page-config',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({pageCode: statType}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            pageConfig = resp.data;
+                            $('#pageTitle').text(pageConfig.PAGE_TITLE || '系统信息汇总');
+                            generateFormFields(pageConfig.PARAMS_CONFIG);
+                        }
+                    } catch (e) {
+                        console.error('解析配置失败:', e);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载配置失败:', error);
+                }
+            });
+        }
+        
+        // 根据配置生成表单控件
+        function generateFormFields(paramsConfig) {
+            var paramsHtml = '';
+            try {
+                var config = typeof paramsConfig === 'string' ? JSON.parse(paramsConfig) : paramsConfig;
+                
+                // 日期范围选择器 - 强制显示
+                var dateRangeLabel = config.dateRangeLabel || '日期范围';
+                paramsHtml += '<div class="col-md-6">';
+                paramsHtml += '<label class="form-label">' + dateRangeLabel + '</label>';
+                paramsHtml += '<div class="input-group">';
+                paramsHtml += '<input type="date" class="form-control" id="startDate">';
+                paramsHtml += '<span class="input-group-text">至</span>';
+                paramsHtml += '<input type="date" class="form-control" id="endDate">';
+                paramsHtml += '</div>';
+                paramsHtml += '</div>';
+                
+                // 时间范围选择器
+                if (config.timeRange) {
+                    var timeRangeLabel = config.timeRangeLabel || '时间范围';
+                    paramsHtml += '<div class="col-md-4">';
+                    paramsHtml += '<label class="form-label">' + timeRangeLabel + '</label>';
+                    paramsHtml += '<select class="form-select" id="timeRange">';
+                    paramsHtml += '<option value="today">今天</option>';
+                    paramsHtml += '<option value="week">本周</option>';
+                    paramsHtml += '<option value="month">本月</option>';
+                    paramsHtml += '<option value="year">本年</option>';
+                    paramsHtml += '</select>';
+                    paramsHtml += '</div>';
+                }
+                
+                // 科室选择器
+                if (config.department) {
+                    var deptLabel = config.departmentLabel || '执行科室';
+                    paramsHtml += '<div class="col-md-4">';
+                    paramsHtml += '<label class="form-label">' + deptLabel + '</label>';
+                    paramsHtml += '<select class="form-select" id="department">';
+                    paramsHtml += '<option value="">全部科室</option>';
+                    paramsHtml += '<option value="消化内镜(总)">消化内镜(总)</option>';
+                    paramsHtml += '<option value="呼吸内镜科">呼吸内镜科</option>';
+                    paramsHtml += '<option value="放射科">放射科</option>';
+                    paramsHtml += '<option value="超声科">超声科</option>';
+                    paramsHtml += '<option value="神经内科">神经内科</option>';
+                    paramsHtml += '<option value="体检科">体检科</option>';
+                    paramsHtml += '</select>';
+                    paramsHtml += '</div>';
+                }
+                
+                // 检查类别选择器
+                if (config.category) {
+                    var catLabel = config.categoryLabel || '检查类别';
+                    paramsHtml += '<div class="col-md-4">';
+                    paramsHtml += '<label class="form-label">' + catLabel + '</label>';
+                    paramsHtml += '<input type="text" class="form-control" id="category" placeholder="输入检查类别">';
+                    paramsHtml += '</div>';
+                }
+            } catch (e) {
+                console.error('解析参数配置失败:', e);
+                // 默认显示日期范围选择器
+                paramsHtml += '<div class="col-md-6">';
+                paramsHtml += '<label class="form-label">日期范围</label>';
+                paramsHtml += '<div class="input-group">';
+                paramsHtml += '<input type="date" class="form-control" id="startDate">';
+                paramsHtml += '<span class="input-group-text">至</span>';
+                paramsHtml += '<input type="date" class="form-control" id="endDate">';
+                paramsHtml += '</div>';
+                paramsHtml += '</div>';
+            }
+            
+            $('#paramsContainer').html(paramsHtml);
+            
+            // 设置默认日期范围（本月）
+            var today = new Date();
+            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            $('#startDate').val(firstDay.toISOString().split('T')[0]);
+            $('#endDate').val(today.toISOString().split('T')[0]);
+        }
+        
+        // 加载统计菜单
+        function loadStatMenu() {
+            $.ajax({
+                url: '/get-stat-menu',
+                type: 'GET',
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    if (data.success) {
+                        var menuHtml = '';
+                        data.data.forEach(function(item) {
+                            var activeClass = item.MENU_CODE === statType ? 'active' : '';
+                            menuHtml += '<li class="nav-item">' +
+                                '<a class="nav-link ' + activeClass + '" href="/stats/' + item.MENU_CODE + '">' +
+                                '<i class="bi ' + item.ICON_CLASS + '"></i> ' + item.MENU_NAME +
+                                '</a>' +
+                                '</li>';
+                        });
+                        $('#statMenu').html(menuHtml);
+                    }
+                }
+            });
+        }
+        
+        // 运行分析
+        function runAnalysis() {
+            var params = {type: statType};
+            
+            // 收集所有表单参数
+            if ($('#startDate').length > 0 && $('#endDate').length > 0) {
+                params.startDate = $('#startDate').val();
+                params.endDate = $('#endDate').val();
+            }
+            if ($('#analysisDate').length > 0) {
+                params.date = $('#analysisDate').val();
+            }
+            if ($('#timeRange').length > 0) {
+                params.timeRange = $('#timeRange').val();
+            }
+            if ($('#department').length > 0) {
+                params.department = $('#department').val();
+            }
+            if ($('#category').length > 0) {
+                params.category = $('#category').val();
+            }
+            
+            $('#analysisResult').html('<div class="text-center"><span class="spinner-border spinner-border-sm"></span> 加载中...</div>');
+            $.ajax({
+                url: '/daily-analysis',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(params),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            displayAnalysisResult(resp.data);
+                        } else {
+                            $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + (resp.error || '未知错误') + '</div>');
+                        }
+                    } catch (e) {
+                        $('#analysisResult').html('<div class="alert alert-danger">解析数据时发生错误</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + error + '</div>');
+                }
+            });
+        }
+        
+        // 显示分析结果
+        function displayAnalysisResult(data) {
+            if (data.length === 0) {
+                $('#analysisResult').html('<div class="text-center">暂无数据</div>');
+                return;
+            }
+            
+            var html = '<table class="table table-bordered">';
+            
+            // 表头
+            html += '<thead><tr>';
+            Object.keys(data[0]).forEach(function(key) {
+                html += '<th>' + key + '</th>';
+            });
+            html += '</tr></thead>';
+            
+            // 表体
+            html += '<tbody>';
+            data.forEach(function(row) {
+                html += '<tr>';
+                Object.values(row).forEach(function(value) {
+                    html += '<td>' + (value || '') + '</td>';
+                });
+                html += '</tr>';
+            });
+            html += '</tbody>';
+            html += '</table>';
+            
+            $('#analysisResult').html(html);
+        }
+        
+        // 页面加载完成后执行
+        $(document).ready(function() {
+            loadPageConfig();
+            loadStatMenu();
+        });
+    </script>
+</body>
+</html>
+

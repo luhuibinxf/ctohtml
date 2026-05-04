@@ -1,0 +1,116 @@
+-- 数据库汇总信息查询
+-- 基于WiNEX_PACS数据库
+-- 统计最新数据
+
+USE WiNEX_PACS;
+
+-- 1. 系统信息汇总
+PRINT '=== 系统信息汇总 ===';
+SELECT 
+    SYSTEM_SOURCE_NO AS 系统标识,
+    COUNT(DISTINCT EXAM_TASK_ID) AS 任务数量,
+    MAX(CREATED_AT) AS 最新任务时间
+FROM EXAM_TASK 
+WHERE IS_DEL = 0
+GROUP BY SYSTEM_SOURCE_NO
+ORDER BY 任务数量 DESC;
+
+-- 2. 检查类别汇总
+PRINT '';
+PRINT '=== 检查类别汇总 ===';
+SELECT 
+    EXAM_CATEGORY_NAME AS 检查类别,
+    COUNT(DISTINCT EXAM_TASK_ID) AS 数量,
+    MAX(CREATED_AT) AS 最新检查时间
+FROM EXAM_TASK 
+WHERE IS_DEL = 0
+  AND SYSTEM_SOURCE_NO = 'RIS'
+  AND EXAM_TASK_STATUS >= 50
+GROUP BY EXAM_CATEGORY_NAME
+ORDER BY 数量 DESC;
+
+-- 3. 人员属性汇总 - 报告医生
+PRINT '';
+PRINT '=== 报告医生汇总 ===';
+SELECT 
+    r.REPORTER_NAME AS 医生姓名,
+    COUNT(DISTINCT r.EXAM_TASK_ID) AS 报告数量,
+    MAX(r.CREATED_AT) AS 最新报告时间
+FROM EXAM_REPORT r
+INNER JOIN EXAM_TASK t ON r.EXAM_TASK_ID = t.EXAM_TASK_ID
+WHERE r.IS_DEL = 0
+  AND t.IS_DEL = 0
+  AND t.SYSTEM_SOURCE_NO = 'RIS'
+  AND r.REPORTER_NAME IS NOT NULL
+GROUP BY r.REPORTER_NAME
+ORDER BY 报告数量 DESC;
+
+-- 4. 人员属性汇总 - 审核医生
+PRINT '';
+PRINT '=== 审核医生汇总 ===';
+SELECT 
+    r.REVIEWER_NAME AS 医生姓名,
+    COUNT(DISTINCT r.EXAM_TASK_ID) AS 审核数量,
+    MAX(r.CREATED_AT) AS 最新审核时间
+FROM EXAM_REPORT r
+INNER JOIN EXAM_TASK t ON r.EXAM_TASK_ID = t.EXAM_TASK_ID
+WHERE r.IS_DEL = 0
+  AND t.IS_DEL = 0
+  AND t.SYSTEM_SOURCE_NO = 'RIS'
+  AND r.REVIEWER_NAME IS NOT NULL
+GROUP BY r.REVIEWER_NAME
+ORDER BY 审核数量 DESC;
+
+-- 5. 人员属性汇总 - 技师
+PRINT '';
+PRINT '=== 技师汇总 ===';
+SELECT 
+    t.TECHNICIAN_NAME AS 技师姓名,
+    COUNT(DISTINCT t.EXAM_TASK_ID) AS 检查数量,
+    MAX(t.CREATED_AT) AS 最新检查时间
+FROM EXAM_TASK t
+INNER JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
+WHERE t.IS_DEL = 0
+  AND r.IS_DEL = 0
+  AND t.SYSTEM_SOURCE_NO = 'RIS'
+  AND t.TECHNICIAN_NAME IS NOT NULL
+GROUP BY t.TECHNICIAN_NAME
+ORDER BY 检查数量 DESC;
+
+-- 6. 执行科室汇总（基于检查类别分组）
+PRINT '';
+PRINT '=== 执行科室汇总 ===';
+SELECT 
+    CASE 
+        WHEN EXAM_CATEGORY_NAME IN (N'普放', N'普放(新)', N'钼靶', N'消化道造影', N'消化道造影(新)') THEN '普放组'
+        WHEN EXAM_CATEGORY_NAME IN (N'CT', N'CT(新)', N'CTA', N'CTA(新)', N'CT重建', N'CT三维重建') THEN 'CT组'
+        WHEN EXAM_CATEGORY_NAME IN (N'核磁共振', N'核磁共振增强', N'MRI增强', N'MRA', N'MRV', N'MRU', N'MRCP', N'MRS') THEN 'MRI组'
+        ELSE '其他组'
+    END AS 执行科室,
+    COUNT(DISTINCT EXAM_TASK_ID) AS 任务数量,
+    MAX(CREATED_AT) AS 最新任务时间
+FROM EXAM_TASK 
+WHERE IS_DEL = 0
+  AND SYSTEM_SOURCE_NO = 'RIS'
+  AND EXAM_TASK_STATUS >= 50
+GROUP BY 
+    CASE 
+        WHEN EXAM_CATEGORY_NAME IN (N'普放', N'普放(新)', N'钼靶', N'消化道造影', N'消化道造影(新)') THEN '普放组'
+        WHEN EXAM_CATEGORY_NAME IN (N'CT', N'CT(新)', N'CTA', N'CTA(新)', N'CT重建', N'CT三维重建') THEN 'CT组'
+        WHEN EXAM_CATEGORY_NAME IN (N'核磁共振', N'核磁共振增强', N'MRI增强', N'MRA', N'MRV', N'MRU', N'MRCP', N'MRS') THEN 'MRI组'
+        ELSE '其他组'
+    END
+ORDER BY 任务数量 DESC;
+
+-- 7. 系统状态汇总
+PRINT '';
+PRINT '=== 系统状态汇总 ===';
+SELECT 
+    EXAM_TASK_STATUS AS 任务状态,
+    COUNT(DISTINCT EXAM_TASK_ID) AS 数量,
+    MAX(CREATED_AT) AS 最新时间
+FROM EXAM_TASK 
+WHERE IS_DEL = 0
+  AND SYSTEM_SOURCE_NO = 'RIS'
+GROUP BY EXAM_TASK_STATUS
+ORDER BY EXAM_TASK_STATUS;

@@ -1,0 +1,108 @@
+<div class="bg-white rounded-3 p-4">
+    <ul class="nav nav-tabs" id="configTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="procRegistryTab" data-bs-toggle="tab" data-bs-target="#procRegistry" type="button">存储注册</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pageConfigTab" data-bs-toggle="tab" data-bs-target="#pageConfig" type="button">页面配置</button>
+        </li>
+    </ul>
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="procRegistry">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="搜索存储过程..." id="procSearch">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100">注册存储过程</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary w-100">刷新列表</button>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>类别</th>
+                        <th>参数</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>usp_GetDailyAnalysis</td>
+                        <td>每日分析</td>
+                        <td>startDate, endDate, system</td>
+                        <td><span class="badge bg-success">已注册</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">编辑</button>
+                            <button class="btn btn-sm btn-danger">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>usp_GetDepartmentStats</td>
+                        <td>科室统计</td>
+                        <td>startDate, endDate</td>
+                        <td><span class="badge bg-success">已注册</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">编辑</button>
+                            <button class="btn btn-sm btn-danger">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>usp_GetDoctorStats</td>
+                        <td>医生统计</td>
+                        <td>startDate, endDate, doctorType</td>
+                        <td><span class="badge bg-success">已注册</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">编辑</button>
+                            <button class="btn btn-sm btn-danger">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pageConfig">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100">添加页面</button>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>页面名称</th>
+                        <th>路径</th>
+                        <th>显示顺序</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>每日分析</td>
+                        <td>/daily-analysis</td>
+                        <td>1</td>
+                        <td><span class="badge bg-success">启用</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">编辑</button>
+                            <button class="btn btn-sm btn-warning">禁用</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>科室统计</td>
+                        <td>/department-statistics</td>
+                        <td>2</td>
+                        <td><span class="badge bg-success">启用</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-info">编辑</button>
+                            <button class="btn btn-sm btn-warning">禁用</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放射科书写组分值计算表</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f5f5f5; padding: 20px; }
+        
+        .container { max-width: 1800px; margin: 0 auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 30px; }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 24px; color: #333; margin-bottom: 5px; }
+        .header .date { color: #666; font-size: 14px; }
+        
+        .filter-bar { display: flex; gap: 15px; align-items: center; margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; flex-wrap: wrap; }
+        .filter-bar label { font-weight: 500; color: #333; }
+        .filter-bar select, .filter-bar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .filter-bar button { padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .filter-bar button:hover { background: #0056b3; }
+        
+        .table-wrapper { overflow-x: auto; }
+        .workload-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .workload-table th, .workload-table td { border: 1px solid #ddd; padding: 6px; text-align: center; }
+        .workload-table th { background: #e9ecef; font-weight: 600; color: #333; }
+        .workload-table tr:hover { background: #f8f9fa; }
+        .workload-table .clickable { cursor: pointer; color: #007bff; text-decoration: underline; }
+        .workload-table .clickable:hover { color: #0056b3; }
+        
+        .group-header-pufang { background: #17a2b8 !important; color: white !important; }
+        .group-header-ct { background: #ffc107 !important; color: #333 !important; }
+        .group-header-mri { background: #28a745 !important; color: white !important; }
+        
+        .sub-type { font-size: 10px; white-space: nowrap; }
+        
+        .summary-row { background: #e9ecef; font-weight: 600; }
+        .summary-row td { border-top: 2px solid #333; }
+        
+        .total-cell { background: #007bff; color: white; font-weight: 600; }
+        
+        .export-btn { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; float: right; margin-bottom: 15px; }
+        .export-btn:hover { background: #218838; }
+        
+        .legend { display: flex; gap: 20px; margin-bottom: 15px; font-size: 12px; color: #666; }
+        .legend-item { display: flex; align-items: center; gap: 5px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 2px; }
+        .legend-pufang { background: #17a2b8; }
+        .legend-ct { background: #ffc107; }
+        .legend-mri { background: #28a745; }
+        
+        .summary-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 2px solid #333; }
+        .summary-card { background: #e9ecef; padding: 15px; border-radius: 8px; text-align: center; }
+        .summary-card .value { font-size: 24px; font-weight: 600; }
+        .summary-card .label { font-size: 12px; color: #666; margin-top: 5px; }
+        .summary-card.dr { border-left: 4px solid #007bff; }
+        .summary-card.ct { border-left: 4px solid #ffc107; }
+        .summary-card.mri { border-left: 4px solid #28a745; }
+        .summary-card.pufang { border-left: 4px solid #17a2b8; }
+        .summary-card.total { border-left: 4px solid #333; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-overlay.active { display: flex; justify-content: center; align-items: center; }
+        .modal { background: white; border-radius: 8px; width: 90%; max-width: 1200px; max-height: 80vh; overflow: hidden; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #007bff; color: white; }
+        .modal-header h3 { margin: 0; }
+        .modal-close { cursor: pointer; font-size: 24px; line-height: 1; }
+        .modal-body { padding: 20px; overflow-y: auto; max-height: calc(80vh - 80px); }
+        .modal-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .modal-table th, .modal-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .modal-table th { background: #e9ecef; }
+        .modal-summary { display: flex; gap: 20px; margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .modal-summary-item { text-align: center; }
+        .modal-summary-item .label { font-size: 12px; color: #666; }
+        .modal-summary-item .value { font-size: 20px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2026年1月书写组分值计算表</h1>
+            <div class="date" id="currentDate">统计日期：2026年01月</div>
+        </div>
+        
+        <button class="export-btn" onclick="exportTable()">导出Excel</button>
+        
+        <div class="filter-bar">
+            <label>统计类型：</label>
+            <select id="statisticsType">
+                <option value="报告医生">报告医生</option>
+                <option value="审核医生">审核医生</option>
+                <option value="技师">技师</option>
+            </select>
+            <label>开始日期：</label>
+            <input type="date" id="startDate" value="2026-01-01">
+            <label>结束日期：</label>
+            <input type="date" id="endDate" value="2026-01-31">
+            <button onclick="loadData()">查询</button>
+            <button onclick="loadFromDatabase()">从数据库加载</button>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color legend-pufang"></div> 普放组</div>
+            <div class="legend-item"><div class="legend-color legend-ct"></div> CT组</div>
+            <div class="legend-item"><div class="legend-color legend-mri"></div> MRI组</div>
+            <div class="legend-item" style="margin-left: 20px;">👆 <span style="color: #007bff;">点击医生姓名查看明细</span></div>
+        </div>
+        
+        <div class="table-wrapper">
+            <table class="workload-table" id="workloadTable">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="width: 100px;">医生姓名</th>
+                        <th colspan="4" class="group-header-pufang">普放组</th>
+                        <th colspan="2" class="group-header-ct">CT组</th>
+                        <th colspan="8" class="group-header-mri">MRI组</th>
+                        <th rowspan="2" style="width: 80px;">合计</th>
+                    </tr>
+                    <tr>
+                        <th>DR</th>
+                        <th><div class="sub-type">下肢及脊柱全长拍片</div></th>
+                        <th>钼靶</th>
+                        <th>造影</th>
+                        <th>CT平扫</th>
+                        <th><div class="sub-type">CT增强(含CTA等)</div></th>
+                        <th>MRI平扫</th>
+                        <th>MRA</th>
+                        <th>MRU</th>
+                        <th>MRCP</th>
+                        <th><div class="sub-type">腹部盆腔前列腺直肠胎儿胎盘</div></th>
+                        <th>MRI增强</th>
+                        <th>乳腺</th>
+                        <th>心脏</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="summary-cards">
+            <div class="summary-card pufang">
+                <div class="value" id="totalPufang">0</div>
+                <div class="label">普放组总计</div>
+            </div>
+            <div class="summary-card ct">
+                <div class="value" id="totalCt">0</div>
+                <div class="label">CT组总计</div>
+            </div>
+            <div class="summary-card mri">
+                <div class="value" id="totalMri">0</div>
+                <div class="label">MRI组总计</div>
+            </div>
+            <div class="summary-card dr">
+                <div class="value" id="totalDr">0</div>
+                <div class="label">DR总计</div>
+            </div>
+            <div class="summary-card total">
+                <div class="value" id="totalAll">0</div>
+                <div class="label">全部总计</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">医生工作量明细</h3>
+                <span class="modal-close" onclick="closeModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-summary" id="modalSummary">
+                    <div class="modal-summary-item">
+                        <div class="label">普放组</div>
+                        <div class="value" id="detailPufang">0</div>
+                    </div>
+                    <div class="modal-summary-item">
+                        <div class="label">CT组</div>
+                        <div class="value" id="detailCt">0</div>
+                    </div>
+                    <div class="modal-summary-item">
+                        <div class="label">MRI组</div>
+                        <div class="value" id="detailMri">0</div>
+                    </div>
+                    <div class="modal-summary-item">
+                        <div class="label">总计</div>
+                        <div class="value" id="detailTotal">0</div>
+                    </div>
+                </div>
+                <table class="modal-table" id="detailTable">
+                    <thead>
+                        <tr>
+                            <th>患者姓名</th>
+                            <th>患者ID</th>
+                            <th>检查类别</th>
+                            <th>检查项目</th>
+                            <th>工作分组</th>
+                            <th>细分类别</th>
+                            <th>执行科室</th>
+                            <th>检查时间</th>
+                            <th>报告时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mockData = [
+            { '医生姓名': '贾永庚', DR: 2, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 12, 'CT增强': 1, 'MRI平扫': 2, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
+            { '医生姓名': '陈丽娟', DR: 0, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 20, 'CT增强': 0, 'MRI平扫': 0, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
+            { '医生姓名': '陈丽娟', DR: 0, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 6, 'CT平扫': 612, 'CT增强': 57, 'MRI平扫': 169, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 6, 'MRI增强': 8, 乳腺: 0, 心脏: 0 },
+            { '医生姓名': '张代文', DR: 410, '下肢及脊柱全长拍片': 10, 钼靶: 10, 造影: 6, 'CT平扫': 612, 'CT增强': 57, 'MRI平扫': 169, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 6, 'MRI增强': 8, 乳腺: 0, 心脏: 0 },
+            { '医生姓名': '陈天虎', DR: 17, '下肢及脊柱全长拍片': 1, 钼靶: 0, 造影: 0, 'CT平扫': 39, 'CT增强': 2, 'MRI平扫': 11, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 }
+        ];
+
+        const mockDetailData = {
+            '贾永庚': [
+                { '患者姓名': '张三', '患者ID': 'P001', '检查类别': '普放', '检查项目': '胸部正位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 09:30', '报告时间': '2026-01-15 10:15' },
+                { '患者姓名': '李四', '患者ID': 'P002', '检查类别': '普放', '检查项目': '颈椎正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:45' },
+                { '患者姓名': '王五', '患者ID': 'P003', '检查类别': 'CT', '检查项目': '头部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 11:00', '报告时间': '2026-01-15 11:30' },
+                { '患者姓名': '赵六', '患者ID': 'P004', '检查类别': 'CT', '检查项目': '胸部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 11:30', '报告时间': '2026-01-15 12:00' },
+                { '患者姓名': '钱七', '患者ID': 'P005', '检查类别': '核磁共振', '检查项目': '脑部MRI平扫', '工作分组': 'MRI组', '细分类别': 'MRI平扫', '执行科室': 'MRI室', '检查时间': '2026-01-15 14:00', '报告时间': '2026-01-15 14:45' },
+            ],
+            '陈丽娟': [
+                { '患者姓名': '孙八', '患者ID': 'P006', '检查类别': 'CT', '检查项目': '腹部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 08:30', '报告时间': '2026-01-15 09:00' },
+                { '患者姓名': '周九', '患者ID': 'P007', '检查类别': 'CT', '检查项目': '胸部CTA', '工作分组': 'CT组', '细分类别': 'CT增强', '执行科室': 'CT室', '检查时间': '2026-01-15 09:00', '报告时间': '2026-01-15 09:45' },
+                { '患者姓名': '吴十', '患者ID': 'P008', '检查类别': '核磁共振', '检查项目': '腰椎MRI平扫', '工作分组': 'MRI组', '细分类别': 'MRI平扫', '执行科室': 'MRI室', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:45' },
+            ],
+            '张代文': [
+                { '患者姓名': '郑十一', '患者ID': 'P009', '检查类别': '普放', '检查项目': '腰椎正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 08:00', '报告时间': '2026-01-15 08:30' },
+                { '患者姓名': '王十二', '患者ID': 'P010', '检查类别': '钼靶', '检查项目': '乳腺钼靶', '工作分组': '普放组', '细分类别': '钼靶', '执行科室': '放射科', '检查时间': '2026-01-15 08:30', '报告时间': '2026-01-15 09:00' },
+            ],
+            '陈天虎': [
+                { '患者姓名': '李十三', '患者ID': 'P011', '检查类别': '普放', '检查项目': '膝关节正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 09:00', '报告时间': '2026-01-15 09:30' },
+                { '患者姓名': '赵十四', '患者ID': 'P012', '检查类别': 'CT', '检查项目': '颈椎CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:30' },
+            ]
+        };
+
+        const columns = ['医生姓名', 'DR', '下肢及脊柱全长拍片', '钼靶', '造影', 'CT平扫', 'CT增强', 'MRI平扫', 'MRA', 'MRU', 'MRCP', '腹部盆腔前列腺直肠癌胎儿胎盘', 'MRI增强', '乳腺', '心脏'];
+
+        function loadData() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statisticsType = document.getElementById('statisticsType').value;
+            
+            const year = startDate.substring(0, 4);
+            const month = startDate.substring(5, 7);
+            document.getElementById('currentDate').textContent = `统计日期：${year}年${parseInt(month)}月 (${statisticsType})`;
+            
+            renderTable(mockData);
+            calculateSummary(mockData);
+        }
+
+        async function loadFromDatabase() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statisticsType = document.getElementById('statisticsType').value;
+            
+            try {
+                const response = await fetch('/api/RadiologyWorkload', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        StartDate: startDate,
+                        EndDate: endDate,
+                        StatisticsType: statisticsType
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    renderTable(data);
+                    calculateSummary(data);
+                } else {
+                    alert('从数据库加载失败，使用Mock数据');
+                    loadData();
+                }
+            } catch (error) {
+                alert('网络连接失败，使用Mock数据');
+                loadData();
+            }
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            let totals = {};
+            columns.forEach(col => totals[col] = 0);
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                let rowTotal = 0;
+                
+                columns.forEach(col => {
+                    const value = item[col] || 0;
+                    rowTotal += value;
+                    totals[col] += value;
+                    
+                    const cell = document.createElement('td');
+                    if (col === '医生姓名') {
+                        cell.textContent = value;
+                        cell.className = 'clickable';
+                        cell.onclick = () => showDetail(value);
+                    } else {
+                        cell.textContent = value;
+                    }
+                    row.appendChild(cell);
+                });
+                
+                const totalCell = document.createElement('td');
+                totalCell.textContent = rowTotal;
+                row.appendChild(totalCell);
+                
+                tbody.appendChild(row);
+            });
+            
+            const summaryRow = document.createElement('tr');
+            summaryRow.className = 'summary-row';
+            
+            columns.forEach(col => {
+                const cell = document.createElement('td');
+                if (col === '医生姓名') {
+                    cell.innerHTML = '<strong>合计</strong>';
+                } else {
+                    cell.textContent = totals[col];
+                }
+                summaryRow.appendChild(cell);
+            });
+            
+            const totalAllCell = document.createElement('td');
+            totalAllCell.className = 'total-cell';
+            let totalAll = 0;
+            Object.keys(totals).forEach(key => {
+                if (key !== '医生姓名') totalAll += totals[key];
+            });
+            totalAllCell.textContent = totalAll;
+            summaryRow.appendChild(totalAllCell);
+            
+            tbody.appendChild(summaryRow);
+        }
+
+        function calculateSummary(data) {
+            let totalPufang = 0, totalCt = 0, totalMri = 0, totalDr = 0;
+            
+            data.forEach(item => {
+                totalDr += item['DR'] || 0;
+                totalPufang += (item['DR'] || 0) + (item['下肢及脊柱全长拍片'] || 0) + (item['钼靶'] || 0) + (item['造影'] || 0);
+                totalCt += (item['CT平扫'] || 0) + (item['CT增强'] || 0);
+                totalMri += (item['MRI平扫'] || 0) + (item['MRA'] || 0) + (item['MRU'] || 0) + (item['MRCP'] || 0) + 
+                           (item['腹部盆腔前列腺直肠癌胎儿胎盘'] || 0) + (item['MRI增强'] || 0) + (item['乳腺'] || 0) + (item['心脏'] || 0);
+            });
+            
+            document.getElementById('totalPufang').textContent = totalPufang;
+            document.getElementById('totalCt').textContent = totalCt;
+            document.getElementById('totalMri').textContent = totalMri;
+            document.getElementById('totalDr').textContent = totalDr;
+            document.getElementById('totalAll').textContent = totalPufang + totalCt + totalMri;
+        }
+
+        function showDetail(workerName) {
+            const modal = document.getElementById('detailModal');
+            const title = document.getElementById('modalTitle');
+            const detailBody = document.getElementById('detailBody');
+            
+            title.textContent = `${workerName} - 工作量明细`;
+            
+            const detailData = mockDetailData[workerName] || [];
+            renderDetailTable(detailData);
+            calculateDetailSummary(detailData);
+            
+            modal.classList.add('active');
+        }
+
+        function renderDetailTable(data) {
+            const tbody = document.getElementById('detailBody');
+            tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 9;
+                cell.textContent = '暂无明细数据';
+                cell.style.textAlign = 'center';
+                row.appendChild(cell);
+                tbody.appendChild(row);
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item['患者姓名'] || ''}</td>
+                    <td>${item['患者ID'] || ''}</td>
+                    <td>${item['检查类别'] || ''}</td>
+                    <td>${item['检查项目'] || ''}</td>
+                    <td>${item['工作分组'] || ''}</td>
+                    <td>${item['细分类别'] || ''}</td>
+                    <td>${item['执行科室'] || ''}</td>
+                    <td>${item['检查时间'] || ''}</td>
+                    <td>${item['报告时间'] || ''}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function calculateDetailSummary(data) {
+            let pufang = 0, ct = 0, mri = 0;
+            
+            data.forEach(item => {
+                if (item['工作分组'] === '普放组') pufang++;
+                else if (item['工作分组'] === 'CT组') ct++;
+                else if (item['工作分组'] === 'MRI组') mri++;
+            });
+            
+            document.getElementById('detailPufang').textContent = pufang;
+            document.getElementById('detailCt').textContent = ct;
+            document.getElementById('detailMri').textContent = mri;
+            document.getElementById('detailTotal').textContent = data.length;
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        async function loadDetailFromDatabase(workerName) {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statisticsType = document.getElementById('statisticsType').value;
+            
+            try {
+                const response = await fetch('/api/RadiologyWorkload/Detail', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        StartDate: startDate,
+                        EndDate: endDate,
+                        WorkerName: workerName,
+                        StatisticsType: statisticsType
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    renderDetailTable(data);
+                    calculateDetailSummary(data);
+                } else {
+                    alert('从数据库加载明细失败，使用Mock数据');
+                    const detailData = mockDetailData[workerName] || [];
+                    renderDetailTable(detailData);
+                    calculateDetailSummary(detailData);
+                }
+            } catch (error) {
+                alert('网络连接失败，使用Mock数据');
+                const detailData = mockDetailData[workerName] || [];
+                renderDetailTable(detailData);
+                calculateDetailSummary(detailData);
+            }
+        }
+
+        document.getElementById('startDate').addEventListener('change', loadData);
+        document.getElementById('endDate').addEventListener('change', loadData);
+        document.getElementById('statisticsType').addEventListener('change', loadData);
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detailModal')) closeModal();
+        });
+        
+        loadData();
+    </script>
+</body>
+</html>

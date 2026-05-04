@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计分析系统 - 配置中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="js/dailyAnalysis.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* 全局配色 - 深蓝商务风 */
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --primary-light: #e8f0fe;
+            --accent: #00c9a7;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* 背景动态粒子效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(26, 115, 232, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 201, 167, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 导航栏 - 毛玻璃效果 */
+        .navbar {
+            background: rgba(15, 23, 42, 0.85) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.75rem 1rem;
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.35rem;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-text {
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-size: 0.9rem;
+        }
+
+        .navbar-text strong {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        /* 卡片设计 */
+        .card {
+            border: none;
+            border-radius: 24px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 1px 3px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+            color: white;
+            border: none;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            animation: shimmer 8s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-header h3 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        /* 登录页面优化 */
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            border-radius: 28px;
+            overflow: visible;
+        }
+
+        .login-card .card-header {
+            border-radius: 28px 28px 0 0;
+            padding: 2.5rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(26, 115, 232, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .login-card .card-body {
+            padding: 2.5rem 2.5rem;
+        }
+
+        .card-footer {
+            background: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            padding: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* 主菜单卡片 */
+        .menu-card {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-12px);
+            box-shadow:
+                0 30px 60px rgba(26, 115, 232, 0.15),
+                0 5px 15px rgba(0, 0, 0, 0.08);
+            border-color: rgba(26, 115, 232, 0.2);
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card:active {
+            transform: translateY(-8px);
+        }
+
+        .menu-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+            transition: all 0.3s;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .menu-card:hover .menu-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-card h4 {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 按钮设计 */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #0d47a1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline-danger {
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 6px 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-light {
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-sm {
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        /* 表单控件 */
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 18px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+            outline: none;
+            background: white;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        /* 表格优化 */
+        .table {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .table-dark {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+        }
+
+        .table-dark th {
+            border-bottom: none;
+            font-weight: 600;
+            padding: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: rgba(26, 115, 232, 0.02);
+        }
+
+        .table-striped > tbody > tr:hover {
+            background-color: rgba(26, 115, 232, 0.06);
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* 模态框优化 */
+        .modal-content {
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 24px 24px 0 0;
+            padding: 1.5rem 2rem;
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .modal-title {
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            padding: 1.25rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+        /* Alert优化 */
+        .alert {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+        }
+
+        /* Badge优化 */
+        .badge {
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        .bg-success {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
+        .bg-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        }
+
+        .bg-info {
+            background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        }
+
+        .bg-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        }
+
+        /* 统计数值 */
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-value-sm {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 页面标题 */
+        h2.text-center {
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tab优化 */
+        .nav-tabs {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--primary);
+            border-bottom-color: rgba(26, 115, 232, 0.3);
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            background: none;
+            border-bottom-color: var(--primary);
+        }
+
+        /* 内容面板 */
+        #panelContent .bg-white {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 返回按钮 */
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* 连接测试卡片 */
+        .card.bg-info\/10 {
+            background: rgba(26, 115, 232, 0.05) !important;
+            border: 1px solid rgba(26, 115, 232, 0.1);
+            border-radius: 16px;
+        }
+
+        /* 容器优化 */
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 登录面板居中优化 */
+        .min-vh-100 {
+            min-height: 100vh;
+        }
+
+        .align-items-center {
+            align-items: center !important;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .login-card {
+                max-width: 90%;
+            }
+
+            .menu-card {
+                margin-bottom: 1rem;
+            }
+
+            h2.text-center {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 加载动画 */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 输入框placeholder优化 */
+        ::placeholder {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* 滚动条优化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .text-sm {
+            font-size: 0.875rem !important;
+        }
+
+        .bg-gray-50 {
+            background-color: #f8fafc !important;
+        }
+
+        /* 页面进入动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #mainMenu .col-md-4 {
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        #mainMenu .col-md-4:nth-child(1) { animation-delay: 0.1s; }
+        #mainMenu .col-md-4:nth-child(2) { animation-delay: 0.2s; }
+        #mainMenu .col-md-4:nth-child(3) { animation-delay: 0.3s; }
+        #mainMenu .col-md-4:nth-child(4) { animation-delay: 0.4s; }
+        #mainMenu .col-md-4:nth-child(5) { animation-delay: 0.5s; }
+        #mainMenu .col-md-4:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">统计分析系统</a>
+            <div class="d-flex">
+                <span class="navbar-text me-3">当前用户: <strong id="currentUser">未登录</strong></span>
+                <button class="btn btn-outline-danger btn-sm" onclick="logout()">退出登录</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div id="loginPanel">
+            <div class="row justify-content-center min-vh-100 align-items-center">
+                <div class="col-md-12 col-lg-4">
+                    <div class="card login-card shadow-lg">
+                        <div class="card-header text-center pb-0">
+                            <div class="login-icon mb-2">🔐</div>
+                            <h3 class="mb-1">系统登录</h3>
+                            <p class="text-white-50 text-sm mt-1">统计分析系统</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="username" placeholder="请输入用户名" autocomplete="username" autofocus>
+                            </div>
+                            <div class="mb-5">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="password" placeholder="请输入密码" autocomplete="current-password">
+                            </div>
+                            <button class="btn btn-primary w-100 py-3" onclick="login()">登 录</button>
+                            <div id="loginError" class="mt-4 alert alert-danger" style="display: none;"></div>
+                        </div>
+                        <div class="card-footer bg-gray-50 text-center text-muted text-sm">
+                            系统版本 v1.0.5
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainMenu" style="display: none;">
+            <h2 class="text-center text-white mb-5">配置中心</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showUserConfig()">
+                        <div class="menu-icon">👥</div>
+                        <h4>用户配置和维护</h4>
+                        <p class="text-muted">管理系统用户</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showPermissionConfig()">
+                        <div class="menu-icon">🔐</div>
+                        <h4>权限维护</h4>
+                        <p class="text-muted">管理用户权限</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showParamConfig()">
+                        <div class="menu-icon">⚙️</div>
+                        <h4>参数配置</h4>
+                        <p class="text-muted">系统参数设置</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="DailyAnalysis.init()">
+                        <div class="menu-icon">📊</div>
+                        <h4>检查每日分析</h4>
+                        <p class="text-muted">检查统计查询</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showComplexConfig()">
+                        <div class="menu-icon">📋</div>
+                        <h4>复杂存储配置</h4>
+                        <p class="text-muted">存储过程管理</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showServerConfig()">
+                        <div class="menu-icon">🖥️</div>
+                        <h4>服务器配置</h4>
+                        <p class="text-muted">服务器参数设置</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="configPanel" style="display: none;">
+            <div class="mb-4">
+                <button class="btn btn-secondary" onclick="goBack()">← 返回</button>
+                <h2 id="panelTitle" class="text-white d-inline ms-3"></h2>
+            </div>
+            <div id="panelContent"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">用户管理</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <input type="hidden" id="userId">
+                        <div class="mb-3">
+                            <label>用户名</label>
+                            <input type="text" class="form-control" id="userUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>密码</label>
+                            <input type="password" class="form-control" id="userPassword">
+                            <small class="text-muted">不填则不修改密码</small>
+                        </div>
+                        <div class="mb-3">
+                            <label>角色</label>
+                            <select class="form-select" id="userRole">
+                                <option value="admin">管理员</option>
+                                <option value="user">普通用户</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>状态</label>
+                            <select class="form-select" id="userStatus">
+                                <option value="active">启用</option>
+                                <option value="inactive">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="saveUser()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentUser = null;
+
+        function login() {
+            var username = $('#username').val().trim();
+            var password = $('#password').val().trim();
+            
+            if (!username || !password) {
+                $('#loginError').text('请输入用户名和密码').show();
+                return;
+            }
+            
+            $('#loginError').hide();
+            
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({username: username, password: password}),
+                timeout: 10000,
+                success: function(resp) {
+                    console.log('Login response:', resp);
+                    if (resp && resp.success) {
+                        currentUser = {username: username, isAdmin: resp.isAdmin};
+                        $('#currentUser').text(username);
+                        $('#loginPanel').hide();
+                        $('#mainMenu').show();
+                    } else {
+                        $('#loginError').text(resp && resp.error ? resp.error : '用户名或密码错误').show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Login error:', xhr.status, status, error);
+                    var msg = '登录失败';
+                    if (xhr.status === 0) {
+                        msg = '无法连接服务器，请检查网络';
+                    } else if (xhr.status === 404) {
+                        msg = '服务接口不存在';
+                    } else if (xhr.status === 500) {
+                        msg = '服务器内部错误';
+                    } else if (status === 'timeout') {
+                        msg = '请求超时';
+                    }
+                    $('#loginError').text(msg).show();
+                }
+            });
+        }
+
+        function logout() {
+            currentUser = null;
+            $('#currentUser').text('未登录');
+            $('#mainMenu').hide();
+            $('#configPanel').hide();
+            $('#loginPanel').show();
+            $('#username').val('');
+            $('#password').val('');
+            $('#loginError').hide();
+        }
+
+        function goBack() {
+            $('#configPanel').hide();
+            $('#mainMenu').show();
+        }
+
+        function showUserConfig() {
+            history.pushState({page: 'userConfig'}, '用户配置', '#user-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('用户配置和维护');
+            loadUsers();
+        }
+
+        function loadUsers() {
+            $.ajax({
+                url: '/get-users',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var html = '<div class="bg-white rounded-3 p-4">';
+                            html += '<button class="btn btn-primary mb-3" onclick="addUser()">添加用户</button>';
+                            html += '<table class="table table-striped">';
+                            html += '<thead><tr><th>ID</th><th>用户名</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody>';
+                            resp.data.forEach(function(user) {
+                                html += '<tr>';
+                                html += '<td>' + user.id + '</td>';
+                                html += '<td>' + user.username + '</td>';
+                                html += '<td>' + (user.role === 'admin' ? '管理员' : '普通用户') + '</td>';
+                                html += '<td>' + (user.status === 'active' ? '启用' : '禁用') + '</td>';
+                                html += '<td>';
+                                html += '<button class="btn btn-sm btn-primary" onclick="editUser(' + user.id + ', \'' + user.username + '\', \'' + user.role + '\', \'' + user.status + '\')">编辑</button>';
+                                if (user.username !== 'lhbdb') {
+                                    html += '<button class="btn btn-sm btn-danger ms-1" onclick="deleteUser(' + user.id + ')">删除</button>';
+                                }
+                                html += '</td></tr>';
+                            });
+                            html += '</tbody></table></div>';
+                            $('#panelContent').html(html);
+                        }
+                    } catch (e) {
+                        $('#panelContent').html('<div class="alert alert-danger">加载失败</div>');
+                    }
+                }
+            });
+        }
+
+        function addUser() {
+            $('#userId').val('');
+            $('#userUsername').val('');
+            $('#userPassword').val('');
+            $('#userRole').val('user');
+            $('#userStatus').val('active');
+            $('#userModal').modal('show');
+        }
+
+        function editUser(id, username, role, status) {
+            $('#userId').val(id);
+            $('#userUsername').val(username);
+            $('#userPassword').val('');
+            $('#userRole').val(role);
+            $('#userStatus').val(status);
+            $('#userModal').modal('show');
+        }
+
+        function saveUser() {
+            var id = $('#userId').val();
+            var username = $('#userUsername').val();
+            var password = $('#userPassword').val();
+            var role = $('#userRole').val();
+            var status = $('#userStatus').val();
+            
+            var url = id ? '/update-user' : '/add-user';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({id: id, username: username, password: password, role: role, status: status}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#userModal').modal('hide');
+                            loadUsers();
+                        } else {
+                            alert(resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function deleteUser(id) {
+            if (confirm('确定要删除此用户吗？')) {
+                $.ajax({
+                    url: '/delete-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({id: id}),
+                    success: function(response) {
+                        try {
+                            var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                            if (resp.success) {
+                                loadUsers();
+                            } else {
+                                alert(resp.error);
+                            }
+                        } catch (e) {
+                            alert('删除失败');
+                        }
+                    }
+                });
+            }
+        }
+
+        function showPermissionConfig() {
+            history.pushState({page: 'permissionConfig'}, '权限配置', '#permission-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('权限维护');
+            $('#panelContent').html('<p class="text-white">权限配置功能开发中...</p>');
+        }
+
+        function showParamConfig() {
+            history.pushState({page: 'paramConfig'}, '参数配置', '#param-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('参数配置');
+            $('#panelContent').html('<p class="text-white">参数配置功能开发中...</p>');
+        }
+
+        function showComplexConfig() {
+            history.pushState({page: 'complexConfig'}, '复杂存储配置', '#complex-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('复杂存储配置');
+            var html = `
+                <div class="bg-white rounded-3 p-4">
+                    <ul class="nav nav-tabs" id="configTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="procRegistryTab" data-bs-toggle="tab" data-bs-target="#procRegistry" type="button">存储注册</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pageConfigTab" data-bs-toggle="tab" data-bs-target="#pageConfig" type="button">页面配置</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade show active" id="procRegistry">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="搜索存储过程..." id="procSearch">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100">注册存储过程</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-secondary w-100">刷新列表</button>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>类别</th>
+                                        <th>参数</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>usp_GetDailyAnalysis</td>
+                                        <td>每日分析</td>
+                                        <td>startDate, endDate, system</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>usp_GetDepartmentStats</td>
+                                        <td>科室统计</td>
+                                        <td>startDate, endDate</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>usp_GetDoctorStats</td>
+                                        <td>医生统计</td>
+                                        <td>startDate, endDate, doctorType</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="pageConfig">
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100">添加页面</button>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>页面名称</th>
+                                        <th>路径</th>
+                                        <th>显示顺序</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>每日分析</td>
+                                        <td>/daily-analysis</td>
+                                        <td>1</td>
+                                        <td><span class="badge bg-success">启用</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-warning">禁用</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>科室统计</td>
+                                        <td>/department-statistics</td>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">启用</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-warning">禁用</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#panelContent').html(html);
+        }
+
+        function showServerConfig() {
+            history.pushState({page: 'serverConfig'}, '服务器配置', '#server-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('服务器配置');
+            var html = `
+                <div class="bg-white rounded-3 p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>数据库连接配置</h5>
+                            <div class="mb-3">
+                                <label class="form-label">服务器地址</label>
+                                <input type="text" class="form-control" id="dbServer" placeholder="localhost">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">数据库名称</label>
+                                <input type="text" class="form-control" id="dbName" placeholder="WiNEX_PACS_Schema_Full">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="dbUser">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="dbPassword">
+                            </div>
+                            <button class="btn btn-primary" onclick="saveDbConfig()">保存配置</button>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>服务器端口配置</h5>
+                            <div class="mb-3">
+                                <label class="form-label">服务端口</label>
+                                <input type="number" class="form-control" id="serverPort" placeholder="9094" min="1" max="65535">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">当前运行端口</label>
+                                <input type="text" class="form-control" id="runningPort" readonly>
+                            </div>
+                            <button class="btn btn-primary" onclick="savePortConfig()">保存端口</button>
+                            <p class="text-muted mt-3">端口修改需重启服务生效</p>
+                        </div>
+                    </div>
+                    <div class="card border-info bg-transparent rounded-lg p-3" style="background: rgba(13, 202, 240, 0.05) !important;">
+                        <h6>📌 连接测试</h6>
+                        <button class="btn btn-success" onclick="testDbConnection()">测试数据库连接</button>
+                        <div id="connectionResult" class="mt-2"></div>
+                    </div>
+                </div>
+            `;
+            $('#panelContent').html(html);
+            loadServerConfig();
+        }
+
+        function loadServerConfig() {
+            $.ajax({
+                url: '/get-port',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#serverPort').val(resp.data.port);
+                            $('#runningPort').val(resp.data.runningPort);
+                        }
+                    } catch (e) {
+                        console.error('加载端口配置失败');
+                    }
+                }
+            });
+        }
+
+        function saveDbConfig() {
+            var server = $('#dbServer').val();
+            var database = $('#dbName').val();
+            var username = $('#dbUser').val();
+            var password = $('#dbPassword').val();
+            
+            $.ajax({
+                url: '/update-db-config',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({server: server, database: database, username: username, password: password}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert('配置保存成功，重启程序后生效');
+                        } else {
+                            alert('保存失败: ' + resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function savePortConfig() {
+            var port = $('#serverPort').val();
+            $.ajax({
+                url: '/set-port',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({port: port}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert('端口配置保存成功，重启程序后生效');
+                        } else {
+                            alert('保存失败: ' + resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function testDbConnection() {
+            $('#connectionResult').html('<span class="text-primary">正在测试连接...</span>');
+            $.ajax({
+                url: '/get-hospital-info',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#connectionResult').html('<span class="text-success">✓ 数据库连接成功</span>');
+                        } else {
+                            $('#connectionResult').html('<span class="text-danger">✗ 连接失败: ' + resp.error + '</span>');
+                        }
+                    } catch (e) {
+                        $('#connectionResult').html('<span class="text-danger">✗ 连接失败</span>');
+                    }
+                },
+                error: function() {
+                    $('#connectionResult').html('<span class="text-danger">✗ 连接失败</span>');
+                }
+            });
+        }
+
+        window.onpopstate = function(event) {
+            if (event.state) {
+                switch(event.state.page) {
+                    case 'userConfig':
+                        showUserConfig();
+                        break;
+                    case 'permissionConfig':
+                        showPermissionConfig();
+                        break;
+                    case 'paramConfig':
+                        showParamConfig();
+                        break;
+                    case 'dailyAnalysis':
+                        DailyAnalysis.init();
+                        break;
+                    case 'complexConfig':
+                        showComplexConfig();
+                        break;
+                    case 'serverConfig':
+                        showServerConfig();
+                        break;
+                }
+            }
+        };
+    </script>
+</body>
+</html>

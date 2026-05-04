@@ -1,0 +1,17 @@
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\OllamaDevHelper.exe
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\OllamaDevHelper.deps.json
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\OllamaDevHelper.runtimeconfig.json
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\OllamaDevHelper.dll
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\OllamaDevHelper.pdb
+D:\AI\tran\OllamaDevHelper\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.csproj.AssemblyReference.cache
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.GeneratedMSBuildEditorConfig.editorconfig
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.AssemblyInfoInputs.cache
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.AssemblyInfo.cs
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.csproj.CoreCompileInputs.cache
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDe.4CCFC9A7.Up2Date
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.dll
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\refint\OllamaDevHelper.dll
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.pdb
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\OllamaDevHelper.genruntimeconfig.cache
+D:\AI\tran\OllamaDevHelper\obj\Debug\net8.0\ref\OllamaDevHelper.dll

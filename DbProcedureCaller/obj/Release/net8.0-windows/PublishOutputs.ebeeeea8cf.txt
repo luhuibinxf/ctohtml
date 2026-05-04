@@ -1,0 +1,12 @@
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\DbProcedureCallerModular.exe
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\DbProcedureCallerModular.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\DbProcedureCallerModular.deps.json
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\DbProcedureCallerModular.runtimeconfig.json
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\DbProcedureCallerModular.pdb
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\Newtonsoft.Json.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\System.Data.SqlClient.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\runtimes\win-arm64\native\sni.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\runtimes\win-x64\native\sni.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\runtimes\win-x86\native\sni.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

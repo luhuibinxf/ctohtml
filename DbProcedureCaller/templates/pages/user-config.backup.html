@@ -1,0 +1,658 @@
+<style>
+/* ===== 用户配置页面样式 - 高端大气版 ===== */
+.uc-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    animation: ucFadeIn 0.4s ease-out;
+}
+@keyframes ucFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.uc-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 24px 28px;
+}
+
+/* 顶部统计卡片区域 */
+.uc-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.uc-stat-card {
+    background: linear-gradient(145deg, #1e293b, #263348);
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s;
+}
+.uc-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.1);
+}
+.uc-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    flex-shrink: 0;
+}
+.uc-stat-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+.uc-stat-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 12px rgba(34,197,94,0.4); }
+.uc-stat-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139,92,246,0.4); }
+.uc-stat-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
+.uc-stat-info { flex: 1; }
+.uc-stat-label { color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.uc-stat-value { color: #f8fafc; font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+.uc-stat-trend { color: #64748b; font-size: 11px; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+.uc-stat-trend.up { color: #22c55e; }
+
+@keyframes ucNumberPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+.uc-stat-value.uc-pulse {
+    animation: ucNumberPulse 0.4s ease-out;
+}
+
+/* 用户列表卡片 */
+.uc-table-card {
+    background: linear-gradient(145deg, #1e293b, #263348);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+}
+.uc-card-header {
+    padding: 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.uc-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f8fafc;
+    font-size: 18px;
+    font-weight: 700;
+}
+.uc-card-title i {
+    font-size: 20px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.uc-table-body { padding: 0; }
+
+/* 搜索和筛选栏 */
+.uc-toolbar {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.uc-search-box {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+}
+.uc-search-box input {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(15,23,42,0.6);
+    color: #f1f5f9;
+    padding: 0 16px 0 40px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+}
+.uc-search-box input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+.uc-search-box input::placeholder { color: #475569; }
+.uc-search-box i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 14px;
+}
+.uc-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+/* 表格样式 */
+.uc-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.uc-table thead th {
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 14px 24px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    white-space: nowrap;
+    background: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.uc-table thead th:last-child { text-align: center; }
+.uc-table tbody tr {
+    transition: all 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: transparent;
+}
+.uc-table tbody tr:last-child { border-bottom: none; }
+.uc-table tbody tr:hover {
+    background: rgba(59,130,246,0.06);
+}
+.uc-table tbody td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: #cbd5e1;
+    background: transparent;
+}
+.uc-table tbody td:last-child { 
+    text-align: center; 
+    background: transparent;
+}
+.uc-table tbody td.uc-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.uc-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.uc-user-name { color: #f8fafc; font-weight: 600; }
+.uc-user-id { color: #64748b; font-size: 12px; font-weight: 500; }
+
+/* 状态徽章 */
+.uc-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.uc-status-active {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.2);
+}
+.uc-status-active::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34,197,94,0.6);
+}
+.uc-status-inactive {
+    background: rgba(239,68,68,0.15);
+    color: #f87171;
+    border: 1px solid rgba(239,68,68,0.2);
+}
+.uc-status-inactive::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+}
+
+/* 角色徽章 */
+.uc-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.uc-role-admin {
+    background: rgba(139,92,246,0.15);
+    color: #a78bfa;
+    border: 1px solid rgba(139,92,246,0.2);
+}
+.uc-role-user {
+    background: rgba(100,116,139,0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(100,116,139,0.2);
+}
+
+/* 操作按钮 */
+.uc-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(45,55,72,0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0 2px;
+    font-size: 14px;
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Solid', sans-serif;
+    font-weight: 900;
+}
+.uc-action-btn i {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Solid', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    line-height: 1;
+}
+.uc-action-btn.uc-btn-edit {
+    color: #60a5fa;
+}
+.uc-action-btn.uc-btn-edit:hover {
+    background: rgba(59,130,246,0.2);
+    border-color: rgba(59,130,246,0.4);
+}
+.uc-action-btn.uc-btn-delete {
+    color: #94a3b8;
+}
+.uc-action-btn.uc-btn-delete:hover {
+    background: rgba(239,68,68,0.2);
+    border-color: rgba(239,68,68,0.4);
+    color: #f87171;
+}
+
+/* 底部操作区 */
+.uc-table-footer {
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.uc-footer-info { color: #64748b; font-size: 13px; }
+.uc-footer-info span { color: #94a3b8; font-weight: 600; }
+
+/* 添加用户按钮 - 高端设计 */
+.uc-btn-add {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0 24px;
+    height: 44px;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(59,130,246,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.uc-btn-add::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+.uc-btn-add:hover::before { left: 100%; }
+.uc-btn-add:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(59,130,246,0.5); }
+.uc-btn-add:active { transform: translateY(-1px); }
+
+/* 加载状态 */
+.uc-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px;
+    color: #64748b;
+}
+.uc-loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: ucSpin 0.8s linear infinite;
+}
+@keyframes ucSpin { to { transform: rotate(360deg); } }
+
+/* ===== 模态框样式 ===== */
+.uc-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 9999;
+}
+.uc-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.uc-modal-backdrop {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+}
+.uc-modal-content {
+    position: relative;
+    background: #1e293b;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    animation: ucModalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+@keyframes ucModalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.uc-modal-header {
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.uc-modal-title {
+    color: #f8fafc;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.uc-modal-title i { color: #3b82f6; }
+.uc-modal-close {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    color: #94a3b8; cursor: pointer; font-size: 16px; transition: all 0.2s;
+}
+.uc-modal-close:hover { background: rgba(239,68,68,0.2); border-color: rgba(239,68,68,0.4); color: #f87171; }
+.uc-modal-body { padding: 28px; }
+
+/* 表单样式 */
+.uc-form-group { margin-bottom: 20px; }
+.uc-form-label {
+    display: flex; align-items: center; gap: 8px;
+    color: #cbd5e1; font-weight: 600; font-size: 13px; margin-bottom: 8px;
+}
+.uc-form-label i { color: #64748b; font-size: 14px; }
+.uc-form-control {
+    width: 100%; height: 44px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1); background: rgba(15,23,42,0.6);
+    color: #f1f5f9; padding: 0 16px; font-size: 14px; transition: all 0.3s;
+    box-sizing: border-box; outline: none;
+}
+.uc-form-control::placeholder { color: #475569; }
+.uc-form-control:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+.uc-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.uc-input-group { display: flex; align-items: center; }
+.uc-input-group .uc-form-control { border-radius: 10px 0 0 10px; border-right: none; }
+.uc-input-append {
+    height: 44px; padding: 0 14px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 0 10px 10px 0;
+    background: rgba(15,23,42,0.6); display: flex; align-items: center;
+    justify-content: center; cursor: pointer; color: #64748b; transition: all 0.2s;
+}
+.uc-input-append:hover { color: #3b82f6; background: rgba(59,130,246,0.1); }
+.uc-form-hint { display: flex; align-items: center; gap: 6px; margin-top: 8px; color: #64748b; font-size: 12px; }
+
+/* 模态框底部 */
+.uc-modal-footer {
+    padding: 20px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.uc-btn-cancel {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 0 20px; height: 44px; font-weight: 600; font-size: 14px;
+    color: #94a3b8; cursor: pointer; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+}
+.uc-btn-cancel:hover { background: rgba(255,255,255,0.1); color: #e2e8f0; }
+.uc-btn-save {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: none;
+    border-radius: 10px; padding: 0 24px; height: 44px; font-weight: 600; font-size: 14px;
+    color: white; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 16px rgba(59,130,246,0.4);
+    display: inline-flex; align-items: center; gap: 8px;
+}
+.uc-btn-save:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.5); }
+</style>
+
+<div class="uc-page">
+    <div class="uc-container">
+        <div id="userAlert" class="mb-4"></div>
+
+        <!-- 顶部统计卡片 -->
+        <div class="uc-stats-row">
+            <div class="uc-stat-card">
+                <div class="uc-stat-icon blue"><i class="fa-solid fa-users"></i></div>
+                <div class="uc-stat-info">
+                    <div class="uc-stat-label">用户总数</div>
+                    <div class="uc-stat-value" id="statTotal">-</div>
+                    <div class="uc-stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i>活跃用户</div>
+                </div>
+            </div>
+            <div class="uc-stat-card">
+                <div class="uc-stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="uc-stat-info">
+                    <div class="uc-stat-label">启用中</div>
+                    <div class="uc-stat-value" id="statActive">-</div>
+                    <div class="uc-stat-trend"><i class="fa-solid fa-minus"></i>正常运行</div>
+                </div>
+            </div>
+            <div class="uc-stat-card">
+                <div class="uc-stat-icon purple"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="uc-stat-info">
+                    <div class="uc-stat-label">管理员</div>
+                    <div class="uc-stat-value" id="statAdmin">-</div>
+                    <div class="uc-stat-trend"><i class="fa-solid fa-minus"></i>系统管理</div>
+                </div>
+            </div>
+            <div class="uc-stat-card">
+                <div class="uc-stat-icon orange"><i class="fa-solid fa-user-clock"></i></div>
+                <div class="uc-stat-info">
+                    <div class="uc-stat-label">今日在线</div>
+                    <div class="uc-stat-value" id="statOnline">-</div>
+                    <div class="uc-stat-trend"><i class="fa-solid fa-clock"></i>实时统计</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 用户列表卡片 -->
+        <div class="uc-table-card">
+            <!-- 卡片头部 -->
+            <div class="uc-card-header">
+                <div class="uc-card-title">
+                    <i class="fa-solid fa-users-gear"></i>
+                    用户管理
+                </div>
+            </div>
+
+            <!-- 工具栏 -->
+            <div class="uc-toolbar">
+                <div class="uc-search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="搜索用户名..." id="userSearch" oninput="UserConfig.filterUsers()">
+                </div>
+                <div class="uc-toolbar-actions">
+                    <button onclick="UserConfig.showAddModal()" class="uc-btn-add">
+                        <i class="fa-solid fa-plus"></i>
+                        添加用户
+                    </button>
+                </div>
+            </div>
+
+            <!-- 表格主体 -->
+            <div class="uc-table-body">
+                <table class="uc-table">
+                    <thead>
+                        <tr>
+                            <th>用户信息</th>
+                            <th>角色</th>
+                            <th>状态</th>
+                            <th style="text-align:center;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <tr>
+                            <td colspan="4">
+                                <div class="uc-loading">
+                                    <div class="uc-loading-spinner"></div>
+                                    <span>加载用户数据中...</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 底部信息 -->
+            <div class="uc-table-footer">
+                <div class="uc-footer-info">
+                    共 <span id="footerTotal">0</span> 条记录
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加用户模态框 -->
+<div id="userModal" class="uc-modal">
+    <div class="uc-modal-backdrop" onclick="UserConfig.hideModal()"></div>
+    <div class="uc-modal-content">
+        <div class="uc-modal-header">
+            <h5 class="uc-modal-title">
+                <i class="fa-solid fa-user-plus"></i>
+                <span id="userModalLabel">添加用户</span>
+            </h5>
+            <button class="uc-modal-close" onclick="UserConfig.hideModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="uc-modal-body">
+            <form id="userForm">
+                <input type="hidden" id="userId">
+
+                <div class="uc-form-group">
+                    <label class="uc-form-label">
+                        <i class="fa-solid fa-at"></i>
+                        用户名
+                    </label>
+                    <input type="text" class="uc-form-control" id="userUsername" required placeholder="请输入登录用户名">
+                </div>
+
+                <div class="uc-form-group">
+                    <label class="uc-form-label">
+                        <i class="fa-solid fa-lock"></i>
+                        密码
+                    </label>
+                    <div class="uc-input-group">
+                        <input type="password" class="uc-form-control" id="userPassword" placeholder="请设置登录密码">
+                        <span class="uc-input-append" onclick="UserConfig.togglePassword()">
+                            <i id="toggleIcon" class="fa-solid fa-eye-slash"></i>
+                        </span>
+                    </div>
+                    <div class="uc-form-hint">
+                        <i class="fa-solid fa-circle-info"></i>
+                        不填则保持原密码不变
+                    </div>
+                </div>
+
+                <div class="uc-form-row">
+                    <div class="uc-form-group">
+                        <label class="uc-form-label">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            用户角色
+                        </label>
+                        <select class="uc-form-control" id="userRole">
+                            <option value="user">普通用户</option>
+                            <option value="admin">管理员</option>
+                        </select>
+                    </div>
+                    <div class="uc-form-group">
+                        <label class="uc-form-label">
+                            <i class="fa-solid fa-toggle-on"></i>
+                            账号状态
+                        </label>
+                        <select class="uc-form-control" id="userStatus">
+                            <option value="active">启用</option>
+                            <option value="inactive">禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uc-modal-footer">
+            <button class="uc-btn-cancel" onclick="UserConfig.hideModal()">
+                <i class="fa-solid fa-arrow-left"></i>
+                取消
+            </button>
+            <button class="uc-btn-save" onclick="UserConfig.saveUser()">
+                <i class="fa-solid fa-check"></i>
+                确认保存
+            </button>
+        </div>
+    </div>
+</div>

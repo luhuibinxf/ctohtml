@@ -1,0 +1,188 @@
+=======================================================
+          统计分析系统项目计划 - 更新内容
+=======================================================
+
+【更新日期】2024年
+【版本号】V1.0
+
+-------------------------------------------------------
+一、数据库连接加密方案
+-------------------------------------------------------
+
+1. 加密算法
+   - 算法：AES-128-CBC
+   - 密钥长度：128位（16字节）
+   - 初始向量：128位（16字节）
+   - 填充方式：PKCS7
+   - 输出编码：Base64
+
+2. 密钥配置（6种支持的解密密钥）
+   序号 密钥（十六进制）
+   1    12-34-56-78-90-AB-CD-EF-12-34-56-78-90-AB-CD-EF
+   2    00-01-02-03-04-05-06-07-08-09-0A-0B-0C-0D-0E-0F
+   3    FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF-FF
+   4    41-42-43-44-45-46-47-48-49-4A-4B-4C-4D-4E-4F-50
+   5    01-12-23-34-45-56-67-78-89-9A-AB-BC-CD-DE-EF-F0
+   6    11-22-33-44-55-66-77-88-99-AA-BB-CC-DD-EE-FF-00
+
+3. 配置文件处理流程
+   启动程序 → 查找 config.dat → 文件存在?
+      是 → 读取内容 → 尝试6种密钥解密
+         解密成功 → 使用连接字符串
+         解密失败 → 检查是否为明文
+            是明文 → 直接使用
+            不是明文 → 弹出配置窗口
+      否 → 弹出配置窗口 → 用户输入 → AES加密保存
+
+-------------------------------------------------------
+二、API接口文档（共12个接口）
+-------------------------------------------------------
+
+| 接口路径 | HTTP方法 | 功能描述 |
+|----------|---------|----------|
+| /        | GET     | 登录界面 |
+| /login   | POST    | 用户登录验证 |
+| /get-hospital-info | GET | 获取医院名称 |
+| /daily-analysis | POST | 每日检查分析 |
+| /department-statistics | POST | 科室统计 |
+| /doctor-statistics | POST | 医生统计 |
+| /category-statistics | POST | 检查类型统计 |
+| /get-system-types | GET | 获取系统类型列表 |
+| /get-reporters | GET | 获取报告医生列表 |
+| /get-reviewers | GET | 获取审核医生列表 |
+| /get-departments | GET | 获取科室列表 |
+| /get-patient-types | GET | 获取病人类型列表 |
+
+详细接口说明：
+
+1. 登录接口 POST /login
+   请求体：{"username":"lhbdb","password":"241023"}
+   响应体：{"success":true,"isAdmin":true}
+
+2. 每日分析接口 POST /daily-analysis
+   支持参数：startDate, endDate, system, reporter, reviewer, 
+             technician, department, category, patientType, 
+             resultStatus（均支持多选，逗号分隔）
+
+3. 基础数据接口 GET /get-xxx
+   返回格式：{"success":true,"data":[{"id":"1","name":"xxx"}]}
+
+-------------------------------------------------------
+三、API测试方式
+-------------------------------------------------------
+
+1. PowerShell测试示例：
+   $body = @{username="lhbdb";password="241023"} | ConvertTo-Json
+   Invoke-WebRequest -Uri "http://localhost:9094/login" `
+       -Method POST -Body $body -ContentType "application/json"
+
+2. curl测试示例：
+   curl -X POST http://localhost:9094/login `
+       -H "Content-Type: application/json" `
+       -d '{"username":"lhbdb","password":"241023"}'
+
+3. 浏览器访问：
+   登录界面：http://localhost:9094/
+   医院信息：http://localhost:9094/get-hospital-info
+
+4. 测试用例：
+   TC-001: GET /get-hospital-info → 返回医院名称
+   TC-002: POST /login → 管理员登录成功
+   TC-003: POST /daily-analysis → 获取分析数据
+
+-------------------------------------------------------
+四、问题处理办法
+-------------------------------------------------------
+
+| 问题 | 现象 | 原因 | 解决办法 |
+|------|------|------|---------|
+| 端口被占用 | 启动失败 | HTTP.sys占用 | 管理员权限启动或改端口 |
+| 数据库连接失败 | 登录时提示失败 | 配置文件无效 | 删除config.dat重新配置 |
+| JSON解析失败 | 接口返回错误 | Content-Type未设置 | 检查请求头 |
+| 配置文件解密失败 | 日志显示失败 | 密钥不匹配 | 删除config.dat重新配置 |
+
+常用命令：
+- 查看端口占用：netstat -ano | findstr :9094
+- 查看服务进程：Get-Process | Where-Object { $_.ProcessName -like '*DbProcedureCaller*' }
+- 停止服务：Stop-Process -Id <PID> -Force
+- 删除配置：Remove-Item config.dat -Force
+
+-------------------------------------------------------
+五、开发与部署环境
+-------------------------------------------------------
+
+【开发环境】
+- 操作系统：Windows 10/11
+- IDE：Visual Studio 2022
+- .NET版本：.NET 8.0 SDK
+- 数据库：SQL Server 2019 Developer Edition
+
+【部署环境】
+- 操作系统：Windows Server 2019/2022
+- .NET版本：.NET 8.0 Runtime
+- 数据库：SQL Server 2019/2022
+- 权限：需要管理员权限
+
+【默认配置】
+- 默认端口：9094
+- 管理员用户：lhbdb/241023
+- 数据库连接：Server=localhost;Database=TestDB;User ID=sa;Password=123456
+
+【部署步骤】
+1. dotnet build DbProcedureCaller/DbProcedureCaller.csproj -c Release
+2. 复制文件到部署目录
+3. 以管理员身份运行 DbProcedureCallerModular.exe
+4. 首次启动弹出配置窗口，输入数据库信息
+
+-------------------------------------------------------
+六、配置文件说明
+-------------------------------------------------------
+
+| 文件 | 路径 | 用途 | 格式 |
+|------|------|------|------|
+| config.dat | d:\AI\tran\config.dat | 数据库连接字符串 | AES加密+Base64 |
+| server_config.dat | d:\AI\tran\server_config.dat | 服务器配置 | 明文 |
+| server.log | 程序运行目录 | 运行日志 | 文本 |
+
+【config.dat 修改方法】
+1. 删除 config.dat 文件
+2. 重新启动程序
+3. 在弹出的配置窗口中输入数据库连接信息
+4. 点击"测试连接"验证
+5. 点击"确定"保存（自动加密）
+
+-------------------------------------------------------
+七、已修复的Bug
+-------------------------------------------------------
+
+| Bug编号 | 问题描述 | 修复方式 |
+|---------|---------|---------|
+| BUG-001 | 端口被系统进程占用 | 绑定localhost代替通配符 |
+| BUG-002 | JSON解析失败 | 设置正确Content-Type头 |
+| BUG-003 | 多选参数不支持 | 添加逗号分隔支持 |
+| BUG-004 | "技术"术语不恰当 | 改为"技师" |
+| BUG-005 | 医院名称不显示 | 修复配置查找逻辑 |
+| BUG-006 | 配置文件解密失败 | 添加多密钥解密支持 |
+| BUG-007 | 数据库连接失败无提示 | 登录时添加提示 |
+
+-------------------------------------------------------
+八、当前服务状态
+-------------------------------------------------------
+
+服务已启动，运行在端口：9094
+访问地址：http://localhost:9094/
+
+=======================================================
+                     文档结束
+=======================================================
+
+【导入Word方法】
+1. 打开Microsoft Word
+2. 新建空白文档
+3. 打开此TXT文件，全选复制（Ctrl+A, Ctrl+C）
+4. 粘贴到Word文档中（Ctrl+V）
+5. 根据需要调整格式
+
+【完整文档】
+详细的Markdown格式文档请查看：
+统计分析系统项目计划_完整版.md

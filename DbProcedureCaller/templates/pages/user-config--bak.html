@@ -1,0 +1,102 @@
+<div class="min-vh-100 p-6">
+    <div class="max-w-5xl mx-auto">
+        <div id="userAlert" class="mb-4"></div>
+
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                <h4 class="text-white font-semibold">用户列表</h4>
+            </div>
+            
+            <div class="p-4">
+                <div class="table-responsive">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-4 text-gray-600 font-semibold text-sm">ID</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-semibold text-sm">用户名</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-semibold text-sm">角色</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-semibold text-sm">状态</th>
+                                <th class="text-right py-3 px-4 text-gray-600 font-semibold text-sm">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center py-10">
+                                    <div class="inline-flex items-center gap-2 text-gray-400">
+                                        <div class="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                                        <span>加载中...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <div class="flex justify-end gap-2">
+                        <button onclick="UserConfig.showAddModal()" class="btn btn-primary">
+                            <i class="fa-solid fa-plus me-2"></i>添加用户
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="userModal" class="custom-modal">
+    <div class="custom-modal-backdrop" onclick="UserConfig.hideModal()"></div>
+    <div class="custom-modal-content" style="max-width: 500px;">
+        <div class="custom-modal-header">
+            <h5 id="userModalLabel">添加用户</h5>
+            <button class="custom-modal-close-btn" onclick="UserConfig.hideModal()">
+                <span>关闭</span>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="custom-modal-body">
+            <form id="userForm">
+                <input type="hidden" id="userId">
+
+                <div class="mb-4">
+                    <label class="form-label font-medium text-gray-700">用户名</label>
+                    <input type="text" class="form-control" id="userUsername" required placeholder="请输入用户名">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label font-medium text-gray-700">密码</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="userPassword" placeholder="请输入密码（不填则不修改）">
+                        <span class="input-group-text bg-white border border-l-0 cursor-pointer" onclick="UserConfig.togglePassword()" style="border-left: none;">
+                            <i class="fa-solid fa-eye-slash text-gray-500"></i>
+                        </span>
+                    </div>
+                    <small class="text-muted text-sm">不填则保持原密码不变</small>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="form-label font-medium text-gray-700">角色</label>
+                        <select class="form-select" id="userRole">
+                            <option value="user">普通用户</option>
+                            <option value="admin">管理员</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label font-medium text-gray-700">状态</label>
+                        <select class="form-select" id="userStatus">
+                            <option value="active">启用</option>
+                            <option value="inactive">禁用</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="custom-modal-footer">
+            <button class="btn btn-secondary px-6" onclick="UserConfig.hideModal()">取消</button>
+            <button class="btn btn-primary px-6" onclick="UserConfig.saveUser()">
+                <i class="fa-solid fa-check me-2"></i>保存
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+-- 系统信息汇总
+-- 更新日期：2026-04-25
+
+SELECT 
+    SYSTEM_SOURCE_NO AS '系统标识',
+    COUNT(*) AS '任务数量',
+    MAX(EXAM_TASK_CREATE_TIME) AS '最新任务时间'
+FROM 
+    EXAM_TASK
+WHERE 
+    IS_DEL = 0
+GROUP BY 
+    SYSTEM_SOURCE_NO
+ORDER BY 
+    COUNT(*) DESC;

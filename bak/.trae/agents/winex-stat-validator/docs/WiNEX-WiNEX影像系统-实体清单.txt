@@ -1,0 +1,3268 @@
+保密等级（勾选）：
+公开	
+受控	√
+秘密	
+
+
+
+
+
+
+
+
+　　　　　　　　　　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　
+
+卫宁健康科技集团股份有限公司
+
+
+目录
+
+1.WiNEX影像系统	
+1.1诊断医师分组:DIAG_DOC_GROUP	
+1.2检查配置模板库:EXAM_SETTINGS_TEMPLATE	
+1.3检查预约项目:EXAM_APPOINTMENT_ITEM	
+1.4检查设备禁忌项目:EXAM_EQUIPMENT_TABOO_ITEMS	
+1.5医师排班字典:DOC_SCHEDULE_DIC	
+1.6检查类别与医技号规则关系:EXAM_CATEGORY_TECHNO_RULE	
+1.7检查设备:EXAM_EQUIPMENT	
+1.8输入项参考值条件:EXAM_REFERENCE_CONDITION	
+1.9规则关联分诊队列:WORKLIST_TRIAGE_QUEUE	
+1.10检查逻辑规则:EXAM_LOGIC_RULE	
+1.11检查项目工作量权重:EXAM_ITEM_WORKLOAD_WEIGHT	
+1.12检查统计报表:EXAM_STATISTICAL_REPORT	
+1.13诊断医师分组与人员关系:DIAG_DOC_GROUP_USER	
+1.14检查类别与打印文件关系:EXAM_CATEGORY_PRINTFILE	
+1.15检查项目检查方法关系表:EXAM_ITEM_DIC_METHOD	
+1.16规则关联的检查类别:WORKLIST_EXAM_CATEGORY	
+1.17检查特殊项目:EXAM_SPECIAL_ITEM	
+1.18医技号规则:TECHNO_RULE	
+1.19诊断模板内容:DIAG_TEMPLATE_CONTENT	
+1.20检查元素项:EXAM_ELEMENT_ITEM	
+1.21检查预约排班:EXAM_APPOINTMENT_SCHEDULE	
+1.22诊断模板树:DIAG_TEMPLATE_TREE	
+1.23排班星期范围:SCHEDULE_DAY_OF_WEEK	
+1.24检查分诊队列:EXAM_TRIAGE_QUEUE	
+1.25预约注意事项:APPOINTMENT_ATTENTION_POINT	
+1.26检查字典:EXAM_DICTIONARY	
+1.27检查输入项参考值:EXAM_REFERENCE	
+1.28检查项目协议:EXAM_ITEM_PROTOCOL	
+1.29检查方法:EXAM_METHOD	
+1.30检查项目字典:EXAM_ITEM_DIC	
+1.31检查类别:EXAM_CATEGORY	
+1.32检查类别归类费用:EXAM_CATEGORY_FEE	
+1.33用户禁忌项目:USER_TABOO_ITEMS	
+1.34检查类别与设备关系:EXAM_CATEGORY_EQUIPMENT	
+1.35规则与就诊类型:WORKLIST_ENCOUNTER_TYPE	
+1.36医生工作排班:DOC_JOB_SCHEDULE	
+1.37专家共识:FILMING_CONSENSUS	
+1.38规则关联的设备:WORKLIST_EQUIPMENT	
+1.39WORKLIST规则:WORKLIST_RULE	
+1.40角色操作权限:PLATFORM_CATEGORY_POWER	
+1.41协同备份记录:PLATFORM_BACKUP_RECORD	
+1.42协同元素项:PLATFORM_ELEMENT_ITEM	
+1.43病人卡数据:PLATFORM_PATIENT_CARDS	
+1.44同步任务:PLATFORM_SCHEDULE_TASK	
+1.45协同报告打印记录:PLATFORM_PRINT_RECORD	
+1.46集团数据:PLATFORM_GROUP	
+1.47报告数据:PLATFORM_REPORT	
+1.48集团机构关系:PLATFORM_HOSPITAL_GROUP	
+1.49协同平台数据脚本记录:PLATFORM_DATABASE_SCRIPT	
+1.50角色操作:PLATFORM_ROLE_OPERATE_POWER	
+1.51协同流转记录:PLATFORM_FLOW_PROXY_RECORD	
+1.52报告图像:PLATFORM_REPORT_IMAGE	
+1.53协同机构配置:PLATFORM_FLOW_HOS_CONFIG	
+1.54心电报告结果:PLATFORM_REPORT_ECG_RESULT	
+1.55医嘱项目:PLATFORM_REPORT_CHARGE_ITEM	
+1.56放射报告结果:PLATFORM_REPORT_RIS_RESULT	
+1.57协同报告其他结果:PLATFORM_OTHER_RESULT	
+1.58患者基本信息:PLATFORM_PATIENT	
+1.59病理报告结果:PLATFORM_REPORT_PIS_RESULT	
+1.60区域组:PLATFORM_FLOW_GROUP	
+1.61协同配置:PLATFORM_SETTINGS	
+1.62协同申请单:PLATFORM_REPORT_REQUISITION	
+1.63医生签名:PLATFORM_USER_SIGNATURE	
+1.64协同机构:PLATFORM_FLOW_HOSPITAL_INFO	
+1.65超声报告结果:PLATFORM_REPORT_UIS_RESULT	
+1.66内镜报告结果:PLATFORM_REPORT_EIS_RESULT	
+1.67协同字典:PLATFORM_DICTIONARY	
+1.68结构化结果表:PLATFORM_STRUC_RESULT	
+1.69检验报告结果表:PLATFORM_REPORT_LIS_RESULT	
+1.70结构化结果管理表:PLATFORM_STRUC_RESULT_MNG	
+1.71人工核查记录表:PLATFORM_MANUAL_CHECK	
+1.72结构化项目表:PLATFORM_STRUC_ITEMS	
+1.73检查打印:EXAM_PRINT	
+1.74检查个性设置:EXAM_SETTINGS	
+1.75检查危急值:EXAM_CRITICAL_VALUES	
+1.76检查签名:EXAM_SIGNATURE	
+1.77检查设备运营:EXAM_EQUIPMENT_OPERATION	
+1.78检查任务留言跟踪:EXAM_TASK_COMMENT_TRACE	
+1.79检查报告记录:EXAM_REPORT	
+1.80历史检查计划任务:EXAM_SCHEDULE_TASK_HISTORY	
+1.81检查预约:EXAM_APPOINTMENT	
+1.82检查影像关系:EXAM_IMG_RELATIONSHIP	
+1.83检查收费项目:EXAM_CHARGE_ITEM	
+1.84检查路径记录表:EXAM_PATH_RETROSPECT	
+1.85迁移任务:EXAM_MIGRATION_TASK	
+1.86检查数据接收:EXAM_MDM_DATA_DIC	
+1.87检查历史变更:EXAM_HISTORY	
+1.88迁移失败记录:EXAM_MIGRATION_FAIL	
+1.89检查消息记录:EXAM_MESSAGE	
+1.90检查申请:EXAM_REQUISITION	
+1.91检查镜子信息:EXAM_MIRROR	
+1.92设备执行过程步骤:MODALITY_PERF_PROC_STEP	
+1.93检查入口:EXAM_ENCOUNTER	
+1.94技术其他信息:TECHNOLOGY_OTHER_INFO	
+1.95预约过程步骤:SCHEDULED_PROC_STEP	
+1.96检查计划任务:EXAM_SCHEDULE_TASK	
+1.97检查患者证件信息:EXAM_PERSON_IDENTIFICA	
+1.98检查COPILOT埋点:EXAM_COPILOT_HISTORY	
+1.99迁移数据关系映射:EXAM_MIGRATION_RELATIONSHIP	
+1.100检查影像胶片:EXAM_IMG_FILM	
+1.101检查患者医技号:EXAM_PATIENT_TECH_NO	
+1.102预约日排班:APPOINTMENT_DAY_SCHEDULE	
+1.103检查患者就诊号源信息:EXAM_PERSON_MEDICAL_NUMBER	
+1.104检查VIP授权:EXAM_VIP_AUTHORIZED	
+1.105检查患者档案信息:EXAM_PERSON	
+1.106患者证件信息表:EXAM_PERSON_IDENTIFICATION	
+1.107检查选择附件:EXAM_SELECT_ATTACHMENT	
+1.108检查任务留言:EXAM_TASK_COMMENT	
+1.109报告其他结果:EXAM_OTHER_RESULT	
+1.110病理申请信息表:EXAM_PIS_REQUISITION	
+1.111造影剂过敏:CONTRAST_MEDIUM_ALLERGY	
+1.112检查登记项目:EXAM_REGISTER_ITEM	
+1.113检查分诊任务:EXAM_TRIAGE_TASK	
+1.114检查分诊屏叫号:EXAM_TRIAGE_SCREEN_CALL	
+1.115检查任务:EXAM_TASK	
+1.116检查数据脚本记录:EXAM_DATABASE_SCRIPT	
+1.117检查医生任务:EXAM_DOC_TASK	
+1.118自助机服务设置:EXAM_SELF_SERVICE_SETTING	
+1.119检查分诊历史:EXAM_TRIAGE_HISTORY	
+1.120检查附件:EXAM_ATTACHMENT	
+1.121检查技术:EXAM_TECHNOLOGY	
+1.122检查数据核查记录:EXAM_CHECK_RECORD	
+1.123检查消息详情:EXAM_MESSAGE_DETAILS	
+1.124屏幕字典:SCREEN_DICTIONARY	
+1.125屏幕外设设置:SCREEN_PERIPHERAL_SETTING	
+1.126屏幕设置:SCREEN_SETTINGS	
+1.127屏幕多媒体资源:SCREEN_MEDIA_RESOURCE	
+1.128屏幕分诊外设:SCREEN_TRIAGE_PERIPHERAL	
+1.129检查会诊医生:EXAM_CONSULTANT	
+1.130检查随访:EXAM_FOLLOW_UP	
+1.131检查经典病例标签:EXAM_CLASSIC_CASE_TAG	
+1.132检查会诊:EXAM_CONSULTATION	
+1.133检查经典病例:EXAM_CLASSIC_CASE	
+1.134检查任务分配:EXAM_TASK_ASSIGNMENT	
+1.135检查随访元素信息:EXAM_FOLLOW_UP_ELEMENT	
+1.136检查质控项目组:EXAM_QC_ITEM_GROUP	
+1.137检查质控记录:EXAM_QC_RECORD	
+1.138检查质控记录分值情况:EXAM_QC_RECORD_SCORE	
+1.139检查质控分组:EXAM_QC_GROUP	
+1.140检查质控分组评价定义:EXAM_QC_GROUP_EVALUATION	
+1.141检查质控条目:EXAM_QC_ENTRY	
+1.142检查质控项目:EXAM_QC_ITEM	
+1.143检查质控项目质控条目:EXAM_QC_ITEM_ENTRY	
+
+	
+
+
+	
+1.WiNEX影像系统
+1.1诊断医师分组:DIAG_DOC_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+DIAG_DOC_GROUP_ID	诊断医师分组	number(19,0)	否	是	description1
+DIAG_DOC_GROUP_NAME	诊断医师分组名称	variableMultibyte(64)	是	否	description2
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description7
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description8
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description9
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description10
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description11
+1.2检查配置模板库:EXAM_SETTINGS_TEMPLATE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SETTINGS_TEMPLATE_ID	检查配置模板库标识	number(19,0)	否	是	检查配置模板库标识
+SETTING_ITEM_KEY	设置项关键词	variableMultibyte(256)	否	否	设置项关键词
+SETTING_ITEM_SECTION	设置项分组	variableMultibyte(64)	是	否	设置项分组
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	检查类别标识
+TEMPLATE_NAME	模板名称	variableMultibyte(256)	是	否	模板名称
+TEMPLATE_CONTENT	模板内容	vamax	是	否	模板内容
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	系统来源编码
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description7
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description8
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description9
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description10
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description11
+1.3检查预约项目:EXAM_APPOINTMENT_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_APPOINTMENT_ITEM_ID	检查预约项目标识	variableMultibyte(256)	否	是	description1
+EXAM_APPOINTMENT_SCHEDULE_ID	检查预约排班标识	number(19,0)	否	否	description1
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	是	否	description16
+URGENT_APPOINTMENT_FLAG	急查允许预约标志	number(19,0)	是	否	description3
+EMERGENCY_APPOINTMENT_FLAG	急诊允许预约标志	number(19,0)	是	否	description4
+ITEM_OCCUPANCY_NUMBER	项目占位数	integer	是	否	description15
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	description10
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	description11
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	description12
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	description13
+1.4检查设备禁忌项目:EXAM_EQUIPMENT_TABOO_ITEMS
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_EQUIPMENT_TABOO_ITEMS_ID	检查设备禁忌项目标识	number(19,0)	否	是	description1
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	否	
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.5医师排班字典:DOC_SCHEDULE_DIC
+字段名称	中文名称	数据类型	可空	主键	备注
+DOC_SCHEDULE_DIC_ID	医师排班字典标识	number(19,0)	否	是	description1
+DIAG_DOC_GROUP_ID	诊断医师分组	number(19,0)	否	否	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+DOC_SCHEDULE_DIC_NAME	医师排班字典名称	variableMultibyte(64)	是	否	description2
+TASK_START_RELATIVE_DAYS	任务开始相对天数	integer	是	否	description3
+TASK_START_TIME	任务开始时间	variableMultibyte(10)	是	否	description4
+TASK_END_RELATIVE_DAYS	任务结束相对天数	integer	是	否	description5
+TASK_END_TIME	任务结束时间	variableMultibyte(10)	是	否	description6
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态
+ASSIGN_BASE_TYPE_CODE	分配基线分类代码	number(19,0)	是	否	description9
+ASSIGN_BASE_NUMBER	分配基线数	integer	是	否	description8
+ASSIGN_MAX_WAITING_NUMBER	分配最大待处理	integer	是	否	description10
+DOC_SCHEDULE_DIC_PTY	医师排班字典属性	variableCharacters(8000)	是	否	description12
+DOC_SCHEDULE_DIC_GROUP_NO	医师排班字典组号	variableMultibyte(64)	是	否	description23
+ENABLED_FLAG	启用标志	number(19,0)	是	否	启用标志
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description18
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description19
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description20
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description21
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description22
+1.6检查类别与医技号规则关系:EXAM_CATEGORY_TECHNO_RULE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CATEGORY_TECHNO_RULE_ID	检查类别与医技号规则关系标识	number(19,0)	否	是	description1
+TECHNO_RULE_ID	影像号规则标识	number(19,0)	否	否	
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.7检查设备:EXAM_EQUIPMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	否	是	设备标识是检查设备表的唯一标识
+EQUIPMENT_NAME	设备名称	variableMultibyte(50)	是	否	机构内设备的名称的详细描述
+EQUIPMENT_ADDRESS	设备位置	variableMultibyte(200)	是	否	设备位置
+MODALITY_NO	设备模式	variableMultibyte(64)	是	否	设备模式编码
+EQUIPMENT_HOSTNAME	设备主机名	variableMultibyte(256)	是	否	description21
+EQUIPMENT_IP	设备IP	variableMultibyte(20)	是	否	设备IP
+EQUIPMENT_PORT	设备端口	variableMultibyte(10)	是	否	设备端口
+EQUIPMENT_WAITING_COUNT	设备候诊人数	integer	是	否	description21
+LICENSE_NO	许可证编码	variableMultibyte(255)	是	否	被监督单位的许可证编号
+MOBILE_EQUIPMENT_TYPE	移动设备类型	variableMultibyte(64)	是	否	移动设备类型
+MOBILE_EQUIPMENT_TYPE_NO	移动设备类型编码	variableCharacters(64)	是	否	移动设备类型编码
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源在编码体系中的编码
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	是否可见的标志
+SEQ_NO	排序	integer	是	否	对事物按照一定规则排序的序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.8输入项参考值条件:EXAM_REFERENCE_CONDITION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_REFERENCE_CONDITION_ID	输入项参考值条件标识	identifierType(19,0)	否	是	输入项参考值条件标识是输入项参考值条件表的唯一标识
+EXAM_REFERENCE_ID	输入项参考值标识	identifierType(19,0)	否	否	
+CONDITION_NO	参考值条件编码	variableCharacters(128)	否	否	
+CONDITION_VALUE	条件值	variableMultibyte(256)	是	否	
+DICTIONARY_FLAG	字典标志	flagType(19,0)	是	否	
+CONDITION_DESC	条件描述	variableMultibyte(256)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+1.9规则关联分诊队列:WORKLIST_TRIAGE_QUEUE
+字段名称	中文名称	数据类型	可空	主键	备注
+WORKLIST_TRIAGE_QUEUE_ID	规则关联分诊队列标识	identifierType(19,0)	否	是	规则关联分诊队列WORKLIST_TRIAGE_QUEUE实体的主键
+EXAM_TRIAGE_QUEUE_ID	检查分诊队列标识	identifierType(19,0)	否	否	description1
+WORKLIST_RULE_ID	WORKLIST规则标识	identifierType(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description7
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	否	否	
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description9
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description11
+1.10检查逻辑规则:EXAM_LOGIC_RULE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_LOGIC_RULE_ID	检查逻辑规则标识	number(19,0)	否	是	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_LOGIC_RULE_NO	检查逻辑规则编码	variableMultibyte(64)	是	否	description15
+EXAM_LOGIC_RULE_NAME	检查逻辑规则名称	variableMultibyte(256)	是	否	description2
+EXAM_LOGIC_RULE_CONDITION	检查逻辑规则条件	variableCharacters(8000)	是	否	description3
+ENABLED_FLAG	是否启用	number(19,0)	是	否	description4
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description10
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description11
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人标识	number(19,0)	是	否	description12
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	description13
+1.11检查项目工作量权重:EXAM_ITEM_WORKLOAD_WEIGHT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ITEM_WORKLOAD_WEIGHT_ID	检查项目工作量权重标识	number(19,0)	否	是	description1
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态
+EXAM_ITEM_WEIGHT	检查项目权重	number(19,2)	是	否	description3
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	description10
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	description11
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	description12
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	description13
+1.12检查统计报表:EXAM_STATISTICAL_REPORT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_STATISTICAL_REPORT_ID	检查统计报表标识	number(19,0)	否	是	检查统计报表标识
+STAT_REPORT_NO	统计报表编码	variableMultibyte(128)	是	否	统计报表编码
+STAT_REPORT_NAME	统计报表名称	variableMultibyte(128)	是	否	统计报表名称
+STAT_REPORT_PATH	统计报表路径	variableMultibyte(512)	是	否	统计报表路径
+STAT_REPORT_SYSTEM_FLAG	统计报表系统标识	number(19,0)	是	否	统计报表系统标识
+STAT_NODE_PROPERTY	统计报表属性	variableMultibyte(512)	是	否	统计报表属性
+PARENT_STATISTICAL_REPORT_ID	父级统计报表标识	number(19,0)	是	否	父级统计报表标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description7
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description8
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description9
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description10
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description11
+1.13诊断医师分组与人员关系:DIAG_DOC_GROUP_USER
+字段名称	中文名称	数据类型	可空	主键	备注
+DIAG_DOC_GROUP_USER_ID	诊断医师分组与人员关系标识	number(19,0)	否	是	description1
+USER_ID	用户标识	number(19,0)	否	否	
+DIAG_DOC_GROUP_ID	诊断医师分组	number(19,0)	否	否	description1
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description8
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人标识	number(19,0)	是	否	description9
+CREATED_NAME	创建人姓名	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人标识	number(19,0)	是	否	description11
+MODIFIED_NAME	最后修改人姓名	variableMultibyte(64)	是	否	description12
+1.14检查类别与打印文件关系:EXAM_CATEGORY_PRINTFILE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CATEGORY_PRINTFILE_ID	检查类别与打印文件关系标识	number(19,0)	否	是	检查类别与打印文件关系EXAM_CATEGORY_PRINTFILE实体的主键
+EXAM_CATEGORY_ID	检查类别标识	identifierType(19,0)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+PRINT_FILE_NO	打印文件编码	variableMultibyte(64)	是	否	打印文件编码
+PRINT_FILE_NAME	打印文件名称	variableMultibyte(100)	是	否	
+ENCOUNTER_TYPE_NO	就诊类型编码	variableCharacters(32)	是	否	
+PRINT_TIMES	打印次数	integer	是	否	
+DEFAULT_FLAG	是否默认	number(19,0)	是	否	
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+TEMPLATE_DESIGN_CONTENT	文件内容	vmbtmax	是	否	
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.15检查项目检查方法关系表:EXAM_ITEM_DIC_METHOD
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ITEM_DIC_METHOD_ID	检查项目检查方法关系表标识	identifierType(19,0)	否	是	检查项目检查方法关系表表的唯一标识
+EXAM_METHOD_ID	检查方法标识	identifierType(19,0)	否	否	检查方法EXAM_METHOD实体的主键
+EXAM_ITEM_DIC_ID	检查项目标识	identifierType(19,0)	否	否	
+SEQ_NO	排序序号	integer	是	否	
+DEFAULT_FLAG	默认方法标志	flagType(19,0)	否	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.16规则关联的检查类别:WORKLIST_EXAM_CATEGORY
+字段名称	中文名称	数据类型	可空	主键	备注
+WORKLIST_EXAM_CATEGORY_ID	规则关联的检查类别标识	number(19,0)	否	是	description1
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	否	否	
+WORKLIST_RULE_ID	WORKLIST规则标识	number(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.17检查特殊项目:EXAM_SPECIAL_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SPECIAL_ITEM_ID	检查特殊项目标识	identifierType(19,0)	否	是	检查特殊项目标识是检查特殊项目表表的唯一标识
+EXAM_MAIN_CATEGORY_NO	检查大类别编码	variableCharacters(32)	是	否	
+SPECIAL_ITEM_CLASS_NAME	特殊项目分类名称	variableMultibyte(40)	是	否	
+SPECIAL_ITEM_NO	特殊项目编码	variableCharacters(80)	是	否	
+SPECIAL_ITEM_NAME	特殊项目名称	variableMultibyte(64)	是	否	
+SPECIAL_ITEM_EXTERN_NO	外部映射编码	variableCharacters(100)	是	否	
+MEM1_NO	记忆码一	variableCharacters(60)	是	否	
+MEM2_NO	记忆码二	variableCharacters(60)	是	否	
+REMARK	备注	variableMultibyte(500)	是	否	
+ALTER_FLAG	可修改标志	flagType(19,0)	是	否	
+VISIBLE_FLAG	可见标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.18医技号规则:TECHNO_RULE
+字段名称	中文名称	数据类型	可空	主键	备注
+TECHNO_RULE_ID	影像号规则标识	number(19,0)	否	是	
+TECHNO_RULE_NAME	影像号规则名称	variableMultibyte(64)	是	否	description22
+CURRENT_NUMBER	当前号码	integer	是	否	
+PRE_PART	前缀	variableMultibyte(10)	是	否	
+CREATE_MODE_CODE	创建模式代码	number(19,0)	是	否	description20
+CREATE_CYCLE_CODE	创建周期代码	number(19,0)	是	否	description21
+TOTAL_LENGTH	总长度	integer	是	否	
+RECYCLE_FLAG	是否回收	number(19,0)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.19诊断模板内容:DIAG_TEMPLATE_CONTENT
+字段名称	中文名称	数据类型	可空	主键	备注
+DIAG_TEMPLATE_CONTENT_ID	模板内容标识	number(19,0)	否	是	模板内容标识是诊断模板内容表的唯一标识
+TEMPLATE_ITEM_NO	模板项编码	variableMultibyte(20)	是	否	
+TEMPLATE_CONTENT	模板内容	vmbtmax	是	否	
+DIAG_TEMPLATE_TREE_ID	模板树标识	number(19,0)	否	否	
+ENCIPHER_FLAG	是否加密	number(19,0)	是	否	
+GENDER_CODE	性别代码	code(19,0)	是	否	性别代码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.20检查元素项:EXAM_ELEMENT_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ELEMENT_ITEM_ID	检查元素项标识	number(19,0)	否	是	检查元素项标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+ELEMENT_ITEM_GROUP_NAME	元素项组名	variableMultibyte(128)	是	否	元素项组名
+BIND_MODEL_KEY	绑定模型属性键	variableMultibyte(64)	是	否	绑定模型属性键
+BIND_MODEL_VALUE	绑定模型属性值	variableMultibyte(64)	是	否	绑定模型值
+BIND_MODEL_NAME	绑定模型属性名称	variableMultibyte(256)	是	否	绑定模型属性名称
+ELEMENT_ITEM_TYPE_NO	元素项输入类型编码	variableMultibyte(64)	是	否	元素项输入类型编码
+ELEMENT_ITEM_DEFAULT_VALUE	元素项默认值	variableMultibyte(64)	是	否	元素项默认值
+ELEMENT_ITEM_DATA_PROPERTY	元素项数据属性	variableMultibyte(32)	是	否	元素项数据属性
+MODEL_SOURCE	模型来源	variableMultibyte(64)	是	否	模型来源
+DATA_SOURCE_TYPE_NO	数据来源类型编码	variableMultibyte(64)	是	否	数据来源类型编码
+DATA_SOURCE_FUNCTION	数据来源函数	variableCharacters(8000)	是	否	数据来源函数
+ELEMENT_ITEM_NAME	元素项名称	variableMultibyte(64)	是	否	元素项名称
+ELEMENT_ITEM_PLACEHOLDER	元素项输入提示	variableMultibyte(128)	是	否	元素项输入提示
+ELEMENT_ITEM_RELATION_SET	元素项关系集	variableMultibyte(256)	是	否	元素项关系集
+ELEMENT_ITEM_RELATION_DEFAULT	元素项关系默认值	variableMultibyte(32)	是	否	元素项关系默认值
+ELEMENT_ITEM_REGEX_TEXT	元素项正则校验文本	variableMultibyte(1024)	是	否	元素项正则校验文本
+TRIGGER_EVENT_TYPE_NO	触发事件类型编码	variableMultibyte(64)	是	否	触发事件类型编码
+TRIGGER_EVENT_FUNCTION	触发事件函数	variableCharacters(4000)	是	否	触发事件函数
+ELEMENT_ITEM_CSS	元素项CSS样式	variableCharacters(8000)	是	否	元素项CSS样式
+ELEMENT_ITEM_BOUNDARY	元素项使用范围	variableMultibyte(128)	是	否	元素项使用范围
+IS_FILTER	是否为筛选项	number(19,0)	是	否	是否为筛选项
+IS_DICTIONARY	是否字典	number(19,0)	是	否	是否字典
+IS_INTERFACE	是否接口	number(19,0)	是	否	是否接口
+IS_READ_ONLY	是否只读	number(19,0)	是	否	是否只读
+REQUIRED_FLAG	必填标志	number(19,0)	是	否	必填标志
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.21检查预约排班:EXAM_APPOINTMENT_SCHEDULE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_APPOINTMENT_SCHEDULE_ID	检查预约排班标识	number(19,0)	否	是	description1
+EXAM_TRIAGE_QUEUE_ID	检查分诊队列标识	number(19,0)	否	否	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+APPOINTMENT_DESC	预约描述	variableMultibyte(256)	是	否	description3
+APPOINTMENT_ADDRESS	预约地点	variableMultibyte(256)	是	否	description4
+APPOINTMENT_TYPE_CODE	预约类型代码	number(19,0)	是	否	description5
+APPOINTMENT_START_DATE	预约开始日期	date	是	否	description6
+APPOINTMENT_END_DATE	预约结束日期	date	是	否	description7
+APPOINTMENT_MAX_DAYS	最大可预约天数	integer	是	否	description12
+APPOINTMENT_DAY_START_TIME	预约当日开始时间	variableMultibyte(10)	是	否	description8
+APPOINTMENT_DAY_END_TIME	预约当日结束时间	variableMultibyte(10)	是	否	description9
+APPOINTMENT_TIME_INTERVAL	预约时间间隔	integer	是	否	description10
+APPOINTMENT_MAX_PERSONS	预约间隔可预约人数	integer	是	否	description11
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.22诊断模板树:DIAG_TEMPLATE_TREE
+字段名称	中文名称	数据类型	可空	主键	备注
+DIAG_TEMPLATE_TREE_ID	模板树标识	number(19,0)	否	是	诊断模板树DIAG_TEMPLATE_TREE实体的主键
+EXAM_CATEGORY_ID	检查类别标识	identifierType(19,0)	是	否	
+EXAM_MAIN_CATEGORY_NO	检查主类别编码	variableCharacters(32)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+TEMPLATE_NODE_NO	模板节点编码	variableMultibyte(64)	是	否	
+TEMPLATE_NODE_NAME	模板节点名称	variableMultibyte(64)	是	否	
+DICT_TEMPLATE_NODE_NO	模板节点字典编码	variableMultibyte(64)	是	否	description22
+PARENT_TEMPLATE_TREE_ID	父节点标识	number(19,0)	是	否	
+MEM1_NO	输入码一	variableMultibyte(30)	是	否	
+MEM2_NO	输入码二	variableMultibyte(30)	是	否	
+NODE_PROPERTY	节点属性	variableMultibyte(40)	是	否	
+NODE_TYPE_STATUS	节点类型状态	number(19,0)	是	否	
+PRIVATE_BY	私有用户编码	number(19,0)	是	否	
+PRIVATE_USER_NAME	私有用户名称	variableMultibyte(32)	是	否	
+LEAF_NODE_FLAG	是否叶子节点	number(19,0)	是	否	
+DEFAULT_FLAG	是否默认	number(19,0)	是	否	description24
+GENDER_CODE	生理性别代码	code(19,0)	是	否	生理性别代码
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.23排班星期范围:SCHEDULE_DAY_OF_WEEK
+字段名称	中文名称	数据类型	可空	主键	备注
+SCHEDULE_DAY_OF_WEEK_ID	排班星期范围标识	number(19,0)	否	是	description1
+EXAM_APPOINTMENT_SCHEDULE_ID	检查预约排班标识	number(19,0)	否	否	description1
+DAY_OF_WEEK_CODE	星期代码	number(19,0)	是	否	星期代码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.24检查分诊队列:EXAM_TRIAGE_QUEUE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TRIAGE_QUEUE_ID	检查分诊队列标识	number(19,0)	否	是	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+TRIAGE_QUEUE_NAME	分诊队列名称	variableMultibyte(64)	是	否	description2
+TRIAGE_QUEUE_PREFIX	分诊对列前缀	variableMultibyte(16)	是	否	description3
+TRIAGE_QUEUE_PTY	分诊队列属性	variableCharacters(4000)	是	否	description16
+VISIBLE_FLAG	是否可见标志	number(19,0)	是	否	是否可见标志
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	医院SOID
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	逻辑删除
+CREATED_AT	创建日期时间	dateTime	否	否	创建日期时间
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	最后修改日期时间
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.25预约注意事项:APPOINTMENT_ATTENTION_POINT
+字段名称	中文名称	数据类型	可空	主键	备注
+APPOINTMENT_ATTENTION_POINT_ID	预约注意事项标识	number(19,0)	否	是	description1
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	是	否	description3
+ATTENTION_POINT_DESC	预约注意事项描述	variableMultibyte(4000)	是	否	description2
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description8
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	description9
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	description11
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	description12
+1.26检查字典:EXAM_DICTIONARY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_DICTIONARY_ID	检查字典标识	number(19,0)	否	是	检查字典标识是检查字典表的唯一标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源在编码体系中的编码
+DICT_CLASS_NAME	字典分类名称	variableMultibyte(40)	是	否	检查字典分类名称的详细描述
+DICT_ITEM_NO	字典项编码	variableMultibyte(40)	是	否	字典项在编码体系中的编码
+DICT_ITEM_NAME	字典项名称	variableMultibyte(64)	是	否	检查字典项目显示的标准名称的详细描述
+DICT_EXTERN_NO	外部映射编码	variableMultibyte(50)	是	否	外部映射在编码体系中的编码
+MEM1_NO	记忆码一	variableMultibyte(30)	是	否	记忆码一
+MEM2_NO	记忆码一	variableMultibyte(30)	是	否	记忆码一
+ALTER_FLAG	可修改标志	number(19,0)	是	否	是否可修改的标志
+VISIBLE_FLAG	可见标志	number(19,0)	是	否	标识是否可见
+SEQ_NO	排序	integer	是	否	对事物按照一定规则排序的序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.27检查输入项参考值:EXAM_REFERENCE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_REFERENCE_ID	检查输入项参考值标识	identifierType(19,0)	否	是	检查输入项参考值标识是检查输入项参考值表的唯一标识
+EXAM_REFERENCE_NAME	参考值名称	variableMultibyte(128)	否	否	
+EXAM_REFERENCE_NO	参考值编码	variableCharacters(32)	否	否	
+REFERENCE_CATEGORY_NO	参考值类型编码	variableCharacters(32)	否	否	
+CEILING	参考值上限	number(19,0)	是	否	
+CEILING_WARNING	参考值上限预警值	number(19,0)	是	否	
+BOTTOM	参考值下限	number(19,0)	是	否	
+BOTTOM_WARNING	参考值下限预警值	number(19,0)	是	否	
+MASCULINE_NO	阴阳性字符	variableCharacters(32)	是	否	
+REFERENCE_TYPE_NO	参考值类别编码	variableCharacters(64)	否	否	
+CONDITION_NO	参考值条件	variableCharacters(32)	是	否	
+GROUP_SEQ_NO	组内排序号	integer	是	否	
+DEFAULT_FLAG	默认标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人姓名	variableMultibyte(64)	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_NAME	修改人姓名	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+1.28检查项目协议:EXAM_ITEM_PROTOCOL
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ITEM_PROTOCOL_ID	项目协议标识	number(19,0)	否	是	
+WORKLIST_RULE_ID	WORKLIST规则标识	number(19,0)	否	否	
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	否	
+PROTOCOL_NO	协议编码	variableMultibyte(50)	是	否	
+PROTOCOL_MEANING	协议涵义	variableMultibyte(50)	是	否	
+PROTOCOL_DESIGNATOR	协议代号	variableMultibyte(50)	是	否	
+EQUIPMENT_VERSION	设备版本	variableMultibyte(50)	是	否	
+CHARACTERSET_CODE	字符集代码	number(19,0)	是	否	
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.29检查方法:EXAM_METHOD
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_METHOD_ID	检查方法标识	number(19,0)	否	是	检查方法EXAM_METHOD实体的主键
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+METHOD_DESC	方法描述	variableMultibyte(1024)	是	否	
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+DEFAULT_FLAG	是否默认标志	flagType(19,0)	是	否	
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.30检查项目字典:EXAM_ITEM_DIC
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	是	检查项目字典标识是检查项目字典表的唯一标识
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	description26
+EXAM_ITEM_NO	检查项目编码	variableMultibyte(50)	是	否	
+EXAM_ITEM_NAME	检查项目名称	variableMultibyte(50)	是	否	
+EXAM_ITEM_ATTRIBUTE_TAG	检查项目分类标签	variableMultibyte(256)	是	否	
+EXAM_ITEM_GROUP	检查项目组	variableMultibyte(64)	是	否	
+LOCAL_ITEM_FLAG	本地项目标志	number(19,0)	是	否	
+DIAG_TEMPLATE_TREE_ID	诊断模板树标识	number(19,0)	是	否	description27
+POSITION_NO	所属部位编码	variableMultibyte(64)	是	否	
+RADIATION_TIMES	曝光次数	integer	是	否	
+EXTERN_NO	外部映射编码	variableMultibyte(50)	是	否	
+EXTERN_ITEM_TYPE_NO	项目分类外部映射编码	variableMultibyte(50)	是	否	
+MEM1_NO	输入码一	variableMultibyte(30)	是	否	
+MEM2_NO	输入码二	variableMultibyte(30)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源编码
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+ITEM_GROUP_SEQ_NO	项目组排序	integer	是	否	项目组排序
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.31检查类别:EXAM_CATEGORY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	否	是	检查类别标识是检查类别表的唯一标识
+EXAM_CATEGORY_NO	检查类别编码	variableMultibyte(32)	是	否	检查类别编码
+EXAM_MAIN_CATEGORY_NO	检查主类别编码	variableCharacters(32)	是	否	检查主类别编码
+EXAM_CATEGORY_NAME	检查类别名称	variableMultibyte(256)	是	否	住院检查类别显示的标准名称的详细描述
+EXEC_DEPT_ID	执行科室标识	number(19,0)	是	否	执行科室的标识
+EXEC_DEPT_NO	执行科室编码	variableMultibyte(32)	是	否	执行科室在编码体系中的编码
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源在编码体系中的编码
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	是否可见的标志
+SEQ_NO	排序	integer	是	否	对事物按照一定规则排序的序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.32检查类别归类费用:EXAM_CATEGORY_FEE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CATEGORY_FEE_ID	检查类别归类费用标识	number(19,0)	否	是	检查类别归类费用标识
+EXAM_ITEM_NO	检查项目编码	variableCharacters(64)	是	否	
+EXAM_ITEM_NAME	检查项目名称	variableMultibyte(256)	是	否	
+EXAM_CATEGORY_ID	检查类别标识	identifierType(19,0)	是	否	
+EXAM_ITEM_TYPE_NO	医嘱项目类型编码	variableCharacters(64)	是	否	
+EXTERN_ITEM_TYPE_NO	项目分类外部映射编码	variableCharacters(256)	是	否	
+IS_CLUDING_FILM_FEE	含有胶片费用	number(19,0)	是	否	含有胶片费用
+BUSINESS_TYPE_NO	业务类型编码	variableCharacters(64)	是	否	
+BUSINESS_TYPE_NAME	业务类型名称	variableMultibyte(256)	是	否	
+BUSINESS_GROUP_NO	分组编码	variableCharacters(64)	否	否	
+BUSINESS_GROUP_NAME	分组名称	variableMultibyte(256)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.33用户禁忌项目:USER_TABOO_ITEMS
+字段名称	中文名称	数据类型	可空	主键	备注
+USER_TABOO_ITEMS_ID	用户禁忌项目标识	number(19,0)	否	是	description1
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	否	
+USER_ID	用户标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.34检查类别与设备关系:EXAM_CATEGORY_EQUIPMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CATEGORY_EQUIPMENT_ID	检查类别与设备关系标识	number(19,0)	否	是	
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	否	否	
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.35规则与就诊类型:WORKLIST_ENCOUNTER_TYPE
+字段名称	中文名称	数据类型	可空	主键	备注
+WORKLIST_ENCOUNTER_TYPE_ID	规则关联就诊类型标识	number(19,0)	否	是	description1
+WORKLIST_RULE_ID	WORKLIST规则标识	number(19,0)	否	否	
+ENCOUNTER_TYPE_NO	就诊类型编码	variableMultibyte(32)	是	否	description3
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.36医生工作排班:DOC_JOB_SCHEDULE
+字段名称	中文名称	数据类型	可空	主键	备注
+DOC_JOB_SCHEDULE_ID	医师工作排班标识	number(19,0)	否	是	description1
+DOC_SCHEDULE_DIC_ID	医师排班字典标识	number(19,0)	否	否	description1
+USER_ID	用户标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+WORK_DATE	参加工作日期	date	是	否	参加工作日期
+LOCK_FLAG	锁定标志	number(19,0)	是	否	锁定标志
+SUSPEND_FLAG	暂停标志	number(19,0)	是	否	description16
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	description8
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description9
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description11
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description12
+1.37专家共识:FILMING_CONSENSUS
+字段名称	中文名称	数据类型	可空	主键	备注
+FILMING_CONSENSUS_ID	专家共识标识	number(19,0)	否	是	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+FILMING_POINT	摄影要点	vmbtmax	是	否	
+STANDARD_IMAGE_DESC	标准影像描述	vmbtmax	是	否	
+EXAM_ITEM_NO	检查项目编码	variableMultibyte(50)	是	否	
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.38规则关联的设备:WORKLIST_EQUIPMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+WORKLIST_EQUIPMENT_ID	规则关联的设备标识	number(19,0)	否	是	description1
+WORKLIST_RULE_ID	WORKLIST规则标识	number(19,0)	否	否	
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.39WORKLIST规则:WORKLIST_RULE
+字段名称	中文名称	数据类型	可空	主键	备注
+WORKLIST_RULE_ID	WORKLIST规则标识	number(19,0)	否	是	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EQP_AE_TITLE	设备AETITLE	variableMultibyte(20)	是	否	
+RULE_CONDITION	规则条件	vmbtmax	是	否	
+CHARACTERSET_CODE	字符集代码	number(19,0)	是	否	
+SEND_ITEM_MODE_CODE	发送项目方式代码	number(19,0)	是	否	
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	
+HAVING_IMAGE_FLAG	是否存在影像	number(19,0)	是	否	
+SPLIT_NAME_FLAG	是否拆分姓名	number(19,0)	是	否	
+SPLIT_POSITION_FLAG	是否拆分部位标志	number(19,0)	是	否	是否拆分部位标志
+SEND_NAME_PINYIN_FLAG	是否同时发送姓名和拼音	number(19,0)	是	否	
+SEND_INSTANCE_UID_FLAG	是否发送INSTANCEUID	number(19,0)	是	否	
+WORKLIST_CONDITION	WORKLIST条件	variableMultibyte(4000)	是	否	WORKLIST条件
+VISIBLE_FLAG	是否可见	number(19,0)	是	否	
+SEQ_NO	排序	integer	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.40角色操作权限:PLATFORM_CATEGORY_POWER
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_CATEGORY_POWER_ID	角色操作权限标识	identifierType(19,0)	否	是	角色操作权限标识是角色操作权限表的唯一标识
+PLATFORM_ROLE_OPERATE_POWER_ID	角色操作标识	identifierType(19,0)	否	否	
+HOSPITAL_NO	机构编码	variableCharacters(64)	否	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+EXAM_CATEGORY_NO	报告类别编码	variableCharacters(64)	否	否	
+CHECKED_FLAG	勾选标志	flagType(19,0)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.41协同备份记录:PLATFORM_BACKUP_RECORD
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_BACKUP_RECORD_ID	协同备份记录标识	identifierType(19,0)	否	是	备份记录标识是协同备份记录的主键标识
+BACKUP_TABLE_NAME	备份表名称	variableCharacters(100)	是	否	
+BACKUP_STATEMENT	备份语句	vmbtmax	是	否	
+BACKUP_AT	备份日期时间	dateTime	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.42协同元素项:PLATFORM_ELEMENT_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_ELEMENT_ITEM_ID	协同元素项标识	identifierType(19,0)	否	是	协同元素项标识是协同元素项的主键标识
+ELEMENT_ITEM_GROUP_NAME	元素项组名	variableMultibyte(128)	是	否	
+BIND_MODEL_VALUE	绑定模型属性值	variableMultibyte(64)	是	否	
+BIND_MODEL_NAME	绑定模型属性名称	variableMultibyte(256)	是	否	
+ELEMENT_ITEM_TYPE_NO	元素项输入类型编码	variableCharacters(64)	是	否	
+ELEMENT_ITEM_DEFAULT_VALUE	元素项默认值	variableMultibyte(64)	是	否	
+DATA_SOURCE_TYPE_NO	数据来源类型编码	variableCharacters(64)	是	否	
+DATA_SOURCE_FUNCTION	数据来源函数	variableCharacters(8000)	是	否	
+ELEMENT_ITEM_RELATION_SET	元素项关系集	variableMultibyte(256)	是	否	
+ELEMENT_ITEM_RELATION_DEFAULT	元素项关系默认值	variableMultibyte(32)	是	否	
+ELEMENT_ITEM_REGEX_TEXT	元素项正则校验文本	variableMultibyte(1024)	是	否	
+TRIGGER_EVENT_TYPE_NO	触发事件类型编码	variableCharacters(64)	是	否	
+TRIGGER_EVENT_FUNCTION	触发事件函数	variableCharacters(4000)	是	否	
+ELEMENT_ITEM_CSS	元素项CSS样式	variableCharacters(8000)	是	否	
+IS_FILTER	是否为筛选项	number(19,0)	是	否	
+IS_READ_ONLY	是否只读	number(19,0)	是	否	
+REQUIRED_FLAG	必填标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(64)	是	否	
+ELEMENT_ITEM_NAME	元素项名称	variableMultibyte(64)	是	否	
+ELEMENT_ITEM_PLACEHOLDER	元素项输入提示	variableMultibyte(100)	是	否	
+MODEL_SOURCE	元素输入项属性来源	variableMultibyte(64)	是	否	
+IS_DICTIONARY	是否为字典	number(19,0)	是	否	
+IS_INTERFACE	是否为接口配置字段	number(19,0)	是	否	
+ELEMENT_ITEM_DATA_PROPERTY	元素项数据属性	variableMultibyte(32)	是	否	
+BIND_MODEL_KEY	绑定模型属性键	variableMultibyte(64)	是	否	
+ELEMENT_ITEM_BOUNDARY	元素项使用范围	variableMultibyte(128)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+1.43病人卡数据:PLATFORM_PATIENT_CARDS
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_PATIENT_CARDS_ID	病人卡数据标识	identifierType(19,0)	否	是	病人卡数据标识是病人卡数据表的唯一标识
+PATIENT_GROUP_NO	分组编码	variableCharacters(64)	否	否	
+CARD_TYPE_NO	卡类型编码	variableCharacters(64)	否	否	
+CARD_NO	卡号	variableCharacters(64)	否	否	
+SEQ_NO	排序序号	integer	否	否	
+HOSPITAL_NO	机构编码	variableCharacters(64)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.44同步任务:PLATFORM_SCHEDULE_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_SCHEDULE_TASK_ID	同步任务标识	identifierType(19,0)	否	是	同步任务标识是同步任务的主键标识
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+SCHEDULE_TASK_NAME	任务名称	variableMultibyte(64)	是	否	
+SCHEDULE_TASK_STATUS_NO	任务状态编码	variableCharacters(64)	是	否	
+SCHEDULE_TASK_FAIL_DESC	任务错误描述	variableCharacters(8000)	是	否	
+RETRY_COUNT	重试次数	number(19,0)	是	否	
+SCHEDULE_TASK_PLANNED_AT	任务计划日期时间	dateTime	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NO	医院编码	variableCharacters(64)	是	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(256)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.45协同报告打印记录:PLATFORM_PRINT_RECORD
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_PRINT_RECORD_ID	协同报告打印记录标识	identifierType(19,0)	否	是	是协同报告打印记录的主键标识
+PLATFORM_REPORT_ID	协同报告标识	identifierType(19,0)	否	否	
+PRINT_USER_NAME	打印人名称	variableMultibyte(64)	是	否	
+PRINT_USER_NO	打印人编码	variableCharacters(64)	是	否	
+PRINT_AT	打印日期时间	dateTime	是	否	
+HOSPITAL_NO	机构编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.46集团数据:PLATFORM_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_GROUP_ID	集团数据标识	identifierType(19,0)	否	是	集团数据标识是集团数据表的唯一标识
+GROUP_NO	集团编码	variableCharacters(64)	否	否	
+GROUP_NAME	集团名称	variableMultibyte(64)	否	否	
+GROUP_TYPE_NO	集团属性编码	variableCharacters(64)	否	否	
+GROUP_TYPE_NAME	集团属性名称	variableMultibyte(64)	是	否	
+CONTACT_NAME	集团联系人	variableMultibyte(64)	是	否	
+CONTACT_PHONE	集团联系电话	variableMultibyte(32)	是	否	
+DESCRIPTION	集团说明	variableMultibyte(500)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.47报告数据:PLATFORM_REPORT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	是	报告数据标识是报告数据表的唯一标识
+PLATFORM_PATIENT_ID	病人基本信息标识	identifierType(19,0)	否	否	
+PATIENT_TYPE_NO	病人类别编码	variableCharacters(64)	否	否	
+PATIENT_NO	病人唯一号	variableCharacters(64)	是	否	
+ADMISSION_NUMBER	病历号	variableMultibyte(32)	是	否	
+CURE_NO	首页序号	variableCharacters(64)	是	否	
+IDCARD_NO	身份证号	variableCharacters(64)	是	否	
+AGE	年龄	variableMultibyte(32)	是	否	
+WARD_NO	病区编码	variableCharacters(64)	是	否	
+WARD_NAME	病区名称	variableMultibyte(32)	是	否	
+BED_NO	床号编码	variableCharacters(64)	是	否	
+CLINIC_DIAG_DESC	临床诊断	variableMultibyte(2000)	是	否	
+EXAM_CATEGORY_NO	报告类别编码	variableCharacters(64)	是	否	
+EXAM_ITEM_NAMES	检查项目	variableMultibyte(1000)	否	否	
+APPLY_DEPT_NAME	申请科室名称	variableMultibyte(32)	是	否	
+APPLY_DEPT_NO	申请科室编码	variableCharacters(64)	是	否	
+APPLY_DOC_NAME	申请医生名称	variableMultibyte(32)	是	否	
+APPLY_AT	申请日期时间	dateTime	是	否	
+APPLY_DOC_NO	申请医生工号	variableCharacters(64)	是	否	
+REPORT_NO	报告医生工号	variableCharacters(64)	是	否	
+REPORT_NAME	报告医生名称	variableMultibyte(32)	是	否	
+REPORT_AT	报告日期时间	dateTime	是	否	
+REVIEWER_NAME	审核医生名称	variableMultibyte(32)	是	否	
+REVIEWER_NO	审核医生工号	variableCharacters(64)	是	否	
+REVIEW_AT	审核日期时间	dateTime	是	否	
+PUBLISHER_NAME	发布医生名称	variableMultibyte(32)	是	否	
+PUBLISHER_NO	发布医生工号	variableCharacters(64)	是	否	
+PUBLIC_AT	发布日期时间	dateTime	是	否	
+PRINT_PAPER_SIZE	打印纸张	variableMultibyte(32)	是	否	
+SERIAL_NUMBER	子系统内部唯一识别码	variableMultibyte(32)	否	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+PDF_PATH	pdf路径	variableMultibyte(300)	是	否	
+PRINT_COUNT	打印次数	integer	是	否	
+CANCEL_FLAG	取消标志	flagType(19,0)	是	否	
+CARD_TYPE_NO	卡类型编码	variableCharacters(64)	是	否	
+CARD_NO	卡号	variableCharacters(64)	是	否	
+EXAM_POSITION_NAME	检查部位名称	variableMultibyte(1000)	是	否	
+EXAM_DEPT_NAME	检查科室名称	variableMultibyte(32)	是	否	
+APPOINT_AT	预约日期时间	dateTime	是	否	
+APPOINT_DOC_NAME	预约医生名称	variableMultibyte(32)	是	否	
+REGISTER_AT	登记日期时间	dateTime	是	否	
+REGISTER_DOC_NAME	登记人名称	variableMultibyte(32)	是	否	
+EXAM_AT	检查日期时间	dateTime	是	否	
+EXAM_DOC_NAME	检查医生姓名	variableMultibyte(32)	是	否	
+EXAM_EQUIPMENT_NAME	检查设备	variableMultibyte(100)	是	否	
+TECH_NO	医技号	variableCharacters(100)	是	否	
+NEG_POS_CODE	阴阳性代码	code(19,0)	是	否	阴阳性
+ADDRESS	住址	variableMultibyte(500)	是	否	
+TELEPHONE_NO	联系电话	variableCharacters(256)	是	否	
+UPLOAD_AT	上传日期时间	dateTime	是	否	
+HOSPITAL_NO	所属医疗机构编码	variableCharacters(64)	否	否	
+IDCARD_TYPE	证件类型	code(19,0)	是	否	身份证类别
+LABEL_NO	唯一条码	variableCharacters(64)	是	否	
+EXEM_DEPT_NO	检查科室编码	variableCharacters(64)	是	否	
+URGENT_FLAG	急诊标志	flagType(19,0)	是	否	
+REPORT_STATUS_NO	报告状态编码	variableCharacters(32)	是	否	报告状态
+FILE_FLAG	归档标志	flagType(19,0)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.48集团机构关系:PLATFORM_HOSPITAL_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_HOSPITAL_GROUP_ID	集团机构关系标识	identifierType(19,0)	否	是	集团机构关系标识是集团机构关系表的唯一标识
+PLATFORM_GROUP_ID	集团标识	identifierType(19,0)	是	否	
+FLOW_HOSPITAL_NO	协同机构编码	variableCharacters(64)	否	否	
+FLOW_HOSPITAL_NAME	协同机构名称	variableMultibyte(64)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.49协同平台数据脚本记录:PLATFORM_DATABASE_SCRIPT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_DATABASE_SCRIPT_ID	协同平台数据脚本记录标识	identifierType(19,0)	否	是	协同平台数据脚本记录标识是协同平台数据脚本记录的主键标识
+VERSION_TIME_STAMP	版本号码	number(19,0)	是	否	
+FILE_PATH	文件路径	variableCharacters(200)	是	否	
+SCRIPT_TYPE_NO	脚本类型编码	variableCharacters(100)	是	否	
+SCRIPT_RUN_STATUS_NO	脚本运行状态编码	variableCharacters(100)	是	否	
+SCRIPT_CONTENT	脚本内容	vmbtmax	是	否	
+SCRIPT_COMMENTS	脚本注释	variableMultibyte(4000)	是	否	
+SCRIPT_ERROR	脚本异常	variableMultibyte(4000)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.50角色操作:PLATFORM_ROLE_OPERATE_POWER
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_ROLE_OPERATE_POWER_ID	角色操作标识	identifierType(19,0)	否	是	角色操作标识是角色操作表的唯一标识
+ROLE_NO	角色编码	variableCharacters(64)	否	否	
+ROLE_NAME	角色名称	variableMultibyte(64)	否	否	
+OPERATE_NO	操作编码	variableCharacters(64)	否	否	
+OPERATE_NO_NAME	操作编码名称	variableMultibyte(64)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CHECKED_FLAG	勾选标志	flagType(19,0)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NO	机构编码	variableCharacters(64)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.51协同流转记录:PLATFORM_FLOW_PROXY_RECORD
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_FLOW_PROXY_RECORD_ID	协同流转记录标识	identifierType(19,0)	否	是	协同流转记录标识是协同流转记录表的唯一标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+SERIAL_NUMBER	子系统内部唯一识别码	variableMultibyte(32)	否	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+FROM_HOSPITAL_NO	请求机构编码	variableCharacters(64)	否	否	
+FROM_HOSPITAL_NAME	请求机构名称	variableMultibyte(64)	否	否	
+TO_HOSPITAL_NO	目标机构编码	variableCharacters(64)	是	否	
+TO_HOSPITAL_NAME	目标机构名称	variableMultibyte(64)	是	否	
+ASSIST_TYPE_NO	申请类型编码	variableCharacters(64)	是	否	
+ASSIST_TYPE_NAME	申请类型名称	variableMultibyte(64)	是	否	
+FLOW_STATUS_NO	流程状态编码	variableCharacters(64)	是	否	
+PROXY_STATUS_NO	代理(转发)状态编码	variableCharacters(64)	是	否	
+PROXY_ERROR_MSG	错误描述	variableMultibyte(8000)	是	否	
+REPORT_STATUS_NO	报告状态编码	variableCharacters(32)	是	否	报告状态
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.52报告图像:PLATFORM_REPORT_IMAGE
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_IMAGE_ID	报告图像标识	identifierType(19,0)	否	是	报告图像标识是报告图像表的唯一标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+IMAGE_NO	图像类型编码	variableCharacters(64)	否	否	
+IMAGE_UID	图像UID	variableMultibyte(64)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.53协同机构配置:PLATFORM_FLOW_HOS_CONFIG
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_FLOW_HOS_CONFIG_ID	协同机构配置标识	identifierType(19,0)	否	是	协同机构配置标识是协同机构配置表的唯一标识
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+FLOW_HOSPITAL_NO	协同机构编码	variableCharacters(64)	否	否	
+PARENT_FLOW_HOSPITAL_NO	上级机构编码	variableCharacters(64)	否	否	
+FLOW_CONDITION	流程配置条件	vmbtmax	否	否	
+FLOW_MODE_NO	协同模式编码	variableCharacters(32)	是	否	
+RECEIVE_FLAG	接收标志	flagType(19,0)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.54心电报告结果:PLATFORM_REPORT_ECG_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_ECG_RESULT_ID	心电报告结果标识	identifierType(19,0)	否	是	心电报告结果标识是心电报告结果的主键标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	是	否	
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论纯文本	vmbtmax	是	否	
+EXAM_CONCLUSION_RICH_TEXT	检查结论富文本	variableCharacters(50)	是	否	
+EXAM_METHOD	检查方法	variableMultibyte(1000)	是	否	
+HEART_RATE	心率	variableMultibyte(128)	是	否	
+P_R_INTERVAL	P-R期间	variableCharacters(128)	是	否	
+QPS_TIME_LIMIT	qps时限	variableCharacters(128)	是	否	
+QT_TIME_LIMIT	QT期间	variableCharacters(128)	是	否	
+QTC_TIME_LIMIT	QTC期间	variableCharacters(128)	是	否	
+SV1	SV1	variableCharacters(128)	是	否	
+RV5	RV5	variableCharacters(128)	是	否	
+SV2	SV2	variableCharacters(128)	是	否	
+RV6	RV6	variableCharacters(128)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(256)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.55医嘱项目:PLATFORM_REPORT_CHARGE_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_CHARGE_ITEM_ID	医嘱项目标识	identifierType(19,0)	否	是	医嘱项目标识是医嘱项目表的唯一标识
+PLATFORM_REPORT_REQUISITION_ID	申请单数据标识	identifierType(19,0)	否	否	
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+EXAM_ORDER_ITEM_NO	检查医嘱流水号	variableCharacters(256)	是	否	
+EXAM_ITEM_NO	项目编码	variableCharacters(64)	是	否	
+EXAM_ITEM_NAME	项目名称	variableMultibyte(64)	是	否	
+EXAM_ITEM_GROUP_NO	检查项目组编号	variableCharacters(64)	是	否	
+EXAM_ITEM_QTY	项目数量	number(19,0)	是	否	
+EXAM_ITEM_UNIT	单位	variableMultibyte(32)	是	否	
+CONFIRM_NO	确收编码	variableCharacters(64)	是	否	
+EXAM_ITEM_PRICE	价格	money(16,4)	是	否	
+ITEM_CHARGE_FLAG	项目收费标志	flagType(19,0)	是	否	
+REFUND_REASON	项目退费原因	variableMultibyte(256)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.56放射报告结果:PLATFORM_REPORT_RIS_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_RIS_RESULT_ID	放射报告结果标识	identifierType(19,0)	否	是	放射报告结果标识是放射报告结果表的唯一标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	是	否	
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论纯文本	vmbtmax	是	否	
+EXAM_CONCLUSION_RICH_TEXT	检查结论富文本	vmbtmax	是	否	
+EXAM_METHOD	检查方法	variableMultibyte(1000)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.57协同报告其他结果:PLATFORM_OTHER_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_OTHER_RESULT_ID	协同报告其他结果标识	identifierType(19,0)	否	是	报告其他结果标识是报告其他结果的主键标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+REPORT_RESULT_NO	报告结果编码	variableCharacters(100)	是	否	
+REPORT_RESULT_NAME	报告结果名称	variableMultibyte(100)	是	否	
+REPORT_RESULT_PLAIN_TEXT	报告结果值纯文本	vmbtmax	是	否	
+REPORT_RESULT_RICH_TEXT	报告结果值富文本	vmbtmax	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.58患者基本信息:PLATFORM_PATIENT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_PATIENT_ID	患者基本信息标识	identifierType(19,0)	否	是	病人基本信息标识是患者基本信息表的唯一标识
+PATIENT_NAME	病人姓名	variableMultibyte(128)	否	否	
+PATIENT_NAME_SPELLING	病人姓名简拼	variableMultibyte(128)	是	否	
+IDCARD_NO	身份证号	variableCharacters(18)	是	否	
+GENDER_CODE	性别代码	code(19,0)	否	否	性别
+BIRTH_DATE	出生日期	date	是	否	
+GROUP_NO	患者分组	variableCharacters(64)	是	否	分组
+ACTIVE_FLAG	有效标志	flagType(19,0)	是	否	
+REGISTRATION_AT	注册日期时间	dateTime	否	否	
+HOSPITAL_NO	建档机构编码	variableCharacters(64)	否	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.59病理报告结果:PLATFORM_REPORT_PIS_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_PIS_RESULT_ID	病理报告结果标识	identifierType(19,0)	否	是	是病理报告结果的主键标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	是	否	
+EXAM_MATERIAL_PLAIN_TEXT	取材记录纯文本	vmbtmax	是	否	
+EXAM_MATERIAL_RICH_TEXT	取材记录富文本	vmbtmax	是	否	
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论纯文本	vmbtmax	是	否	
+EXAM_CONCLUSION_RICH_TEXT	检查结论富文本	vmbtmax	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.60区域组:PLATFORM_FLOW_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_FLOW_GROUP_ID	区域组标识	identifierType(19,0)	否	是	区域组标识是区域组表的唯一标识
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+GROUP_NAME	组名称	variableMultibyte(32)	否	否	
+GROUP_LOCAL_ADDRESS	组局域网地址	variableMultibyte(128)	否	否	
+GROUP_PRIVATE_ADDRESS	组专网地址	variableMultibyte(128)	是	否	
+GROUP_INTERNET_ADDRESS	组外网地址	variableMultibyte(128)	是	否	
+CONTACT_NAME	组联系人名称	variableMultibyte(64)	是	否	
+CONTACT_PHONE	组联系电话	variableMultibyte(32)	是	否	
+GROUP_DESCRIPTION	组说明	variableMultibyte(500)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.61协同配置:PLATFORM_SETTINGS
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_SETTINGS_ID	协同配置标识	identifierType(19,0)	否	是	协同配置标识是协同配置表的唯一标识
+SETTING_DOMAIN_NO	作用域编码	variableCharacters(64)	否	否	
+SETTING_DOMAIN_NAME	作用域名称	variableMultibyte(32)	否	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+SETTING_ITEM_KEY	配置键	variableMultibyte(32)	否	否	
+SETTING_ITEM_SECTION	配置组	variableMultibyte(64)	否	否	
+SETTING_ITEM_ENTRY	配置项	variableMultibyte(64)	否	否	
+SETTING_ITEM_DATA_TYPE_NO	配置项的数据类型编码	variableCharacters(64)	否	否	
+SETTING_DOMAIN_IDENTITY	作用域	variableMultibyte(64)	是	否	
+SETTING_VALUE	配置值	vmbtmax	是	否	
+SETTING_DATASOURCE_CLASSNAME	配置项数据来源	vmbtmax	是	否	
+PRIVATE_BY	私人用户标识	identifierType(19,0)	是	否	
+REMARK	配置备注	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.62协同申请单:PLATFORM_REPORT_REQUISITION
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_REQUISITION_ID	协同申请单标识	identifierType(19,0)	否	是	协同申请单标识是协同申请单表的唯一标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	否	否	
+SERIAL_NUMBER	子系统内部唯一识别码	variableMultibyte(32)	否	否	
+EXAM_REQUISITION_CONTENT	检查申请单内容	vmbtmax	是	否	
+APPLY_HOSPITAL_NO	开单机构编码	variableCharacters(64)	是	否	
+APPLY_HOSPITAL_NAME	开单机构名称	variableMultibyte(64)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.63医生签名:PLATFORM_USER_SIGNATURE
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_USER_SIGNATURE_ID	医生签名标识	identifierType(19,0)	否	是	医生签名标识是医生签名表的唯一标识
+USER_NO	用户编码	variableCharacters(64)	否	否	
+USER_NAME	用户名称	variableMultibyte(64)	否	否	
+SIGNATURE_FILE	签名Base64	vmbtmax	是	否	
+USER_HOSPITAL_NO	医生医院编码	variableCharacters(64)	是	否	
+USER_HOSPITAL_NAME	医生医院名称	variableMultibyte(64)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.64协同机构:PLATFORM_FLOW_HOSPITAL_INFO
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_FLOW_HOSPITAL_INFO_ID	协同机构标识	identifierType(19,0)	否	是	协同机构标识是协同机构表的唯一标识
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+PLATFORM_FLOW_GROUP_ID	区域组标识	identifierType(19,0)	否	否	
+FLOW_HOSPITAL_NO	机构编码	variableCharacters(64)	否	否	
+FLOW_HOSPITAL_NAME	机构名称	variableMultibyte(64)	否	否	
+HOSPITAL_LOCAL_ADDRESS	局域网地址	variableMultibyte(100)	是	否	
+HOSPITAL_PRIVATE_ADDRESS	专网地址	variableMultibyte(100)	是	否	
+HOSPITAL_INTERNET_ADDRESS	外网地址	variableMultibyte(100)	是	否	
+CONTACT_NAME	联系人	variableMultibyte(64)	是	否	
+CONTACT_PHONE	联系电话	variableMultibyte(64)	是	否	
+DESCRIPTION	机构说明	variableMultibyte(500)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.65超声报告结果:PLATFORM_REPORT_UIS_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_UIS_RESULT_ID	超声报告结果标识	identifierType(19,0)	否	是	超声报告结果标识是超声报告结果的主键标识
+PLATFORM_REPORT_ID	报告数据标识	identifierType(19,0)	是	否	
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论(纯文本)	vmbtmax	是	否	
+EXAM_CONCLUSION_RICH_TEXT	检查结论(富文本)	vmbtmax	是	否	
+EXAM_OBSERVATION_PLAIN_TEXT	观察记录(纯文本)	vmbtmax	是	否	
+EXAM_OBSERVATION_RICH_TEXT	观察记录(富文本)	vmbtmax	是	否	
+EXAM_METHOD	检查途径	variableMultibyte(1000)	是	否	
+EXAM_PROBE_RATE	探头频率	variableCharacters(100)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(256)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.66内镜报告结果:PLATFORM_REPORT_EIS_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_EIS_RESULT_ID	内镜报告结果标识	identifierType(19,0)	否	是	是内镜报告结果的主键标识
+PLATFORM_REPORT_ID	报告结果标识	identifierType(19,0)	是	否	
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论纯文本	vmbtmax	是	否	
+EXAM_CONCLUSION_RICH_TEXT	检查结论富文本	vmbtmax	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	
+1.67协同字典:PLATFORM_DICTIONARY
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_DICTIONARY_ID	协同字典标识	identifierType(19,0)	否	是	协同字典标识是协同字典表的唯一标识
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(64)	否	否	
+DICT_CLASS_NAME	字典分类名称	variableMultibyte(64)	否	否	
+DICT_ITEM_NO	字典项编码	variableCharacters(64)	否	否	
+DICT_ITEM_NAME	字典项名称	variableMultibyte(64)	否	否	
+DICT_EXTERN_NO	外部映射编码	variableCharacters(64)	是	否	
+MEM1_NO	记忆码一	variableCharacters(64)	是	否	
+MEM2_NO	记忆码二	variableCharacters(64)	是	否	
+ALTER_FLAG	修改标志	flagType(19,0)	否	否	
+VISIBLE_FLAG	可见标志	flagType(19,0)	否	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+1.68结构化结果表:PLATFORM_STRUC_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_STRUC_RESULT_ID	结构化结果表标识	identifierType(19,0)	否	是	结构化结果表标识是结构化结果表表的唯一标识
+PLATFORM_STRUC_RESULT_MNG_ID	结构化结果管理标识	identifierType(19,0)	否	否	
+STRUC_INDICATOR	结构化指标	variableMultibyte(32)	是	否	
+RESULT	结果	variableMultibyte(128)	是	否	
+UNIT	单位	variableMultibyte(19)	是	否	
+MATCH_FLAG	匹配标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.69检验报告结果表:PLATFORM_REPORT_LIS_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_REPORT_LIS_RESULT_ID	检验报告结果表标识	identifierType(19,0)	否	是	主键标识是检验报告结果表表的唯一标识
+PLATFORM_REPORT_ID	报告标识	identifierType(19,0)	否	否	
+ITEM_NO	项目编码	variableCharacters(64)	是	否	
+ITEM_NAME	项目名称	variableMultibyte(64)	是	否	
+LIS_RESULT	结果	variableMultibyte(256)	是	否	
+LIS_AT	检验日期时间	dateTime	是	否	
+UNIT	单位	variableMultibyte(32)	是	否	
+NEG_POS_CODE	阴阳性代码	code(19,0)	是	否	阴阳性
+REFERENCE_VALUE	参考值	variableMultibyte(32)	是	否	
+HIGH_AND_LOW_POINTS	高低标记	variableMultibyte(32)	是	否	
+PRINT_NUM	打印序号	number(19,0)	是	否	
+SPECIMEN_TYPE_NO	标本类型编码	variableCharacters(64)	是	否	标本类型
+SPECIMEN_SAMPLE_AT	采样日期时间	dateTime	是	否	
+INDICATOR_FLAG	传染标志	flagType(19,0)	是	否	
+SPECIMEN_REVEIVE_AT	标本接收日期时间	dateTime	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.70结构化结果管理表:PLATFORM_STRUC_RESULT_MNG
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_STRUC_RESULT_MNG_ID	结构化结果管理表标识	identifierType(19,0)	否	是	结构化结果管理表标识是结构化结果管理表表的唯一标识
+PLATFORM_REPORT_ID	报告标识	identifierType(19,0)	否	否	
+PLATFORM_STRUC_ITEMS_ID	结构化项目标识	identifierType(19,0)	否	否	
+STRUC_AT	结构化日期时间	dateTime	是	否	
+COPILOT_CHECK_FLAG	cop核查标志	flagType(19,0)	是	否	
+COPILOT_CHECK_RESULT_FLAG	cop核查结果标志	flagType(19,0)	是	否	
+COPILOT_CHECK_RESULT_CONTENT	cop核查提醒内容	vmbtmax	是	否	
+COPILOT_CHECK_AT	cop核查日期时间	dateTime	是	否	
+COPILOT_MANUAL_CHECK_FLAG	cop人工核查标志	flagType(19,0)	是	否	
+COPILOT_MANUAL_VALID_FLAG	cop人工核查有效标志	flagType(19,0)	是	否	
+COPILOT_MANUAL_VALID_REMARK	cop人工无效原因备注	variableMultibyte(256)	是	否	
+MANUAL_CHECK_FLAG	人工核查标志	flagType(19,0)	是	否	
+MANUAL_CHECK_DOC_NAME	人工核查人姓名	variableMultibyte(32)	是	否	
+MANUAL_CHECK_DOC_NO	人工核查人编码	variableCharacters(64)	是	否	
+MANUAL_CHECK_AT	人工核查日期时间	dateTime	是	否	
+MANUAL_MODIFY_REC	人工核查记录	variableMultibyte(512)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+HOSPITAL_NO	医疗机构编码	variableCharacters(64)	否	否	
+1.71人工核查记录表:PLATFORM_MANUAL_CHECK
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_MANUAL_CHECK_ID	人工核查记录表标识	identifierType(19,0)	否	是	人工核查记录表标识是人工核查记录表表的唯一标识
+PLATFORM_STRUC_RESULT_MNG_ID	结构结果管理标识	identifierType(19,0)	否	否	
+MANUAL_CHECK_DOC_NAME	人工核查人姓名	variableMultibyte(32)	是	否	
+MANUAL_CHECK_DOC_NO	人工核查人编码	variableCharacters(64)	是	否	
+MANUAL_MODIFY_REC	人工核查记录	variableMultibyte(512)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.72结构化项目表:PLATFORM_STRUC_ITEMS
+字段名称	中文名称	数据类型	可空	主键	备注
+PLATFORM_STRUC_ITEMS_ID	结构化项目表标识	identifierType(19,0)	否	是	结构化项目表标识是结构化项目表表的唯一标识
+ITEM_NAME	项目名称	variableMultibyte(19)	是	否	
+ITEM_STATUS_NO	项目状态编码	variableCharacters(64)	是	否	
+LEAD_DOC_NAME	负责人姓名	variableMultibyte(32)	是	否	
+LEAD_DOC_NO	负责人编码	variableCharacters(32)	是	否	
+EXEC_START_AT	开始执行时间	time	是	否	
+EXEC_END_AT	结束执行时间	time	是	否	
+COPILOT_AUTO_CHECK_FLAG	COPILOT自动核查标志	flagType(19,0)	是	否	
+ITEM_DESCRIBETION	描述	variableMultibyte(128)	是	否	
+ITEM_REPORT_CONTENT_SCOPE	报告内容范围	variableMultibyte(256)	是	否	
+ITEM_INDICATORS_CONTENT	指标内容	vmbtmax	是	否	
+ITEM_EXPORT_DATA_SCOPE	导出内容	vmbtmax	是	否	
+ITEM_QUERY_CONDITION	查询条件	vmbtmax	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+HOSPITAL_NO	医疗机构编码	variableCharacters(64)	否	否	
+1.73检查打印:EXAM_PRINT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PRINT_ID	检查打印操作标识	number(19,0)	否	是	
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+PRINT_FILE_NO	打印文件编码	variableMultibyte(64)	是	否	打印文件编码
+PRINT_FILE_NAME	打印文件名称	variableMultibyte(100)	是	否	
+EXAM_CATEGORY_PRINTFILE_ID	检查类别与打印文件关系标识	number(19,0)	是	否	description11
+PRINTER_BY	打印人标识	number(19,0)	是	否	
+PRINTED_AT	打印时间	dateTime	是	否	
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.74检查个性设置:EXAM_SETTINGS
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SETTINGS_ID	检查个性设置标识	number(19,0)	否	是	检查个性设置标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+SETTING_ITEM_KEY	设置项关键词	variableMultibyte(256)	是	否	设置项关键词
+SETTING_ITEM_DOMAIN_NO	设置项范围编码	variableMultibyte(16)	是	否	设置项范围编码
+SETTING_ITEM_DOMAIN_NAME	设置项范围名称	variableMultibyte(64)	是	否	设置项范围名称
+SETTING_ITEM_SECTION	设置项分组	variableMultibyte(64)	是	否	设置项分组
+SETTING_ITEM_ENTRY	设置项实体	variableMultibyte(256)	是	否	设置项实体
+SETTING_ITEM_DATA_TYPE	设置项数据类型	variableMultibyte(16)	是	否	设置项数据类型
+DEFAULT_VALUE	默认值	vmbtmax	是	否	默认值
+PRIVATE_BY	私人用户标识	number(19,0)	是	否	私人用户标识
+VISIBLE_FLAG	可见标志	number(19,0)	是	否	可见标志
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+DESCRIPTION	参数说明	variableCharacters(2000)	是	否	
+EXAM_SETTINGS_PARENT_ID	系统配置父标识	identifierType(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.75检查危急值:EXAM_CRITICAL_VALUES
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CRITICAL_VALUES_ID	检查危急值标识	number(19,0)	否	是	检查危急值标识是检查危急值表的唯一标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查危急值中的检查任务标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+CALLER_ID	打电话人员标识	number(19,0)	是	否	检查危急值中的打电话人员标识
+CALLER_NAME	打电话人员名称	variableMultibyte(32)	是	否	打电话人员名称
+CALLED_AT	打电话时间	dateTime	是	否	打电话时间
+PATIENT_TEL	患者电话	variableMultibyte(32)	是	否	患者电话
+INFORMED_WARD_ID	被通知病区标识	number(19,0)	是	否	检查危急值中的被通知病区标识
+INFORMED_WARD_NO	被通知病区编码	variableMultibyte(16)	是	否	被通知病区编码
+INFORMED_WARD_NAME	被通知病区名称	variableMultibyte(32)	是	否	被通知病区名称
+INFORMED_WARD_TEL	被通知病区电话	variableMultibyte(32)	是	否	被通知病区电话
+INFORMED_DEPT_ID	被通知科室标识	number(19,0)	是	否	检查危急值中的被通知科室标识
+INFORMED_DEPT_NO	被通知科室编码	variableMultibyte(16)	是	否	被通知科室编码
+INFORMED_DEPT_NAME	被通知科室名称	variableMultibyte(32)	是	否	被通知科室名称
+INFORMED_DEPT_TEL	被通知科室电话	variableMultibyte(32)	是	否	被通知科室电话
+INFORMED_DOC_ID	被通知医生标识	number(19,0)	是	否	检查危急值中的被通知医生标识
+INFORMED_DOC_NO	被通知医生编码	variableMultibyte(16)	是	否	被通知医生编码
+INFORMED_DOC_NAME	被通知医生名称	variableMultibyte(32)	是	否	被通知医生名称
+INFORMED_DOC_TEL	被通知医生电话	variableMultibyte(32)	是	否	description12
+CRITICAL_VALUES_NO	危急值编码	variableCharacters(128)	是	否	危急值编码
+CRITICAL_VALUES_DESC	危急值描述	variableMultibyte(256)	是	否	危急值描述
+CRITICAL_VALUES_STATUS	危急值状态	number(19,0)	是	否	危急值状态在编码体系中的代码
+COMFORMER_ID	确认人标识	number(19,0)	是	否	检查危急值中的确认人标识
+COMFORMER_NO	确认人编码	variableMultibyte(16)	是	否	确认人编码
+COMFORMER_NAME	确认人名称	variableMultibyte(32)	是	否	确认人名称
+COMFORMED_AT	确认时间	dateTime	是	否	确认时间
+COMFORMED_DESC	确认描述	variableMultibyte(256)	是	否	确认描述
+NOTIFIED_PROCESSOR_ID	被通知处置人标识	number(19,0)	是	否	检查危急值中的被通知处置人标识
+NOTIFIED_PROCESSOR_NO	被通知处置人编码	variableMultibyte(16)	是	否	被通知处置人编码
+NOTIFIED_PROCESSOR_NAME	被通知处置人名称	variableMultibyte(32)	是	否	通知处置人名称
+NOTIFIED_PROCEDURE_AT	被通知处置的时间	dateTime	是	否	被通知处置的时间
+NOTIFIED_PROCEDURE_DESC	被通知处置的描述	variableMultibyte(256)	是	否	被通知处置的描述
+PROCESSOR_ID	处置人标识	number(19,0)	是	否	检查危急值中的处置人标识
+PROCESSOR_NO	处置人编码	variableMultibyte(16)	是	否	处置人编码
+PROCESSOR_NAME	处置人名称	variableMultibyte(32)	是	否	处置人名称
+PROCESSED_AT	处置时间	dateTime	是	否	处置时间
+PROCEDURE_DESC	处置描述	variableMultibyte(256)	是	否	处置描述
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.76检查签名:EXAM_SIGNATURE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SIGNATURE_ID	检查签名标识	number(19,0)	否	是	检查签名标识
+USER_ID	用户标识	number(19,0)	是	否	用户标识
+USER_NO	用户编码	variableMultibyte(32)	是	否	用户编码
+SIGNATURE_FILE	签名文件	vmbtmax	是	否	签名文件
+HOSPITAL_NO	机构编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.77检查设备运营:EXAM_EQUIPMENT_OPERATION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_EQUIPMENT_OPERATION_ID	检查设备运营标识	number(19,0)	否	是	检查设备运营标识是检查设备运营表的唯一标识
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	否	否	检查设备运营中的设备标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+WORKING_USER_BY	当班用户标识	number(19,0)	是	否	标识是否为当班用户
+EQUIPMENT_OPERATION_ELEMENT	设备运营元素	variableCharacters(2000)	是	否	设备运营元素
+ENABLED_FLAG	启用标志	number(19,0)	是	否	标识检查设备运营是否启用
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description8
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	description9
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	description11
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	description12
+1.78检查任务留言跟踪:EXAM_TASK_COMMENT_TRACE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TASK_COMMENT_TRACE_ID	检查任务消息已读标识	number(19,0)	否	是	description1
+EXAM_TASK_COMMENT_ID	检查任务留言标识	number(19,0)	否	否	description1
+READ_BY	已读用户	number(19,0)	是	否	description2
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	description11
+1.79检查报告记录:EXAM_REPORT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_REPORT_ID	检查报告标识	number(19,0)	否	是	检查报告标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查任务标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+WRITER_BY	报告书写医生标识	number(19,0)	是	否	报告书写医生标识
+WRITER_NO	报告书写医生编码	variableMultibyte(32)	是	否	报告书写医生编码
+WRITER_NAME	报告书写者名称	variableMultibyte(32)	是	否	报告书写者名称
+WRITE_AT	报告书写时间	dateTime	是	否	报告书写时间
+REPORTER_BY	报告医生标识	number(19,0)	是	否	报告医生标识
+REPORTER_NO	报告医生编码	variableMultibyte(32)	是	否	报告医生编码
+REPORTER_NAME	报告医生名称	variableMultibyte(32)	是	否	报告医生名称
+REPORT_AT	报告时间	dateTime	是	否	报告时间
+REVIEWER_BY	审核医生标识	number(19,0)	是	否	审核医生标识
+REVIEWER_NO	审核医生编码	variableMultibyte(32)	是	否	审核医生编码
+REVIEWER_NAME	审核医生名称	variableMultibyte(32)	是	否	审核医生名称
+REVIEW_AT	审核时间	dateTime	是	否	审核时间
+SECOND_REVIEWER_BY	二审医生标识	number(19,0)	是	否	二审医生标识
+SECOND_REVIEWER_NO	二审医生编码	variableCharacters(32)	是	否	二审医生编码
+SECOND_REVIEWER_NAME	二审医生名称	variableMultibyte(32)	是	否	二审医生名称
+SECOND_REVIEW_AT	二审时间	dateTime	是	否	二审时间
+PUBLISHER_BY	发布医生标识	number(19,0)	是	否	发布医生标识
+PUBLISHER_NAME	发布人名称	variableMultibyte(32)	是	否	发布人名称
+PUBLIC_AT	发布时间	dateTime	是	否	发布时间
+OBSERVATION_TEXT	观察记录纯文本	vmbtmax	是	否	观察记录纯文本
+OBSERVATION_HTML	观察记录富文本	vmbtmax	是	否	观察记录富文本
+EXAM_FINDINGS_PLAIN_TEXT	检查所见纯文本	vmbtmax	是	否	检查所见纯文本
+EXAM_FINDINGS_RICH_TEXT	检查所见富文本	vmbtmax	是	否	检查所见富文本
+EXAM_CONCLUSION_PLAIN_TEXT	检查结论纯文本	vmbtmax	是	否	检查结论纯文本
+EXAM_CONCLUSION_RICH_TEXT	检查结论富文本	vmbtmax	是	否	检查结论富文本
+NEG_POS_CODE	阴阳性代码	variableMultibyte(10)	是	否	阴阳性代码
+EXAM_CONTAGION_TYPE	检查传报类型	variableMultibyte(50)	是	否	检查传报类型
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.80历史检查计划任务:EXAM_SCHEDULE_TASK_HISTORY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SCHEDULE_TASK_HISTORY_ID	历史检查计划任务标识	number(19,0)	否	是	历史检查计划任务标识
+EXAM_SCHEDULE_TASK_ID	检查计划任务标识	number(19,0)	是	否	检查计划任务标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源编码
+SCHEDULE_TASK_CATEGORY	计划任务分类	variableMultibyte(50)	否	否	计划任务分类
+SCHEDULE_TASK_SUBCATEGORY	计划任务子分类	variableMultibyte(50)	是	否	计划任务子分类
+SCHEDULE_TASK_NAME	计划任务名称	variableMultibyte(50)	否	否	计划任务名称
+SCHEDULE_TASK_DESC	计划任务描述	variableMultibyte(2000)	是	否	计划任务描述
+SCHEDULE_TASK_EXPIRED_AT	计划任务截止时间	dateTime	是	否	计划任务截止时间
+SCHEDULE_TASK_CYCLE	计划任务周期	number(19,0)	是	否	计划任务周期
+SCHEDULE_TASK_PLANNED_AT	计划任务计划时间	dateTime	否	否	计划任务计划时间
+SCHEDULE_TASK_SCRIPT_TYPE	计划任务脚本类型	variableMultibyte(50)	否	否	计划任务脚本类型
+SCHEDULE_TASK_SCRIPT	计划任务脚本内容	variableCharacters(8000)	否	否	计划任务脚本内容
+SCHEDULE_TASK_STATUS_NO	计划任务状态编码	variableMultibyte(50)	否	否	计划任务状态编码
+SCHEDULE_TASK_EXECUTED_AT	计划任务执行时间	dateTime	是	否	计划任务执行时间
+SCHEDULE_TASK_COMPLETED_AT	计划任务完成时间	dateTime	是	否	计划任务完成时间
+SCHEDULE_TASK_FAIL_DESC	计划任务失败描述	variableCharacters(8000)	是	否	计划任务失败描述
+SCHEDULE_TASK_SOURCE_ELEMENT	计划任务源头属性	variableCharacters(4000)	是	否	计划任务源头属性
+MAX_RETRY_COUNT	最大重试次数	number(19,0)	是	否	最大重试次数
+RETRY_COUNT	重试次数	number(19,0)	是	否	重试次数
+EXTERNAL_TASK_FLAG	外部任务标志	number(19,0)	是	否	外部任务标志
+PARENT_EXAM_SCHEDULE_TASK_ID	父检查计划任务标识	number(19,0)	是	否	父检查计划任务标识
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态
+REQUEST_URL	接口地址	variableCharacters(4000)	是	否	
+REQUEST_HEADER	接口请求头部	vmbtmax	是	否	
+REQUEST_PARAM	接口请求入参	vmbtmax	是	否	
+REQUEST_CONTENT	接口返回结果	vmbtmax	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.81检查预约:EXAM_APPOINTMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_APPOINTMENT_ID	检查预约标识	number(19,0)	否	是	检查预约EXAM_APPOINTMENT实体的主键
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+APPOINTMENT_DAY_SCHEDULE_ID	预约日排班标识	number(19,0)	是	否	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_TRIAGE_QUEUE_ID	检查分诊队列标识	number(19,0)	是	否	description48
+APPOINTMENT_DATE	预约日期	date	是	否	description39
+APPOINTMENT_START_TIME	预约开始时间	variableMultibyte(10)	是	否	description40
+APPOINTMENT_END_TIME	预约结束时间	variableMultibyte(10)	是	否	description41
+APPOINTMENT_DESC	预约描述	variableMultibyte(256)	是	否	description43
+APPOINTMENT_ADDRESS	预约地点	variableMultibyte(256)	是	否	description47
+APPOINTMENT_NO	预约号	variableMultibyte(8)	是	否	description44
+APPOINTMENT_PRINT_FLAG	预约打印标志	number(19,0)	是	否	description45
+EXAM_REQUISITION_NO	申请单标识编码	variableMultibyte(64)	是	否	description46
+APPOINTMENT_BY	预约操作者标识	number(19,0)	是	否	description49
+APPOINTMENT_NAME	预约操作者名称	variableMultibyte(64)	是	否	description50
+EXTERNAL_SYS_NAME	外部系统名	variableCharacters(256)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.82检查影像关系:EXAM_IMG_RELATIONSHIP
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_IMG_RELATIONSHIP_ID	检查影像关系标识	number(19,0)	否	是	检查影像关系标识是检查影像关系表的唯一标识
+MODALITY_PERF_PROC_STEP_ID	设备执行过程步骤标识	number(19,0)	否	否	检查影像关系中的设备执行过程步骤标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查影像关系中的检查任务标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.83检查收费项目:EXAM_CHARGE_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CHARGE_ITEM_ID	检查收费项标识	number(19,0)	否	是	检查收费项标识是检查收费项目表的唯一标识
+EXAM_REQUISITION_ID	检查申请标识	number(19,0)	是	否	检查收费项目中的检查申请标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查收费项目中的检查任务标识
+EXAM_REQUISITION_NO	检查申请编码	variableMultibyte(64)	是	否	检查申请编码
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+EXAM_ORDER_ITEM_NO	检查医嘱项流水号	variableMultibyte(64)	是	否	检查医嘱项流水号
+EXAM_ITEM_NO	检查项目编码	variableMultibyte(64)	是	否	检查项目在编码体系中的编码
+EXAM_ITEM_NAME	检查项目名称	variableMultibyte(256)	是	否	检查项目名称的详细描述
+EXAM_ITEM_GROUP_NO	检查项目组编号	variableMultibyte(64)	是	否	检查项目组编号
+EXTERN_ITEM_TYPE_NO	项目分类外部映射编码	variableMultibyte(50)	是	否	项目分类外部映射编码
+EXAM_ITEM_PRICE	检查项目价格	number(19,2)	是	否	检查项目价格
+EXAM_ITEM_QTY	检查项目数量	number(19,2)	是	否	检查项目数量
+EXAM_ITEM_UNIT	检查项目单位	variableMultibyte(64)	是	否	检查项目单位
+ITEM_SOURCE_CODE	项目来源	number(19,0)	是	否	项目来源的详细说明
+CONFIRMED_NO	确收编码	variableMultibyte(32)	是	否	确收编码
+ITEM_CHARGE_STATUS	项目收费状态	number(19,0)	是	否	项目收费状态在编码体系中的代码
+REFUND_REASON	退费原由	variableMultibyte(256)	是	否	退费原由
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.84检查路径记录表:EXAM_PATH_RETROSPECT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PATH_RETROSPECT_ID	检查路径记录表标识	identifierType(19,0)	否	是	检查路径记录表标识是检查路径记录表表的唯一标识
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	否	
+NODE_NO	闭环节点编码	variableCharacters(64)	否	否	
+NODE_NAME	闭环节点名称	variableMultibyte(64)	否	否	
+SEQ_NO	排序序号	integer	否	否	
+NODE_AT	节点日期时间	dateTime	否	否	
+NODE_CREATED_AT	节点创建日期时间	dateTime	否	否	
+NODE_STATUS_NO	节点状态编码	variableCharacters(64)	否	否	
+NODE_STATUS_NO_DESC	节点状态描述	variableMultibyte(256)	是	否	
+NODE_TYPE_NO	节点类型编码	variableCharacters(64)	否	否	
+EXAM_HISTORY_ID	检查历史变更标识	identifierType(19,0)	是	否	
+EXAM_TRIAGE_HISTORY_ID	检查分诊历史标识	identifierType(19,0)	是	否	
+EXAM_SCHEDULE_TASK_ID	检查计划任务标识	identifierType(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	医院SOID
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+1.85迁移任务:EXAM_MIGRATION_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MIGRATION_TASK_ID	迁移任务标识	identifierType(19,0)	否	是	迁移任务表EXAM_MIGRATION_TASK实体的主键
+EXAM_MIGRATION_TASK_NAME	迁移任务名称	variableMultibyte(256)	是	否	
+MIGRATION_TASK_GROUP_ID	任务组标识	identifierType(19,0)	是	否	
+MIGRATION_TASK_STATUS_NO	迁移任务状态编码	variableCharacters(64)	是	否	
+REPORT_TOTAL	迁移报告总数	number(19,0)	是	否	
+FINISH_TOTAL	完成迁移报告总数	number(19,0)	是	否	
+TASK_START_AT	任务开始日期时间	dateTime	是	否	
+TASK_FINISH_AT	任务开始日期时间	dateTime	是	否	
+FAIL_TOTAL	失败报告数	number(19,0)	是	否	
+TASK_TIME_SPEND	任务总耗时	number(19,0)	是	否	
+EXAM_REPORT_DATE	报告任务日期	date	是	否	
+REMARK	备注内容	variableMultibyte(2000)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.86检查数据接收:EXAM_MDM_DATA_DIC
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MDM_DATA_DIC_ID	检查数据接收标识	identifierType(19,0)	否	是	检查数据接收标识是检查数据接收表的唯一标识
+SERVICE_CODE_NO	服务编码	variableCharacters(64)	是	否	
+SERVICE_NAME	服务名称	variableCharacters(64)	是	否	
+MDM_DATA_KEY	数据主键	variableCharacters(64)	是	否	
+MDM_DATA_NO	数据编码	variableCharacters(64)	是	否	
+MDM_DATA_NAME	数据名称	variableCharacters(64)	是	否	
+MDM_TYPE_NO	数据类型编码	variableCharacters(64)	是	否	
+GROUP_NO	分组编码	variableCharacters(64)	是	否	
+GROUP_NAME	分组名称	variableCharacters(64)	是	否	
+CLASS_NO	分类编码	variableCharacters(64)	是	否	
+CLASS_NAME	分类名称	variableCharacters(64)	是	否	
+EXTERN1_NO	外部编码一	variableCharacters(64)	是	否	
+EXTERN2_NO	外部编码二	variableCharacters(64)	是	否	
+MEM1_NO	输入码一	variableCharacters(64)	是	否	
+MEM2_NO	输入码二	variableCharacters(64)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_NAME	创建人姓名	variableMultibyte(64)	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_NAME	修改人姓名	variableMultibyte(64)	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.87检查历史变更:EXAM_HISTORY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_HISTORY_ID	检查历史标识	number(19,0)	否	是	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+FROM_ID	快照标识	number(19,0)	是	否	
+HISTORY_TYPE	历史数据类型	variableMultibyte(100)	是	否	
+HISTORY_VALUE	历史数据快照	vmbtmax	是	否	
+HISTORY_SOURCE_NO	历史数据来源编码	variableCharacters(100)	是	否	历史数据来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.88迁移失败记录:EXAM_MIGRATION_FAIL
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MIGRATION_FAIL_ID	迁移失败记录标识	identifierType(19,0)	否	是	迁移失败记录EXAM_MIGRATION_FAIL实体的主键
+EXAM_MIGRATION_TASK_ID	迁移任务标识	identifierType(19,0)	是	否	
+EXAM_MIGRATION_TASK_NAME	迁移任务名称	variableMultibyte(64)	是	否	
+MIGRATION_TASK_GROUP_ID	任务分组标识	identifierType(19,0)	是	否	
+EXAM_REPORT_DATE	报告任务日期	date	是	否	
+SERIAL_NUMBER	三方系统内部号	variableCharacters(64)	是	否	
+FAIL_REASON	失败原因	variableMultibyte(2000)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.89检查消息记录:EXAM_MESSAGE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MESSAGE_ID	检查消息记录标识	identifierType(19,0)	否	是	检查消息记录的主键
+MESSAGE_TYPE_NO	消息类型编码	variableCharacters(100)	是	否	
+MESSAGE_CONTENT	消息内容	variableMultibyte(4000)	是	否	
+MESSAGE_REMIND_PRIORITY	消息提醒优先级	integer	是	否	
+MESSAGE_OBJECT_NO	消息对象编码	variableCharacters(100)	是	否	
+REMIND_TYPE_NO	消息提醒类型编码	variableCharacters(100)	是	否	
+REMIND_APPOINTED_FLAG	是否预约提醒标志	flagType(19,0)	是	否	
+REMIND_APPOINTED_AT	预约提醒日期时间	dateTime	是	否	
+MESSAGE_SOURCE_OBJECT	消息来源对象	variableCharacters(128)	是	否	
+MESSAGE_INITIATE_BY	消息发起人标识	identifierType(19,0)	是	否	
+MESSAGE_INITIATE_AT	消息发起日期时间	dateTime	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(40)	是	否	
+1.90检查申请:EXAM_REQUISITION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_REQUISITION_ID	检查申请标识	number(19,0)	否	是	
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_REQUISITION_NO	申请单标识编码	variableMultibyte(64)	是	否	
+EXAM_REQUISITION_CONTENT	检查申请单内容	variableCharacters(8000)	是	否	description14
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.91检查镜子信息:EXAM_MIRROR
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MIRROR_ID	检查镜子信息标识	identifierType(19,0)	否	是	检查镜子标识是检查镜子信息表的唯一标识
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	否	
+EXAM_MIRROR_CARD_NO	镜子卡号	variableCharacters(64)	是	否	
+EXAM_MIRROR_NO	镜子编码	variableCharacters(64)	是	否	
+EXAM_MIRROR_NAME	镜子名称	variableMultibyte(64)	是	否	
+EXAM_MIRROR_STATUS_NO	镜子状态编码	variableCharacters(64)	是	否	镜子状态
+CLEANED_BY	洗消人员标识	identifierType(19,0)	是	否	
+CLEANED_NAME	洗消人员	variableMultibyte(64)	是	否	
+CLEANED_START_AT	洗消开始日期时间	dateTime	是	否	
+CLEANED_END_AT	洗消结束日期时间	dateTime	是	否	
+CLEANED_TIME_LENGTH	洗消用时	variableMultibyte(32)	是	否	
+CLEANED_FLOW_NODES	洗消流程节点	vmbtmax	是	否	
+MIRROR_USE_REASON_NO	镜子使用原因编码	variableCharacters(80)	是	否	
+MIRROR_USE_REASON_DESC	镜子使用原因描述	variableMultibyte(128)	是	否	
+EXAM_TRANCE_NO	洗消流程追溯码	variableCharacters(512)	是	否	
+MIRROR_ERROR_MSG	镜子错误信息	variableMultibyte(300)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.92设备执行过程步骤:MODALITY_PERF_PROC_STEP
+字段名称	中文名称	数据类型	可空	主键	备注
+MODALITY_PERF_PROC_STEP_ID	设备执行过程步骤标识	number(19,0)	否	是	设备执行过程步骤标识是设备执行过程步骤表的唯一标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+PPS_STUDYUID	PPS检查唯一值	variableMultibyte(128)	是	否	PPS检查唯一值
+PPS_START_AT	PPS开始时间	dateTime	是	否	PPS开始的公元纪年日期的完整描述
+PPS_END_AT	PPS结束时间	dateTime	是	否	PPS结束的公元纪年日期的完整描述
+STUDY_DESCRIPTION	检查描述	variableMultibyte(128)	是	否	检查的描述信息
+IMAGE_COUNT	影像数量	integer	是	否	影像数量
+ACCESSION_NO	Accession编号	variableMultibyte(100)	是	否	Accession编号
+TECH_NO	医技号	variableMultibyte(20)	是	否	医技编码
+ENGLISH_NAME	患者英文名	variableMultibyte(64)	是	否	患者英文名称
+EQUIPMENT_NAME	设备名称	variableMultibyte(64)	是	否	机构内设备的名称的详细描述
+PERF_PHYSICIAN_NAME	执行医师名称	variableMultibyte(50)	是	否	执行医师名称
+PPS_MODALITY	影像类型	variableMultibyte(64)	是	否	影像类型
+IMAGE_BODY_PART	影像部位	variableMultibyte(100)	是	否	影像部位
+IMAGE_STUDY_AT	影像检查时间	dateTime	是	否	影像检查的公元纪年日期的完整描述
+GENDER_CODE	性别代码	code(19,0)	是	否	性别
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.93检查入口:EXAM_ENCOUNTER
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ENCOUNTER_ID	检查入口标识	number(19,0)	否	是	检查入口标识是检查入口表的唯一标识
+BIZ_ROLE_ID	业务角色标识	number(19,0)	是	否	业务角色的标识
+PATIENT_NO	病人编码	variableMultibyte(64)	是	否	信息系统中对病人按照一定的编码规则生成的编码
+ENCOUNTER_NO	就诊标识编码	variableMultibyte(64)	是	否	就诊标识在编码体系中的编码
+ENC_REG_SEQ_NO	就诊登记流水号	variableMultibyte(64)	是	否	按照某一特点的编码规则赋予登记对象用于就诊登记的顺序号
+SYSTEM_SOURCE_NO	系统来源标识	variableMultibyte(32)	是	否	标识系统来源在编码体系中的代码
+EXAM_ENCOUNTER_AT	检查业务时间	dateTime	是	否	检查业务的公元纪年日期和时间的完整描述
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.94技术其他信息:TECHNOLOGY_OTHER_INFO
+字段名称	中文名称	数据类型	可空	主键	备注
+TECHNOLOGY_OTHER_INFO_ID	技术其他信息标识	number(19,0)	否	是	
+EXAM_TECHNOLOGY_ID	技术信息标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+TECHNOLOGY_ITEM_NO	技术项编码	variableMultibyte(32)	是	否	
+TECHNOLOGY_ITEM_NAME	技术项名称	variableMultibyte(64)	是	否	
+TECHNOLOGY_ITEM_RESULT	技术项结果	variableMultibyte(1024)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.95预约过程步骤:SCHEDULED_PROC_STEP
+字段名称	中文名称	数据类型	可空	主键	备注
+SCHEDULED_PROC_STEP_ID	预约过程步骤标识	number(19,0)	否	是	
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+SPS_NO	预约过程步骤编号	variableMultibyte(64)	是	否	
+SPS_AE_TITLE	应用实体名	variableMultibyte(64)	是	否	
+SPS_START_AT	开始时间	dateTime	是	否	
+SPS_PHYSICIANS_NAME	物理名称	variableMultibyte(64)	是	否	
+SPS_MODALITY	影像类型	variableMultibyte(64)	是	否	
+SPS_DESCRIPTION	协议描述	variableMultibyte(128)	是	否	
+SPS_TRGT_CODE	协议对应代码	variableMultibyte(128)	是	否	
+SPS_VERSION	协议版本	variableMultibyte(128)	是	否	
+SPS_DESIGNATOR	协议设计者	variableMultibyte(128)	是	否	
+SPS_MEANING	协议代码注释	variableMultibyte(128)	是	否	
+RP_NO	请求过程编号	variableMultibyte(32)	是	否	
+RP_STUDYUID	请求过程检查唯一值	variableMultibyte(255)	是	否	
+RP_DESCRIPTION	请求过程描述	variableMultibyte(128)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.96检查计划任务:EXAM_SCHEDULE_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SCHEDULE_TASK_ID	检查计划任务标识	number(19,0)	否	是	检查计划任务标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	否	否	系统来源编码
+SCHEDULE_TASK_CATEGORY	计划任务分类	variableMultibyte(50)	否	否	计划任务分类
+SCHEDULE_TASK_SUBCATEGORY	计划任务子分类	variableMultibyte(50)	是	否	计划任务子分类
+SCHEDULE_TASK_NAME	计划任务名称	variableMultibyte(50)	否	否	计划任务名称
+SCHEDULE_TASK_DESC	计划任务描述	variableMultibyte(2000)	是	否	计划任务描述
+SCHEDULE_TASK_EXPIRED_AT	计划任务截止时间	dateTime	是	否	计划任务截止时间
+SCHEDULE_TASK_CYCLE	计划任务周期	number(19,0)	是	否	计划任务周期
+SCHEDULE_TASK_PLANNED_AT	计划任务计划时间	dateTime	否	否	计划任务计划时间
+SCHEDULE_TASK_SCRIPT_TYPE	计划任务脚本类型	variableMultibyte(50)	否	否	计划任务脚本类型
+SCHEDULE_TASK_SCRIPT	计划任务脚本内容	variableCharacters(8000)	否	否	计划任务脚本内容
+SCHEDULE_TASK_STATUS_NO	计划任务状态编码	variableMultibyte(50)	否	否	计划任务状态编码
+SCHEDULE_TASK_EXECUTED_AT	计划任务执行时间	dateTime	是	否	计划任务执行时间
+SCHEDULE_TASK_COMPLETED_AT	计划任务完成时间	dateTime	是	否	计划任务完成时间
+SCHEDULE_TASK_FAIL_DESC	计划任务失败描述	variableCharacters(8000)	是	否	计划任务失败描述
+SCHEDULE_TASK_SOURCE_ELEMENT	计划任务源头属性	variableCharacters(4000)	是	否	计划任务源头属性
+MAX_RETRY_COUNT	最大重试次数	number(19,0)	是	否	最大重试次数
+RETRY_COUNT	重试次数	number(19,0)	是	否	重试次数
+EXTERNAL_TASK_FLAG	外部任务标志	number(19,0)	是	否	外部任务标志
+PARENT_EXAM_SCHEDULE_TASK_ID	父检查计划任务标识	number(19,0)	是	否	父检查计划任务标识
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.97检查患者证件信息:EXAM_PERSON_IDENTIFICA
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PERSON_IDENTIFICA_ID	检查患者证件信息标识	identifierType(19,0)	否	是	检查患者证件信息EXAM_PERSON_IDENTIFICA实体的主键
+EXAM_PERSON_ID	检查患者档案信息标识	identifierType(19,0)	是	否	
+IDCARD_NO	身份证件号码	variableCharacters(256)	是	否	
+IDCARD_TYPE_CODE	身份证件类别代码	code(19,0)	是	否	身份证件类别编码
+ENABLED_FLAG	启用标志	flagType(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.98检查COPILOT埋点:EXAM_COPILOT_HISTORY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_COPILOT_HISTORY_ID	检查COPILOT埋点标识	identifierType(19,0)	否	是	检查COPILOT埋点EXAM_COPILOT_HISTORY实体的主键
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	否	检查任务EXAM_TASK实体的主键
+COPILOT_TYPE_NO	COPILOT类别编码	variableCharacters(50)	是	否	
+COPILOT_AT	COPILOT生成日期时间	dateTime	是	否	
+CURRENT_EXAM_COMPLETION_AT	当次检查完成日期时间	dateTime	是	否	
+CURRENT_EXAM_ITEM_NAME	当次检查项目名称	variableMultibyte(256)	是	否	
+CURRENT_EXAM_FINDINGS	当次检查所见	variableMultibyte(4000)	是	否	
+CURRENT_EXAM_CONCLUSION	当次检查结论	variableMultibyte(4000)	是	否	
+LAST_EXAM_COMPLETION_AT	上次检查完成日期时间	dateTime	是	否	
+LAST_EXAM_ITEM_NAME	上次检查项目名称	variableMultibyte(256)	是	否	
+LAST_EXAM_FINDINGS	上次检查所见	variableMultibyte(4000)	是	否	
+LAST_EXAM_CONCLUSION	上次检查结论	variableMultibyte(4000)	是	否	
+COPILOT_RESULT	COPILOT结果	variableMultibyte(4000)	是	否	
+COPILOT_FINISH_AT	COPILOT完成日期时间	dateTime	是	否	
+COPILOT_BY	COPILOT人员标识	identifierType(19,0)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.99迁移数据关系映射:EXAM_MIGRATION_RELATIONSHIP
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MIGRATION_RELATIONSHIP_ID	迁移数据关系映射标识	identifierType(19,0)	否	是	迁移数据关系映射EXAM_MIGRATION_RELATIONSHIP实体的主键
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	是	否	
+SERIAL_NUMBER	三方系统内部标识号	variableCharacters(64)	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	
+1.100检查影像胶片:EXAM_IMG_FILM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_IMG_FILM_ID	检查影像胶片标识	number(19,0)	否	是	检查影像胶片标识是检查影像胶片表的唯一标识
+MODALITY_PERF_PROC_STEP_ID	设备执行过程步骤标识	number(19,0)	否	否	检查影像胶片中的设备执行过程步骤标识
+FILM_STUDY_UID	胶片检查UID	variableMultibyte(128)	是	否	description2
+FILM_SERIES_UID	胶片序列UID	variableMultibyte(128)	是	否	description3
+FILM_IMAGE_UID	胶片图像UID	variableMultibyte(128)	是	否	description4
+FILM_TYPE_CODE	胶片类型代码	number(19,0)	是	否	胶片类型在特定编码体系中的代码
+FILM_SIZE_NO	胶片尺寸编码	variableMultibyte(64)	是	否	description8
+FILM_COUNT	胶片张数	integer	是	否	胶片张数
+FILM_PRINT_STATUS	胶片打印状态	number(19,0)	是	否	胶片打印状态在编码体系中的代码
+FILM_PRINT_TIMES	胶片打印次数	integer	是	否	description10
+FILM_PRINT_AT	胶片打印时间	dateTime	是	否	description6
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description15
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	description16
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	description17
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	description18
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	description19
+1.101检查患者医技号:EXAM_PATIENT_TECH_NO
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PATIENT_TECH_NO_ID	检查患者医技号标识	number(19,0)	否	是	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+TECH_NO	医技号	variableMultibyte(20)	是	否	
+BIZ_ROLE_ID	业务角色标识	number(19,0)	否	否	
+EXAM_CATEGORY_ID	检查类型标识	number(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.102预约日排班:APPOINTMENT_DAY_SCHEDULE
+字段名称	中文名称	数据类型	可空	主键	备注
+APPOINTMENT_DAY_SCHEDULE_ID	预约日排班标识	number(19,0)	否	是	description1
+EXAM_APPOINTMENT_SCHEDULE_ID	检查预约排班标识	number(19,0)	否	否	description1
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+APPOINTMENT_DATE	预约日期	date	是	否	description6
+APPOINTMENT_START_TIME	预约开始时间	variableMultibyte(10)	是	否	description7
+APPOINTMENT_END_TIME	预约结束时间	variableMultibyte(10)	是	否	description8
+APPOINTMENT_TOTAL_COUNT	可预约人数	integer	是	否	description9
+APPOINTMENT_REAL_COUNT	已预约人数	integer	是	否	description10
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.103检查患者就诊号源信息:EXAM_PERSON_MEDICAL_NUMBER
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PERSON_MEDICAL_NUMBER_ID	检查患者就诊号源信息标识	identifierType(19,0)	否	是	检查患者就诊号源信息EXAM_PERSON_MEDICAL_NUMBER实体的主键
+EXAM_PERSON_ID	检查患者档案信息标识	identifierType(19,0)	是	否	
+MEDICAL_NUMBER_TYPE_NO	就诊号源类型编码	variableCharacters(40)	是	否	
+MEDICAL_NUMBER	就诊号	variableCharacters(256)	是	否	
+PASSWORD_HASH	密码哈希值	variableCharacters(256)	是	否	
+OR_CODE_NO	二维码编码	variableCharacters(256)	是	否	
+ENABLED_FLAG	启用标志	flagType(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.104检查VIP授权:EXAM_VIP_AUTHORIZED
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_VIP_AUTHORIZED_ID	检查VIP授权标识	identifierType(19,0)	否	是	检VIP类型标识是检查VIP授权表表的唯一标识
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	否	
+AUTHORIZED_ID	被授权人标识	identifierType(19,0)	是	否	
+AUTHORIZED_NO	被授权人编码	variableCharacters(32)	否	否	
+AUTHORIZED_NAME	被授权人名称	variableCharacters(64)	否	否	
+AUTHORIZED_DEPT_ID	被授权人部门标识	identifierType(19,0)	是	否	
+AUTHORIZED_DEPT_NO	被授权人部门编码	variableCharacters(32)	是	否	
+AUTHORIZED_DEPT_NAME	被授权人部门名称	variableCharacters(64)	是	否	
+AUTHORIZED_START_DATE	授权有效开始日期	date	是	否	
+AUTHORIZED_END_DATE	授权有效结束日期	date	是	否	
+AUTHORIZED_TYPE_NO	授权类型编码	variableCharacters(256)	是	否	
+HISTORY_FLAG	历史标志	flagType(19,0)	是	否	
+OPERATED_AT	授权日期时间	dateTime	否	否	
+OPERATED_BY	授权人标识	identifierType(19,0)	否	否	
+OPERATED_NAME	授权人名称	variableMultibyte(256)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.105检查患者档案信息:EXAM_PERSON
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PERSON_ID	检查患者档案信息标识	identifierType(19,0)	否	是	检查患者档案信息EXAM_PERSON实体的主键
+FULL_NAME	姓名	variableMultibyte(128)	是	否	
+GENDER_CODE	性别代码	code(19,0)	是	否	性别代码
+BIRTH_DATE	出生日期	date	是	否	
+TELEPHONE_NO	手机号	variableCharacters(24)	是	否	
+PAT_EMAIL	患者邮箱	variableMultibyte(128)	是	否	
+NATIONALITY_CODE	国籍代码	code(19,0)	是	否	国籍编码
+NATIONALITY_NAME	国籍名称	variableMultibyte(30)	是	否	
+NATION_CODE	民族代码	code(19,0)	是	否	民族代码
+NATION_NAME	民族名称	variableMultibyte(30)	是	否	
+MARITAL_STATUS_CODE	婚姻状况代码	code(19,0)	是	否	婚姻状况代码
+MARITAL_STATUS_NAME	婚姻状况名称	variableMultibyte(10)	是	否	
+RELIGION_CODE	宗教信仰代码	code(19,0)	是	否	宗教信仰代码
+RELIGION_NAME	宗教信仰名称	variableMultibyte(20)	是	否	
+PINYIN	拼音码	variableCharacters(64)	是	否	
+JIANPIN	简拼	variableCharacters(64)	是	否	
+WUBI	五笔	variableCharacters(64)	是	否	
+OCCUPATION_CODE	职业类别代码	code(19,0)	是	否	职业类别代码
+OCCUPATION_NAME	职业类别名称	variableMultibyte(30)	是	否	
+ADDRESS	详细地址	variableMultibyte(128)	是	否	
+PORTRAIT_URL	照片链接地址	variableCharacters(256)	是	否	
+REAL_NAME_AUTH_LEVEL_CODE	实名认证级别代码	code(19,0)	是	否	实名认证级别编码
+REAL_NAME_AUTH_LEVEL_NAME	实名认证级别名称	variableMultibyte(10)	是	否	
+PATIENT_CATEGORY_CODE	人员类别代码	code(19,0)	是	否	人员类别代码
+PATIENT_CATEGORY_NAME	人员类别名称	variableMultibyte(10)	是	否	
+MPI	患者主索引	variableCharacters(64)	是	否	
+PATIENT_NO	患者标识编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.106患者证件信息表:EXAM_PERSON_IDENTIFICATION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PERSON_IDENTIFICATION_ID	患者证件信息表标识	identifierType(19,0)	否	是	检查患者证件信息标识是患者证件信息表的主键标识
+EXAM_PERSON_ID	检查患者档案信息标识	identifierType(19,0)	否	否	
+IDCARD_NO	身份证件号码	variableCharacters(256)	是	否	
+IDCARD_TYPE_CODE	身份证件类别代码	code(19,null)	是	否	身份证件类别
+ENABLED_FLAG	启用标志	flagType(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	是	否	
+CREATED_AT	创建日期时间	dateTime	是	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.107检查选择附件:EXAM_SELECT_ATTACHMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SELECT_ATTACHMENT_ID	检查选择附件标识	number(19,0)	否	是	
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+EXAM_ATTACHMENT_ID	检查附件标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+SEQ_NO	排序号	integer	是	否	
+REMARK	备注	variableMultibyte(200)	是	否	备注
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.108检查任务留言:EXAM_TASK_COMMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TASK_COMMENT_ID	检查任务留言标识	number(19,0)	否	是	description1
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+COMMENT_TEXT	留言文本	variableMultibyte(1024)	是	否	description2
+COMMENT_SOURCE_NAME	留言来源模块名称	variableMultibyte(64)	是	否	description3
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description8
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	description9
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	description10
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	description11
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	description12
+1.109报告其他结果:EXAM_OTHER_RESULT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_OTHER_RESULT_ID	检查其他结果标识	number(19,0)	否	是	检查其他结果标识是报告其他结果表的唯一标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+REPORT_ITEM_NO	报告项编码	variableMultibyte(32)	是	否	
+REPORT_ITEM_NAME	报告项名称	variableMultibyte(64)	是	否	
+REPORT_ITEM_RESULT	报告项结果	vmbtmax	是	否	
+REPORT_ITEM_REF_VALUE	报告项参考值	variableMultibyte(128)	是	否	
+REPORT_ITEM_STATUS	报告项结果高低值状态	number(19,0)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.110病理申请信息表:EXAM_PIS_REQUISITION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_PIS_REQUISITION_ID	病理申请信息表标识	identifierType(19,0)	否	是	病理申请标识是病理申请信息表表的唯一标识
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	是	否	
+APPLY_DOC_NO	申请医生编码	variableCharacters(64)	是	否	
+APPLY_DOC_NAME	申请医生名称	variableMultibyte(64)	是	否	
+APPLY_DEPT_ID	申请科室标识	identifierType(19,0)	是	否	
+APPLY_DEPT_NO	申请科室编码	variableCharacters(64)	是	否	
+APPLY_DEPT_NAME	申请科室名称	variableMultibyte(64)	是	否	
+REQUISITION_CONTENT	申请单内容	vmbtmax	是	否	
+REQUISITION_PRINT_TIMES	申请单打印次数	integer	是	否	
+REQUISITION_PRINT_AT	申请单打印日期时间	dateTime	是	否	
+BARCODE_PRINT_TIMES	标本条码打印次数	integer	是	否	
+BARCODE_PRINT_AT	条码打印日期时间	dateTime	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人姓名	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员姓名	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.111造影剂过敏:CONTRAST_MEDIUM_ALLERGY
+字段名称	中文名称	数据类型	可空	主键	备注
+CONTRAST_MEDIUM_ALLERGY_ID	造影剂过敏标识	number(19,0)	否	是	description1
+BIZ_ROLE_ID	业务角色标识	number(19,0)	否	否	
+CONTRAST_MEDIUM_NO	造影剂编码	variableMultibyte(32)	是	否	description2
+CONTRAST_MEDIUM_NAME	造影剂名称	variableMultibyte(64)	是	否	description3
+ALLERGY_LEVEL_CODE	过敏程度代码	number(19,0)	是	否	description4
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	description10
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	description11
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	description12
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	description13
+1.112检查登记项目:EXAM_REGISTER_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_REGISTER_ITEM_ID	检查登记项目标识	number(19,0)	否	是	
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	是	否	
+EXAM_ITEM_NAME	检查项目名称	variableMultibyte(256)	是	否	
+POSITION_NO	部位编码	variableMultibyte(64)	是	否	部位编码
+POSITION_NAME	部位名称	variableMultibyte(256)	是	否	部位名称
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.113检查分诊任务:EXAM_TRIAGE_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TRIAGE_TASK_ID	检查分诊任务标识	number(19,0)	否	是	检查分诊任务标识是检查分诊任务表的唯一标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查分诊任务中的检查任务标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+EXAM_EQUIPMENT_ID	检查设备标识	number(19,0)	是	否	检查分诊任务中的检查设备标识
+EXAM_TRIAGE_QUEUE_ID	检查分诊队列标识	number(19,0)	是	否	检查分诊任务中的检查分诊队列标识
+TRIAGE_QUEUE_NAME	分诊队列名称	variableMultibyte(64)	是	否	description15
+TRIAGE_QUEUE_PREFIX	分诊队列前缀	variableMultibyte(16)	是	否	description16
+TRIAGE_QUEUE_AP_PREFIX	上下午前缀	variableMultibyte(16)	是	否	description17
+TRIAGE_QUEUE_SEQ_NO	分诊队列排序号序	integer	是	否	description18
+TRIAGE_ROOM_SEQ_NO	分诊诊间排序号序	integer	是	否	description33
+TRIAGE_TASK_DEADLINE_AT	分诊任务截止时间	dateTime	是	否	description19
+TRIAGE_QUEUE_NO	分诊队列号	variableMultibyte(32)	是	否	description20
+TRIAGE_TASK_STATUS	分诊任务状态	number(19,0)	是	否	description4
+TRIAGE_TASK_SUSPEND_FLAG	分诊任务暂停标志	number(19,0)	是	否	description14
+TRIAGE_TASK_WAITING_AT	分诊任务候诊时间	dateTime	是	否	description5
+TRIAGE_TASK_WAITING_BY	分诊任务候诊操作者	number(19,0)	是	否	description6
+TRIAGE_TASK_START_AT	分诊任务开始检查时间	dateTime	是	否	description7
+TRIAGE_TASK_START_BY	分诊任务开始检查操作者	number(19,0)	是	否	description8
+TRIAGE_TASK_END_AT	分诊任务结束检查时间	dateTime	是	否	description9
+TRIAGE_TASK_END_BY	分诊任务结束检查操作者	number(19,0)	是	否	description10
+TRIAGE_TASK_PRIORITY_CODE	分诊任务优先级代码	number(19,0)	是	否	description11
+TRIAGE_TASK_CALL_TIMES	分诊任务呼叫次数	integer	是	否	description12
+TRIAGE_TASK_CALLER_BY	分诊任务呼叫操作者	number(19,0)	是	否	description13
+TRIAGE_TASK_DELETED_BY	分诊任务删除者标识	number(19,0)	是	否	标识是否为分诊任务删除者
+OVER_NO_TIMES	过号次数	integer	是	否	description31
+TRIAGE_TASK_TYPE_CODE	分诊任务分类代码	number(19,0)	是	否	description34
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description35
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建者标识	number(19,0)	是	否	description27
+CREATED_NAME	创建者名称	variableMultibyte(64)	是	否	description28
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改者标识	number(19,0)	是	否	description29
+MODIFIED_NAME	最后修改者名称	variableMultibyte(64)	是	否	description30
+1.114检查分诊屏叫号:EXAM_TRIAGE_SCREEN_CALL
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TRIAGE_SCREEN_CALL_ID	检查分诊屏叫号标识	number(19,0)	否	是	检查分诊屏叫号EXAM_TRIAGE_SCREEN_CALL实体的主键
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+EXAM_TRIAGE_QUEUE_ID	分诊队列标识	identifierType(19,0)	是	否	
+CALL_TYPE_NO	叫号类型编码	variableCharacters(40)	是	否	
+FULL_NAME	姓名	variableMultibyte(128)	是	否	姓名
+TECH_NO	医技号	variableMultibyte(20)	是	否	
+TRIAGE_QUEUE_NO	分诊队列号	variableMultibyte(32)	是	否	description20
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	
+EXAM_CATEGORY_NAME	检查类别名称	variableCharacters(64)	是	否	
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	是	否	
+EQUIPMENT_NAME	设备名称	variableCharacters(64)	是	否	
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	
+TRIAGE_TASK_STATUS	分诊任务状态	number(19,0)	是	否	description4
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.115检查任务:EXAM_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	是	检查任务EXAM_TASK实体的主键
+EXAM_ENCOUNTER_ID	检查入口标识	identifierType(19,0)	否	否	检查任务中的检查入口标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+ENCOUNTER_TYPE_NO	就诊类型编码	variableMultibyte(32)	是	否	就诊类型编码
+PATIENT_NO	病人编码	variableCharacters(64)	是	否	病人编码
+FULL_NAME	姓名	variableMultibyte(128)	是	否	个体在公安户籍管理部门正式登记注册的姓氏和名称
+PINYIN	拼音码	variableCharacters(64)	是	否	拼音码
+JIANPIN	简拼码	variableCharacters(64)	是	否	简拼码
+BIRTH_DATE	出生日期	date	是	否	个体出生当天的公元纪年日期的完整描述
+GENDER_CODE	性别代码	number(19,0)	是	否	个体生理性别在特定编码体系中的代码
+TELEPHONE_NO	电话号码	variableMultibyte(24)	是	否	个体或机构联系电话的号码,包括国际、国内区号和分机号
+ADDRESS	地址（工作单位或家庭住址）	variableMultibyte(128)	是	否	地址（工作单位或家庭住址）
+VIP_TYPE_NO	VIP类别编码	variableCharacters(32)	是	否	VIP类别编码
+IDCARD_NO	身份证件号码	variableMultibyte(18)	是	否	个体的身份证件上的唯一法定标识符
+IDCARD_TYPE_CODE	身份证件类别代码	number(19,0)	是	否	个体身份证件所属类别在特定编码体系中的代码
+AGE	年龄	variableMultibyte(32)	是	否	患者年龄满1周岁的实足年龄，为患者出生后按照日历计箅的历法年龄，以实足年龄的相应整数填写
+AGE_YEARS	年龄（年）	number(19,0)	是	否	年龄超过1周岁的实足年龄的周岁
+AGE_MONTHS	年龄（月）	number(10,2)	是	否	年龄不足1周岁的实足年龄的月龄
+AGE_DAYS	年龄（天）	number(19,0)	是	否	年龄不足1月的实足年龄的天数
+NATION_CODE	民族代码	number(19,0)	是	否	个体所属民族的类别再特定编码体系中的代码
+NATION_NAME	民族名称	variableMultibyte(64)	是	否	个体所属民族名称的详细描述
+CARD_NO	就诊卡号	variableMultibyte(32)	是	否	所持就诊卡的卡号，对应就诊卡类型
+CARD_TYPE_CODE	就诊卡类型代码	number(19,0)	是	否	患者所持就诊卡的类型在特定编码体系中的代码
+ADMISSION_NUMBER	住院号	variableMultibyte(256)	是	否	按照某一特定编码规则赋予住院就诊对象的顺序号
+WARD_ID	病区标识	number(19,0)	是	否	病区的标识
+WARD_NO	病区编码	variableMultibyte(64)	是	否	患者所在病区的编码
+WARD_NAME	病区名称	variableMultibyte(50)	是	否	患者当前所在病区的名称
+BED_NO	床位编号	variableMultibyte(32)	是	否	患者住院期间，所住床位对应的编号
+EXAM_EQUIPMENT_ID	设备标识	number(19,0)	是	否	设备标识
+EQUIPMENT_NAME	设备名称	variableMultibyte(40)	是	否	机构内设备的名称的详细描述
+EXAM_CATEGORY_ID	检查类别标识	identifierType(19,0)	是	否	检查类别标识
+EXAM_CATEGORY_NO	检查类别编码	variableCharacters(50)	是	否	检查类别编码
+EXAM_CATEGORY_NAME	检查类别名称	variableMultibyte(50)	是	否	住院检查类别显示的标准名称
+EXAM_MAIN_CATEGORY_NO	检查主类别编码	variableCharacters(50)	是	否	检查主类别编码
+LABEL_NO	条码编号	variableMultibyte(32)	是	否	科室检查唯一码
+TECH_NO	医技号	variableMultibyte(20)	是	否	患者影像号
+APPOINTMENT_BY	预约医生标识	number(19,0)	是	否	预约医生的标识
+APPOINTMENT_NAME	预约医生名称	variableMultibyte(32)	是	否	预约医生名称
+REGISTER_BY	登记医生标识	number(19,0)	是	否	登记医生标识
+REGISTER_NAME	登记医生名称	variableMultibyte(32)	是	否	登记医生名称
+REGISTER_AT	登记签到时间	dateTime	是	否	登记签到时间
+APPLY_DEPT_ID	申请科室标识	number(19,0)	是	否	申请科室唯一标识
+APPLY_DEPT_NO	申请科室编码	variableMultibyte(64)	是	否	申请科室的编码
+APPLY_DEPT_NAME	申请科室名称	variableMultibyte(50)	是	否	申请检验的科室名称的详细描述
+APPLY_AT	申请时间	dateTime	是	否	申请开立的时间
+APPLY_DOC_ID	申请医生标识	number(19,0)	是	否	申请医生标识
+APPLY_DOC_NO	申请医生编码	variableMultibyte(64)	是	否	申请医生编码
+APPLY_DOC_NAME	申请医生名称	variableMultibyte(32)	是	否	申请医生名称
+CLINIC_DIAG_DESC	临床诊断描述	variableMultibyte(1024)	是	否	报告临床诊断描述
+URGENT_FLAG	急查标志	number(19,0)	是	否	是否是急查标志
+SPECIAL_IDENTIFICATION_NO	特殊标识编码	variableMultibyte(64)	是	否	特殊标识在编码体系中的编码
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态在编码体系中的代码
+CONFIRMED_NO	确收编码	variableMultibyte(32)	是	否	确收费用的编码
+IS_CLUDING_FILM_FEE	含有胶片费用	number(19,0)	是	否	含有胶片费用
+EXAM_COMPLETION_AT	检查完成时间	dateTime	是	否	检查完成的时间
+TECHNICIAN_BY	技术员标识	identifierType(19,0)	是	否	技术员标识
+TECHNICIAN_NAME	技术员名称	variableMultibyte(32)	是	否	技术员名称
+EXAM_IMAGE_COUNT	检查影像数量	integer	是	否	检查影像数量
+IMAGE_CREATED_AT	影像创建时间	dateTime	是	否	影像创建时间
+IMAGE_ENTER_AT	影像入库时间	dateTime	是	否	影像入库时间
+EXAM_ASSIST_STATUS	检查协同状态	number(19,0)	是	否	检查协同状态在编码体系中的代码
+EXEC_DEPT_ID	执行科室标识	number(19,0)	是	否	执行科室的标识
+EXEC_DEPT_NO	执行科室编码	variableMultibyte(32)	是	否	执行科室编码
+DELETED_BY	删除人标识	identifierType(19,0)	是	否	删除人标识
+DELETED_NAME	删除人名称	variableMultibyte(100)	是	否	删除人名称
+DELETED_AT	删除时间	dateTime	是	否	删除时间
+LOCK_FLAG	锁定标志	number(19,0)	是	否	是否是锁定标志
+LOCK_BY	锁定用户标识	identifierType(19,0)	是	否	锁定用户标识
+LOCK_NAME	锁定人名称	variableMultibyte(100)	是	否	锁定人名称
+LOCK_PC	锁定计算机	variableMultibyte(50)	是	否	锁定计算机
+CV_REPORT_ID	危急值报告标识	number(19,0)	是	否	危急值报告标识
+REPORT_CA_VALUE	报告CA签名值	variableCharacters(2048)	是	否	报告CA签名值
+REVISE_NO	修订编码	variableCharacters(64)	是	否	修订编码
+REMARK	备注	variableMultibyte(2048)	是	否	备注
+REPORT_EXT_ID	报告外部标识	variableCharacters(64)	是	否	报告外部标识
+APPLY_HOSPITAL_NO	申请机构编码	variableCharacters(64)	是	否	申请机构编码
+APPLY_HOSPITAL_NAME	申请机构名称	variableCharacters(64)	是	否	申请机构名称
+APPLY_TYPE_NO	申请类型编码	variableCharacters(64)	是	否	申请类型编码
+APPLY_TYPE_NAME	申请类型名称	variableCharacters(64)	是	否	申请类型名称
+ASSIST_HOSPITAL_NO	协同机构编码	variableCharacters(64)	是	否	协同机构编码
+ASSIST_HOSPITAL_NAME	协同机构名称	variableCharacters(64)	是	否	协同机构名称
+ASSIST_STATUS_DESC	协同状态描述	variableCharacters(4000)	是	否	协同状态描述
+ASSIST_REGISTER_FLAG	协同登记标志	flagType(19,0)	是	否	协同登记标志
+SOURCE_HOSPITAL_SOID	来源医院SOID	number(19,0)	是	否	来源医院SOID
+EXAM_CATEGORY_PRINTFILE_ID	打印关系标识	identifierType(19,0)	是	否	打印关系标识
+PRINT_FILE_NAME	打印文件名称	variableMultibyte(100)	是	否	打印文件名称
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.116检查数据脚本记录:EXAM_DATABASE_SCRIPT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_DATABASE_SCRIPT_ID	检查数据脚本记录标识	identifierType(19,0)	否	是	检查数据脚本记录标识是实体_38表的唯一标识
+VERSION_TIME_STAMP	版本号	number(19,0)	是	否	
+FILE_PATH	文件路径	variableCharacters(200)	是	否	
+SCRIPT_TYPE_NO	脚本类型编码	variableCharacters(100)	是	否	
+SCRIPT_RUN_STATUS_NO	脚本运行状态编码	variableCharacters(100)	是	否	
+SCRIPT_CONTENT	脚本内容	vmbtmax	是	否	
+SCRIPT_COMMENTS	脚本注释	variableMultibyte(4000)	是	否	
+SCRIPT_ERROR	脚本异常	variableMultibyte(4000)	是	否	
+SYSTEM_SOURCE_NO	子系统编码	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.117检查医生任务:EXAM_DOC_TASK
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_DOC_TASK_ID	检查医生任务标识	number(19,0)	否	是	description1
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+DOC_SCHEDULE_DIC_ID	医师排班字段标识	number(19,0)	是	否	医师排班字段标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+TASK_EXECUTOR_BY	任务执行者标识	number(19,0)	是	否	description12
+TASK_ASSIGNMENT_AT	任务分配时间	dateTime	是	否	description13
+DOC_TASK_STATUS	医生任务状态	number(19,0)	是	否	description14
+EXAM_TASK_STATUS	检查任务状态	number(19,0)	是	否	检查任务状态
+DOC_TASK_WORKLOAD	医生任务工作量	number(19,2)	是	否	description18
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	description9
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	description11
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	description11
+1.118自助机服务设置:EXAM_SELF_SERVICE_SETTING
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_SELF_SERVICE_SETTING_ID	自助机服务设置标识	number(19,0)	否	是	自助机服务设置标识
+SELF_SERVICE_IP	自助机服务IP	variableMultibyte(20)	是	否	自助机服务IP
+SELF_SERVICE_HOST_NAME	自助机服务主机名	variableMultibyte(256)	是	否	自助机服务主机名
+SELF_SERVICE_ALIAS	自助机服务别名	variableMultibyte(256)	是	否	自助机服务别名
+SELF_SERVICE_SETTING_CONTENT	自助机服务设置内容	variableCharacters(8000)	是	否	自助机服务设置内容
+SELF_SERVICE_TYPE_NO	自助机服务分类编码	variableMultibyte(64)	是	否	自助机服务分类编码
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.119检查分诊历史:EXAM_TRIAGE_HISTORY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TRIAGE_HISTORY_ID	检查分诊历史标识	number(19,0)	否	是	检查分诊历史标识
+FROM_ID	快照标识	number(19,0)	是	否	
+OPERATE_TYPE_NO	操作类型编码	variableCharacters(50)	是	否	操作类型编码
+TRIAGE_HISTORY_VALUE	分诊历史数据	variableMultibyte(4000)	是	否	分诊历史数据
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.120检查附件:EXAM_ATTACHMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_ATTACHMENT_ID	检查附件标识	number(19,0)	否	是	检查附件标识是检查附件表的唯一标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+FILE_SIZE	附件大小	number(19,0)	是	否	
+FILE_TYPE_NO	附件类别编码	variableMultibyte(20)	是	否	
+PC_MAC_ADDRESS	上传的计算机MAC地址	variableMultibyte(128)	是	否	
+UPLOAD_PC_NAME	上传计算机名称	variableMultibyte(50)	是	否	
+FILE_PACS_IMAGE_UID	上传文件UID	variableMultibyte(128)	是	否	
+FILE_PATH	文件物理路径	variableMultibyte(128)	是	否	
+FILE_CREATED_AT	文件创建时间	dateTime	是	否	
+UPLOAD_PACS_FLAG	是否上传PACS	number(19,0)	是	否	
+UPLOAD_PACS_ERROR_MSG	上传到PACS异常信息	vmbtmax	是	否	
+FILE_ANNOTATION	图片编辑信息	vmbtmax	是	否	
+MEMO	备注	variableMultibyte(200)	是	否	
+FILE_SOURCE_NO	文件来源编码	variableCharacters(50)	是	否	文件来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.121检查技术:EXAM_TECHNOLOGY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TECHNOLOGY_ID	检查技术标识	number(19,0)	否	是	检查技术标识是检查技术表的唯一标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	检查技术中的检查任务标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源在编码体系中的编码
+EXAM_METHOD	检查方法	variableMultibyte(2000)	是	否	患者接受医学检查项目所采用的检查方法名称
+INJECTION_BY	注射人标识	number(19,0)	是	否	标识是否为注射人
+INJECTION_NO	注射人编码	variableCharacters(32)	是	否	注射人编码
+INJECTION_NAME	注射人名称	variableMultibyte(32)	是	否	注射人的名称的详细描述
+INSTRUCTOR_BY	指导医生标识	number(19,0)	是	否	标识是否为指导医生
+INSTRUCTOR_NO	指导医生编码	variableCharacters(32)	是	否	指导医生编码
+INSTRUCTOR_NAME	指导医生名称	variableMultibyte(32)	是	否	检查技术知指导医生的名称的详细描述
+TECHNICIAN_BY	技术员标识	number(19,0)	是	否	标识是否为技术员
+TECHNICIAN_NO	技术员编码	variableCharacters(32)	是	否	技术员编码
+TECHNICIAN_NAME	技术员名称	variableMultibyte(32)	是	否	技术员的名称的详细描述
+EXAM_COMPLETION_AT	检查完成时间	dateTime	是	否	检查完成时间的公元纪年日期和时间的详细描述
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.122检查数据核查记录:EXAM_CHECK_RECORD
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CHECK_RECORD_ID	检查数据核查记录标识	identifierType(19,0)	否	是	核查记录标识是检查数据核查记录表表的唯一标识
+EXAM_TASK_ID	检查任务标识	identifierType(19,0)	否	否	
+CHECK_TYPE_NO	核查类型编码	variableCharacters(32)	否	否	
+CHECK_CONTENT	核查内容	variableMultibyte(2000)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人姓名	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	修改人姓名	variableMultibyte(64)	是	否	
+SYSTEM_SOURCE_NO	应用系统编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医疗机构名称	variableMultibyte(128)	是	否	
+1.123检查消息详情:EXAM_MESSAGE_DETAILS
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_MESSAGE_DETAILS_ID	检查消息详情标识	identifierType(19,0)	否	是	检查消息详情主键
+EXAM_MESSAGE_ID	检查消息记录标识	identifierType(19,0)	是	否	
+MESSAGE_RECEIVE_OBJECT	消息接收对象	variableCharacters(256)	是	否	
+MESSAGE_REMIND_AT	消息提醒日期时间	dateTime	是	否	
+MESSAGE_READ_FLAG	阅读标志	flagType(19,0)	是	否	
+MESSAGE_READ_AT	阅读日期时间	dateTime	是	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人名称	variableMultibyte(64)	是	否	
+1.124屏幕字典:SCREEN_DICTIONARY
+字段名称	中文名称	数据类型	可空	主键	备注
+SCREEN_DICTIONARY_ID	屏幕字典标识	identifierType(19,0)	否	是	屏幕字典SCREEN_DICTIONARY实体的主键
+DICT_CLASS_NAME	字典分类名称	variableCharacters(50)	是	否	
+DICT_ITEM_NO	字典项目编码	variableCharacters(50)	是	否	
+DICT_ITEM_NAME	字典项目名称	variableCharacters(64)	是	否	
+DICT_EXTERN_NO	字段外部映射编码	variableCharacters(50)	是	否	
+MEM1_NO	记忆一编码	variableCharacters(30)	是	否	
+MEM2_NO	记忆二编码	variableCharacters(30)	是	否	
+ALTER_FLAG	是否可修改标志	flagType(19,0)	是	否	
+VISIBLE_FLAG	是否可见标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.125屏幕外设设置:SCREEN_PERIPHERAL_SETTING
+字段名称	中文名称	数据类型	可空	主键	备注
+SCREEN_PERIPHERAL_SETTING_ID	屏幕外设设置标识	identifierType(19,0)	否	是	屏幕外设设置SCREEN_PERIPHERAL_SETTING实体的主键
+SCREEN_TRIAGE_PERIPHERAL_ID	屏幕分诊外设标识	identifierType(19,0)	否	否	屏幕分诊外设SCREEN_TRIAGE_PERIPHERAL实体的主键
+PERIPHERAL_SETTING_NAME	外设配置名称	variableCharacters(64)	是	否	
+PERIPHERAL_TYPE_NO	外设类型编码	variableCharacters(64)	是	否	
+PERIPHERAL_SETTING_LOGO	外设配置logo	vmbtmax	是	否	
+PERIPHERAL_SETTING_CONTENT	外设配置内容	vmbtmax	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.126屏幕设置:SCREEN_SETTINGS
+字段名称	中文名称	数据类型	可空	主键	备注
+SCREEN_SETTINGS_ID	屏幕设置标识	identifierType(19,0)	否	是	屏幕设置SCREEN_SETTINGS实体的主键
+SETTING_ITEM_KEY	设置项关键词	variableCharacters(256)	是	否	
+SETTING_ITEM_DOMAIN_NO	设置项范围编码	variableCharacters(20)	是	否	
+SETTING_ITEM_DOMAIN_NAME	设置项范围名称	variableCharacters(64)	是	否	
+SETTING_ITEM_SECTION	设置项分组	variableCharacters(64)	是	否	
+SETTING_ITEM_ENTRY	设置项实体	variableCharacters(256)	是	否	
+SETTING_ITEM_DATATYPE	设置项数据型	variableCharacters(20)	是	否	
+DEFAULT_VALUE	默认值	vmbtmax	是	否	
+PRIVATE_BY	私人用户标识	identifierType(19,0)	是	否	
+VISIBLE_FLAG	是否可见标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	integer	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.127屏幕多媒体资源:SCREEN_MEDIA_RESOURCE
+字段名称	中文名称	数据类型	可空	主键	备注
+SCREEN_MEDIA_RESOURCE_ID	屏幕多媒体资源标识	identifierType(19,0)	否	是	屏幕多媒体资源SCREEN_MEDIA_RESOURCE实体的主键
+MEDIA_RESOURCE_NAME	媒体资源名称	variableCharacters(255)	是	否	
+MEDIA_RESOURCE_SIZE	媒体资源大小（KB）	number(19,0)	是	否	
+MEDIA_RESOURCE_PATH	媒体资源路径	variableCharacters(255)	是	否	
+MEDIA_RESOURCE_TYPE_NO	媒体资源类型编码	variableCharacters(255)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.128屏幕分诊外设:SCREEN_TRIAGE_PERIPHERAL
+字段名称	中文名称	数据类型	可空	主键	备注
+SCREEN_TRIAGE_PERIPHERAL_ID	屏幕分诊外设标识	identifierType(19,0)	否	是	屏幕分诊外设SCREEN_TRIAGE_PERIPHERAL实体的主键
+TRIAGE_PERIPHERAL_IP	分诊外设IP	variableCharacters(32)	是	否	
+TRIAGE_PERIPHERAL_HOST_NAME	分诊外设主机名称	variableCharacters(64)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建人员名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改人员名称	variableMultibyte(64)	是	否	
+1.129检查会诊医生:EXAM_CONSULTANT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CONSULTANT_ID	检查会诊医生标识	number(19,0)	否	是	检查会诊医生标识
+EXAM_CONSULTATION_ID	检查会诊标识	number(19,0)	否	否	检查会诊标识
+CONSULTANT_BY	会诊医生标识	number(19,0)	是	否	会诊医生标识
+CONSULTANT_NAME	会诊医生名称	variableMultibyte(64)	是	否	会诊医生名称
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.130检查随访:EXAM_FOLLOW_UP
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_FOLLOW_UP_ID	检查随访标识	number(19,0)	否	是	检查随访EXAM_FOLLOW_UP实体的主键
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+EXAM_TASK_ASSIGNMENT_ID	检查任务归类标识	number(19,0)	否	否	检查任务归类标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	检查类别标识
+NEG_POS_CODE	阴阳性代码	variableMultibyte(10)	是	否	
+FOLLOW_UP_AT	随访时间	dateTime	是	否	随访时间
+FOLLOW_UP_BY	随访人员标识	number(19,0)	是	否	随访人员标识
+FOLLOW_UP_NAME	随访人员名称	variableMultibyte(64)	是	否	随访人员名称
+FOLLOW_UP_DESC	随访描述	variableMultibyte(4000)	是	否	随访描述
+FOLLOW_UP_RESULT	随访结果	variableMultibyte(64)	是	否	随访结果
+FOLLOW_UP_POSITION_REMARK	随访定位备注	variableMultibyte(1000)	是	否	
+FOLLOW_UP_QUALITATIVE_REMARK	随访定性备注	variableMultibyte(1000)	是	否	
+FOLLOW_UP_PATHOLOGIC_DIAGNOSIS	随访病理诊断	variableMultibyte(1000)	是	否	
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.131检查经典病例标签:EXAM_CLASSIC_CASE_TAG
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CLASSIC_CASE_TAG_ID	检查经典病例标签标识	number(19,0)	否	是	检查经典病例标签标识
+EXAM_CLASSIC_CASE_ID	检查经典病例标识	number(19,0)	否	否	检查经典病例标识
+CLASSIC_CASE_TAG_NO	经典病例标签编码	variableCharacters(64)	是	否	经典病例标签编码
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.132检查会诊:EXAM_CONSULTATION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CONSULTATION_ID	检查会诊标识	number(19,0)	否	是	检查会诊标识
+EXAM_TASK_ASSIGNMENT_ID	检查任务归类标识	number(19,0)	否	否	检查任务归类标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	检查类别标识
+CONSULTATION_HOST_BY	会诊主持人标识	number(19,0)	是	否	会诊主持人标识
+CONSULTATION_HOST_NAME	会诊主持人名称	variableMultibyte(64)	是	否	会诊主持人名称
+CONSULTATION_AT	会诊时间	dateTime	是	否	会诊时间
+CONSULTATION_SPEECH_CONTENT	会诊发言内容	variableMultibyte(4000)	是	否	会诊发言内容
+IMAGE_READING_SUMMARY	会诊读片小结	variableMultibyte(2000)	是	否	会诊读片小结
+CONSULTATION_CONCLUSION	会诊结论	variableMultibyte(2000)	是	否	会诊结论
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.133检查经典病例:EXAM_CLASSIC_CASE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_CLASSIC_CASE_ID	检查经典病例标识	number(19,0)	否	是	检查经典病例标识
+EXAM_TASK_ASSIGNMENT_ID	检查任务分配标识	number(19,0)	否	否	检查任务分配标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+CLASSIC_CASE_DESC	经典病例描述	variableMultibyte(4000)	是	否	经典病例描述
+CLASSIC_CASE_REMARK	经典病例备注	variableMultibyte(2000)	是	否	经典病例备注
+ENABLED_FLAG	启用标志	flagType(19,0)	是	否	启用标志
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	
+1.134检查任务分配:EXAM_TASK_ASSIGNMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_TASK_ASSIGNMENT_ID	检查任务分配标识	number(19,0)	否	是	检查任务分配标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+EXAM_TASK_ASSIGN_STATUS	任务分配状态	number(19,0)	是	否	任务分配状态
+EXAM_TASK_ASSIGN_CATEGORY_CODE	任务分配类别代码	number(19,0)	是	否	任务分配类别代码
+SYSTEM_SOURCE_NO	系统来源编码	variableCharacters(64)	是	否	系统来源编码
+ASSIGNED_AT	分配日期时间	dateTime	是	否	分配日期时间
+ASSIGNED_BY	分配医生标识	number(19,0)	是	否	分配医生标识
+ASSIGNED_DOCTOR_NAME	分配医生名称	variableMultibyte(64)	是	否	分配医生名称
+HAVING_PATHOLOGY_FLAG	存在病理标志	number(19,0)	是	否	存在病理标志
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建人员标识	number(19,0)	是	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改人员标识	number(19,0)	是	否	
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.135检查随访元素信息:EXAM_FOLLOW_UP_ELEMENT
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_FOLLOW_UP_ELEMENT_ID	检查随访元素信息标识	number(19,0)	否	是	检查随访元素信息标识
+EXAM_FOLLOW_UP_ID	检查随访标识	number(19,0)	否	否	检查随访标识
+FOLLOW_UP_ELEMENT_NO	随访元素编码	variableMultibyte(64)	是	否	随访元素编码
+FOLLOW_UP_ELEMENT_VALUE	随访元素内容	variableMultibyte(4000)	是	否	随访元素内容
+REFERENCE_FLAG	参考标志	number(19,0)	是	否	参考标志
+REFERENCE_REPORT_NO	参考报告编码	variableMultibyte(64)	是	否	参考报告编码
+REFERENCE_REPORT_CATEGORY	参考报告类型	variableMultibyte(64)	是	否	参考报告类型
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(64)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.136检查质控项目组:EXAM_QC_ITEM_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_ITEM_GROUP_ID	检查质控项目组标识	number(19,0)	否	是	检查质控项目组标识
+EXAM_QC_GROUP_ID	检查质控分组标识	number(19,0)	否	否	检查质控分组标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.137检查质控记录:EXAM_QC_RECORD
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_RECORD_ID	检查质控记录标识	number(19,0)	否	是	检查质控记录标识
+EXAM_TASK_ID	检查任务标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_RECORD_LEVEL_NO	质控记录等级编码	variableMultibyte(64)	是	否	质控记录等级编码
+QC_RECORD_NODE_NO	质控记录节点编码	variableMultibyte(64)	是	否	质控记录节点编码
+EXAM_QC_GROUP_ID	检查质控分组标识	number(19,0)	是	否	检查质控分组标识
+QC_GROUP_NAME	质控分组名称	variableMultibyte(64)	是	否	质控分组名称
+QC_GROUP_CATEGORY_NO	质控分组分类编码	variableMultibyte(64)	是	否	质控分组分类编码
+QC_DOCTOR_BY	质控医师标识	number(19,0)	是	否	质控医师标识
+QC_DOCTOR_NAME	质控医师名称	variableMultibyte(32)	是	否	质控医师名称
+QC_AT	质控时间	dateTime	是	否	质控时间
+QC_RECORD_STATUS_NO	质控记录状态编码	variableMultibyte(32)	是	否	质控记录状态编码
+QC_RECORD_GROUP_SCORE	质控记录分组得分	number(19,0)	是	否	质控记录分组得分
+QC_GROUP_EVALUATION_NO	质控分组评价编码	variableMultibyte(64)	是	否	质控分组评价编码
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.138检查质控记录分值情况:EXAM_QC_RECORD_SCORE
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_RECORD_SCORE_ID	检查质控记录分值标识	number(19,0)	否	是	检查质控记录分值标识
+EXAM_QC_RECORD_ID	检查质控记录标识	number(19,0)	否	否	检查质控记录标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_ENTRY_NAME	质控条目名称	variableMultibyte(256)	是	否	质控条目名称
+QC_ENTRY_MODE	质控条目模式	variableCharacters(50)	是	否	质控条目模式
+QC_ENTRY_SCORE	质控条目分数	number(19,0)	是	否	质控条目分数
+QC_ITEM_ENTRY_DESC	质控项目质控条目描述	variableMultibyte(4000)	是	否	质控项目质控条目描述
+QC_ITEM_SCORE_MODE	质控项目分值处理模式	variableMultibyte(64)	是	否	质控项目分值处理模式
+QC_ITEM_RESULT	质控项目结果值	number(19,0)	是	否	质控项目结果值
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.139检查质控分组:EXAM_QC_GROUP
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_GROUP_ID	检查质控分组标识	number(19,0)	否	是	检查质控分组标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_GROUP_NAME	质控分组名称	variableMultibyte(64)	是	否	质控分组名称
+QC_GROUP_CATEGORY_NO	质控分组分类编码	variableMultibyte(64)	是	否	质控分组分类编码
+QC_GROUP_SCORE_STANDARD_NO	质控分组分值标准编码	variableMultibyte(32)	是	否	质控分组分值标准编码
+DEFAULT_FLAG	默认标志	flagType(19,0)	是	否	
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.140检查质控分组评价定义:EXAM_QC_GROUP_EVALUATION
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_GROUP_EVALUATION_ID	检查质控分组评价标识	number(19,0)	否	是	检查质控分组评价标识
+EXAM_QC_GROUP_ID	检查质控分组标识	number(19,0)	否	否	检查质控分组标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_GROUP_EVALUATION_NO	质控分组评价编码	variableMultibyte(64)	是	否	质控分组评价编码
+LOWER_LIMIT_RELATION	下限关系符	variableMultibyte(32)	是	否	下限关系符
+LOWER_LIMIT_VALUE	下限值	number(19,0)	是	否	下限值
+UPPER_LIMIT_RELATION	上限关系符	variableMultibyte(32)	是	否	上限关系符
+UPPER_LIMIT_VALUE	上限值	number(19,0)	是	否	上限值
+QC_GROUP_EVALUATION_DESC	质控分组评价描述	variableMultibyte(1024)	是	否	质控分组评价描述
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.141检查质控条目:EXAM_QC_ENTRY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_ENTRY_ID	检查质控组项标识	number(19,0)	否	是	检查质控组项标识
+EXAM_QC_GROUP_ID	检查质控分组标识	number(19,0)	否	否	检查质控分组标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_ENTRY_NAME	质控条目名称	variableMultibyte(256)	是	否	质控条目名称
+QC_ENTRY_MODE	质控条目模式	variableCharacters(50)	是	否	质控条目模式
+QC_ENTRY_SCORE	质控条目分数	number(19,0)	是	否	质控条目分数
+QC_ENTRY_DESC	质控条目描述	variableMultibyte(4000)	是	否	质控条目描述
+SEQ_NO	排序序号	shortInteger	是	否	排序序号
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.142检查质控项目:EXAM_QC_ITEM
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_ITEM_ID	检查质控项目标识	number(19,0)	否	是	检查质控项目标识
+EXAM_QC_ITEM_GROUP_ID	检查质控项目组标识	number(19,0)	否	否	检查质控项目组标识
+EXAM_ITEM_DIC_ID	检查项目字典标识	number(19,0)	否	否	
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+EXAM_ITEM_NAME	检查项目名称	variableMultibyte(50)	是	否	检查项目名称
+EXAM_CATEGORY_ID	检查类别标识	number(19,0)	是	否	检查类别标识
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+1.143检查质控项目质控条目:EXAM_QC_ITEM_ENTRY
+字段名称	中文名称	数据类型	可空	主键	备注
+EXAM_QC_ITEM_ENTRY_ID	检查质控项目质控条目标识	number(19,0)	否	是	检查质控项目质控条目标识
+EXAM_QC_ENTRY_ID	检查质控组项标识	number(19,0)	否	否	检查质控组项标识
+EXAM_QC_ITEM_GROUP_ID	检查质控项目组标识	number(19,0)	否	否	检查质控项目组标识
+SYSTEM_SOURCE_NO	系统来源编码	variableMultibyte(32)	是	否	系统来源编码
+QC_ITEM_ENTRY_DESC	质控项目质控条目描述	variableMultibyte(4000)	是	否	质控项目质控条目描述
+HOSPITAL_SOID	医院SOID	number(19,0)	否	否	
+HOSPITAL_NAME	医院名称	variableMultibyte(128)	是	否	医院名称
+IS_DEL	逻辑删除	shortInteger	否	否	
+CREATED_AT	创建日期时间	dateTime	否	否	
+CREATED_BY	创建用户标识	number(19,0)	是	否	创建用户标识
+CREATED_NAME	创建用户名称	variableMultibyte(64)	是	否	创建用户名称
+MODIFIED_AT	最后修改日期时间	dateTime	是	否	
+MODIFIED_BY	最后修改用户标识	number(19,0)	是	否	最后修改用户标识
+MODIFIED_NAME	最后修改用户名称	variableMultibyte(64)	是	否	最后修改用户名称
+
+
+
+

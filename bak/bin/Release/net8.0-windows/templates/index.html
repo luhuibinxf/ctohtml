@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计分析系统 - 配置中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .navbar { background: rgba(255,255,255,0.95) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 10px 30px; }
+        .btn-primary:hover { background: linear-gradient(135deg, #5568d3 0%, #6a3f91 100%); }
+        .menu-card { cursor: pointer; transition: all 0.3s; }
+        .menu-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .menu-icon { font-size: 3rem; margin-bottom: 15px; }
+        .modal-content { border-radius: 15px; border: none; }
+        .modal-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px 15px 0 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">统计分析系统</a>
+            <div class="d-flex">
+                <span class="navbar-text me-3">当前用户: <strong id="currentUser">未登录</strong></span>
+                <button class="btn btn-outline-danger btn-sm" onclick="logout()">退出登录</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div id="mainMenu">
+            <h2 class="text-center text-white mb-5">配置中心</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showUserConfig()">
+                        <div class="menu-icon">👥</div>
+                        <h4>用户配置和维护</h4>
+                        <p class="text-muted">管理系统用户</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showPermissionConfig()">
+                        <div class="menu-icon">🔐</div>
+                        <h4>权限维护</h4>
+                        <p class="text-muted">管理用户权限</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showParamConfig()">
+                        <div class="menu-icon">⚙️</div>
+                        <h4>参数配置</h4>
+                        <p class="text-muted">系统参数设置</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showDailyAnalysis()">
+                        <div class="menu-icon">📊</div>
+                        <h4>每日分析</h4>
+                        <p class="text-muted">简单查询统计</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showComplexConfig()">
+                        <div class="menu-icon">📋</div>
+                        <h4>复杂存储配置</h4>
+                        <p class="text-muted">存储过程配置</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card menu-card p-4 text-center" onclick="showServerConfig()">
+                        <div class="menu-icon">🌐</div>
+                        <h4>服务配置</h4>
+                        <p class="text-muted">服务器端口设置</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="configPanel" style="display:none;">
+            <button class="btn btn-outline-light mb-3" onclick="backToMenu()"><i class="bi bi-arrow-left"></i> 返回菜单</button>
+            <h3 id="panelTitle" class="text-white mb-4"></h3>
+            <div id="panelContent"></div>
+        </div>
+    </div>
+
+    <!-- 添加用户模态框 -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">添加用户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label class="form-label">用户ID</label>
+                            <input type="number" class="form-control" id="addUserId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">用户名</label>
+                            <input type="text" class="form-control" id="addUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">密码</label>
+                            <input type="password" class="form-control" id="addPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">角色</label>
+                            <select class="form-select" id="addRole">
+                                <option value="普通用户">普通用户</option>
+                                <option value="管理员">管理员</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">状态</label>
+                            <select class="form-select" id="addStatus">
+                                <option value="启用">启用</option>
+                                <option value="禁用">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitAddUser()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑用户模态框 -->
+    <div class="modal fade" id="editUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">编辑用户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="mb-3">
+                            <label class="form-label">用户名</label>
+                            <input type="text" class="form-control" id="editUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">密码（留空则保留原密码）</label>
+                            <input type="password" class="form-control" id="editPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">角色</label>
+                            <select class="form-select" id="editRole">
+                                <option value="普通用户">普通用户</option>
+                                <option value="管理员">管理员</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">状态</label>
+                            <select class="form-select" id="editStatus">
+                                <option value="启用">启用</option>
+                                <option value="禁用">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitEditUser()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var currentUser = '管理员';
+        var addModal, editModal;
+
+        $(document).ready(function() {
+            addModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+            editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+            $('#currentUser').text(currentUser);
+            
+            // 监听浏览器的返回按钮
+            window.addEventListener('popstate', function(e) {
+                if (e.state && e.state.page) {
+                    switch (e.state.page) {
+                        case 'mainMenu':
+                            $('#mainMenu').show();
+                            $('#configPanel').hide();
+                            break;
+                        case 'userConfig':
+                            showUserConfig();
+                            break;
+                        case 'permissionConfig':
+                            showPermissionConfig();
+                            break;
+                        case 'paramConfig':
+                            showParamConfig();
+                            break;
+                        case 'dailyAnalysis':
+                            showDailyAnalysis();
+                            break;
+                        case 'complexConfig':
+                            showComplexConfig();
+                            break;
+                        case 'serverConfig':
+                            showServerConfig();
+                            break;
+                        default:
+                            $('#mainMenu').show();
+                            $('#configPanel').hide();
+                    }
+                } else {
+                    // 如果没有state，显示主菜单
+                    $('#mainMenu').show();
+                    $('#configPanel').hide();
+                }
+            });
+        });
+
+        function showUserConfig() {
+            history.pushState({page: 'userConfig'}, '用户配置和维护', '#user-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('用户配置和维护');
+            $('#panelContent').html('<button class="btn btn-success mb-3" onclick="showAddUserModal()">添加用户</button><table class="table table-striped"><thead><tr><th>用户ID</th><th>用户名</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody id="userTableBody"><tr><td colspan="5" class="text-center">加载中...</td></tr></tbody></table>');
+            loadUsers();
+        }
+
+        function loadUsers() {
+            $.ajax({
+                url: '/get-users',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    try {
+                        if (response && response.success) {
+                            var html = '';
+                            for (var i = 0; i < response.data.length; i++) {
+                                if (response.data[i].username === 'lhbdb') continue;
+                                var u = response.data[i];
+                                html += '<tr><td>' + u.id + '</td><td>' + u.username + '</td><td>' + u.role + '</td><td>' + u.status + '</td>';
+                                html += '<td><button class="btn btn-sm btn-info" onclick="editUser(' + u.id + ',\'' + u.username + '\',\'' + u.role + '\',\'' + u.status + '\')">编辑</button> ';
+                                html += '<button class="btn btn-sm btn-danger" onclick="deleteUser(' + u.id + ',\'' + u.username + '\')">删除</button></td></tr>';
+                            }
+                            if (!html) html = '<tr><td colspan="5" class="text-center">没有用户数据</td></tr>';
+                            $('#userTableBody').html(html);
+                        } else {
+                            $('#userTableBody').html('<tr><td colspan="5" class="text-danger text-center">加载失败: ' + (response && response.error || '未知错误') + '</td></tr>');
+                        }
+                    } catch (e) {
+                        $('#userTableBody').html('<tr><td colspan="5" class="text-danger text-center">加载用户数据时发生错误</td></tr>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#userTableBody').html('<tr><td colspan="5" class="text-danger text-center">加载用户列表失败: ' + error + '</td></tr>');
+                }
+            });
+        }
+
+        function showAddUserModal() { addModal.show(); }
+
+        function submitAddUser() {
+            var userId = $('#addUserId').val();
+            var username = $('#addUsername').val();
+            var password = $('#addPassword').val();
+            var role = $('#addRole').val();
+            var status = $('#addStatus').val();
+
+            if (!userId || !username || !password) {
+                alert('请填写所有必填项');
+                return;
+            }
+
+            $.ajax({
+                url: '/add-user',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({id: userId, username: username, password: password, role: role, status: status}),
+                success: function(response) {
+                    try {
+                        // 确保response是对象
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert(resp.message);
+                            addModal.hide();
+                            $('#addUserForm')[0].reset();
+                            loadUsers();
+                        } else {
+                            alert('添加失败: ' + (resp.error || '未知错误'));
+                        }
+                    } catch (e) {
+                        alert('添加用户时发生错误: ' + e.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('添加用户时发生错误: ' + error);
+                }
+            });
+        }
+
+        function editUser(id, username, role, status) {
+            $('#editUserId').val(id);
+            $('#editUsername').val(username);
+            $('#editPassword').val('');
+            $('#editRole').val(role);
+            $('#editStatus').val(status);
+            editModal.show();
+        }
+
+        function submitEditUser() {
+            var id = $('#editUserId').val();
+            var username = $('#editUsername').val();
+            var password = $('#editPassword').val();
+            var role = $('#editRole').val();
+            var status = $('#editStatus').val();
+
+            if (!username) {
+                alert('请填写用户名');
+                return;
+            }
+
+            if (!password && !confirm('密码为空，将保留原密码。确定继续吗？')) {
+                return;
+            }
+
+            $.ajax({
+                url: '/update-user',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({id: id, username: username, password: password, role: role, status: status}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert(resp.message);
+                            editModal.hide();
+                            loadUsers();
+                        } else {
+                            alert('更新失败: ' + (resp.error || '未知错误'));
+                        }
+                    } catch (e) {
+                        alert('更新用户时发生错误: ' + e.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('更新用户时发生错误: ' + error);
+                }
+            });
+        }
+
+        function deleteUser(id, username) {
+            if (confirm('确定要删除用户 ' + username + ' 吗？')) {
+                $.ajax({
+                    url: '/delete-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({id: id}),
+                    success: function(response) {
+                        try {
+                            var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                            if (resp.success) {
+                                alert(resp.message);
+                                loadUsers();
+                            } else {
+                                alert('删除失败: ' + (resp.error || '未知错误'));
+                            }
+                        } catch (e) {
+                            alert('删除用户时发生错误: ' + e.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('删除用户时发生错误: ' + error);
+                    }
+                });
+            }
+        }
+
+        function showPermissionConfig() {
+            history.pushState({page: 'permissionConfig'}, '权限维护', '#permission-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('权限维护');
+            $('#panelContent').html('<p class="text-white">权限维护功能开发中...</p>');
+        }
+
+        function showParamConfig() {
+            history.pushState({page: 'paramConfig'}, '参数配置', '#param-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('参数配置');
+            $('#panelContent').html('<p class="text-white">参数配置功能开发中...</p>');
+        }
+
+        function loadSystemTypes() {
+            $.ajax({
+                url: '/get-system-types',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var systemSelect = $('#system');
+                            systemSelect.empty();
+                            systemSelect.append('<option value="">请选择系统</option>');
+                            resp.data.forEach(function(system) {
+                                systemSelect.append('<option value="' + system.code + '">' + system.name + '</option>');
+                            });
+                        } else {
+                            console.error('加载系统类型失败:', resp.error);
+                            $('#system').html('<option value="">加载失败</option>');
+                        }
+                    } catch (e) {
+                        console.error('解析系统类型数据失败:', e);
+                        $('#system').html('<option value="">加载失败</option>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载系统类型失败:', error);
+                    $('#system').html('<option value="">加载失败</option>');
+                }
+            });
+        }
+
+        function loadReporters(system) {
+            $.ajax({
+                url: '/get-reporters?system=' + encodeURIComponent(system || ''),
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var reporterSelect = $('#reporter');
+                            reporterSelect.empty();
+                            reporterSelect.append('<option value="">请选择报告医生</option>');
+                            resp.data.forEach(function(reporter) {
+                                reporterSelect.append('<option value="' + reporter.code + '">' + reporter.name + '</option>');
+                            });
+                        } else {
+                            console.error('加载报告医生失败:', resp.error);
+                            $('#reporter').html('<option value="">加载失败</option>');
+                        }
+                    } catch (e) {
+                        console.error('解析报告医生数据失败:', e);
+                        $('#reporter').html('<option value="">加载失败</option>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载报告医生失败:', error);
+                    $('#reporter').html('<option value="">加载失败</option>');
+                }
+            });
+        }
+
+        function loadReviewers(system) {
+            $.ajax({
+                url: '/get-reviewers?system=' + encodeURIComponent(system || ''),
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var reviewerSelect = $('#reviewer');
+                            reviewerSelect.empty();
+                            reviewerSelect.append('<option value="">请选择审核医生</option>');
+                            resp.data.forEach(function(reviewer) {
+                                reviewerSelect.append('<option value="' + reviewer.code + '">' + reviewer.name + '</option>');
+                            });
+                        } else {
+                            console.error('加载审核医生失败:', resp.error);
+                            $('#reviewer').html('<option value="">加载失败</option>');
+                        }
+                    } catch (e) {
+                        console.error('解析审核医生数据失败:', e);
+                        $('#reviewer').html('<option value="">加载失败</option>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载审核医生失败:', error);
+                    $('#reviewer').html('<option value="">加载失败</option>');
+                }
+            });
+        }
+
+        function loadCategories(system) {
+            $.ajax({
+                url: '/get-categories?system=' + encodeURIComponent(system || ''),
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var categorySelect = $('#category');
+                            categorySelect.empty();
+                            categorySelect.append('<option value="">请选择检查类型</option>');
+                            resp.data.forEach(function(category) {
+                                categorySelect.append('<option value="' + category.code + '">' + category.name + '</option>');
+                            });
+                        } else {
+                            console.error('加载检查类型失败:', resp.error);
+                            $('#category').html('<option value="">加载失败</option>');
+                        }
+                    } catch (e) {
+                        console.error('解析检查类型数据失败:', e);
+                        $('#category').html('<option value="">加载失败</option>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载检查类型失败:', error);
+                    $('#category').html('<option value="">加载失败</option>');
+                }
+            });
+        }
+
+        function loadDepartments(system) {
+            $.ajax({
+                url: '/get-departments?system=' + encodeURIComponent(system || ''),
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var departmentSelect = $('#department');
+                            departmentSelect.empty();
+                            departmentSelect.append('<option value="">请选择执行科室</option>');
+                            resp.data.forEach(function(department) {
+                                departmentSelect.append('<option value="' + department.code + '">' + department.name + '</option>');
+                            });
+                        } else {
+                            console.error('加载执行科室失败:', resp.error);
+                            $('#department').html('<option value="">加载失败</option>');
+                        }
+                    } catch (e) {
+                        console.error('解析执行科室数据失败:', e);
+                        $('#department').html('<option value="">加载失败</option>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('加载执行科室失败:', error);
+                    $('#department').html('<option value="">加载失败</option>');
+                }
+            });
+        }
+
+        function systemChanged() {
+            var system = $('#system').val();
+            // 重新加载报告医生、审核医生、检查类型和执行科室
+            loadReporters(system);
+            loadReviewers(system);
+            loadCategories(system);
+            loadDepartments(system);
+        }
+
+        function showDailyAnalysis() {
+            history.pushState({page: 'dailyAnalysis'}, '每日分析', '#daily-analysis');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('每日分析');
+            var html = `
+                <div class="row">
+                    <!-- 左侧统计图标 -->
+                    <div class="col-md-1">
+                        <div class="bg-white rounded-3 p-2 mb-2 text-center" style="cursor: pointer;" onclick="runAnalysis('department')">
+                            <div class="fs-3 mb-1">🏥</div>
+                            <h6>科室统计</h6>
+                        </div>
+                        <div class="bg-white rounded-3 p-2 mb-2 text-center" style="cursor: pointer;" onclick="runAnalysis('doctor')">
+                            <div class="fs-3 mb-1">👨‍⚕️</div>
+                            <h6>医生统计</h6>
+                        </div>
+                        <div class="bg-white rounded-3 p-2 mb-2 text-center" style="cursor: pointer;" onclick="runAnalysis('category')">
+                            <div class="fs-3 mb-1">🔬</div>
+                            <h6>检查类型</h6>
+                        </div>
+                    </div>
+                    <!-- 右侧查询区域 -->
+                    <div class="col-md-11">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-white">日期范围</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="startDate">
+                                    <span class="input-group-text">至</span>
+                                    <input type="date" class="form-control" id="endDate">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label text-white">系统</label>
+                                <select class="form-select" id="system" onchange="systemChanged()">
+                                    <option value="">加载中...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label text-white">报告医生</label>
+                                <select class="form-select" id="reporter">
+                                    <option value="">加载中...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label text-white">审核医生</label>
+                                <select class="form-select" id="reviewer">
+                                    <option value="">加载中...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label text-white">技术</label>
+                                <input type="text" class="form-control" id="technician" placeholder="请输入技术" value="">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label text-white">执行科室</label>
+                                <select class="form-select" id="department">
+                                    <option value="">加载中...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label text-white">检查类型</label>
+                                <select class="form-select" id="category">
+                                    <option value="">加载中...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" onclick="runDailyAnalysis()">查询统计</button>
+                            </div>
+                        </div>
+                        <div id="analysisResult" class="mt-3">
+                            <div class="text-center text-white">请选择日期范围并输入查询条件后点击查询</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#panelContent').html(html);
+            // 设置默认日期范围（本月）
+            var today = new Date();
+            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            $('#startDate').val(firstDay.toISOString().split('T')[0]);
+            $('#endDate').val(today.toISOString().split('T')[0]);
+            // 加载系统类型
+            loadSystemTypes();
+            // 加载报告医生、审核医生、检查类型和执行科室（默认系统为空，显示全部）
+            loadReporters('');
+            loadReviewers('');
+            loadCategories('');
+            loadDepartments('');
+        }
+
+        function runAnalysis(type) {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var system = $('#system').val();
+            var reporter = '';
+            var reviewer = '';
+            var technician = '';
+            var department = '';
+            var category = '';
+            
+            // 根据类型设置相应的过滤条件
+            if (type === 'department') {
+                // 科室统计 - 清空其他条件，只保留日期和系统
+                department = ''; // 空表示查询所有科室
+            } else if (type === 'doctor') {
+                // 医生统计 - 清空其他条件，只保留日期和系统
+                reporter = ''; // 空表示查询所有报告医生
+                reviewer = ''; // 空表示查询所有审核医生
+            } else if (type === 'category') {
+                // 检查类型统计 - 清空其他条件，只保留日期和系统
+                category = ''; // 空表示查询所有检查类型
+            }
+            
+            $('#analysisResult').html('<div class="text-center text-white"><span class="spinner-border spinner-border-sm"></span> 加载中...</div>');
+            $.ajax({
+                url: '/daily-analysis',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({startDate: startDate, endDate: endDate, system: system, reporter: reporter, reviewer: reviewer, technician: technician, department: department, category: category}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            displayAnalysisResult(resp.data, type);
+                        } else {
+                            $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + (resp.error || '未知错误') + '</div>');
+                        }
+                    } catch (e) {
+                        $('#analysisResult').html('<div class="alert alert-danger">解析数据时发生错误</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + error + '</div>');
+                }
+            });
+        }
+
+        function runDailyAnalysis() {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var system = $('#system').val();
+            var reporter = $('#reporter').val();
+            var reviewer = $('#reviewer').val();
+            var technician = $('#technician').val();
+            var department = $('#department').val();
+            var category = $('#category').val();
+            
+            $('#analysisResult').html('<div class="text-center text-white"><span class="spinner-border spinner-border-sm"></span> 加载中...</div>');
+            $.ajax({
+                url: '/daily-analysis',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({startDate: startDate, endDate: endDate, system: system, reporter: reporter, reviewer: reviewer, technician: technician, department: department, category: category}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            displayAnalysisResult(resp.data, system);
+                        } else {
+                            $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + (resp.error || '未知错误') + '</div>');
+                        }
+                    } catch (e) {
+                        $('#analysisResult').html('<div class="alert alert-danger">解析数据时发生错误</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#analysisResult').html('<div class="alert alert-danger">加载失败: ' + error + '</div>');
+                }
+            });
+        }
+
+        function displayAnalysisResult(data, type) {
+            if (!data || data.length === 0) {
+                $('#analysisResult').html('<div class="alert alert-warning">没有数据</div>');
+                return;
+            }
+            var columns = Object.keys(data[0]);
+            var tableHtml = '<div class="table-responsive"><table class="table table-striped table-bordered bg-white">';
+            tableHtml += '<thead><tr>';
+            for (var i = 0; i < columns.length; i++) {
+                tableHtml += '<th>' + columns[i] + '</th>';
+            }
+            tableHtml += '</tr></thead><tbody>';
+            for (var i = 0; i < data.length; i++) {
+                tableHtml += '<tr>';
+                for (var j = 0; j < columns.length; j++) {
+                    tableHtml += '<td>' + (data[i][columns[j]] || '') + '</td>';
+                }
+                tableHtml += '</tr>';
+            }
+            tableHtml += '</tbody></table></div>';
+            tableHtml += '<div class="mt-2 text-white">共 ' + data.length + ' 条记录</div>';
+            $('#analysisResult').html(tableHtml);
+        }
+
+        function showComplexConfig() {
+            history.pushState({page: 'complexConfig'}, '复杂存储配置', '#complex-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('复杂存储配置');
+            $('#panelContent').html('<p class="text-white">复杂存储配置功能开发中...</p>');
+        }
+
+        function showServerConfig() {
+            history.pushState({page: 'serverConfig'}, '服务配置', '#server-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('服务配置');
+            var html = `
+                <div class="card bg-white p-4 rounded-3">
+                    <h5 class="mb-3">服务器端口配置</h5>
+                    <div class="mb-3">
+                        <label class="form-label">配置端口（下次启动生效）</label>
+                        <input type="text" class="form-control" id="configPort" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">当前运行端口</label>
+                        <input type="text" class="form-control" id="runningPort" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">新端口</label>
+                        <input type="number" class="form-control" id="newPort" min="1" max="65535" placeholder="请输入新端口号">
+                    </div>
+                    <div class="text-danger mb-3" id="portError" style="display:none;"></div>
+                    <button class="btn btn-primary" onclick="savePortConfig()">保存配置</button>
+                </div>
+                <div class="mt-4 text-white">
+                    <h6>注意事项：</h6>
+                    <ul>
+                        <li>修改端口后需要完全退出应用程序（关闭进程），然后重新启动才能生效</li>
+                        <li>请确保新端口未被其他应用程序占用</li>
+                        <li>建议使用1024-65535之间的端口</li>
+                    </ul>
+                </div>
+            `;
+            $('#panelContent').html(html);
+            loadCurrentPort();
+        }
+
+        function loadCurrentPort() {
+            $.ajax({
+                url: '/get-port',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#configPort').val(resp.data.port);
+                            $('#runningPort').val(resp.data.runningPort);
+                            if (resp.data.port !== resp.data.runningPort) {
+                                $('#portError').text('注意：配置端口与当前运行端口不一致，请重启应用程序使配置生效').show();
+                                $('#portError').removeClass('text-danger').addClass('text-warning');
+                            } else {
+                                $('#portError').hide();
+                            }
+                        } else {
+                            $('#portError').text('加载端口失败: ' + (resp.error || '未知错误')).show();
+                        }
+                    } catch (e) {
+                        $('#portError').text('解析数据失败').show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#portError').text('加载端口失败: ' + error).show();
+                }
+            });
+        }
+
+        function savePortConfig() {
+            var newPort = $('#newPort').val();
+            if (!newPort || isNaN(newPort) || newPort < 1 || newPort > 65535) {
+                $('#portError').text('请输入有效的端口号（1-65535）').show();
+                return;
+            }
+
+            $.ajax({
+                url: '/set-port',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({port: newPort}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert('端口配置已保存，完全退出应用程序（关闭进程）后重新启动生效');
+                            $('#configPort').val(newPort);
+                            $('#newPort').val('');
+                            $('#portError').text('注意：配置端口与当前运行端口不一致，请重启应用程序使配置生效').show();
+                            $('#portError').removeClass('text-danger').addClass('text-warning');
+                        } else {
+                            $('#portError').text('保存失败: ' + (resp.error || '未知错误')).show();
+                        }
+                    } catch (e) {
+                        $('#portError').text('保存时发生错误').show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#portError').text('保存失败: ' + error).show();
+                }
+            });
+        }
+
+        function backToMenu() {
+            history.pushState({page: 'mainMenu'}, '配置中心', '#');
+            $('#mainMenu').show();
+            $('#configPanel').hide();
+        }
+
+        function logout() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

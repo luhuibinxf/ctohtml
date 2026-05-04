@@ -1,0 +1,38 @@
+# 运行说明
+
+## 关于运行环境
+
+**重要：运行此exe程序不需要安装Python或其他开发环境！**
+
+- 程序已经通过PyInstaller打包为独立的可执行文件
+- 包含了所有必要的依赖库
+- 可以在任何Windows系统上直接运行
+
+## 唯一的依赖
+
+程序需要目标系统上安装了 **SQL Server 驱动**。如果系统尚未安装，可以从以下地址下载并安装：
+
+- [Microsoft ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
+
+## 运行步骤
+
+1. **解压程序**：将程序文件解压到任意目录
+2. **配置数据库**：编辑 `config.ini` 文件，填写正确的数据库连接信息
+3. **运行程序**：双击 `db_procedure_caller.exe` 文件
+4. **访问界面**：打开浏览器，访问 `http://localhost:5000`
+
+## 常见问题
+
+### 无法连接数据库
+- 检查 `config.ini` 中的连接信息是否正确
+- 确保SQL Server驱动已安装
+- 确保数据库服务器可以访问
+
+### 端口被占用
+- 程序默认使用 5000 端口
+- 如果端口被占用，可以修改 `app.py` 中的端口号后重新打包
+
+### 执行存储过程失败
+- 检查存储过程名称是否正确
+- 检查参数格式是否正确
+- 确保数据库用户有执行该存储过程的权限

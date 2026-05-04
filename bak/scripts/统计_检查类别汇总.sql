@@ -1,0 +1,15 @@
+-- 检查类别汇总
+-- 更新日期：2026-04-25
+
+SELECT 
+    EXAM_CATEGORY_NAME AS '检查类别',
+    COUNT(*) AS '数量',
+    MAX(EXAM_TASK_CREATE_TIME) AS '最新检查时间'
+FROM 
+    EXAM_TASK
+WHERE 
+    IS_DEL = 0
+GROUP BY 
+    EXAM_CATEGORY_NAME
+ORDER BY 
+    COUNT(*) DESC;

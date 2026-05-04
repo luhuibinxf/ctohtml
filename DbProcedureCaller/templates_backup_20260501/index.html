@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计分析系统 - 配置中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="js/dailyAnalysis.js?v=1.0.11"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --primary-light: #e8f0fe;
+            --accent: #00c9a7;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(26, 115, 232, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 201, 167, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 30%, #0f172a 70%, #1e293b 100%) !important;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(96, 165, 250, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(96, 165, 250, 0.15);
+            padding: 1rem 2rem;
+            z-index: 1030;
+            position: relative;
+            overflow: hidden;
+            min-height: 65px;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                #1e1b4b 0%, 
+                #3b82f6 20%, 
+                #06b6d4 40%, 
+                #10b981 60%, 
+                #3b82f6 80%, 
+                #1e1b4b 100%);
+            background-size: 200% 100%;
+            animation: shimmerLine 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmerLine {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(96, 165, 250, 0.15);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: #60a5fa;
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .btn-back:hover {
+            background: rgba(96, 165, 250, 0.25);
+            border-color: rgba(96, 165, 250, 0.5);
+            color: #93c5fd;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.25);
+        }
+
+        .back-icon {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb-item {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-item:hover {
+            color: #93c5fd;
+            background: rgba(96, 165, 250, 0.1);
+            cursor: pointer;
+        }
+
+        .breadcrumb-item.active {
+            color: #60a5fa;
+            font-weight: 700;
+            background: rgba(96, 165, 250, 0.15);
+        }
+
+        .breadcrumb-separator {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-text {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .navbar-text strong {
+            color: #60a5fa;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+        }
+
+        .navbar .btn-outline-danger {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.08) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+
+        .navbar .btn-outline-danger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .navbar .btn-outline-danger:hover {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(239, 68, 68, 0.15) 100%);
+            border-color: rgba(239, 68, 68, 0.6);
+            color: #fecaca;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+        }
+
+        .navbar .btn-outline-danger:hover::before {
+            left: 100%;
+        }
+
+        .card {
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+            color: white;
+            border: none;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            animation: shimmer 8s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-header h3 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            border-radius: 28px;
+            overflow: visible;
+        }
+
+        .login-card .card-header {
+            border-radius: 28px 28px 0 0;
+            padding: 2.5rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 4px 12px rgba(26, 115, 232, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .login-card .card-body {
+            padding: 2.5rem 2.5rem;
+        }
+
+        .card-footer {
+            background: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            padding: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .menu-card {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(26, 115, 232, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-color: rgba(26, 115, 232, 0.2);
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card:active {
+            transform: translateY(-8px);
+        }
+
+        .menu-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+            transition: all 0.3s;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .menu-card:hover .menu-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-card h4 {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #0d47a1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline-danger {
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 6px 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-light {
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-sm {
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 18px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+            outline: none;
+            background: white;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .table {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .table-dark {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+        }
+
+        .table-dark th {
+            border-bottom: none;
+            font-weight: 600;
+            padding: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: rgba(26, 115, 232, 0.02);
+        }
+
+        .table-striped > tbody > tr:hover {
+            background-color: rgba(26, 115, 232, 0.06);
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-content {
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 24px 24px 0 0;
+            padding: 1.5rem 2rem;
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .modal-title {
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            padding: 1.25rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+        }
+
+        .badge {
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        .bg-success {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
+        .bg-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        }
+
+        .bg-info {
+            background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        }
+
+        .bg-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-value-sm {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        h2.text-center {
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--primary);
+            border-bottom-color: rgba(26, 115, 232, 0.3);
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            background: none;
+            border-bottom-color: var(--primary);
+        }
+
+        #panelContent .bg-white {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #panelTitle {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 20px rgba(96, 165, 250, 0.3);
+            position: relative;
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        #panelTitle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #60a5fa, #34d399);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .container, .container-fluid {
+            position: relative;
+            z-index: 1;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        #configPanel {
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        #panelContent {
+            width: 100% !important;
+            padding: 0 !important;
+        }
+
+        body .container {
+            margin: 0 !important;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .row {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        [class*="col-"] {
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+        }
+
+        .da-page {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 16px !important;
+            box-sizing: border-box !important;
+        }
+
+        .min-vh-100 {
+            min-height: 100vh;
+        }
+
+        .align-items-center {
+            align-items: center !important;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                max-width: 90%;
+            }
+            .menu-card {
+                margin-bottom: 1rem;
+            }
+            h2.text-center {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #mainMenu .col-md-2 {
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        #mainMenu .col-md-2:nth-child(1) { animation-delay: 0.1s; }
+        #mainMenu .col-md-2:nth-child(2) { animation-delay: 0.2s; }
+        #mainMenu .col-md-2:nth-child(3) { animation-delay: 0.3s; }
+        #mainMenu .col-md-2:nth-child(4) { animation-delay: 0.4s; }
+        #mainMenu .col-md-2:nth-child(5) { animation-delay: 0.5s; }
+        #mainMenu .col-md-2:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="breadcrumb-nav">
+                <button class="btn-back" onclick="goBack()">
+                    <span class="back-icon">←</span>
+                    <span>返回</span>
+                </button>
+                <div class="breadcrumb">
+                    <span class="breadcrumb-item">统计分析</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-item active">每日分析</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <span class="navbar-text">当前用户: <strong id="currentUser">未登录</strong></span>
+                <button class="btn btn-outline-danger ms-3" onclick="logout()">退出登录</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div id="loginPanel">
+            <div class="row justify-content-center min-vh-100 align-items-center">
+                <div class="col-md-12 col-lg-4">
+                    <div class="card login-card shadow-lg">
+                        <div class="card-header text-center pb-0">
+                            <div class="login-icon mb-2">🔐</div>
+                            <h3 class="mb-1">系统登录</h3>
+                            <p class="text-white-50 text-sm mt-1">统计分析系统</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="username" placeholder="请输入用户名" autocomplete="username" autofocus>
+                            </div>
+                            <div class="mb-5">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="password" placeholder="请输入密码" autocomplete="current-password">
+                            </div>
+                            <button class="btn btn-primary w-100 py-3" onclick="login()">登 录</button>
+                            <div id="loginError" class="mt-4 alert alert-danger" style="display: none;"></div>
+                        </div>
+                        <div class="card-footer bg-gray-50 text-center text-muted text-sm">
+                            系统版本 v1.0.5
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainMenu" style="display: none;">
+            <h2 class="text-center text-white mb-5">配置中心</h2>
+            <div class="row g-3">
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showUserConfig()">
+                        <div class="menu-icon">👥</div>
+                        <h4>用户配置和维护</h4>
+                        <p class="text-muted">管理系统用户</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showPermissionConfig()">
+                        <div class="menu-icon">🔐</div>
+                        <h4>权限维护</h4>
+                        <p class="text-muted">管理用户权限</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showParamConfig()">
+                        <div class="menu-icon">⚙️</div>
+                        <h4>参数配置</h4>
+                        <p class="text-muted">系统参数设置</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showDailyAnalysis()">
+                        <div class="menu-icon">📊</div>
+                        <h4>检查每日分析</h4>
+                        <p class="text-muted">检查统计查询</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showComplexConfig()">
+                        <div class="menu-icon">⚙️</div>
+                        <h4>个性化统计设置</h4>
+                        <p class="text-muted">自定义统计配置</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card menu-card p-3 text-center" onclick="showServerConfig()">
+                        <div class="menu-icon">🖥️</div>
+                        <h4>服务器配置</h4>
+                        <p class="text-muted">服务器参数设置</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="configPanel" style="display: none;">
+            <div class="mb-4">
+                <button class="btn btn-secondary" onclick="goBack()">← 返回</button>
+                <h2 id="panelTitle" class="text-white d-inline ms-3"></h2>
+            </div>
+            <div id="panelContent"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">用户管理</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <input type="hidden" id="userId">
+                        <div class="mb-3">
+                            <label>用户名</label>
+                            <input type="text" class="form-control" id="userUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>密码</label>
+                            <input type="password" class="form-control" id="userPassword">
+                            <small class="text-muted">不填则不修改密码</small>
+                        </div>
+                        <div class="mb-3">
+                            <label>角色</label>
+                            <select class="form-select" id="userRole">
+                                <option value="admin">管理员</option>
+                                <option value="user">普通用户</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>状态</label>
+                            <select class="form-select" id="userStatus">
+                                <option value="active">启用</option>
+                                <option value="inactive">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="saveUser()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentUser = null;
+
+        function login(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            var username = $('#username').val();
+            var password = $('#password').val();
+            
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({username: username, password: password}),
+                success: function(resp) {
+                    console.log('Login response:', resp);
+                    if (resp.success) {
+                        currentUser = {username: username, isAdmin: resp.isAdmin};
+                        $('#currentUser').text(username);
+                        $('#loginPanel').hide();
+                        $('#mainMenu').show();
+                    } else {
+                        $('#loginError').text('用户名或密码错误').show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Login error:', status, error);
+                    $('#loginError').text('连接服务器失败: ' + error).show();
+                }
+            });
+            
+            return false;
+        }
+
+        function goBack() {
+            $('#dailyAnalysisPanel').hide();
+            $('#mainMenu').show();
+        }
+
+        function logout() {
+            currentUser = null;
+            $('#currentUser').text('未登录');
+            $('#mainMenu').hide();
+            $('#configPanel').hide();
+            $('#loginPanel').show();
+            $('#username').val('');
+            $('#password').val('');
+            $('#loginError').hide();
+        }
+
+        function goBack() {
+            $('#configPanel').hide();
+            $('#mainMenu').show();
+        }
+
+        function showUserConfig() {
+            history.pushState({page: 'userConfig'}, '用户配置', '#user-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('用户配置和维护');
+            loadUsers();
+        }
+
+        function loadUsers() {
+            $.ajax({
+                url: '/get-users',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            var html = '<div class="bg-white rounded-3 p-4">';
+                            html += '<button class="btn btn-primary mb-3" onclick="addUser()">添加用户</button>';
+                            html += '<table class="table table-striped">';
+                            html += '<thead><tr><th>ID</th><th>用户名</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody>';
+                            resp.data.forEach(function(user) {
+                                html += '<tr>';
+                                html += '<td>' + user.id + '</td>';
+                                html += '<td>' + user.username + '</td>';
+                                html += '<td>' + (user.role === 'admin' ? '管理员' : '普通用户') + '</td>';
+                                html += '<td>' + (user.status === 'active' ? '启用' : '禁用') + '</td>';
+                                html += '<td>';
+                                html += '<button class="btn btn-sm btn-primary" onclick="editUser(' + user.id + ', \'' + user.username + '\', \'' + user.role + '\', \'' + user.status + '\')">编辑</button>';
+                                if (user.username !== 'lhbdb') {
+                                    html += '<button class="btn btn-sm btn-danger ms-1" onclick="deleteUser(' + user.id + ')">删除</button>';
+                                }
+                                html += '</td></tr>';
+                            });
+                            html += '</tbody></table></div>';
+                            $('#panelContent').html(html);
+                        }
+                    } catch (e) {
+                        $('#panelContent').html('<div class="alert alert-danger">加载失败</div>');
+                    }
+                }
+            });
+        }
+
+        function addUser() {
+            $('#userId').val('');
+            $('#userUsername').val('');
+            $('#userPassword').val('');
+            $('#userRole').val('user');
+            $('#userStatus').val('active');
+            $('#userModal').modal('show');
+        }
+
+        function editUser(id, username, role, status) {
+            $('#userId').val(id);
+            $('#userUsername').val(username);
+            $('#userPassword').val('');
+            $('#userRole').val(role);
+            $('#userStatus').val(status);
+            $('#userModal').modal('show');
+        }
+
+        function saveUser() {
+            var id = $('#userId').val();
+            var username = $('#userUsername').val();
+            var password = $('#userPassword').val();
+            var role = $('#userRole').val();
+            var status = $('#userStatus').val();
+            
+            var url = id ? '/update-user' : '/add-user';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({id: id, username: username, password: password, role: role, status: status}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#userModal').modal('hide');
+                            loadUsers();
+                        } else {
+                            alert(resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function deleteUser(id) {
+            if (confirm('确定要删除此用户吗？')) {
+                $.ajax({
+                    url: '/delete-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({id: id}),
+                    success: function(response) {
+                        try {
+                            var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                            if (resp.success) {
+                                loadUsers();
+                            } else {
+                                alert(resp.error);
+                            }
+                        } catch (e) {
+                            alert('删除失败');
+                        }
+                    }
+                });
+            }
+        }
+
+        function showPermissionConfig() {
+            history.pushState({page: 'permissionConfig'}, '权限配置', '#permission-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('权限维护');
+            $('#panelContent').html('<p class="text-white">权限配置功能开发中...</p>');
+        }
+
+        function showParamConfig() {
+            history.pushState({page: 'paramConfig'}, '参数配置', '#param-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('参数配置');
+            $('#panelContent').html('<p class="text-white">参数配置功能开发中...</p>');
+        }
+
+        function showDailyAnalysis() {
+            history.pushState({page: 'dailyAnalysis'}, '检查每日分析', '#daily-analysis');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('检查每日分析');
+            DailyAnalysis.init();
+        }
+
+        function showComplexConfig() {
+            history.pushState({page: 'complexConfig'}, '个性化统计设置', '#complex-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('个性化统计设置');
+            var html = `
+                <div class="bg-white rounded-3 p-4">
+                    <ul class="nav nav-tabs" id="configTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="procRegistryTab" data-bs-toggle="tab" data-bs-target="#procRegistry" type="button">存储注册</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pageConfigTab" data-bs-toggle="tab" data-bs-target="#pageConfig" type="button">页面配置</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade show active" id="procRegistry">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="搜索存储过程..." id="procSearch">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100">注册存储过程</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-secondary w-100">刷新列表</button>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>类别</th>
+                                        <th>参数</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>usp_GetDailyAnalysis</td>
+                                        <td>每日分析</td>
+                                        <td>startDate, endDate, system</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>usp_GetDepartmentStats</td>
+                                        <td>科室统计</td>
+                                        <td>startDate, endDate</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>usp_GetDoctorStats</td>
+                                        <td>医生统计</td>
+                                        <td>startDate, endDate, doctorType</td>
+                                        <td><span class="badge bg-success">已注册</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="pageConfig">
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100">添加页面</button>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>页面名称</th>
+                                        <th>路径</th>
+                                        <th>显示顺序</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>每日分析</td>
+                                        <td>/daily-analysis</td>
+                                        <td>1</td>
+                                        <td><span class="badge bg-success">启用</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-warning">禁用</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>科室统计</td>
+                                        <td>/department-statistics</td>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">启用</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info">编辑</button>
+                                            <button class="btn btn-sm btn-warning">禁用</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#panelContent').html(html);
+        }
+
+        function showServerConfig() {
+            history.pushState({page: 'serverConfig'}, '服务器配置', '#server-config');
+            $('#mainMenu').hide();
+            $('#configPanel').show();
+            $('#panelTitle').text('服务器配置');
+            var html = `
+                <div class="bg-white rounded-3 p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>数据库连接配置</h5>
+                            <div class="mb-3">
+                                <label class="form-label">服务器地址</label>
+                                <input type="text" class="form-control" id="dbServer" placeholder="localhost">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">数据库名称</label>
+                                <input type="text" class="form-control" id="dbName" placeholder="WiNEX_PACS_Schema_Full">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="dbUser">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="dbPassword">
+                            </div>
+                            <button class="btn btn-primary" onclick="saveDbConfig()">保存配置</button>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>服务器端口配置</h5>
+                            <div class="mb-3">
+                                <label class="form-label">服务端口</label>
+                                <input type="number" class="form-control" id="serverPort" placeholder="9094" min="1" max="65535">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">当前运行端口</label>
+                                <input type="text" class="form-control" id="runningPort" readonly>
+                            </div>
+                            <button class="btn btn-primary" onclick="savePortConfig()">保存端口</button>
+                            <p class="text-muted mt-3">端口修改需重启服务生效</p>
+                        </div>
+                    </div>
+                    <div class="card border-info bg-transparent rounded-lg p-3" style="background: rgba(13, 202, 240, 0.05) !important;">
+                        <h6>📌 连接测试</h6>
+                        <button class="btn btn-success" onclick="testDbConnection()">测试数据库连接</button>
+                        <div id="connectionResult" class="mt-2"></div>
+                    </div>
+                </div>
+            `;
+            $('#panelContent').html(html);
+            loadServerConfig();
+        }
+
+        function loadServerConfig() {
+            $.ajax({
+                url: '/get-port',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#serverPort').val(resp.data.port);
+                            $('#runningPort').val(resp.data.runningPort);
+                        }
+                    } catch (e) {
+                        console.error('加载端口配置失败');
+                    }
+                }
+            });
+        }
+
+        function saveDbConfig() {
+            var server = $('#dbServer').val();
+            var database = $('#dbName').val();
+            var username = $('#dbUser').val();
+            var password = $('#dbPassword').val();
+            
+            $.ajax({
+                url: '/update-db-config',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({server: server, database: database, username: username, password: password}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert('配置保存成功，重启程序后生效');
+                        } else {
+                            alert('保存失败: ' + resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function savePortConfig() {
+            var port = $('#serverPort').val();
+            $.ajax({
+                url: '/set-port',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({port: port}),
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            alert('端口配置保存成功，重启程序后生效');
+                        } else {
+                            alert('保存失败: ' + resp.error);
+                        }
+                    } catch (e) {
+                        alert('保存失败');
+                    }
+                }
+            });
+        }
+
+        function testDbConnection() {
+            $('#connectionResult').html('<span class="text-primary">正在测试连接...</span>');
+            $.ajax({
+                url: '/get-hospital-info',
+                type: 'GET',
+                success: function(response) {
+                    try {
+                        var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                        if (resp.success) {
+                            $('#connectionResult').html('<span class="text-success">✓ 数据库连接成功</span>');
+                        } else {
+                            $('#connectionResult').html('<span class="text-danger">✗ 连接失败: ' + resp.error + '</span>');
+                        }
+                    } catch (e) {
+                        $('#connectionResult').html('<span class="text-danger">✗ 连接失败</span>');
+                    }
+                },
+                error: function() {
+                    $('#connectionResult').html('<span class="text-danger">✗ 连接失败</span>');
+                }
+            });
+        }
+
+        window.onpopstate = function(event) {
+            if (event.state) {
+                switch(event.state.page) {
+                    case 'userConfig':
+                        showUserConfig();
+                        break;
+                    case 'permissionConfig':
+                        showPermissionConfig();
+                        break;
+                    case 'paramConfig':
+                        showParamConfig();
+                        break;
+                    case 'dailyAnalysis':
+                        DailyAnalysis.init();
+                        break;
+                    case 'complexConfig':
+                        showComplexConfig();
+                        break;
+                    case 'serverConfig':
+                        showServerConfig();
+                        break;
+                }
+            }
+        };
+    </script>
+</body>
+</html>

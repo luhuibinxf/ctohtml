@@ -1,0 +1,155 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center p-5">
+    <div class="w-100" style="max-width: 900px;">
+        <div class="text-center mb-5">
+            <h3 class="text-white font-bold fs-2 mb-2">系统配置中心</h3>
+            <p class="text-white-50">管理数据库连接和服务端口</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="menu-card h-100" onclick="ServerConfig.showDbModal()">
+                    <div class="card-body text-center p-5">
+                        <div class="menu-icon mb-3">
+                            <i class="fa-solid fa-database text-primary"></i>
+                        </div>
+                        <h4 class="mb-2">数据库配置</h4>
+                        <p class="mb-3">配置数据库连接信息</p>
+                        <div class="d-flex align-items-center justify-content-center gap-2 text-primary">
+                            <span>修改配置</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="menu-card h-100" onclick="ServerConfig.showPortModal()">
+                    <div class="card-body text-center p-5">
+                        <div class="menu-icon mb-3">
+                            <i class="fa-solid fa-server text-success"></i>
+                        </div>
+                        <h4 class="mb-2">端口配置</h4>
+                        <p class="mb-3">配置服务监听端口</p>
+                        <div class="d-flex align-items-center justify-content-center gap-2 text-success">
+                            <span>修改端口</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <span class="badge bg-info px-3 py-2">当前端口: <span id="currentPortDisplay" class="font-bold">--</span></span>
+        </div>
+    </div>
+</div>
+
+<div id="dbModal" class="custom-modal">
+    <div class="custom-modal-backdrop" onclick="ServerConfig.hideDbModal()"></div>
+    <div class="custom-modal-content">
+        <div class="custom-modal-header">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-database"></i>
+                <h5>数据库连接配置</h5>
+            </div>
+            <button class="custom-modal-close-btn" onclick="ServerConfig.hideDbModal()">
+                <span>关闭</span>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="custom-modal-body">
+            <div class="alert alert-info" id="dbModalStatusBar">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-info-circle"></i>
+                    <div>
+                        <strong>连接状态</strong>
+                        <p class="mb-0 text-sm" id="dbModalStatus">点击"测试连接"验证配置</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-12">
+                    <label class="form-label">服务器地址</label>
+                    <input type="text" class="form-control" id="dbModalServer" placeholder="127.0.0.1">
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">数据库名称</label>
+                    <input type="text" class="form-control" id="dbModalName" placeholder="WiNEX_PACS">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">用户名</label>
+                    <input type="text" class="form-control" id="dbModalUser" placeholder="sa">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">密码</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="dbModalPassword" placeholder="输入密码">
+                        <button class="btn btn-outline-secondary" type="button" onclick="ServerConfig.toggleDbPassword()">
+                            <i class="fa-solid fa-eye" id="dbToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dbModalResult"></div>
+        </div>
+        <div class="custom-modal-footer">
+            <button class="btn btn-secondary" onclick="ServerConfig.hideDbModal()">取消</button>
+            <button class="btn btn-success" onclick="ServerConfig.testDbModalConnection()">
+                <i class="fa-solid fa-plug me-2"></i>测试连接
+            </button>
+            <button class="btn btn-primary" onclick="ServerConfig.saveDbModalConfig()">
+                <i class="fa-solid fa-floppy-disk me-2"></i>保存配置
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="portModal" class="custom-modal">
+    <div class="custom-modal-backdrop" onclick="ServerConfig.hidePortModal()"></div>
+    <div class="custom-modal-content">
+        <div class="custom-modal-header">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-server"></i>
+                <h5>服务端口配置</h5>
+            </div>
+            <button class="custom-modal-close-btn" onclick="ServerConfig.hidePortModal()">
+                <span>关闭</span>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="custom-modal-body">
+            <div class="alert alert-warning mb-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-alert-circle"></i>
+                    <div>
+                        <strong>重要提示</strong>
+                        <p class="mb-0 text-sm">端口修改后需要重启程序才能生效</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">当前运行端口</label>
+                <input type="text" class="form-control bg-light" id="portModalCurrent" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">新服务端口</label>
+                <input type="number" class="form-control" id="portModalNew" placeholder="9094" min="1" max="65535">
+                <small class="text-muted">有效范围：1 - 65535</small>
+            </div>
+        </div>
+        <div class="custom-modal-footer">
+            <button class="btn btn-secondary" onclick="ServerConfig.hidePortModal()">取消</button>
+            <button class="btn btn-primary" onclick="ServerConfig.savePortModalConfig()">
+                <i class="fa-solid fa-floppy-disk me-2"></i>保存端口
+            </button>
+            <button class="btn btn-warning text-white" onclick="ServerConfig.savePortAndRestart()">
+                <i class="fa-solid fa-power-off me-2"></i>保存并重启
+            </button>
+        </div>
+    </div>
+</div>

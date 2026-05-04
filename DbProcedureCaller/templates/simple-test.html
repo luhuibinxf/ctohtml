@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数据展示</title>
+</head>
+<body>
+    <h1>📊 每日分析数据</h1>
+    <button onclick="getData()">获取数据</button>
+    <div id="result"></div>
+
+    <script>
+        function getData() {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '加载中...';
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/daily-analysis', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    console.log('状态:', xhr.status);
+                    console.log('响应:', xhr.responseText);
+                    
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success && data.data && data.data.length > 0) {
+                            var html = '<h3>共 ' + data.data.length + ' 条数据</h3>';
+                            html += '<table border="1"><tr><th>系统</th><th>报告医生</th><th>任务数量</th><th>阳性率</th></tr>';
+                            data.data.slice(0, 5).forEach(function(row) {
+                                html += '<tr><td>' + row['系统'] + '</td><td>' + row['报告医生'] + '</td><td>' + row['任务数量'] + '</td><td>' + row['阳性率'] + '</td></tr>';
+                            });
+                            html += '</table>';
+                            resultDiv.innerHTML = html;
+                        } else {
+                            resultDiv.innerHTML = '没有数据';
+                        }
+                    } else {
+                        resultDiv.innerHTML = '请求失败: ' + xhr.status;
+                    }
+                }
+            };
+            
+            xhr.send('{"startDate":"2026-04-01","endDate":"2026-04-30"}');
+        }
+    </script>
+</body>
+</html>

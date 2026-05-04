@@ -1,0 +1,71 @@
+{
+  "system_sources": {
+    "RIS": {
+      "name": "放射科",
+      "groups": {
+        "普放组": {
+          "display_name": "普放组",
+          "categories": {
+            "DR": ["普放", "普放(新)"],
+            "钼靶": ["钼靶", "乳腺钼靶"],
+            "造影": ["消化道造影", "消化道造影(新)"],
+            "下肢及脊柱全长拍片": ["下肢", "脊柱", "全长", "拍片"]
+          },
+          "formula": "DR + 钼靶 + 造影 + 下肢及脊柱全长拍片"
+        },
+        "CT组": {
+          "display_name": "CT组",
+          "categories": {
+            "CT平扫": ["CT"],
+            "CT增强": ["CT(新)", "CT增强", "CTA", "CTV", "CTU", "CTP", "CCTA"]
+          },
+          "formula": "CT平扫 + CT增强"
+        },
+        "MRI组": {
+          "display_name": "MRI组",
+          "categories": {
+            "MRI平扫": ["核磁共振", "核磁共振(新)", "MRI", "MRI(新)"],
+            "MRI增强": ["MRI增强"],
+            "MRA": ["MRA"],
+            "MRV": ["MRV"],
+            "MRU": ["MRU"],
+            "MRCP": ["MRCP"],
+            "MRS": ["MRS"]
+          },
+          "formula": "MRI平扫 + MRI增强 + MRA + MRV + MRU + MRCP + MRS"
+        }
+      }
+    },
+    "EIS": {
+      "name": "内镜科",
+      "groups": {
+        "胃镜": {
+          "display_name": "胃镜",
+          "categories": {
+            "无痛胃镜": ["无痛胃镜", "无痛胃+肠", "无痛胃肠镜", "无痛超声胃镜"],
+            "普通胃镜": ["胃镜", "胃+肠", "胃肠镜"]
+          },
+          "formula": "无痛胃镜 + 普通胃镜"
+        },
+        "肠镜": {
+          "display_name": "肠镜",
+          "categories": {
+            "无痛肠镜": ["无痛肠镜", "无痛胃+肠", "无痛胃肠镜", "无痛超声肠镜"],
+            "普通肠镜": ["肠镜", "胃+肠", "胃肠镜"]
+          },
+          "formula": "无痛肠镜 + 普通肠镜"
+        },
+        "其他": {
+          "display_name": "其他",
+          "categories": {
+            "超声胃镜": ["超声胃镜"],
+            "超声肠镜": ["超声肠镜"],
+            "支气管镜": ["支气管镜", "ZQG"],
+            "ERCP": ["ERCP", "ercp", "Ercp"]
+          },
+          "formula": ""
+        }
+      }
+    }
+  }
+}

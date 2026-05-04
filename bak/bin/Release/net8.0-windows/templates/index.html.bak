@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计系统 - 配置中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .btn-group-vertical {
+            width: 100%;
+        }
+        .btn-group-vertical .btn {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">统计系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">首页</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            当前用户: lhbdb
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" id="changePassword">修改密码</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/">退出登录</a></li>
+                        </ul>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center mb-5">配置中心</h1>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        功能菜单
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group-vertical">
+                            <button type="button" class="btn btn-primary" id="userConfigBtn">1. 用户配置和维护</button>
+                            <button type="button" class="btn btn-primary" id="permissionConfigBtn">2. 权限维护</button>
+                            <button type="button" class="btn btn-primary" id="paramsConfigBtn">3. 参数配置</button>
+                            <button type="button" class="btn btn-primary" id="dailyAnalysisBtn">4. 每日分析</button>
+                            <button type="button" class="btn btn-primary" id="complexProcedureBtn">5. 复杂存储配置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 id="contentTitle">欢迎使用统计系统配置中心</h3>
+                    </div>
+                    <div class="card-body" id="contentBody">
+                        <p>请从左侧菜单选择要执行的操作。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改密码模态框 -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">修改密码</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label for="oldPassword" class="form-label">旧密码</label>
+                            <input type="password" class="form-control" id="oldPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">新密码</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">确认新密码</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="submitChangePassword">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加用户模态框 -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">添加用户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label for="addUserId" class="form-label">用户ID</label>
+                            <input type="number" class="form-control" id="addUserId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addUsername" class="form-label">用户名</label>
+                            <input type="text" class="form-control" id="addUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addPassword" class="form-label">密码</label>
+                            <input type="password" class="form-control" id="addPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addRole" class="form-label">角色</label>
+                            <select class="form-select" id="addRole" required>
+                                <option value="普通用户">普通用户</option>
+                                <option value="管理员">管理员</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addStatus" class="form-label">状态</label>
+                            <select class="form-select" id="addStatus" required>
+                                <option value="启用">启用</option>
+                                <option value="禁用">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="submitAddUser">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 编辑用户模态框 -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">编辑用户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="mb-3">
+                            <label for="editUsername" class="form-label">用户名</label>
+                            <input type="text" class="form-control" id="editUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPassword" class="form-label">密码</label>
+                            <input type="password" class="form-control" id="editPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editRole" class="form-label">角色</label>
+                            <select class="form-select" id="editRole" required>
+                                <option value="普通用户">普通用户</option>
+                                <option value="管理员">管理员</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStatus" class="form-label">状态</label>
+                            <select class="form-select" id="editStatus" required>
+                                <option value="启用">启用</option>
+                                <option value="禁用">禁用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="submitEditUser">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 使用标志位确保只执行一次
+        var userConfigInitialized = false;
+        
+        // 加载用户列表函数
+        function loadUserList() {
+            $.ajax({
+                url: '/get-users',
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        const users = response.data;
+                        let html = '';
+                        
+                        users.forEach(user => {
+                            // 隐藏 lhbdb 用户
+                            if (user.username === 'lhbdb') {
+                                return;
+                            }
+                            
+                            html += '<tr>';
+                            html += '<td>' + user.id + '</td>';
+                            html += '<td>' + user.username + '</td>';
+                            html += '<td>' + user.role + '</td>';
+                            html += '<td>' + user.status + '</td>';
+                            html += '<td>';
+                            html += '<button type="button" class="btn btn-sm btn-info" onclick="editUser(' + user.id + ',\'' + user.username + '\',\'' + user.role + '\',\'' + user.status + '\')">编辑</button> ';
+                            html += '<button type="button" class="btn btn-sm btn-danger" onclick="deleteUser(' + user.id + ',\'' + user.username + '\')">删除</button>';
+                            html += '</td>';
+                            html += '</tr>';
+                        });
+                        
+                        if (html === '') {
+                            html = '<tr><td colspan="5" class="text-center">没有用户数据</td></tr>';
+                        }
+                        
+                        $('#userTableBody').html(html);
+                    } else {
+                        $('#userTableBody').html('<tr><td colspan="5" class="text-center text-danger">加载用户列表失败</td></tr>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#userTableBody').html('<tr><td colspan="5" class="text-center text-danger">请求失败</td></tr>');
+                }
+            });
+        }
+        
+        // 编辑用户函数
+        function editUser(id, username, role, status) {
+            $('#editUserId').val(id);
+            $('#editUsername').val(username);
+            $('#editPassword').val('');
+            $('#editRole').val(role);
+            $('#editStatus').val(status);
+            $('#editUserModal').modal('show');
+        }
+        
+        // 删除用户函数
+        function deleteUser(id, username) {
+            if (confirm('确定要删除用户 ' + username + ' 吗？')) {
+                $.ajax({
+                    url: '/delete-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ id: id }),
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            loadUserList();
+                        } else {
+                            alert('删除用户失败: ' + response.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('请求失败: ' + error);
+                    }
+                });
+            }
+        }
+        
+        $(document).ready(function() {
+            // 用户配置和维护
+            $('#userConfigBtn').click(function() {
+                if (userConfigInitialized) {
+                    loadUserList();
+                    return;
+                }
+                
+                userConfigInitialized = true;
+                
+                $('#contentTitle').text('用户配置和维护');
+                $('#contentBody').html(`
+                    <div class="mb-3">
+                        <h4>用户管理</h4>
+                        <p>在这里可以添加、编辑和删除用户。</p>
+                        <button type="button" class="btn btn-success" id="addUserBtn">添加用户</button>
+                    </div>
+                    <div class="mt-4">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>用户ID</th>
+                                    <th>用户名</th>
+                                    <th>角色</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <tr>
+                                    <td colspan="5" class="text-center">加载用户列表中...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `);
+                
+                loadUserList();
+                
+                // 绑定添加用户按钮点击事件
+                $('#addUserBtn').click(function() {
+                    $('#addUserModal').modal('show');
+                });
+            });
+            
+            // 绑定提交添加用户按钮点击事件
+            $('#submitAddUser').click(function() {
+                const userId = $('#addUserId').val();
+                const username = $('#addUsername').val();
+                const password = $('#addPassword').val();
+                const role = $('#addRole').val();
+                const status = $('#addStatus').val();
+                
+                if (!userId || !username || !password) {
+                    alert('请输入用户ID、用户名和密码');
+                    return;
+                }
+                
+                $.ajax({
+                    url: '/add-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        id: userId,
+                        username: username,
+                        password: password,
+                        role: role,
+                        status: status
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $('#addUserModal').modal('hide');
+                            $('#addUserForm')[0].reset();
+                            loadUserList();
+                        } else {
+                            alert('添加用户失败: ' + response.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('请求失败: ' + error);
+                    }
+                });
+            });
+            
+            // 绑定提交编辑用户按钮点击事件
+            $('#submitEditUser').click(function() {
+                const userId = $('#editUserId').val();
+                const username = $('#editUsername').val();
+                const password = $('#editPassword').val();
+                const role = $('#editRole').val();
+                const status = $('#editStatus').val();
+                
+                if (!userId || !username) {
+                    alert('请输入用户名');
+                    return;
+                }
+                
+                if (!password) {
+                    if (!confirm('密码为空，将保留原密码。确定要继续吗？')) {
+                        return;
+                    }
+                }
+                
+                $.ajax({
+                    url: '/update-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        id: userId,
+                        username: username,
+                        password: password,
+                        role: role,
+                        status: status
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $('#editUserModal').modal('hide');
+                            $('#editPassword').val('');
+                            loadUserList();
+                        } else {
+                            alert('更新用户失败: ' + response.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('请求失败: ' + error);
+                    }
+                });
+            });
+        });
+                    alert('请选择要编辑的用户');
+                });
+                
+                // 绑定删除用户按钮点击事件
+                $('#deleteUserBtn').click(function() {
+                    alert('请选择要删除的用户');
+                });
+                
+                // 绑定添加用户按钮点击事件
+                $('#addUserBtn').click(function() {
+                    // 打开添加用户模态框
+                    $('#addUserModal').modal('show');
+                });
+                
+                // 绑定提交添加用户按钮点击事件
+                $('#submitAddUser').click(function() {
+                    const userId = $('#addUserId').val();
+                    const username = $('#addUsername').val();
+                    const password = $('#addPassword').val();
+                    const role = $('#addRole').val();
+                    const status = $('#addStatus').val();
+                    
+                    if (!userId || !username || !password) {
+                        alert('请输入用户ID、用户名和密码');
+                        return;
+                    }
+                    
+                    // 检查用户是否已经存在
+                    $.ajax({
+                        url: '/get-users',
+                        type: 'GET',
+                        success: function(response) {
+                            if (response.success) {
+                                const users = response.data;
+                                const userExists = users.some(user => user.id == parseInt(userId) || user.username == username);
+                                
+                                if (userExists) {
+                                    alert('用户ID或用户名已存在');
+                                    return;
+                                }
+                                
+                                // 发送添加用户请求
+                                $.ajax({
+                                    url: '/add-user',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        id: userId,
+                                        username: username,
+                                        password: password,
+                                        role: role,
+                                        status: status
+                                    }),
+                                    success: function(response) {
+                                        if (response.success) {
+                                            alert(response.message);
+                                            // 关闭模态框
+                                            $('#addUserModal').modal('hide');
+                                            // 清空表单
+                                            $('#addUserForm')[0].reset();
+                                            // 重新加载用户列表
+                                            $.ajax({
+                                                url: '/get-users',
+                                                type: 'GET',
+                                                success: function(response) {
+                                                    if (response.success) {
+                                                        const users = response.data;
+                                                        let html = '';
+                                                        
+                                                        users.forEach(user => {
+                                                            // 隐藏 lhbdb 用户
+                                                            if (user.username === 'lhbdb') {
+                                                                return;
+                                                            }
+                                                            
+                                                            html += `
+                                                                <tr>
+                                                                    <td>${user.id}</td>
+                                                                    <td>${user.username}</td>
+                                                                    <td>${user.role}</td>
+                                                                    <td>${user.status}</td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-sm btn-info edit-user" data-id="${user.id}" data-username="${user.username}" data-role="${user.role}" data-status="${user.status}">编辑</button>
+                                                                        <button type="button" class="btn btn-sm btn-danger delete-user" data-id="${user.id}" data-username="${user.username}">删除</button>
+                                                                    </td>
+                                                                </tr>
+                                                            `;
+                                                        });
+                                                        
+                                                        if (html === '') {
+                                                            html = '<tr><td colspan="5" class="text-center">没有用户数据</td></tr>';
+                                                        }
+                                                        
+                                                        $('#userTableBody').html(html);
+                                                        
+                                                        // 重新绑定编辑用户按钮点击事件
+                                                        $('.edit-user').click(function() {
+                                                            const id = $(this).data('id');
+                                                            const username = $(this).data('username');
+                                                            const role = $(this).data('role');
+                                                            const status = $(this).data('status');
+                                                            alert(`编辑用户: ${username} (ID: ${id})`);
+                                                            // 这里可以打开编辑用户的模态框
+                                                        });
+                                                        
+                                                        // 重新绑定删除用户按钮点击事件
+                                                        $('.delete-user').click(function() {
+                                                            const id = $(this).data('id');
+                                                            const username = $(this).data('username');
+                                                            if (confirm(`确定要删除用户 ${username} 吗？`)) {
+                                                                alert(`删除用户: ${username} (ID: ${id})`);
+                                                                // 这里可以发送删除用户的请求
+                                                            }
+                                                        });
+                                                    } else {
+                                                        $('#userTableBody').html('<tr><td colspan="5" class="text-center text-danger">加载用户列表失败: ' + response.error + '</td></tr>');
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    $('#userTableBody').html('<tr><td colspan="5" class="text-center text-danger">请求失败: ' + error + '</td></tr>');
+                                                }
+                                            });
+                                        } else {
+                                            alert('添加用户失败: ' + response.error);
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        alert('请求失败: ' + error);
+                                    }
+                                });
+                            } else {
+                                alert('检查用户存在失败: ' + response.error);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert('请求失败: ' + error);
+                        }
+                    });
+                });
+                
+                // 绑定编辑用户按钮点击事件
+                $('#editUserBtn').click(function() {
+                    alert('编辑用户');
+                    // 这里可以打开编辑用户的模态框
+                });
+                
+                // 绑定删除用户按钮点击事件
+                $('#deleteUserBtn').click(function() {
+                    alert('删除用户');
+                    // 这里可以打开删除用户的确认对话框
+                });
+            });
+
+            // 权限维护
+            $('#permissionConfigBtn').click(function() {
+                $('#contentTitle').text('权限维护');
+                $('#contentBody').html(`
+                    <div class="mb-3">
+                        <h4>权限管理</h4>
+                        <p>在这里可以维护用户可以查询哪些统计。</p>
+                    </div>
+                    <div class="mt-4">
+                        <div class="mb-3">
+                            <label for="userSelect" class="form-label">选择用户</label>
+                            <select class="form-select" id="userSelect">
+                                <option value="1">lhbdb (管理员)</option>
+                            </select>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>统计ID</th>
+                                    <th>统计名称</th>
+                                    <th>权限</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>每日工作量统计</td>
+                                    <td><input type="checkbox" checked></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>月度工作量统计</td>
+                                    <td><input type="checkbox" checked></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>年度工作量统计</td>
+                                    <td><input type="checkbox" checked></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary">保存权限</button>
+                    </div>
+                `);
+            });
+
+            // 参数配置
+            $('#paramsConfigBtn').click(function() {
+                $('#contentTitle').text('参数配置');
+                $('#contentBody').html(`
+                    <div class="mb-3">
+                        <h4>系统参数配置</h4>
+                        <p>在这里可以配置系统的一些参数信息。</p>
+                    </div>
+                    <div class="mt-4">
+                        <form id="paramsForm">
+                            <div class="mb-3">
+                                <label for="param1" class="form-label">参数1</label>
+                                <input type="text" class="form-control" id="param1" placeholder="请输入参数1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="param2" class="form-label">参数2</label>
+                                <input type="text" class="form-control" id="param2" placeholder="请输入参数2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="param3" class="form-label">参数3</label>
+                                <input type="text" class="form-control" id="param3" placeholder="请输入参数3">
+                            </div>
+                            <button type="button" class="btn btn-primary">保存参数</button>
+                        </form>
+                    </div>
+                `);
+            });
+
+            // 每日分析
+            $('#dailyAnalysisBtn').click(function() {
+                $('#contentTitle').text('每日分析');
+                $('#contentBody').html(`
+                    <div class="mb-3">
+                        <h4>每日分析</h4>
+                        <p>在这里可以执行一些简单的查询，不需要执行存储过程。</p>
+                    </div>
+                    <div class="mt-4">
+                        <div class="mb-3">
+                            <label for="analysisDate" class="form-label">选择日期</label>
+                            <input type="date" class="form-control" id="analysisDate">
+                        </div>
+                        <button type="button" class="btn btn-primary">执行分析</button>
+                        <div class="mt-4" id="analysisResult">
+                            <p class="text-muted">分析结果将显示在这里</p>
+                        </div>
+                    </div>
+                `);
+            });
+
+            // 复杂存储配置
+            $('#complexProcedureBtn').click(function() {
+                $('#contentTitle').text('复杂存储配置');
+                $('#contentBody').html(`
+                    <div class="mb-3">
+                        <h4>复杂存储配置</h4>
+                        <p>在这里可以配置一些复杂的存储过程来显示复杂的工作量。</p>
+                    </div>
+                    <div class="mt-4">
+                        <form id="procedure-form">
+                            <div class="mb-3">
+                                <label for="procedure-name" class="form-label">存储过程名称</label>
+                                <input type="text" class="form-control" id="procedure-name" placeholder="例如: GetUserInfo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="procedure-params" class="form-label">参数 (用逗号分隔)</label>
+                                <input type="text" class="form-control" id="procedure-params" placeholder="例如: 1, 'admin'">
+                            </div>
+                            <button type="submit" class="btn btn-primary">执行</button>
+                        </form>
+                        <div class="mt-4" id="result-container">
+                            <p class="text-muted">执行结果将显示在这里</p>
+                        </div>
+                    </div>
+                `);
+
+                // 重新绑定表单提交事件
+                $('#procedure-form').submit(function(e) {
+                    e.preventDefault();
+                    
+                    const procedureName = $('#procedure-name').val();
+                    const paramsInput = $('#procedure-params').val();
+                    const params = paramsInput ? paramsInput.split(',').map(p => p.trim()) : [];
+                    
+                    $.ajax({
+                        url: '/call-procedure',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            procedure_name: procedureName,
+                            params: params
+                        }),
+                        success: function(response) {
+                            if (response.success) {
+                                displayResults(response.data);
+                            } else {
+                                $('#result-container').html(`<div class="alert alert-danger">错误: ${response.error}</div>`);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#result-container').html(`<div class="alert alert-danger">请求失败: ${error}</div>`);
+                        }
+                    });
+                });
+            });
+
+            // 修改密码
+            $('#changePassword').click(function() {
+                $('#changePasswordModal').modal('show');
+            });
+
+            // 提交修改密码
+            $('#submitChangePassword').click(function() {
+                const oldPassword = $('#oldPassword').val();
+                const newPassword = $('#newPassword').val();
+                const confirmPassword = $('#confirmPassword').val();
+
+                if (newPassword !== confirmPassword) {
+                    alert('新密码和确认密码不一致');
+                    return;
+                }
+
+                // 这里可以添加修改密码的逻辑
+                alert('密码修改成功');
+                $('#changePasswordModal').modal('hide');
+                $('#changePasswordForm')[0].reset();
+            });
+
+            // 显示结果函数
+            function displayResults(data) {
+                if (data.length === 0) {
+                    $('#result-container').html('<div class="alert alert-info">没有返回结果</div>');
+                    return;
+                }
+                
+                let table = '<table class="table table-striped"><thead><tr>';
+                
+                // 添加表头
+                for (let key in data[0]) {
+                    table += `<th>${key}</th>`;
+                }
+                table += '</tr></thead><tbody>';
+                
+                // 添加数据行
+                data.forEach(row => {
+                    table += '<tr>';
+                    for (let key in row) {
+                        table += `<td>${row[key]}</td>`;
+                    }
+                    table += '</tr>';
+                });
+                
+                table += '</tbody></table>';
+                $('#result-container').html(table);
+            }
+        });
+    </script>
+</body>
+</html>

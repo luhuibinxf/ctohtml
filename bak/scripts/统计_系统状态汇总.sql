@@ -1,0 +1,15 @@
+-- 系统状态汇总
+-- 更新日期：2026-04-25
+
+SELECT 
+    EXAM_TASK_STATUS AS '任务状态',
+    COUNT(*) AS '数量',
+    MAX(EXAM_TASK_CREATE_TIME) AS '最新时间'
+FROM 
+    EXAM_TASK
+WHERE 
+    IS_DEL = 0
+GROUP BY 
+    EXAM_TASK_STATUS
+ORDER BY 
+    COUNT(*) DESC;

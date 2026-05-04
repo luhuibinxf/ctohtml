@@ -1,0 +1,15 @@
+-- 技师工作量
+-- 更新日期：2026-04-25
+
+SELECT 
+    TECHNICIAN_NAME AS '技师姓名',
+    COUNT(*) AS '检查数量',
+    MAX(EXAM_TASK_CREATE_TIME) AS '最新检查时间'
+FROM 
+    EXAM_TASK
+WHERE 
+    IS_DEL = 0
+GROUP BY 
+    TECHNICIAN_NAME
+ORDER BY 
+    COUNT(*) DESC;

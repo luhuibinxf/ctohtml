@@ -1,0 +1,6 @@
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.csproj.AssemblyReference.cache
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.GeneratedMSBuildEditorConfig.editorconfig
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.AssemblyInfoInputs.cache
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.AssemblyInfo.cs
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.csproj.CoreCompileInputs.cache
+D:\AI\tran\DbProcedureCaller\obj\Release\net8.0\DbProcedureCaller.sourcelink.json

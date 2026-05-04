@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>统计系统 - 登录</title>
+    <style>
+        body { font-family: Microsoft YaHei UI, sans-serif; margin: 0; padding: 0; background: #1976d2; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); width: 400px; }
+        h1 { color: #1976d2; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
+        input[type='text'], input[type='password'] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
+        input[type='submit'] { width: 100%; padding: 12px; background: #1976d2; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        input[type='submit']:hover { background: #1565c0; }
+        .error-message { background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; margin-top: 15px; text-align: center; }
+        .success-message { background: #e8f5e8; color: #2e7d32; padding: 10px; border-radius: 5px; margin-top: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class='login-container'>
+        <div class="hospital-info">
+            <h3>系统所属医院：示例医院</h3>
+        </div>
+        <h1>统计系统登录</h1>
+        <form action='/login' method='post'>
+            <div class='form-group'>
+                <label for='username'>用户名</label>
+                <input type='text' id='username' name='username' required>
+            </div>
+            <div class='form-group'>
+                <label for='password'>密码</label>
+                <input type='password' id='password' name='password' required>
+            </div>
+            <input type='submit' value='登录'>
+        </form>
+        <div id='message' class='error-message' style='display: none;'></div>
+    </div>
+    <script>
+        // 检查URL参数中的错误信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            document.getElementById('message').textContent = error;
+            document.getElementById('message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

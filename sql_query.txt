@@ -1,0 +1,39 @@
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(CASE t.ENCOUNTER_TYPE_NO 
+                        WHEN '1' THEN '门诊' 
+                        WHEN '2' THEN '住院' 
+                        WHEN '3' THEN '急诊' 
+                        WHEN '4' THEN '体检'
+                        WHEN '138138' THEN '门诊' 
+                        WHEN '138139' THEN '急诊'
+                        WHEN '138140' THEN '体检' 
+                        WHEN '145235' THEN '住院'
+                        WHEN 'OPD' THEN '门诊' 
+                        WHEN 'IPD' THEN '住院' 
+                        WHEN 'EMER' THEN '急诊' 
+                        WHEN 'CHECKUP' THEN '体检'
+                        ELSE ISNULL(d.cValue, t.ENCOUNTER_TYPE_NO) 
+                    END, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN '383927' THEN '阳性' WHEN '383926' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
+                    COUNT(*) AS 任务数量,
+                    SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END) AS 阳性数量,
+                    SUM(CASE WHEN r.NEG_POS_CODE = '383926' THEN 1 ELSE 0 END) AS 阴性数量,
+                    ROUND(CASE WHEN COUNT(*) > 0 THEN SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1.0 ELSE 0.0 END) * 100.0 / COUNT(*) ELSE 0.0 END, 2) AS 阳性率
+                FROM EXAM_TASK t WITH(NOLOCK)
+                INNER JOIN EXAM_REPORT r WITH(NOLOCK) ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
+                LEFT JOIN Pacs_SysDict d WITH(NOLOCK) ON d.TableName='EXAM_TASK' AND d.FieldName='ENCOUNTER_TYPE_NO' 
+                    AND (CAST(d.nValue AS VARCHAR(50)) = t.ENCOUNTER_TYPE_NO OR d.cValue = t.ENCOUNTER_TYPE_NO)
+                WHERE t.IS_DEL = 0

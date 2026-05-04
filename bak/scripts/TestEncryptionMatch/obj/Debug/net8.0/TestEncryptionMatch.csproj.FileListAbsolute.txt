@@ -1,0 +1,14 @@
+D:\AI\tran\scripts\TestEncryptionMatch\bin\Debug\net8.0\TestEncryptionMatch.exe
+D:\AI\tran\scripts\TestEncryptionMatch\bin\Debug\net8.0\TestEncryptionMatch.deps.json
+D:\AI\tran\scripts\TestEncryptionMatch\bin\Debug\net8.0\TestEncryptionMatch.runtimeconfig.json
+D:\AI\tran\scripts\TestEncryptionMatch\bin\Debug\net8.0\TestEncryptionMatch.dll
+D:\AI\tran\scripts\TestEncryptionMatch\bin\Debug\net8.0\TestEncryptionMatch.pdb
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.GeneratedMSBuildEditorConfig.editorconfig
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.AssemblyInfoInputs.cache
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.AssemblyInfo.cs
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.csproj.CoreCompileInputs.cache
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.dll
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\refint\TestEncryptionMatch.dll
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.pdb
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\TestEncryptionMatch.genruntimeconfig.cache
+D:\AI\tran\scripts\TestEncryptionMatch\obj\Debug\net8.0\ref\TestEncryptionMatch.dll

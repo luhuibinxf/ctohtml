@@ -1,0 +1,2431 @@
+[2026-05-01 10:17:58] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:17:58] [INFO] 配置文件不存在
+[2026-05-01 10:17:58] [INFO] 使用默认端口: 9094
+[2026-05-01 10:17:58] [INFO] 数据库配置文件已存在
+[2026-05-01 10:17:58] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:17:58] [INFO] 使用端口: 9094
+[2026-05-01 10:17:58] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:17:58] [INFO] HTTP服务器启动成功
+[2026-05-01 10:17:58] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:17:58] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 10:18:30] [INFO] API请求: POST /login
+[2026-05-01 10:18:30] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 10:18:30] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 10:18:30] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 10:18:30] [INFO] 配置文件内容长度: 90
+[2026-05-01 10:18:30] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 10:18:30] [INFO] 配置文件为明文，加载成功
+[2026-05-01 10:18:30] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 10:18:30] [INFO] TJYHB表结构检查完成
+[2026-05-01 10:18:30] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 10:21:47] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:21:47] [INFO] 配置文件不存在
+[2026-05-01 10:21:47] [INFO] 使用默认端口: 9094
+[2026-05-01 10:21:47] [INFO] 数据库配置文件已存在
+[2026-05-01 10:21:47] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:21:47] [INFO] 使用端口: 9094
+[2026-05-01 10:21:47] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:21:47] [INFO] HTTP服务器启动成功
+[2026-05-01 10:21:47] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:21:47] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 10:22:22] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js?v=1.0.10.html
+[2026-05-01 10:22:22] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 10:22:50] [INFO] API请求: POST /login
+[2026-05-01 10:22:50] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 10:22:50] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 10:22:50] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 10:22:50] [INFO] 配置文件内容长度: 90
+[2026-05-01 10:22:50] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 10:22:50] [INFO] 配置文件为明文，加载成功
+[2026-05-01 10:22:51] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 10:22:51] [INFO] TJYHB表结构检查完成
+[2026-05-01 10:22:51] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 10:23:46] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:23:46] [INFO] 配置文件不存在
+[2026-05-01 10:23:46] [INFO] 使用默认端口: 9094
+[2026-05-01 10:23:46] [INFO] 数据库配置文件已存在
+[2026-05-01 10:23:46] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:23:46] [INFO] 使用端口: 9094
+[2026-05-01 10:23:46] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:23:46] [INFO] HTTP服务器启动成功
+[2026-05-01 10:23:46] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:23:46] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 10:39:56] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:39:56] [INFO] 解密后内容: 8080
+[2026-05-01 10:39:56] [INFO] 从配置文件加载端口: 8080
+[2026-05-01 10:39:56] [INFO] 数据库配置文件已存在
+[2026-05-01 10:39:56] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:39:56] [INFO] 使用端口: 8080
+[2026-05-01 10:39:56] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:39:56] [INFO] HTTP服务器启动成功
+[2026-05-01 10:39:56] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:39:56] [INFO] 统计服务器已启动！本地访问：http://localhost:8080/, 网络访问：http://192.168.2.6:8080/
+[2026-05-01 10:41:16] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:41:16] [INFO] 解密后内容: 5094
+[2026-05-01 10:41:16] [INFO] 从配置文件加载端口: 5094
+[2026-05-01 10:41:16] [INFO] 数据库配置文件已存在
+[2026-05-01 10:41:16] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:41:16] [INFO] 使用端口: 5094
+[2026-05-01 10:41:16] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:41:16] [INFO] HTTP服务器启动成功
+[2026-05-01 10:41:16] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:41:16] [INFO] 统计服务器已启动！本地访问：http://localhost:5094/, 网络访问：http://192.168.2.6:5094/
+[2026-05-01 10:43:15] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:43:15] [INFO] 解密后内容: 51999
+[2026-05-01 10:43:15] [INFO] 从配置文件加载端口: 51999
+[2026-05-01 10:43:15] [INFO] 数据库配置文件已存在
+[2026-05-01 10:43:15] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:43:15] [INFO] 使用端口: 51999
+[2026-05-01 10:43:15] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:43:15] [INFO] HTTP服务器启动成功
+[2026-05-01 10:43:15] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:43:15] [INFO] 统计服务器已启动！本地访问：http://localhost:51999/, 网络访问：http://192.168.2.6:51999/
+[2026-05-01 10:46:11] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:46:11] [INFO] 解密后内容: 65000
+[2026-05-01 10:46:11] [INFO] 从配置文件加载端口: 65000
+[2026-05-01 10:46:11] [INFO] 数据库配置文件已存在
+[2026-05-01 10:46:11] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:46:11] [INFO] 使用端口: 65000
+[2026-05-01 10:46:11] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:46:11] [INFO] HTTP服务器启动成功
+[2026-05-01 10:46:11] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:46:11] [INFO] 统计服务器已启动！本地访问：http://localhost:65000/, 网络访问：http://192.168.2.6:65000/
+[2026-05-01 10:47:43] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:47:43] [INFO] 解密后内容: 20240
+[2026-05-01 10:47:43] [INFO] 从配置文件加载端口: 20240
+[2026-05-01 10:47:43] [INFO] 数据库配置文件已存在
+[2026-05-01 10:47:43] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:47:43] [INFO] 使用端口: 20240
+[2026-05-01 10:47:43] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:47:43] [INFO] HTTP服务器启动成功
+[2026-05-01 10:47:43] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:47:43] [INFO] 统计服务器已启动！本地访问：http://localhost:20240/, 网络访问：http://192.168.2.6:20240/
+[2026-05-01 10:48:59] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:48:59] [INFO] 解密后内容: 55555
+[2026-05-01 10:48:59] [INFO] 从配置文件加载端口: 55555
+[2026-05-01 10:48:59] [INFO] 数据库配置文件已存在
+[2026-05-01 10:48:59] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:48:59] [INFO] 使用端口: 55555
+[2026-05-01 10:48:59] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:48:59] [INFO] HTTP服务器启动成功
+[2026-05-01 10:48:59] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:48:59] [INFO] 统计服务器已启动！本地访问：http://localhost:55555/, 网络访问：http://192.168.2.6:55555/
+[2026-05-01 10:50:10] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:50:10] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 10:52:28] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:52:28] [INFO] 解密后内容: 5094
+[2026-05-01 10:52:28] [INFO] 从配置文件加载端口: 5094
+[2026-05-01 10:52:28] [INFO] 数据库配置文件已存在
+[2026-05-01 10:52:28] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:52:28] [INFO] 使用端口: 5094
+[2026-05-01 10:52:28] [INFO] 添加HTTP前缀完成
+[2026-05-01 10:52:28] [INFO] HTTP服务器启动成功
+[2026-05-01 10:52:28] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:52:28] [INFO] 统计服务器已启动！本地访问：http://localhost:5094/, 网络访问：http://192.168.2.6:5094/
+[2026-05-01 10:53:10] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:53:10] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 10:55:24] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:55:24] [INFO] 解密后内容: 5094
+[2026-05-01 10:55:24] [INFO] 从配置文件加载端口: 5094
+[2026-05-01 10:55:25] [INFO] 数据库配置文件已存在
+[2026-05-01 10:55:25] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:55:25] [INFO] 使用端口: 5094
+[2026-05-01 10:55:25] [INFO] HTTP服务器启动成功
+[2026-05-01 10:55:25] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:55:25] [INFO] 统计服务器已启动！本地访问：http://localhost:5094/, 网络访问：http://192.168.2.6:5094/
+[2026-05-01 10:55:53] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:55:53] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 10:57:35] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 10:57:35] [INFO] 配置文件不存在
+[2026-05-01 10:57:35] [INFO] 使用默认端口: 9094
+[2026-05-01 10:57:35] [INFO] 数据库配置文件已存在
+[2026-05-01 10:57:35] [INFO] 开始启动HTTP服务器...
+[2026-05-01 10:57:35] [INFO] 使用端口: 9094
+[2026-05-01 10:57:35] [INFO] HTTP服务器启动成功
+[2026-05-01 10:57:35] [INFO] HTTP服务器线程已启动
+[2026-05-01 10:57:35] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 10:58:01] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:58:01] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 10:58:39] [INFO] API请求: GET /get-stat-menu
+[2026-05-01 10:58:51] [INFO] API请求: GET /api/menu
+[2026-05-01 10:58:58] [INFO] API请求: GET /get-all-options?type=1
+[2026-05-01 10:58:58] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 10:59:23] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:59:23] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 10:59:23] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:59:23] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js?v=1.0.10.html
+[2026-05-01 10:59:23] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js?v=1.0.10.html
+[2026-05-01 10:59:23] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 10:59:23] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 10:59:23] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 10:59:45] [INFO] API请求: POST /login
+[2026-05-01 10:59:45] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 10:59:45] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 10:59:45] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 10:59:45] [INFO] 配置文件内容长度: 90
+[2026-05-01 10:59:45] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 10:59:45] [INFO] 配置文件为明文，加载成功
+[2026-05-01 10:59:45] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 10:59:45] [INFO] TJYHB表结构检查完成
+[2026-05-01 10:59:45] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 11:01:55] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 11:01:55] [INFO] 配置文件不存在
+[2026-05-01 11:01:55] [INFO] 使用默认端口: 9094
+[2026-05-01 11:01:55] [INFO] 数据库配置文件已存在
+[2026-05-01 11:01:55] [INFO] 开始启动HTTP服务器...
+[2026-05-01 11:01:55] [INFO] 使用端口: 9094
+[2026-05-01 11:01:55] [INFO] HTTP服务器启动成功
+[2026-05-01 11:01:55] [INFO] HTTP服务器线程已启动
+[2026-05-01 11:01:55] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 11:02:04] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:02:04] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:02:04] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:02:04] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:02:04] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:02:05] [INFO] API请求: GET /get-all-options?_=1777604524924
+[2026-05-01 11:02:05] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:02:05] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:02:05] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:02:05] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:02:05] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:02:05] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 11:02:05] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 11:02:05] [INFO] 配置文件内容长度: 90
+[2026-05-01 11:02:05] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 11:02:05] [INFO] 配置文件为明文，加载成功
+[2026-05-01 11:02:54] [INFO] API请求: POST /login
+[2026-05-01 11:02:54] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 11:02:54] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 11:02:54] [INFO] TJYHB表结构检查完成
+[2026-05-01 11:02:54] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 11:03:44] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:03:44] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:03:44] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:03:44] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:03:44] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:03:44] [INFO] API请求: GET /get-all-options?_=1777604624269
+[2026-05-01 11:03:44] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:03:44] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:03:44] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:03:44] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:03:44] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:04:41] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:04:41] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:04:41] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:05:54] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:05:54] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:05:54] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:05:54] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:05:54] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:05:55] [INFO] API请求: GET /get-all-options?_=1777604754989
+[2026-05-01 11:05:55] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:05:55] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:05:55] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:05:55] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:05:55] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:06:16] [INFO] API请求: POST /login
+[2026-05-01 11:06:16] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 11:06:16] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 11:06:41] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:06:41] [INFO] 每日分析请求: startDate=2026-04-30, endDate=2026-05-01, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 11:06:50] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:07:19] [INFO] API请求: POST /department-statistics
+[2026-05-01 11:07:19] [INFO] 科室统计请求: startDate=2026-04-30, endDate=2026-05-01, system=
+[2026-05-01 11:07:44] [INFO] API请求: POST /doctor-statistics
+[2026-05-01 11:07:44] [INFO] 医生统计请求: startDate=2026-04-30, endDate=2026-05-01, system=, doctorType=reporter
+[2026-05-01 11:07:47] [INFO] API请求: POST /category-statistics
+[2026-05-01 11:07:47] [INFO] 检查类型统计请求: startDate=2026-04-30, endDate=2026-05-01, system=
+[2026-05-01 11:13:33] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:13:33] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=????, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:13:46] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:14:02] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:14:02] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=????, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:14:02] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:14:48] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:14:48] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=????, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:15:02] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:15:02] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:15:09] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:15:09] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:15:09] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:18:55] [INFO] API请求: GET /get-all-options?type=1
+[2026-05-01 11:18:55] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:19:05] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:19:43] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:19:43] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:20:04] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:20:16] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 11:20:16] [INFO] 配置文件不存在
+[2026-05-01 11:20:16] [INFO] 使用默认端口: 9094
+[2026-05-01 11:20:16] [INFO] 数据库配置文件已存在
+[2026-05-01 11:20:16] [INFO] 开始启动HTTP服务器...
+[2026-05-01 11:20:16] [INFO] 使用端口: 9094
+[2026-05-01 11:20:16] [INFO] HTTP服务器启动成功
+[2026-05-01 11:20:16] [INFO] HTTP服务器线程已启动
+[2026-05-01 11:20:16] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 11:20:47] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:20:47] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:21:10] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:21:10] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=????, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:21:11] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 11:21:11] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 11:21:11] [INFO] 配置文件内容长度: 90
+[2026-05-01 11:21:11] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 11:21:11] [INFO] 配置文件为明文，加载成功
+[2026-05-01 11:21:23] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:21:59] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:21:59] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=????, sortOrder=DESC, pageSize=20, pageIndex=1
+[2026-05-01 11:22:10] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:22:23] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:22:23] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:22:23] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:22:39] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:23:08] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:23:08] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:23:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:23:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:23:41] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:23:41] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:23:52] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:24:53] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:24:53] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:24:58] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:24:58] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:25:09] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:25:13] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:25:13] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:25:13] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:25:23] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:25:23] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=5, pageIndex=1
+[2026-05-01 11:25:34] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:25:37] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:25:37] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=3, pageIndex=1
+[2026-05-01 11:25:37] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:34:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:34:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:34:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:34:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:34:57] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:34:57] [INFO] API请求: GET /get-all-options?_=1777606497525
+[2026-05-01 11:34:57] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:34:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:34:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:34:57] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:34:57] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:35:04] [INFO] API请求: POST /login
+[2026-05-01 11:35:04] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 11:35:04] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 11:35:04] [INFO] TJYHB表结构检查完成
+[2026-05-01 11:35:04] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 11:35:07] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:35:07] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:35:07] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:35:10] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:35:10] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 11:35:41] [ERROR] 获取统计数据失败: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+[2026-05-01 11:38:11] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:38:11] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=3, pageIndex=1
+[2026-05-01 11:38:24] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:42:09] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 11:42:09] [INFO] 配置文件不存在
+[2026-05-01 11:42:09] [INFO] 使用默认端口: 9094
+[2026-05-01 11:42:09] [INFO] 数据库配置文件已存在
+[2026-05-01 11:42:09] [INFO] 开始启动HTTP服务器...
+[2026-05-01 11:42:09] [INFO] 使用端口: 9094
+[2026-05-01 11:42:09] [INFO] HTTP服务器启动成功
+[2026-05-01 11:42:09] [INFO] HTTP服务器线程已启动
+[2026-05-01 11:42:09] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 11:42:28] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:42:28] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=10, pageIndex=1
+[2026-05-01 11:42:28] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 11:42:28] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 11:42:28] [INFO] 配置文件内容长度: 90
+[2026-05-01 11:42:28] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 11:42:28] [INFO] 配置文件为明文，加载成功
+[2026-05-01 11:42:28] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:42:42] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:43:05] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:43:05] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=10, pageIndex=1
+[2026-05-01 11:43:05] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:43:17] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:43:33] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:43:33] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=5, pageIndex=1
+[2026-05-01 11:43:33] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:43:33] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:45:57] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:46:41] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:46:41] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\.well-known/appspecific/com.chrome.devtools.json.html
+[2026-05-01 11:46:41] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\.well-known/appspecific/com.chrome.devtools.json.html
+[2026-05-01 11:46:41] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:46:41] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:46:41] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:46:53] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:46:53] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:46:53] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 11:46:53] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:46:53] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:47:12] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:47:12] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 11:47:12] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:47:12] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:49:12] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:49:12] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 11:49:12] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:49:23] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:49:23] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:49:23] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:49:23] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:49:23] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 11:49:34] [INFO] API请求: POST /daily-analysis
+[2026-05-01 11:49:34] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 11:49:34] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 11:49:45] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 11:53:52] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 11:53:52] [INFO] 配置文件不存在
+[2026-05-01 11:53:52] [INFO] 使用默认端口: 9094
+[2026-05-01 11:53:52] [INFO] 数据库配置文件已存在
+[2026-05-01 11:53:52] [INFO] 开始启动HTTP服务器...
+[2026-05-01 11:53:52] [INFO] 使用端口: 9094
+[2026-05-01 11:53:52] [INFO] HTTP服务器启动成功
+[2026-05-01 11:53:52] [INFO] HTTP服务器线程已启动
+[2026-05-01 11:53:52] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 11:54:36] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:54:47] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:58:49] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:58:49] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 11:58:49] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:58:49] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:58:49] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 11:58:49] [INFO] API请求: GET /get-all-options?_=1777607929852
+[2026-05-01 11:58:49] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 11:58:49] [INFO] API请求: GET /get-query-config
+[2026-05-01 11:58:49] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 11:58:49] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 11:58:49] [INFO] 配置文件内容长度: 90
+[2026-05-01 11:58:49] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 11:58:49] [INFO] 配置文件为明文，加载成功
+[2026-05-01 11:58:50] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:58:50] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:58:50] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:59:08] [INFO] API请求: POST /login
+[2026-05-01 11:59:08] [INFO] 登录尝试: 用户名=admin
+[2026-05-01 11:59:08] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 11:59:08] [INFO] TJYHB表结构检查完成
+[2026-05-01 11:59:08] [INFO] 登录失败: 用户名=admin
+[2026-05-01 11:59:33] [INFO] API请求: POST /login
+[2026-05-01 11:59:33] [INFO] 登录尝试: 用户名=admin
+[2026-05-01 11:59:33] [INFO] 登录失败: 用户名=admin
+[2026-05-01 11:59:38] [INFO] API请求: GET /daily-analysis
+[2026-05-01 11:59:39] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 11:59:39] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 11:59:39] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:00:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:00:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:00:29] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:00:29] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:00:29] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:00:29] [INFO] API请求: GET /get-all-options?_=1777608029155
+[2026-05-01 12:00:29] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:00:29] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:00:29] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:00:29] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:00:29] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:00:47] [INFO] API请求: POST /login
+[2026-05-01 12:00:47] [INFO] 登录尝试: 用户名=admin
+[2026-05-01 12:00:48] [INFO] 登录失败: 用户名=admin
+[2026-05-01 12:01:29] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:01:29] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:01:29] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:01:29] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:01:29] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:01:29] [INFO] API请求: GET /get-all-options?_=1777608089912
+[2026-05-01 12:01:29] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:01:29] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:01:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:01:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:01:30] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:04:47] [INFO] API请求: POST /login
+[2026-05-01 12:04:47] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:04:47] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:04:55] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:04:55] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:04:55] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:04:55] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:04:55] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:04:55] [INFO] API请求: GET /get-all-options?_=1777608295296
+[2026-05-01 12:04:55] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:04:55] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:04:55] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:04:55] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:04:55] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:05:12] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:05:12] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:05:12] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:05:12] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:05:12] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:05:12] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:05:12] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\.well-known/appspecific/com.chrome.devtools.json.html
+[2026-05-01 12:05:12] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\.well-known/appspecific/com.chrome.devtools.json.html
+[2026-05-01 12:05:12] [INFO] API请求: GET /get-all-options?_=1777608312846
+[2026-05-01 12:05:12] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:05:13] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:05:13] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:05:13] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 12:05:13] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 12:05:19] [INFO] API请求: POST /login
+[2026-05-01 12:05:19] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:05:19] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:05:23] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:05:23] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:05:23] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:05:35] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:05:36] [INFO] API请求: POST /login
+[2026-05-01 12:05:36] [INFO] 登录尝试: 用户名=
+[2026-05-01 12:05:36] [INFO] 登录失败: 用户名=
+[2026-05-01 12:06:21] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:06:21] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:06:21] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:06:35] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:07:49] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:07:49] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\test-daily.html
+[2026-05-01 12:07:49] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\test-daily.html
+[2026-05-01 12:07:49] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:07:49] [INFO] 每日分析请求: startDate=2024-01-01, endDate=2024-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:07:49] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:07:57] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:07:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:07:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:07:57] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:08:32] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:08:32] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:08:32] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:08:43] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:08:48] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:08:48] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:08:48] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:08:48] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:09:15] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:09:15] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\test-daily.html
+[2026-05-01 12:09:15] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\test-daily.html
+[2026-05-01 12:09:15] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:09:15] [INFO] 每日分析请求: startDate=2024-01-01, endDate=2024-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:09:15] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:09:18] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:09:18] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:09:18] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:09:18] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:10:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:10:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:10:28] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:10:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:10:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:10:28] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:10:36] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:10:36] [INFO] 每日分析请求: startDate=2024-01-01, endDate=2024-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:10:36] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:10:44] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:11:50] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:11:50] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:11:50] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:11:50] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:11:50] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:11:50] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:11:57] [INFO] API请求: GET /get-hospital-info
+[2026-05-01 12:11:57] [INFO] 尝试从数据库获取医院名称...
+[2026-05-01 12:11:57] [INFO] 数据库连接成功
+[2026-05-01 12:11:57] [ERROR] 获取医院名称失败: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:11:57] [ERROR] 数据库连接错误: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:11:57] [INFO] 未找到医院名称配置，使用默认值
+[2026-05-01 12:14:12] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:14:12] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2025-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:14:12] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:14:22] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:14:33] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:14:33] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:14:33] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:14:41] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:15:20] [INFO] API请求: GET /get-hospital-info
+[2026-05-01 12:15:20] [INFO] 尝试从数据库获取医院名称...
+[2026-05-01 12:15:20] [INFO] 数据库连接成功
+[2026-05-01 12:15:20] [ERROR] 获取医院名称失败: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:15:20] [ERROR] 数据库连接错误: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:15:20] [INFO] 未找到医院名称配置，使用默认值
+[2026-05-01 12:15:21] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:15:21] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2025-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:15:21] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:15:30] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:16:07] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 12:16:07] [INFO] 配置文件不存在
+[2026-05-01 12:16:07] [INFO] 使用默认端口: 9094
+[2026-05-01 12:16:07] [INFO] 数据库配置文件已存在
+[2026-05-01 12:16:07] [INFO] 开始启动HTTP服务器...
+[2026-05-01 12:16:07] [INFO] 使用端口: 9094
+[2026-05-01 12:16:07] [INFO] HTTP服务器启动成功
+[2026-05-01 12:16:07] [INFO] HTTP服务器线程已启动
+[2026-05-01 12:16:07] [INFO] 统计服务器已启动！本地访问：http://localhost:9094/, 网络访问：http://192.168.2.6:9094/
+[2026-05-01 12:16:17] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:16:17] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\test-db-data.html
+[2026-05-01 12:16:17] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\test-db-data.html
+[2026-05-01 12:16:46] [INFO] API请求: GET /get-port
+[2026-05-01 12:17:06] [INFO] API请求: GET /get-hospital-info
+[2026-05-01 12:17:06] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 12:17:06] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 12:17:06] [INFO] 配置文件内容长度: 90
+[2026-05-01 12:17:06] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 12:17:06] [INFO] 配置文件为明文，加载成功
+[2026-05-01 12:17:06] [INFO] 尝试从数据库获取医院名称...
+[2026-05-01 12:17:06] [INFO] 数据库连接成功
+[2026-05-01 12:17:06] [ERROR] 获取医院名称失败: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:17:06] [ERROR] 数据库连接错误: 对象名 'tjfx_SYS_CONFIG' 无效。
+[2026-05-01 12:17:06] [INFO] 未找到医院名称配置，使用默认值
+[2026-05-01 12:17:26] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:17:26] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:17:26] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:17:38] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:17:40] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:17:40] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:17:40] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:17:40] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:17:45] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:17:45] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2026-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:17:45] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:17:46] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:18:52] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:18:52] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:18:52] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:18:52] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:18:52] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2025-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=20, pageIndex=1
+[2026-05-01 12:18:52] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:19:01] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:19:01] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:19:01] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:19:01] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:19:35] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:19:35] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2025-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=20, pageIndex=1
+[2026-05-01 12:19:35] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:19:43] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:20:56] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:20:56] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:20:56] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:20:56] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:20:56] [INFO] 每日分析请求: startDate=2023-01-01, endDate=2025-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:20:56] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:21:04] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:21:04] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:21:04] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:21:04] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:22:08] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:22:08] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:22:08] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:22:18] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:23:59] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 12:23:59] [INFO] 配置文件不存在
+[2026-05-01 12:23:59] [INFO] 使用默认端口: 9095
+[2026-05-01 12:23:59] [INFO] 数据库配置文件已存在
+[2026-05-01 12:23:59] [INFO] 开始启动HTTP服务器...
+[2026-05-01 12:23:59] [INFO] 使用端口: 9095
+[2026-05-01 12:23:59] [INFO] HTTP服务器启动成功
+[2026-05-01 12:23:59] [INFO] HTTP服务器线程已启动
+[2026-05-01 12:23:59] [INFO] 统计服务器已启动！本地访问：http://localhost:9095/, 网络访问：http://192.168.2.6:9095/
+[2026-05-01 12:24:10] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:24:10] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:24:10] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 12:24:10] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 12:24:10] [INFO] 配置文件内容长度: 90
+[2026-05-01 12:24:10] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 12:24:10] [INFO] 配置文件为明文，加载成功
+[2026-05-01 12:24:11] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:24:22] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:26:30] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 12:26:30] [INFO] 配置文件不存在
+[2026-05-01 12:26:30] [INFO] 使用默认端口: 8081
+[2026-05-01 12:26:30] [INFO] 数据库配置文件已存在
+[2026-05-01 12:26:30] [INFO] 开始启动HTTP服务器...
+[2026-05-01 12:26:30] [INFO] 使用端口: 8081
+[2026-05-01 12:26:30] [INFO] HTTP服务器启动成功
+[2026-05-01 12:26:30] [INFO] HTTP服务器线程已启动
+[2026-05-01 12:26:30] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-01 12:27:20] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:27:20] [INFO] 每日分析请求: startDate=, endDate=, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:27:20] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 12:27:20] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 12:27:20] [INFO] 配置文件内容长度: 90
+[2026-05-01 12:27:20] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 12:27:20] [INFO] 配置文件为明文，加载成功
+[2026-05-01 12:27:20] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:27:40] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:27:40] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:27:40] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:27:40] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:27:40] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:27:40] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:27:40] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:28:56] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:28:56] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:28:56] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\simple-test.html
+[2026-05-01 12:28:56] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:28:56] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:28:56] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:29:02] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:29:02] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:29:02] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:29:14] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:31:38] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:31:38] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:31:38] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:31:55] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:31:55] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:31:55] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:31:55] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:31:55] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:33:21] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:33:21] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:33:21] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:33:36] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:33:40] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:33:40] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:33:40] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:33:53] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:34:08] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:34:08] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:34:08] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:34:08] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:34:27] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:34:27] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:34:36] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:34:36] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:34:37] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:34:37] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:34:37] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:34:37] [INFO] API请求: GET /get-all-options?_=1777610077095
+[2026-05-01 12:34:37] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:34:37] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:34:37] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:34:37] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:34:37] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:34:46] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:34:46] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:35:07] [INFO] API请求: POST /login
+[2026-05-01 12:35:07] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:09] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 12:35:09] [INFO] TJYHB表结构检查完成
+[2026-05-01 12:35:09] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:10] [INFO] API请求: POST /login
+[2026-05-01 12:35:10] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:10] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:10] [INFO] API请求: POST /login
+[2026-05-01 12:35:10] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:10] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:10] [INFO] API请求: POST /login
+[2026-05-01 12:35:10] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:10] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:10] [INFO] API请求: POST /login
+[2026-05-01 12:35:10] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:10] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:10] [INFO] API请求: POST /login
+[2026-05-01 12:35:10] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:35:10] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:35:17] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:35:17] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-29, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:35:17] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:35:32] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:35:43] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:35:43] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:35:43] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:35:43] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:36:19] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:36:19] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 12:36:19] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:36:19] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:36:19] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 12:36:21] [INFO] API请求: GET /get-all-options?_=1777610179755
+[2026-05-01 12:36:21] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 12:36:21] [INFO] API请求: GET /get-query-config
+[2026-05-01 12:36:21] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 12:36:21] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:36:21] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 12:36:29] [INFO] API请求: POST /login
+[2026-05-01 12:36:29] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 12:36:30] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 12:37:00] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:37:00] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:37:00] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:37:16] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:38:37] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:38:37] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-01 12:38:37] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:38:51] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 12:38:57] [INFO] API请求: GET /daily-analysis
+[2026-05-01 12:39:12] [INFO] API请求: POST /daily-analysis
+[2026-05-01 12:39:12] [INFO] 每日分析请求: startDate=2026-04-01, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 12:39:12] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(t.SYSTEM_SOURCE_NO, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                    ISNULL(t.ENCOUNTER_TYPE_NO, '') AS 病人类型,
+                    ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' 
+[2026-05-01 12:39:24] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 18:19:58] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 18:19:58] [INFO] 配置文件不存在
+[2026-05-01 18:19:58] [INFO] 使用默认端口: 8081
+[2026-05-01 18:19:58] [INFO] 数据库配置文件已存在
+[2026-05-01 18:19:58] [INFO] 开始启动HTTP服务器...
+[2026-05-01 18:19:58] [INFO] 使用端口: 8081
+[2026-05-01 18:19:58] [INFO] HTTP服务器启动成功
+[2026-05-01 18:19:58] [INFO] HTTP服务器线程已启动
+[2026-05-01 18:19:58] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-01 18:21:50] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-01 18:21:50] [INFO] 配置文件不存在
+[2026-05-01 18:21:50] [INFO] 使用默认端口: 8081
+[2026-05-01 18:21:50] [INFO] 数据库配置文件已存在
+[2026-05-01 18:21:50] [INFO] 开始启动HTTP服务器...
+[2026-05-01 18:21:50] [INFO] 使用端口: 8081
+[2026-05-01 18:21:50] [INFO] HTTP服务器启动成功
+[2026-05-01 18:21:50] [INFO] HTTP服务器线程已启动
+[2026-05-01 18:21:50] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-01 18:21:56] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:21:56] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 18:21:56] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:21:56] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:21:56] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:21:58] [INFO] API请求: GET /get-all-options
+[2026-05-01 18:21:58] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 18:21:58] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-01 18:21:58] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-01 18:21:58] [INFO] 配置文件内容长度: 94
+[2026-05-01 18:21:58] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-01 18:21:58] [INFO] 配置文件为明文，加载成功
+[2026-05-01 18:22:08] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:22:08] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 18:22:08] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-01 18:22:59] [INFO] API请求: POST /login
+[2026-05-01 18:22:59] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 18:23:00] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-01 18:23:00] [INFO] TJYHB表结构检查完成
+[2026-05-01 18:23:00] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-01 18:23:00] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 18:23:33] [INFO] API请求: POST /daily-analysis
+[2026-05-01 18:23:33] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 18:23:33] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-01 18:23:44] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 18:23:47] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:23:47] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 18:23:47] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:23:47] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:23:47] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:23:47] [INFO] API请求: GET /get-all-options
+[2026-05-01 18:23:47] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 18:23:53] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:23:53] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:23:53] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:24:03] [INFO] API请求: POST /daily-analysis
+[2026-05-01 18:24:03] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 18:24:03] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-01 18:24:04] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 18:24:33] [INFO] API请求: POST /daily-analysis
+[2026-05-01 18:24:33] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-01 18:24:33] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-01 18:24:33] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-01 18:39:36] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:39:36] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 18:39:36] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:39:36] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:39:36] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:39:36] [INFO] API请求: GET /get-all-options
+[2026-05-01 18:39:36] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 18:39:44] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:39:44] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:39:44] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:39:45] [INFO] API请求: POST /login
+[2026-05-01 18:39:45] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 18:39:45] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-01 18:39:45] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-01 18:44:09] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:44:09] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-01 18:44:09] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:44:09] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:44:09] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-01 18:44:09] [INFO] API请求: GET /get-all-options
+[2026-05-01 18:44:09] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-01 18:44:17] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-01 18:44:17] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:44:17] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-01 18:44:17] [INFO] API请求: POST /login
+[2026-05-01 18:44:17] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-01 18:44:17] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-01 18:44:17] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 09:48:45] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:48:45] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 09:48:45] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:48:45] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:48:45] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:48:45] [INFO] API请求: GET /get-all-options
+[2026-05-02 09:48:45] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 09:48:55] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:48:55] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:48:55] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:48:55] [INFO] API请求: POST /login
+[2026-05-02 09:48:55] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 09:48:55] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 09:48:55] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 09:48:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:48:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:48:57] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:51:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:51:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 09:51:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:51:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:51:30] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:51:30] [INFO] API请求: GET /get-all-options
+[2026-05-02 09:51:30] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 09:51:37] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:51:37] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:51:37] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 09:51:38] [INFO] API请求: POST /login
+[2026-05-02 09:51:38] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 09:51:38] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 09:51:38] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 09:57:24] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:57:24] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 09:57:24] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:57:24] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:57:24] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 09:57:42] [INFO] API请求: GET /get-all-options
+[2026-05-02 09:57:42] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 09:58:04] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 09:58:04] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-02 09:58:04] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\@vite/client.html
+[2026-05-02 09:58:11] [INFO] API请求: POST /login
+[2026-05-02 09:58:11] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 09:58:13] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 09:58:13] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:13:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:13:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:13:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:13:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:13:30] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:13:30] [INFO] API请求: GET /get-all-options
+[2026-05-02 10:13:30] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 10:13:40] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:13:40] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:13:40] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:13:40] [INFO] API请求: POST /login
+[2026-05-02 10:13:40] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:13:41] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:13:41] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:13:41] [INFO] API请求: POST /login
+[2026-05-02 10:13:41] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:13:41] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:13:41] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:13:41] [INFO] API请求: POST /login
+[2026-05-02 10:13:41] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:13:41] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:13:41] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:13:41] [INFO] API请求: POST /login
+[2026-05-02 10:13:41] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:13:41] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:13:41] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:21:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:21:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:21:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:21:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:21:57] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:21:57] [INFO] API请求: GET /get-all-options
+[2026-05-02 10:21:57] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 10:22:06] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:22:06] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:22:06] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:22:06] [INFO] API请求: POST /login
+[2026-05-02 10:22:06] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:22:06] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:22:06] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:22:15] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:22:15] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:22:15] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:22:28] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:22:28] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:22:28] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:22:28] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:22:28] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:22:35] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:22:35] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:22:35] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:22:36] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:22:46] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:22:46] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:22:46] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:22:46] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:22:56] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:22:56] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:22:56] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:22:56] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:23:06] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:23:06] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:23:06] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:23:17] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:23:17] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:23:17] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:23:17] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:23:17] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:23:26] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:23:26] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:23:26] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:23:26] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:23:36] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:23:36] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:23:36] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:23:36] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:24:07] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:24:07] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:24:07] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:24:24] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:25:07] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:25:07] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:25:07] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:25:07] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:26:07] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:26:07] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:26:07] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:26:19] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:26:19] [INFO] API请求: POST /daily-analysis
+[2026-05-02 10:26:19] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-02 10:26:19] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-02 10:26:28] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-02 10:26:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:26:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:26:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:26:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:26:28] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:26:28] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:26:28] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:26:28] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:26:28] [INFO] API请求: GET /get-all-options
+[2026-05-02 10:26:28] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 10:26:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:26:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:26:30] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:26:37] [INFO] API请求: POST /login
+[2026-05-02 10:26:37] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:26:38] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:26:38] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:26:43] [INFO] API请求: GET /get-port
+[2026-05-02 10:26:43] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:26:43] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:26:43] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:27:01] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:27:01] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:27:01] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:28:54] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:28:54] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:28:54] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:28:54] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:28:54] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:28:55] [INFO] API请求: GET /get-all-options
+[2026-05-02 10:28:55] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 10:29:03] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:29:03] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:03] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:28] [INFO] API请求: POST /login
+[2026-05-02 10:29:28] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 10:29:28] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 10:29:28] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-02 10:29:30] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:29:30] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:30] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:34] [INFO] API请求: GET /get-port
+[2026-05-02 10:29:34] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:29:34] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:34] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:29:44] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:29:44] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:29:44] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:38:56] [INFO] API请求: GET /get-port
+[2026-05-02 10:39:03] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:39:03] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:39:03] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\update-db-config.html
+[2026-05-02 10:39:56] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:39:56] [INFO] 配置文件不存在
+[2026-05-02 10:39:56] [INFO] 使用默认端口: 8081
+[2026-05-02 10:39:56] [INFO] 数据库配置文件已存在
+[2026-05-02 10:39:56] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:39:56] [INFO] 使用端口: 8081
+[2026-05-02 10:39:56] [INFO] HTTP服务器启动成功
+[2026-05-02 10:39:56] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:39:56] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 10:41:08] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:41:08] [INFO] 配置文件不存在
+[2026-05-02 10:41:08] [INFO] 使用默认端口: 8081
+[2026-05-02 10:41:08] [INFO] 数据库配置文件已存在
+[2026-05-02 10:41:08] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:41:08] [INFO] 使用端口: 8081
+[2026-05-02 10:41:08] [INFO] HTTP服务器启动成功
+[2026-05-02 10:41:08] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:41:08] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 10:54:42] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:54:42] [INFO] 配置文件不存在
+[2026-05-02 10:54:42] [INFO] 使用默认端口: 8081
+[2026-05-02 10:54:42] [INFO] 数据库配置文件已存在
+[2026-05-02 10:54:42] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:54:42] [INFO] 使用端口: 8081
+[2026-05-02 10:54:42] [INFO] HTTP服务器启动成功
+[2026-05-02 10:54:42] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:54:42] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 10:54:48] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:54:48] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:54:48] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:54:48] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:54:48] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:54:48] [INFO] API请求: GET /get-all-options
+[2026-05-02 10:54:48] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-02 10:54:48] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-02 10:54:48] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-02 10:54:48] [INFO] 配置文件内容长度: 94
+[2026-05-02 10:54:48] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-02 10:54:48] [INFO] 配置文件为明文，加载成功
+[2026-05-02 10:54:57] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:54:57] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:54:57] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\favicon.ico.html
+[2026-05-02 10:56:39] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:56:40] [INFO] 配置文件不存在
+[2026-05-02 10:56:40] [INFO] 使用默认端口: 8081
+[2026-05-02 10:56:40] [INFO] 数据库配置文件已存在
+[2026-05-02 10:56:40] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:56:40] [INFO] 使用端口: 8081
+[2026-05-02 10:56:40] [INFO] HTTP服务器启动成功
+[2026-05-02 10:56:40] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:56:40] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 10:56:45] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:56:45] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\index.html
+[2026-05-02 10:56:46] [INFO] EXE路径: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\
+[2026-05-02 10:56:46] [INFO] 模板路径: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:56:46] [INFO] 正在返回静态文件: D:\AI\tran\DbProcedureCaller\templates\js/dailyAnalysis.js
+[2026-05-02 10:57:26] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:57:27] [INFO] 配置文件不存在
+[2026-05-02 10:57:27] [INFO] 使用默认端口: 8081
+[2026-05-02 10:57:27] [INFO] 数据库配置文件已存在
+[2026-05-02 10:57:27] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:57:27] [INFO] 使用端口: 8081
+[2026-05-02 10:57:27] [INFO] HTTP服务器启动成功
+[2026-05-02 10:57:27] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:57:27] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 10:58:59] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 10:58:59] [INFO] 配置文件不存在
+[2026-05-02 10:58:59] [INFO] 使用默认端口: 8081
+[2026-05-02 10:58:59] [INFO] 数据库配置文件已存在
+[2026-05-02 10:58:59] [INFO] 开始启动HTTP服务器...
+[2026-05-02 10:58:59] [INFO] 使用端口: 8081
+[2026-05-02 10:59:00] [INFO] HTTP服务器启动成功
+[2026-05-02 10:59:00] [INFO] HTTP服务器线程已启动
+[2026-05-02 10:59:00] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 12:22:45] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:22:45] [INFO] 配置文件不存在
+[2026-05-02 12:22:45] [INFO] 使用默认端口: 8081
+[2026-05-02 12:22:45] [INFO] 数据库配置文件已存在
+[2026-05-02 12:22:45] [INFO] 开始启动HTTP服务器...
+[2026-05-02 12:22:45] [INFO] 使用端口: 8081
+[2026-05-02 12:22:45] [INFO] HTTP服务器启动成功
+[2026-05-02 12:22:45] [INFO] HTTP服务器线程已启动
+[2026-05-02 12:22:45] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 12:23:34] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:23:34] [INFO] 配置文件不存在
+[2026-05-02 12:23:34] [INFO] 使用默认端口: 8081
+[2026-05-02 12:23:34] [INFO] 数据库配置文件已存在
+[2026-05-02 12:23:34] [INFO] 开始启动HTTP服务器...
+[2026-05-02 12:23:34] [INFO] 使用端口: 8081
+[2026-05-02 12:23:34] [INFO] HTTP服务器启动成功
+[2026-05-02 12:23:34] [INFO] HTTP服务器线程已启动
+[2026-05-02 12:23:34] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 12:27:08] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:27:08] [INFO] 配置文件不存在
+[2026-05-02 12:27:08] [INFO] 使用默认端口: 8081
+[2026-05-02 12:27:08] [INFO] 数据库配置文件已存在
+[2026-05-02 12:27:08] [INFO] 开始启动HTTP服务器...
+[2026-05-02 12:27:08] [INFO] 使用端口: 8081
+[2026-05-02 12:27:08] [INFO] HTTP服务器启动成功
+[2026-05-02 12:27:08] [INFO] HTTP服务器线程已启动
+[2026-05-02 12:27:08] [INFO] 统计服务器已启动！本地访问：http://localhost:8081/, 网络访问：http://192.168.2.6:8081/
+[2026-05-02 12:35:21] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:35:21] [INFO] 配置文件不存在
+[2026-05-02 12:35:21] [INFO] 使用默认端口: 8081
+[2026-05-02 12:35:21] [INFO] HTTP服务器启动成功
+[2026-05-02 12:37:12] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:37:12] [INFO] 配置文件不存在
+[2026-05-02 12:37:12] [INFO] 使用默认端口: 8081
+[2026-05-02 12:37:12] [INFO] HTTP服务器启动成功
+[2026-05-02 12:39:38] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:39:38] [INFO] 配置文件不存在
+[2026-05-02 12:39:38] [INFO] 使用默认端口: 8081
+[2026-05-02 12:39:38] [INFO] HTTP服务器启动成功
+[2026-05-02 12:42:55] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:42:55] [INFO] 配置文件不存在
+[2026-05-02 12:42:55] [INFO] 使用默认端口: 8081
+[2026-05-02 12:42:55] [INFO] HTTP服务器启动成功
+[2026-05-02 12:51:16] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:51:16] [INFO] 配置文件不存在
+[2026-05-02 12:51:16] [INFO] 使用默认端口: 8081
+[2026-05-02 12:51:16] [INFO] HTTP服务器启动成功
+[2026-05-02 12:52:16] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:52:16] [INFO] 配置文件不存在
+[2026-05-02 12:52:16] [INFO] 使用默认端口: 8081
+[2026-05-02 12:52:16] [INFO] HTTP服务器启动成功
+[2026-05-02 12:53:05] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:53:05] [INFO] 配置文件不存在
+[2026-05-02 12:53:05] [INFO] 使用默认端口: 8081
+[2026-05-02 12:53:06] [INFO] HTTP服务器启动成功
+[2026-05-02 12:53:10] [INFO] HTTP服务器已停止
+[2026-05-02 12:54:29] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:54:29] [INFO] 配置文件不存在
+[2026-05-02 12:54:29] [INFO] 使用默认端口: 8081
+[2026-05-02 12:54:29] [INFO] HTTP服务器启动成功
+[2026-05-02 12:54:39] [INFO] HTTP服务器已停止
+[2026-05-02 12:55:57] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 12:55:57] [INFO] 配置文件不存在
+[2026-05-02 12:55:57] [INFO] 使用默认端口: 8081
+[2026-05-02 12:55:57] [INFO] HTTP服务器启动成功
+[2026-05-02 12:56:06] [INFO] HTTP服务器已停止
+[2026-05-02 23:34:38] [INFO] 尝试加载配置文件: D:\AI\tran\DbProcedureCaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-02 23:34:38] [INFO] 配置文件不存在
+[2026-05-02 23:34:38] [INFO] 使用默认端口: 8081
+[2026-05-02 23:34:38] [INFO] HTTP服务器启动成功
+[2026-05-02 23:34:52] [INFO] 请求: POST /login
+[2026-05-02 23:34:52] [INFO] API请求: POST /login
+[2026-05-02 23:34:52] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-02 23:34:52] [INFO] 登录尝试: 密码长度=6
+[2026-05-02 23:34:52] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-02 23:34:52] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-02 23:34:52] [INFO] 配置文件内容长度: 120
+[2026-05-02 23:34:52] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-02 23:34:52] [INFO] 配置文件为明文，加载成功
+[2026-05-02 23:34:53] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-02 23:34:53] [INFO] TJYHB表结构检查完成
+[2026-05-02 23:34:53] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-02 23:34:53] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 14:57:40] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 14:57:40] [INFO] 配置文件不存在
+[2026-05-03 14:57:40] [INFO] 使用默认端口: 8081
+[2026-05-03 14:57:40] [INFO] HTTP服务器启动成功
+[2026-05-03 14:58:05] [INFO] 请求: GET /
+[2026-05-03 14:58:30] [INFO] 请求: GET /
+[2026-05-03 14:58:30] [INFO] 请求: GET /
+[2026-05-03 14:58:30] [INFO] 请求: GET /
+[2026-05-03 14:58:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 14:58:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 14:58:31] [INFO] 请求: GET /
+[2026-05-03 14:58:31] [INFO] 请求: GET /
+[2026-05-03 14:58:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 14:58:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 14:58:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 14:58:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 14:58:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 14:58:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 14:58:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 14:58:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 14:58:31] [INFO] 请求: GET /get-all-options
+[2026-05-03 14:58:32] [INFO] API请求: GET /get-all-options
+[2026-05-03 14:58:32] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 14:58:32] [INFO] 请求: GET /favicon.ico
+[2026-05-03 14:58:32] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 14:58:32] [INFO] 请求: GET /favicon.ico
+[2026-05-03 14:58:32] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 14:58:32] [INFO] 请求: GET /favicon.ico
+[2026-05-03 14:58:32] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 14:58:32] [INFO] 请求: GET /favicon.ico
+[2026-05-03 14:58:32] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 14:58:32] [INFO] 请求: GET /favicon.ico
+[2026-05-03 14:58:32] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 14:58:32] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 14:58:32] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 14:58:32] [INFO] 配置文件内容长度: 120
+[2026-05-03 14:58:32] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 14:58:32] [INFO] 配置文件为明文，加载成功
+[2026-05-03 14:58:36] [INFO] 请求: GET /get-all-options
+[2026-05-03 14:58:36] [INFO] API请求: GET /get-all-options
+[2026-05-03 14:58:36] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 14:58:45] [INFO] 请求: POST /login
+[2026-05-03 14:58:45] [INFO] API请求: POST /login
+[2026-05-03 14:58:45] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 14:58:45] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 14:58:45] [ERROR] 初始化数据库表失败: ExecuteScalar requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:58:45] [ERROR] 验证用户失败: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:58:45] [ERROR] 数据库连接失败，请检查数据库配置或联系管理员处理。错误信息: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:58:45] [INFO] 登录失败: 用户名=lhbdb, 原因: 用户名或密码错误
+[2026-05-03 14:58:50] [INFO] 请求: POST /login
+[2026-05-03 14:58:50] [INFO] API请求: POST /login
+[2026-05-03 14:58:50] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 14:58:50] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 14:58:50] [ERROR] 验证用户失败: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:58:50] [ERROR] 数据库连接失败，请检查数据库配置或联系管理员处理。错误信息: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:58:50] [INFO] 登录失败: 用户名=lhbdb, 原因: 用户名或密码错误
+[2026-05-03 14:59:00] [INFO] 请求: POST /login
+[2026-05-03 14:59:00] [INFO] API请求: POST /login
+[2026-05-03 14:59:00] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 14:59:00] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 14:59:00] [ERROR] 验证用户失败: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:59:00] [ERROR] 数据库连接失败，请检查数据库配置或联系管理员处理。错误信息: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:59:00] [INFO] 登录失败: 用户名=lhbdb, 原因: 用户名或密码错误
+[2026-05-03 14:59:07] [ERROR] 获取所有下拉框选项失败: ExecuteReader requires an open and available Connection. The connection's current state is open.
+[2026-05-03 14:59:07] [ERROR] 获取所有下拉框选项失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-03 15:00:11] [INFO] HTTP服务器已停止
+[2026-05-03 15:00:13] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:00:13] [INFO] 配置文件不存在
+[2026-05-03 15:00:13] [INFO] 使用默认端口: 8081
+[2026-05-03 15:00:13] [INFO] HTTP服务器启动成功
+[2026-05-03 15:00:51] [INFO] 请求: POST /login
+[2026-05-03 15:00:51] [INFO] API请求: POST /login
+[2026-05-03 15:00:51] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:00:51] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:00:51] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:00:51] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:00:51] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:00:51] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:00:51] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:00:52] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:00:52] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:00:52] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-03 15:00:52] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:00:57] [INFO] 请求: GET /login
+[2026-05-03 15:00:57] [INFO] API请求: GET /login
+[2026-05-03 15:03:45] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:03:45] [INFO] 配置文件不存在
+[2026-05-03 15:03:45] [INFO] 使用默认端口: 8081
+[2026-05-03 15:03:45] [INFO] HTTP服务器启动成功
+[2026-05-03 15:04:05] [INFO] 请求: POST /login
+[2026-05-03 15:04:05] [INFO] API请求: POST /login
+[2026-05-03 15:04:05] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:04:05] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:04:05] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:04:05] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:04:05] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:04:05] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:04:05] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:04:06] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:04:06] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:04:06] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-03 15:04:06] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:04:52] [INFO] 请求: POST /login
+[2026-05-03 15:04:52] [INFO] API请求: POST /login
+[2026-05-03 15:04:52] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:04:52] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:04:52] [ERROR] 更新登录信息失败: There is already an open DataReader associated with this Command which must be closed first.
+[2026-05-03 15:04:52] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:04:59] [INFO] 请求: POST /daily-analysis
+[2026-05-03 15:04:59] [INFO] API请求: POST /daily-analysis
+[2026-05-03 15:04:59] [INFO] 每日分析请求: startDate=2026-03-31, endDate=2026-04-30, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=任务数量, sortOrder=DESC, pageSize=0, pageIndex=1
+[2026-05-03 15:04:59] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-03 15:05:14] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-03 15:05:54] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:05:54] [INFO] 配置文件不存在
+[2026-05-03 15:05:54] [INFO] 使用默认端口: 8081
+[2026-05-03 15:05:54] [INFO] HTTP服务器启动成功
+[2026-05-03 15:06:17] [INFO] 请求: POST /login
+[2026-05-03 15:06:17] [INFO] API请求: POST /login
+[2026-05-03 15:06:17] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:06:17] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:06:17] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:06:17] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:06:17] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:06:17] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:06:17] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:06:18] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:06:18] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:06:18] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:06:20] [INFO] 请求: GET /login
+[2026-05-03 15:06:20] [INFO] API请求: GET /login
+[2026-05-03 15:06:42] [INFO] 请求: GET /pages/complex-config.html
+[2026-05-03 15:08:49] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:08:49] [INFO] 配置文件不存在
+[2026-05-03 15:08:49] [INFO] 使用默认端口: 8081
+[2026-05-03 15:08:49] [INFO] HTTP服务器启动成功
+[2026-05-03 15:09:03] [INFO] 请求: POST /daily-analysis
+[2026-05-03 15:09:03] [INFO] API请求: POST /daily-analysis
+[2026-05-03 15:09:03] [INFO] 每日分析请求: startDate=2026-01-01, endDate=2026-12-31, system=, reporter=, reviewer=, technician=, department=, category=, patientType=, resultStatus=, sortBy=, sortOrder=, pageSize=0, pageIndex=1
+[2026-05-03 15:09:03] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:09:03] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:09:03] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:09:03] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:09:03] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:09:03] [INFO] 执行SQL查询: 
+                SELECT
+                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                        WHEN 'UIS' THEN '超声' 
+                        WHEN 'RIS' THEN '放射' 
+                        WHEN 'EIS' THEN '内镜' 
+                        WHEN 'PIS' THEN '病理'
+                        WHEN 'NMS' THEN '核医学'
+                        ELSE t.SYSTEM_SOURCE_NO 
+                    END, '') AS 系统,
+                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                    ISNULL(r.REVIEWER_NAME, '') AS 审核
+[2026-05-03 15:09:03] [ERROR] 记录查询历史失败: 对象名 'DAILY_QUERY_HISTORY' 无效。
+[2026-05-03 15:13:41] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:13:41] [INFO] 请求: GET /get-port
+[2026-05-03 15:13:41] [INFO] API请求: GET /get-port
+[2026-05-03 15:13:51] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:13:51] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:13:59] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:13:59] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:00] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:00] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:01] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:01] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:23] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:23] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:23] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:23] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:24] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:24] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:25] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:25] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:25] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:25] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:25] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:25] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:25] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:14:25] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:14:28] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:14:28] [INFO] 请求: GET /get-port
+[2026-05-03 15:14:28] [INFO] API请求: GET /get-port
+[2026-05-03 15:16:40] [INFO] 请求: POST /test-db-connection
+[2026-05-03 15:16:40] [INFO] API请求: POST /test-db-connection
+[2026-05-03 15:16:40] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 15:16:40] [INFO] 数据库连接测试成功
+[2026-05-03 15:16:44] [INFO] 请求: GET /test-db-connection
+[2026-05-03 15:16:44] [INFO] API请求: GET /test-db-connection
+[2026-05-03 15:17:36] [INFO] 请求: GET /
+[2026-05-03 15:17:36] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:17:36] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:17:36] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:17:36] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:17:36] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:17:42] [INFO] 请求: POST /login
+[2026-05-03 15:17:42] [INFO] API请求: POST /login
+[2026-05-03 15:17:42] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:17:42] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:17:42] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:17:42] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:17:42] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:17:45] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:17:45] [INFO] 请求: GET /get-port
+[2026-05-03 15:17:45] [INFO] API请求: GET /get-port
+[2026-05-03 15:18:04] [INFO] 请求: POST /update-db-config
+[2026-05-03 15:18:04] [INFO] API请求: POST /update-db-config
+[2026-05-03 15:18:04] [INFO] 尝试更新数据库配置
+[2026-05-03 15:18:04] [INFO] 数据库配置更新成功
+[2026-05-03 15:18:08] [INFO] 请求: POST /test-db-connection
+[2026-05-03 15:18:08] [INFO] API请求: POST /test-db-connection
+[2026-05-03 15:18:08] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 15:18:08] [INFO] 数据库连接测试成功
+[2026-05-03 15:18:16] [INFO] 请求: POST /test-db-connection
+[2026-05-03 15:18:16] [INFO] API请求: POST /test-db-connection
+[2026-05-03 15:18:16] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 15:18:16] [INFO] 数据库连接测试成功
+[2026-05-03 15:18:17] [INFO] 请求: POST /set-port
+[2026-05-03 15:18:17] [INFO] API请求: POST /set-port
+[2026-05-03 15:18:17] [INFO] 端口配置已保存: 9094
+[2026-05-03 15:18:19] [INFO] 请求: POST /update-db-config
+[2026-05-03 15:18:20] [INFO] API请求: POST /update-db-config
+[2026-05-03 15:18:20] [INFO] 尝试更新数据库配置
+[2026-05-03 15:18:20] [INFO] 数据库配置更新成功
+[2026-05-03 15:20:02] [INFO] 请求: GET /
+[2026-05-03 15:20:02] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:20:02] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:20:02] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:20:02] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:20:02] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:20:02] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:20:02] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:20:02] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:20:02] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:20:02] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:20:09] [INFO] 请求: POST /login
+[2026-05-03 15:20:09] [INFO] API请求: POST /login
+[2026-05-03 15:20:09] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:20:09] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:20:09] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:20:11] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:20:11] [INFO] 请求: GET /get-port
+[2026-05-03 15:20:11] [INFO] API请求: GET /get-port
+[2026-05-03 15:20:27] [INFO] 请求: POST /update-db-config
+[2026-05-03 15:20:27] [INFO] API请求: POST /update-db-config
+[2026-05-03 15:20:27] [INFO] 尝试更新数据库配置
+[2026-05-03 15:20:27] [INFO] 数据库配置更新成功
+[2026-05-03 15:20:29] [INFO] 请求: POST /test-db-connection
+[2026-05-03 15:20:29] [INFO] API请求: POST /test-db-connection
+[2026-05-03 15:20:29] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 15:20:29] [INFO] 数据库连接测试成功
+[2026-05-03 15:20:29] [INFO] 请求: POST /update-db-config
+[2026-05-03 15:20:29] [INFO] API请求: POST /update-db-config
+[2026-05-03 15:20:29] [INFO] 尝试更新数据库配置
+[2026-05-03 15:20:29] [INFO] 数据库配置更新成功
+[2026-05-03 15:20:31] [INFO] 请求: GET /
+[2026-05-03 15:20:31] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:20:31] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:20:31] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:20:31] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:20:31] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:20:31] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:20:31] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:20:31] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:20:31] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:20:31] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:20:40] [INFO] 请求: POST /login
+[2026-05-03 15:20:40] [INFO] API请求: POST /login
+[2026-05-03 15:20:40] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:20:40] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:20:41] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:20:42] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:20:42] [INFO] 请求: GET /get-port
+[2026-05-03 15:20:42] [INFO] API请求: GET /get-port
+[2026-05-03 15:20:45] [INFO] 请求: POST /set-port
+[2026-05-03 15:20:45] [INFO] API请求: POST /set-port
+[2026-05-03 15:20:45] [INFO] 端口配置已保存: 9094
+[2026-05-03 15:24:18] [INFO] 请求: GET /
+[2026-05-03 15:24:18] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:24:18] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:24:18] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:24:18] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:24:18] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:24:23] [INFO] 请求: POST /login
+[2026-05-03 15:24:23] [INFO] API请求: POST /login
+[2026-05-03 15:24:23] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:24:23] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:24:23] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:24:26] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:24:26] [INFO] 请求: GET /get-port
+[2026-05-03 15:24:26] [INFO] API请求: GET /get-port
+[2026-05-03 15:24:38] [INFO] 请求: POST /test-db-connection
+[2026-05-03 15:24:38] [INFO] API请求: POST /test-db-connection
+[2026-05-03 15:24:38] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 15:24:38] [INFO] 数据库连接测试成功
+[2026-05-03 15:24:38] [INFO] 请求: POST /update-db-config
+[2026-05-03 15:24:38] [INFO] API请求: POST /update-db-config
+[2026-05-03 15:24:38] [INFO] 尝试更新数据库配置
+[2026-05-03 15:24:38] [INFO] 数据库配置更新成功
+[2026-05-03 15:24:38] [INFO] 请求: POST /set-port
+[2026-05-03 15:24:38] [INFO] API请求: POST /set-port
+[2026-05-03 15:24:38] [INFO] 端口配置已保存: 9094
+[2026-05-03 15:24:40] [INFO] 请求: GET /
+[2026-05-03 15:24:40] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:24:40] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:24:40] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:24:40] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:24:40] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:24:40] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:24:40] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:24:40] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:24:40] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:24:40] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:24:58] [INFO] 请求: POST /login
+[2026-05-03 15:24:58] [INFO] API请求: POST /login
+[2026-05-03 15:24:58] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:24:58] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:24:58] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:29:01] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:29:01] [INFO] 解密后内容: 9094
+[2026-05-03 15:29:01] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 15:29:01] [INFO] HTTP服务器启动成功
+[2026-05-03 15:35:24] [INFO] HTTP服务器已停止
+[2026-05-03 15:35:38] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:35:38] [INFO] 解密后内容: 9094
+[2026-05-03 15:35:38] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 15:35:38] [INFO] HTTP服务器启动成功
+[2026-05-03 15:36:17] [INFO] 请求: GET /
+[2026-05-03 15:36:18] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:36:18] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:36:18] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:36:18] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:36:18] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:36:18] [INFO] 请求: GET /favicon.ico
+[2026-05-03 15:36:18] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\favicon.ico
+[2026-05-03 15:36:18] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:36:18] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:36:18] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:36:18] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:36:18] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:36:23] [INFO] 请求: POST /login
+[2026-05-03 15:36:23] [INFO] API请求: POST /login
+[2026-05-03 15:36:23] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:36:23] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:36:24] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:36:24] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:36:25] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:36:27] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:36:27] [INFO] 请求: GET /get-port
+[2026-05-03 15:36:27] [INFO] API请求: GET /get-port
+[2026-05-03 15:38:14] [INFO] 请求: GET /
+[2026-05-03 15:38:14] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:38:14] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:38:14] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:38:14] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:38:14] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:38:21] [INFO] 请求: POST /login
+[2026-05-03 15:38:21] [INFO] API请求: POST /login
+[2026-05-03 15:38:21] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:38:21] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:38:22] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:38:23] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:38:23] [INFO] 请求: GET /get-port
+[2026-05-03 15:38:23] [INFO] API请求: GET /get-port
+[2026-05-03 15:38:28] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:38:28] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:43:03] [INFO] HTTP服务器已停止
+[2026-05-03 15:44:08] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:44:08] [INFO] 解密后内容: 9094
+[2026-05-03 15:44:08] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 15:44:08] [INFO] HTTP服务器启动成功
+[2026-05-03 15:50:45] [INFO] HTTP服务器已停止
+[2026-05-03 15:51:01] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:51:01] [INFO] 解密后内容: 9094
+[2026-05-03 15:51:01] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 15:51:01] [INFO] HTTP服务器启动成功
+[2026-05-03 15:51:29] [INFO] 请求: GET /
+[2026-05-03 15:51:29] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:51:29] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:51:29] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:51:29] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:51:29] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:51:29] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:51:29] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:51:29] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:51:29] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:51:29] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:51:37] [INFO] 请求: POST /login
+[2026-05-03 15:51:37] [INFO] API请求: POST /login
+[2026-05-03 15:51:37] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:51:37] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:51:38] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:51:38] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:51:38] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:51:40] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:51:40] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 15:51:40] [INFO] 请求: GET /get-db-config
+[2026-05-03 15:51:40] [INFO] 请求: GET /get-port
+[2026-05-03 15:51:40] [INFO] API请求: GET /get-db-config
+[2026-05-03 15:51:40] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:51:40] [INFO] API请求: GET /get-port
+[2026-05-03 15:51:40] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:51:47] [INFO] 请求: GET /pages/user-config.html
+[2026-05-03 15:51:47] [INFO] 请求: GET /get-users
+[2026-05-03 15:51:47] [INFO] API请求: GET /get-users
+[2026-05-03 15:51:53] [INFO] 请求: GET /
+[2026-05-03 15:51:53] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:51:53] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:51:53] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:51:53] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:51:53] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:52:01] [INFO] 请求: POST /login
+[2026-05-03 15:52:01] [INFO] API请求: POST /login
+[2026-05-03 15:52:01] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:52:01] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:52:01] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:52:03] [INFO] 请求: GET /pages/permission-config.html
+[2026-05-03 15:52:12] [INFO] 请求: GET /pages/permission-config.html
+[2026-05-03 15:52:14] [INFO] 请求: GET /pages/user-config.html
+[2026-05-03 15:52:14] [INFO] 请求: GET /get-users
+[2026-05-03 15:52:14] [INFO] API请求: GET /get-users
+[2026-05-03 15:57:32] [INFO] HTTP服务器已停止
+[2026-05-03 15:57:44] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 15:57:44] [INFO] 解密后内容: 9094
+[2026-05-03 15:57:44] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 15:57:44] [INFO] HTTP服务器启动成功
+[2026-05-03 15:58:17] [INFO] 请求: GET /
+[2026-05-03 15:58:17] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:58:17] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:58:17] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:58:17] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:58:17] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:58:17] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 15:58:17] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 15:58:17] [INFO] 配置文件内容长度: 120
+[2026-05-03 15:58:17] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 15:58:17] [INFO] 配置文件为明文，加载成功
+[2026-05-03 15:58:24] [INFO] 请求: POST /login
+[2026-05-03 15:58:24] [INFO] API请求: POST /login
+[2026-05-03 15:58:24] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:58:24] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:58:24] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 15:58:24] [INFO] TJYHB表结构检查完成
+[2026-05-03 15:58:24] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:58:26] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 15:58:26] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 15:58:26] [INFO] 请求: GET /get-port
+[2026-05-03 15:58:26] [INFO] 请求: GET /get-db-config
+[2026-05-03 15:58:26] [INFO] API请求: GET /get-port
+[2026-05-03 15:58:26] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:58:26] [INFO] API请求: GET /get-db-config
+[2026-05-03 15:58:26] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:58:30] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 15:58:30] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 15:58:58] [INFO] 请求: GET /pages/permission-config.html
+[2026-05-03 15:59:02] [INFO] 请求: GET /pages/user-config.html
+[2026-05-03 15:59:02] [INFO] 请求: GET /js/pages/user-config.js
+[2026-05-03 15:59:02] [INFO] 请求: GET /get-users
+[2026-05-03 15:59:02] [INFO] API请求: GET /get-users
+[2026-05-03 15:59:05] [INFO] 请求: GET /get-user
+[2026-05-03 15:59:05] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-user.html
+[2026-05-03 15:59:13] [INFO] 请求: GET /get-user
+[2026-05-03 15:59:13] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-user.html
+[2026-05-03 15:59:23] [INFO] 请求: GET /
+[2026-05-03 15:59:23] [INFO] 请求: GET /css/common.css
+[2026-05-03 15:59:23] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 15:59:23] [INFO] 请求: GET /get-all-options
+[2026-05-03 15:59:23] [INFO] API请求: GET /get-all-options
+[2026-05-03 15:59:23] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 15:59:30] [INFO] 请求: POST /login
+[2026-05-03 15:59:30] [INFO] API请求: POST /login
+[2026-05-03 15:59:30] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 15:59:30] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 15:59:30] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 15:59:33] [INFO] 请求: GET /pages/complex-config.html
+[2026-05-03 15:59:43] [INFO] 请求: GET /pages/permission-config.html
+[2026-05-03 15:59:49] [INFO] 请求: GET /pages/user-config.html
+[2026-05-03 15:59:49] [INFO] 请求: GET /js/pages/user-config.js
+[2026-05-03 15:59:49] [INFO] 请求: GET /get-users
+[2026-05-03 15:59:49] [INFO] API请求: GET /get-users
+[2026-05-03 15:59:54] [INFO] 请求: GET /get-user
+[2026-05-03 15:59:54] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-user.html
+[2026-05-03 16:00:08] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:00:08] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:00:08] [INFO] 请求: GET /get-port
+[2026-05-03 16:00:08] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:00:08] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:00:08] [INFO] API请求: GET /get-port
+[2026-05-03 16:00:08] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:00:08] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:03:50] [INFO] HTTP服务器已停止
+[2026-05-03 16:04:02] [INFO] 尝试加载配置文件: D:\AI\tran\dbprocedurecaller\bin\Release\net8.0-windows\server_config.dat
+[2026-05-03 16:04:02] [INFO] 解密后内容: 9094
+[2026-05-03 16:04:02] [INFO] 从配置文件加载端口: 9094
+[2026-05-03 16:04:02] [INFO] HTTP服务器启动成功
+[2026-05-03 16:04:41] [INFO] 请求: GET /
+[2026-05-03 16:04:41] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:04:41] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:04:42] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:04:42] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:04:42] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:04:42] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 16:04:42] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 16:04:42] [INFO] 配置文件内容长度: 120
+[2026-05-03 16:04:42] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 16:04:42] [INFO] 配置文件为明文，加载成功
+[2026-05-03 16:04:48] [INFO] 请求: POST /login
+[2026-05-03 16:04:48] [INFO] API请求: POST /login
+[2026-05-03 16:04:48] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:04:48] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:04:51] [INFO] TJYHB表已存在，检查并添加缺失的列...
+[2026-05-03 16:04:51] [INFO] TJYHB表结构检查完成
+[2026-05-03 16:04:51] [INFO] 请求: POST /login
+[2026-05-03 16:04:51] [INFO] API请求: POST /login
+[2026-05-03 16:04:51] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:04:51] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:04:52] [INFO] 请求: POST /login
+[2026-05-03 16:04:52] [INFO] API请求: POST /login
+[2026-05-03 16:04:52] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:04:52] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:04:53] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:04:53] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:04:53] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:04:55] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:04:55] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:04:55] [INFO] 请求: GET /get-port
+[2026-05-03 16:04:55] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:04:55] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:04:55] [INFO] API请求: GET /get-port
+[2026-05-03 16:04:55] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:04:55] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:08:26] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:08:26] [INFO] 请求: GET /get-port
+[2026-05-03 16:08:26] [INFO] API请求: GET /get-port
+[2026-05-03 16:08:26] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:08:26] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:08:26] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:08:26] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:11:38] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:11:38] [INFO] 请求: GET /get-port
+[2026-05-03 16:11:38] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:11:38] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:11:38] [INFO] API请求: GET /get-port
+[2026-05-03 16:11:38] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:11:38] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:11:40] [INFO] 请求: GET /get-port
+[2026-05-03 16:11:40] [INFO] API请求: GET /get-port
+[2026-05-03 16:11:43] [INFO] 请求: GET /
+[2026-05-03 16:11:43] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:11:43] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:11:43] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:11:43] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:11:43] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:11:49] [INFO] 请求: POST /login
+[2026-05-03 16:11:49] [INFO] API请求: POST /login
+[2026-05-03 16:11:49] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:11:49] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:11:50] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:11:51] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:11:51] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:11:51] [INFO] 请求: GET /get-port
+[2026-05-03 16:11:51] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:11:51] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:11:51] [INFO] API请求: GET /get-port
+[2026-05-03 16:11:51] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:11:51] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:14:50] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:14:50] [INFO] 请求: GET /get-port
+[2026-05-03 16:14:50] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:14:50] [INFO] API请求: GET /get-port
+[2026-05-03 16:14:50] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:14:50] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:14:50] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:17:49] [INFO] 请求: GET /
+[2026-05-03 16:17:49] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:17:49] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:17:50] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:17:50] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:17:50] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:17:56] [INFO] 请求: POST /login
+[2026-05-03 16:17:56] [INFO] API请求: POST /login
+[2026-05-03 16:17:56] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:17:56] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:17:58] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:17:59] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:17:59] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:17:59] [INFO] 请求: GET /get-port
+[2026-05-03 16:17:59] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:17:59] [INFO] API请求: GET /get-port
+[2026-05-03 16:17:59] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:17:59] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:17:59] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:26:57] [INFO] 请求: GET /
+[2026-05-03 16:26:57] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:26:57] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:26:57] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:26:57] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:26:57] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:27:02] [INFO] 请求: POST /login
+[2026-05-03 16:27:02] [INFO] API请求: POST /login
+[2026-05-03 16:27:02] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:27:02] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:27:03] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:27:05] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:27:05] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:27:05] [INFO] 请求: GET /get-port
+[2026-05-03 16:27:05] [INFO] API请求: GET /get-port
+[2026-05-03 16:27:05] [INFO] 请求: GET /get-port
+[2026-05-03 16:27:05] [INFO] API请求: GET /get-port
+[2026-05-03 16:39:39] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:39:39] [INFO] 请求: GET /get-port
+[2026-05-03 16:39:39] [INFO] API请求: GET /get-port
+[2026-05-03 16:39:58] [INFO] 请求: GET /
+[2026-05-03 16:39:58] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:39:58] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:39:58] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:39:58] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:39:58] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:40:06] [INFO] 请求: POST /login
+[2026-05-03 16:40:06] [INFO] API请求: POST /login
+[2026-05-03 16:40:06] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:40:06] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:40:06] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:40:07] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:40:07] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:40:07] [INFO] 请求: GET /get-port
+[2026-05-03 16:40:07] [INFO] API请求: GET /get-port
+[2026-05-03 16:40:07] [INFO] 请求: GET /get-port
+[2026-05-03 16:40:07] [INFO] API请求: GET /get-port
+[2026-05-03 16:40:08] [INFO] 请求: GET /get-port
+[2026-05-03 16:40:08] [INFO] API请求: GET /get-port
+[2026-05-03 16:40:16] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:40:16] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:40:18] [INFO] 请求: GET /get-port
+[2026-05-03 16:40:18] [INFO] API请求: GET /get-port
+[2026-05-03 16:43:03] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:43:03] [INFO] 请求: GET /get-port
+[2026-05-03 16:43:03] [INFO] API请求: GET /get-port
+[2026-05-03 16:43:04] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:43:04] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:43:07] [INFO] 请求: GET /get-port
+[2026-05-03 16:43:07] [INFO] API请求: GET /get-port
+[2026-05-03 16:43:40] [INFO] 请求: GET /get-db-config
+[2026-05-03 16:43:40] [INFO] API请求: GET /get-db-config
+[2026-05-03 16:43:42] [INFO] 请求: POST /test-db-connection
+[2026-05-03 16:43:42] [INFO] API请求: POST /test-db-connection
+[2026-05-03 16:43:42] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 16:43:42] [ERROR] 数据库连接测试失败: 用户 'sa' 登录失败。
+[2026-05-03 16:43:55] [INFO] 请求: POST /test-db-connection
+[2026-05-03 16:43:55] [INFO] API请求: POST /test-db-connection
+[2026-05-03 16:43:55] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 16:43:55] [INFO] 数据库连接测试成功
+[2026-05-03 16:43:56] [INFO] 请求: POST /test-db-connection
+[2026-05-03 16:43:56] [INFO] API请求: POST /test-db-connection
+[2026-05-03 16:43:56] [INFO] 测试数据库连接: Server=127.0.0.1, Database=WiNEX_PACS, User=sa
+[2026-05-03 16:43:56] [INFO] 数据库连接测试成功
+[2026-05-03 16:43:56] [INFO] 请求: POST /update-db-config
+[2026-05-03 16:43:56] [INFO] API请求: POST /update-db-config
+[2026-05-03 16:43:56] [INFO] 尝试更新数据库配置
+[2026-05-03 16:43:56] [INFO] 数据库配置更新成功
+[2026-05-03 16:43:56] [INFO] 请求: GET /get-hospital-info
+[2026-05-03 16:43:56] [INFO] 文件不存在: D:\AI\tran\dbprocedurecaller\templates\get-hospital-info.html
+[2026-05-03 16:44:00] [INFO] 请求: GET /get-port
+[2026-05-03 16:44:00] [INFO] API请求: GET /get-port
+[2026-05-03 16:46:20] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:46:20] [INFO] 请求: GET /get-port
+[2026-05-03 16:46:20] [INFO] API请求: GET /get-port
+[2026-05-03 16:46:22] [INFO] 请求: GET /get-port
+[2026-05-03 16:46:22] [INFO] API请求: GET /get-port
+[2026-05-03 16:46:25] [INFO] 请求: GET /
+[2026-05-03 16:46:25] [INFO] 请求: GET /css/common.css
+[2026-05-03 16:46:25] [INFO] 请求: GET /js/dailyAnalysis.js
+[2026-05-03 16:46:25] [INFO] 请求: GET /get-all-options
+[2026-05-03 16:46:25] [INFO] API请求: GET /get-all-options
+[2026-05-03 16:46:25] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-03 16:46:25] [INFO] 尝试备用路径: d:\AI\tran\config.dat
+[2026-05-03 16:46:25] [INFO] 配置文件路径: d:\AI\tran\config.dat
+[2026-05-03 16:46:25] [INFO] 配置文件内容长度: 120
+[2026-05-03 16:46:25] [ERROR] 解密过程异常: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+[2026-05-03 16:46:25] [INFO] 配置文件为明文，加载成功
+[2026-05-03 16:46:30] [INFO] 请求: POST /login
+[2026-05-03 16:46:30] [INFO] API请求: POST /login
+[2026-05-03 16:46:30] [INFO] 登录尝试: 用户名=lhbdb
+[2026-05-03 16:46:30] [INFO] 登录尝试: 密码长度=6
+[2026-05-03 16:46:33] [INFO] 登录成功: 用户名=lhbdb, 是管理员=True
+[2026-05-03 16:46:34] [INFO] 请求: GET /pages/server-config.html
+[2026-05-03 16:46:34] [INFO] 请求: GET /js/pages/server-config.js
+[2026-05-03 16:46:34] [INFO] 请求: GET /get-port
+[2026-05-03 16:46:34] [INFO] API请求: GET /get-port
+[2026-05-03 16:46:34] [INFO] 请求: GET /get-port
+[2026-05-03 16:46:34] [INFO] API请求: GET /get-port
+[2026-05-03 16:46:35] [INFO] 请求: GET /get-port
+[2026-05-03 16:46:35] [INFO] API请求: GET /get-port

@@ -1,0 +1,80 @@
+{
+  "database": {
+    "server": "localhost",
+    "database": "WiNEX_PACS",
+    "authentication": "windows",
+    "connection_string": "Server=localhost;Database=WiNEX_PACS;Integrated Security=True;TrustServerCertificate=True;",
+    "read_only": true,
+    "forbidden_operations": ["CREATE", "ALTER", "DROP", "DELETE", "INSERT", "UPDATE"]
+  },
+  "schema": {
+    "tables": {
+      "EXAM_TASK": {
+        "description": "检查任务主表",
+        "fields": {
+          "EXAM_TASK_ID": "检查任务ID（主键）",
+          "SYSTEM_SOURCE_NO": "系统分类（RIS=放射科, EIS=内镜科, UIS=超声科, PIS=病理科, NMS=核医学科）",
+          "EXAM_TASK_STATUS": "任务状态（20=创建, 40=检查中, 50=完成, 60=审核, 70=发布）",
+          "EXAM_CATEGORY_NAME": "检查类别名称",
+          "REGISTER_AT": "登记时间",
+          "CREATED_AT": "创建时间",
+          "IS_DEL": "删除标志（0=未删除, 1=已删除）",
+          "LABEL_NO": "标签号/检查号",
+          "TECHNICIAN_NAME": "技师姓名",
+          "ADMISSION_NUMBER": "就诊号",
+          "ENCOUNTER_TYPE_NO": "就诊类型（138138=门诊, 145235=住院, 138140=体检）"
+        }
+      },
+      "EXAM_REPORT": {
+        "description": "检查报告表",
+        "fields": {
+          "EXAM_REPORT_ID": "报告ID（主键）",
+          "EXAM_TASK_ID": "关联检查任务ID",
+          "REPORTER_NAME": "报告医生姓名",
+          "REVIEWER_NAME": "审核医生姓名",
+          "WRITER_AT": "书写时间",
+          "REPORT_AT": "报告时间",
+          "REVIEW_AT": "审核时间",
+          "EXAM_CONCLUSION_PLAIN_TEXT": "报告结论（纯文本）",
+          "IS_DEL": "删除标志（0=未删除, 1=已删除）"
+        }
+      },
+      "EXAM_CHARGE_ITEM": {
+        "description": "检查收费项目表",
+        "fields": {
+          "EXAM_ITEM_ID": "收费项目ID",
+          "EXAM_TASK_ID": "关联检查任务ID",
+          "EXAM_ITEM_NAME": "检查项目名称",
+          "IS_DEL": "删除标志（0=未删除, 1=已删除）"
+        }
+      }
+    },
+    "query_templates": {
+      "total_count": "SELECT COUNT(*) FROM EXAM_TASK t JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID WHERE t.IS_DEL=0 AND r.IS_DEL=0 AND t.SYSTEM_SOURCE_NO='@system' AND t.EXAM_TASK_STATUS>=50 AND CAST(t.REGISTER_AT AS DATE)='@date' AND @doctor_field IS NOT NULL",
+      "by_category": "SELECT t.EXAM_CATEGORY_NAME, COUNT(*) AS Count FROM EXAM_TASK t JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID WHERE t.IS_DEL=0 AND r.IS_DEL=0 AND t.SYSTEM_SOURCE_NO='@system' AND t.EXAM_TASK_STATUS>=50 AND CAST(t.REGISTER_AT AS DATE)='@date' AND @doctor_field IS NOT NULL GROUP BY t.EXAM_CATEGORY_NAME ORDER BY Count DESC",
+      "by_doctor": "SELECT @doctor_field AS 医生, COUNT(*) AS Count FROM EXAM_TASK t JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID WHERE t.IS_DEL=0 AND r.IS_DEL=0 AND t.SYSTEM_SOURCE_NO='@system' AND t.EXAM_TASK_STATUS>=50 AND CAST(t.REGISTER_AT AS DATE)='@date' AND @doctor_field IS NOT NULL GROUP BY @doctor_field ORDER BY Count DESC",
+      "by_charge_item": "SELECT ri.EXAM_ITEM_NAME, COUNT(DISTINCT t.EXAM_TASK_ID) AS Count FROM EXAM_TASK t JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID LEFT JOIN EXAM_CHARGE_ITEM ri ON t.EXAM_TASK_ID = ri.EXAM_TASK_ID AND ri.IS_DEL=0 WHERE t.IS_DEL=0 AND r.IS_DEL=0 AND t.SYSTEM_SOURCE_NO='@system' AND t.EXAM_TASK_STATUS>=50 AND CAST(t.REGISTER_AT AS DATE)='@date' AND @doctor_field IS NOT NULL GROUP BY ri.EXAM_ITEM_NAME ORDER BY Count DESC"
+    }
+  },
+  "statistics": {
+    "default_date_range": "current_month",
+    "status_filter": "EXAM_TASK_STATUS >= 50",
+    "exclude_deleted": true,
+    "doctor_types": {
+      "reporter": "r.REPORTER_NAME",
+      "reviewer": "r.REVIEWER_NAME",
+      "technician": "t.TECHNICIAN_NAME"
+    }
+  },
+  "validation": {
+    "enable_auto_validation": true,
+    "tolerance": 0,
+    "require_exact_match": true,
+    "min_days_required": 2,
+    "enforce_schema_first": true,
+    "enforce_file_verification": true,
+    "enforce_read_only": true,
+    "enforce_deep_analysis": true,
+    "enforce_proactive_discovery": true
+  }
+}
