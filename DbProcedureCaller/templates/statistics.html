@@ -128,6 +128,29 @@
             flex: 1;
             min-width: 0;
         }
+        .menu-edit-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.25s;
+            flex-shrink: 0;
+        }
+        .menu-item:hover .menu-edit-btn {
+            opacity: 1;
+        }
+        .menu-edit-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
         .menu-item-text {
             font-weight: 500;
             font-size: 14px;
@@ -532,9 +555,11 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var currentStat = null;
         var sidebarVisible = true;
+        var isAdminUser = false;
         
         function goBack() {
             if (window.top !== window.self) {
@@ -549,8 +574,29 @@
             $('#startDate').val(today);
             $('#endDate').val(today);
             
-            loadCustomStats();
+            checkAdminStatus();
         });
+        
+        function checkAdminStatus() {
+            var username = sessionStorage.getItem('user') || '';
+            console.log('当前用户:', username);
+            $.ajax({
+                url: '/check-admin?username=' + encodeURIComponent(username),
+                method: 'GET',
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    console.log('管理员检查结果:', data);
+                    isAdminUser = data.success && data.isAdmin;
+                    console.log('是否管理员:', isAdminUser);
+                    loadCustomStats();
+                },
+                error: function(xhr, status, error) {
+                    console.log('管理员检查失败:', error);
+                    isAdminUser = false;
+                    loadCustomStats();
+                }
+            });
+        }
         
         function toggleSidebar() {
             $('#sidebar').toggleClass('collapsed');
@@ -588,15 +634,23 @@
                         data.data.sort((a, b) => (a.sortOrder || 100) - (b.sortOrder || 100));
                         data.data.forEach(function(config) {
                             var iconClass = config.icon || 'fa-chart-bar';
+                            var mainProc = config.mainProcName || config.procName || '';
+                            var configId = config.id || config.name;
+                            var editBtn = isAdminUser ? `
+                                <button class="menu-edit-btn" onclick="console.log('配置ID:', '${configId}', '名称:', '${config.name}'); openParamConfig('${configId}', '${config.name}', '${mainProc}'); event.stopPropagation();" title="配置参数">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </button>
+                            ` : '';
                             html += `
-                                <div class="menu-item" data-stat-id="${config.id}" onclick="loadStat('${config.id}')">
-                                    <div class="menu-icon cyan">
+                                <div class="menu-item" data-stat-id="${config.id}">
+                                    <div class="menu-icon cyan" onclick="loadStat('${config.id}')">
                                         <i class="fa-solid ${iconClass}"></i>
                                     </div>
-                                    <div class="menu-item-content">
+                                    <div class="menu-item-content" onclick="loadStat('${config.id}')">
                                         <div class="menu-item-text">${config.name}</div>
                                         <div class="menu-item-desc">${config.description || config.procName}</div>
                                     </div>
+                                    ${editBtn}
                                 </div>
                             `;
                         });
@@ -812,6 +866,267 @@
         function exportData() {
             alert('导出功能开发中');
         }
+        
+        var currentConfigId = null;
+        
+        function openParamConfig(configId, configName, procName) {
+            console.log('openParamConfig called:', configId, configName, procName);
+            currentConfigId = configId;
+            $('#paramConfigModal').modal('show');
+            $('#configTitle').text(configName);
+            $('#procNameDisplay').text(procName);
+            loadProcParams(procName);
+        }
+        
+        function loadProcParams(procName) {
+            console.log('loadProcParams called, currentConfigId:', currentConfigId, 'procName:', procName);
+            $.ajax({
+                url: '/get-proc-config?id=' + currentConfigId,
+                method: 'GET',
+                success: function(configResponse) {
+                    console.log('get-proc-config response:', configResponse);
+                    var savedParams = {};
+                    var configData = typeof configResponse === 'string' ? JSON.parse(configResponse) : configResponse;
+                    console.log('parsed configData:', configData);
+                    if (configData.success && configData.data && configData.data.parameters) {
+                        try {
+                            var params = typeof configData.data.parameters === 'string' ? JSON.parse(configData.data.parameters) : configData.data.parameters;
+                            console.log('parsed parameters:', params);
+                            params.forEach(function(p) {
+                                var paramKey = p.name;
+                                if (paramKey.startsWith('@')) {
+                                    paramKey = paramKey.substring(1);
+                                }
+                                savedParams[paramKey.toLowerCase()] = p;
+                            });
+                            console.log('savedParams object:', savedParams);
+                        } catch (e) {
+                            console.log('解析已保存参数失败:', e);
+                        }
+                    } else {
+                        console.log('没有找到已保存的参数配置');
+                    }
+                    
+                    $.ajax({
+                        url: '/get-proc-metadata',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ procName: procName }),
+                        success: function(response) {
+                            var data = typeof response === 'string' ? JSON.parse(response) : response;
+                            if (data.success && data.parameters) {
+                                renderParamTable(data.parameters, savedParams);
+                            }
+                        },
+                        error: function() {
+                            $('#paramTableBody').html('<tr><td colspan="6" class="text-center text-gray">获取参数失败</td></tr>');
+                        }
+                    });
+                },
+                error: function() {
+                    $.ajax({
+                        url: '/get-proc-metadata',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ procName: procName }),
+                        success: function(response) {
+                            var data = typeof response === 'string' ? JSON.parse(response) : response;
+                            if (data.success && data.parameters) {
+                                renderParamTable(data.parameters, {});
+                            }
+                        },
+                        error: function() {
+                            $('#paramTableBody').html('<tr><td colspan="6" class="text-center text-gray">获取参数失败</td></tr>');
+                        }
+                    });
+                }
+            });
+        }
+        
+        function renderParamTable(parameters, savedParams) {
+            savedParams = savedParams || {};
+            var html = '';
+            parameters.forEach(function(param) {
+                var paramKey = param.name;
+                if (paramKey.startsWith('@')) {
+                    paramKey = paramKey.substring(1);
+                }
+                var saved = savedParams[paramKey.toLowerCase()] || {};
+                var isDateType = param.type.toLowerCase().includes('date') || param.name.toLowerCase().includes('date');
+                var datePresetSelect = isDateType ? `
+                    <select class="form-select form-select-sm mt-1 param-preset" data-param-name="${param.name}" onchange="applyDatePreset(this)">
+                        <option value="">选择预设</option>
+                        <option value="today">当日</option>
+                        <option value="monthStart">当月首日</option>
+                        <option value="monthEnd">当月末</option>
+                        <option value="yearStart">当年首日</option>
+                        <option value="yearEnd">当年末</option>
+                        <option value="lastWeek">上周</option>
+                        <option value="thisWeekStart">本周一</option>
+                        <option value="lastWeekStart">上周一</option>
+                    </select>
+                ` : '';
+                var enabledChecked = saved.enabled === undefined || saved.enabled === null ? 'checked' : (saved.enabled ? 'checked' : '');
+                var multiselectChecked = saved.multiselect ? 'checked' : '';
+                html += `
+                    <tr>
+                        <td>${param.name}</td>
+                        <td>
+                            <input type="text" class="form-control param-display-name" 
+                                   placeholder="显示别名" data-param-name="${param.name}" 
+                                   value="${saved.displayName || ''}">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control param-default" 
+                                   placeholder="默认值" data-param-name="${param.name}" 
+                                   value="${saved.defaultValue || ''}">
+                            ${datePresetSelect}
+                        </td>
+                        <td>
+                            <input type="text" class="form-control param-options" 
+                                   placeholder="1,2,3 或 全部,选项1" data-param-name="${param.name}" 
+                                   value="${saved.options || ''}">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="param-multiselect" data-param-name="${param.name}" ${multiselectChecked}>
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="param-enabled" data-param-name="${param.name}" ${enabledChecked}>
+                        </td>
+                    </tr>
+                `;
+            });
+            $('#paramTableBody').html(html);
+        }
+        
+        function applyDatePreset(select) {
+            var paramName = $(select).data('param-name');
+            var preset = $(select).val();
+            if (!preset) return;
+            
+            var value = '';
+            var today = new Date();
+            switch(preset) {
+                case 'today':
+                    value = today.toISOString().split('T')[0];
+                    break;
+                case 'monthStart':
+                    value = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().split('T')[0];
+                    break;
+                case 'monthEnd':
+                    value = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().split('T')[0];
+                    break;
+                case 'yearStart':
+                    value = new Date(today.getFullYear(), 0, 1).toISOString().split('T')[0];
+                    break;
+                case 'yearEnd':
+                    value = new Date(today.getFullYear(), 11, 31).toISOString().split('T')[0];
+                    break;
+                case 'lastWeek':
+                    var lastWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    value = lastWeek.toISOString().split('T')[0];
+                    break;
+                case 'thisWeekStart':
+                    var day = today.getDay();
+                    var diff = today.getDate() - day + (day === 0 ? -6 : 1);
+                    value = new Date(today.setDate(diff)).toISOString().split('T')[0];
+                    break;
+                case 'lastWeekStart':
+                    var lastWeekStart = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    var day = lastWeekStart.getDay();
+                    var diff = lastWeekStart.getDate() - day + (day === 0 ? -6 : 1);
+                    value = new Date(lastWeekStart.setDate(diff)).toISOString().split('T')[0];
+                    break;
+            }
+            $(`.param-default[data-param-name="${paramName}"]`).val(value);
+            $(select).val('');
+        }
+        
+        function saveParamConfig() {
+            console.log('saveParamConfig called, currentConfigId:', currentConfigId);
+            var params = [];
+            $('.param-enabled:checked').each(function() {
+                var paramName = $(this).data('param-name');
+                var displayName = $(`.param-display-name[data-param-name="${paramName}"]`).val();
+                var defaultValue = $(`.param-default[data-param-name="${paramName}"]`).val();
+                var options = $(`.param-options[data-param-name="${paramName}"]`).val();
+                var multiselect = $(`.param-multiselect[data-param-name="${paramName}"]`).is(':checked');
+                params.push({
+                    name: paramName,
+                    displayName: displayName,
+                    defaultValue: defaultValue,
+                    options: options,
+                    multiselect: multiselect
+                });
+            });
+            
+            var postData = {
+                configId: currentConfigId,
+                parameters: params
+            };
+            console.log('发送的数据:', postData);
+            
+            $.ajax({
+                url: '/save-param-config',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(postData),
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success) {
+                        $('#paramConfigModal').modal('hide');
+                        showToast('参数配置保存成功', 'success');
+                    } else {
+                        showToast('保存失败: ' + (data.error || '未知错误'), 'error');
+                    }
+                },
+                error: function() {
+                    showToast('保存失败', 'error');
+                }
+            });
+        }
+        
+        function showToast(message, type) {
+            var toastClass = type === 'success' ? 'bg-success' : 'bg-danger';
+            $('<div>').addClass(`toast ${toastClass} text-white`).text(message)
+                .appendTo('body').fadeIn().delay(3000).fadeOut(function() { $(this).remove(); });
+        }
     </script>
+    
+    <div class="modal fade" id="paramConfigModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="configTitle">参数配置</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">存储过程</label>
+                        <div class="form-control-plaintext" id="procNameDisplay"></div>
+                    </div>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>参数名称</th>
+                                <th>显示名称</th>
+                                <th>默认值</th>
+                                <th>选项配置</th>
+                                <th>多选</th>
+                                <th>启用</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paramTableBody">
+                            <tr><td colspan="6" class="text-center text-gray">加载中...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="saveParamConfig()">保存配置</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

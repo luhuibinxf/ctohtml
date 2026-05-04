@@ -181,6 +181,7 @@ namespace DbProcedureCaller.Services
                                 config.sortOrder = reader["SORT_ORDER"] != DBNull.Value ? (int)reader["SORT_ORDER"] : 100;
                                 config.templateName = reader["TEMPLATE_NAME"].ToString();
                                 config.procName = reader["PROC_NAME"].ToString();
+                                config.mainProcName = reader["PROC_NAME"].ToString().Replace("_Detail", "");
                                 config.hasDetailProc = reader["HAS_DETAIL_PROC"] != DBNull.Value && (bool)reader["HAS_DETAIL_PROC"];
                                 config.detailProcName = reader["DETAIL_PROC_NAME"]?.ToString() ?? "";
                                 config.parameters = reader["PARAMETERS"] != DBNull.Value ? reader["PARAMETERS"].ToString() : "[]";
@@ -293,10 +294,12 @@ namespace DbProcedureCaller.Services
                 {
                     EnsureTableExists(conn);
 
-                    string sql = "SELECT * FROM TJ_TJFX_CONFIG WHERE ID = @ID AND IS_ENABLED = 1";
+                    LogHelper.LogInfo($"GetConfigById - 尝试查询配置, configId: '{configId}', 长度: {configId.Length}");
+
+                    string sql = "SELECT * FROM TJ_TJFX_CONFIG WHERE NAME = @NAME AND IS_ENABLED = 1";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ID", configId);
+                        cmd.Parameters.AddWithValue("@NAME", configId);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -310,16 +313,20 @@ namespace DbProcedureCaller.Services
                                 config.sortOrder = reader["SORT_ORDER"] != DBNull.Value ? (int)reader["SORT_ORDER"] : 100;
                                 config.templateName = reader["TEMPLATE_NAME"].ToString();
                                 config.procName = reader["PROC_NAME"].ToString();
+                                config.mainProcName = reader["PROC_NAME"].ToString().Replace("_Detail", "");
                                 config.hasDetailProc = reader["HAS_DETAIL_PROC"] != DBNull.Value && (bool)reader["HAS_DETAIL_PROC"];
                                 config.detailProcName = reader["DETAIL_PROC_NAME"]?.ToString() ?? "";
                                 config.parameters = reader["PARAMETERS"] != DBNull.Value ? reader["PARAMETERS"].ToString() : "[]";
                                 config.columns = reader["COLUMNS"] != DBNull.Value ? reader["COLUMNS"].ToString() : "[]";
                                 config.permission = reader["PERMISSION"] != DBNull.Value ? reader["PERMISSION"].ToString() : "";
 
-                                return "{\"success\": true, \"data\": " + JsonConvert.SerializeObject(config) + "}";
+                                string result = "{\"success\": true, \"data\": " + JsonConvert.SerializeObject(config) + "}";
+                                LogHelper.LogInfo($"GetConfigById成功 - configId: {configId}, parameters: {config.parameters}");
+                                return result;
                             }
                             else
                             {
+                                LogHelper.LogInfo($"GetConfigById失败 - configId: '{configId}', 原因: 配置不存在");
                                 return "{\"success\": false, \"error\": \"配置不存在\"}";
                             }
                         }
@@ -329,6 +336,41 @@ namespace DbProcedureCaller.Services
             catch (Exception ex)
             {
                 LogHelper.LogException(ex, "获取统计配置失败");
+                return "{\"success\": false, \"error\": \"" + ex.Message.Replace("\"", "'") + "\"}";
+            }
+        }
+
+        public string SaveParamConfig(string configId, string parametersJson)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseConnection.GetConnection(_connectionString))
+                {
+                    EnsureTableExists(conn);
+
+                    string sql = "UPDATE TJ_TJFX_CONFIG SET PARAMETERS = @PARAMETERS, UPDATE_TIME = GETDATE() WHERE ID = @ID OR NAME = @ID";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", configId);
+                        cmd.Parameters.AddWithValue("@PARAMETERS", parametersJson ?? "[]");
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            LogHelper.LogInfo($"参数配置保存成功: {configId}");
+                            return "{\"success\": true, \"message\": \"参数配置保存成功\"}";
+                        }
+                        else
+                        {
+                            return "{\"success\": false, \"error\": \"配置不存在\"}";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "保存参数配置失败");
                 return "{\"success\": false, \"error\": \"" + ex.Message.Replace("\"", "'") + "\"}";
             }
         }

@@ -66,6 +66,10 @@ namespace DbProcedureCaller.API
                 {
                     return HandleGetUser(url);
                 }
+                else if (url.StartsWith("/check-admin") && httpMethod == "GET")
+                {
+                    return HandleCheckAdmin(url);
+                }
                 else if (url == "/add-user" && httpMethod == "POST")
                 {
                     return HandleAddUser(inputStream);
@@ -250,6 +254,10 @@ namespace DbProcedureCaller.API
                 {
                     return HandleGetUpgradeMessages();
                 }
+                else if (url == "/save-param-config" && httpMethod == "POST")
+                {
+                    return HandleSaveParamConfig(inputStream);
+                }
                 else
                 {
                     return Encoding.UTF8.GetBytes("{\"success\": false, \"error\": \"未知的API端点\"}");
@@ -308,6 +316,30 @@ namespace DbProcedureCaller.API
             
             string json = _userService.GetUserJson(userId);
             return Encoding.UTF8.GetBytes(json);
+        }
+
+        private byte[] HandleCheckAdmin(string url)
+        {
+            string username = ExtractUrlParam(url, "username");
+            
+            LogHelper.LogInfo($"检查用户是否是管理员: {username}");
+
+            try
+            {
+                if (string.IsNullOrEmpty(username))
+                {
+                    return Encoding.UTF8.GetBytes("{\"success\": true, \"isAdmin\": false, \"message\": \"用户名为空\"}");
+                }
+                
+                bool isAdmin = _userService.IsAdminUser(username);
+                LogHelper.LogInfo($"用户 {username} 的管理员检查结果: {isAdmin}");
+                return Encoding.UTF8.GetBytes($"{{\"success\": true, \"isAdmin\": {isAdmin.ToString().ToLower()}, \"username\": \"{HttpUtility.HtmlEncode(username)}\"}}");
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "检查管理员权限失败");
+                return CreateErrorResponse(ex.Message);
+            }
         }
 
         private byte[] HandleAddUser(Stream inputStream)
@@ -568,6 +600,22 @@ namespace DbProcedureCaller.API
                                 return data.Substring(startSearch, endIndex - startSearch);
                             }
                         }
+                        else if (data[startSearch] == '[')
+                        {
+                            int endIndex = FindMatchingBracket(data, startSearch, '[', ']');
+                            if (endIndex > startSearch)
+                            {
+                                return data.Substring(startSearch, endIndex - startSearch + 1);
+                            }
+                        }
+                        else if (data[startSearch] == '{')
+                        {
+                            int endIndex = FindMatchingBracket(data, startSearch, '{', '}');
+                            if (endIndex > startSearch)
+                            {
+                                return data.Substring(startSearch, endIndex - startSearch + 1);
+                            }
+                        }
                         else
                         {
                             int endIndex = data.IndexOfAny(new char[] { ',', '}', ']', ' ', '\n', '\r' }, startSearch);
@@ -602,6 +650,22 @@ namespace DbProcedureCaller.API
                 }
             }
             return "";
+        }
+        
+        private int FindMatchingBracket(string data, int startIndex, char openBracket, char closeBracket)
+        {
+            int depth = 1;
+            for (int i = startIndex + 1; i < data.Length; i++)
+            {
+                if (data[i] == openBracket)
+                    depth++;
+                else if (data[i] == closeBracket)
+                    depth--;
+                
+                if (depth == 0)
+                    return i;
+            }
+            return -1;
         }
 
         private byte[] HandleGetHospitalInfo()
@@ -1483,6 +1547,35 @@ namespace DbProcedureCaller.API
             {
                 LogHelper.LogException(ex, "获取升级消息失败");
                 return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleSaveParamConfig(Stream inputStream)
+        {
+            using (StreamReader reader = new StreamReader(inputStream, Encoding.UTF8))
+            {
+                string postData = reader.ReadToEnd();
+
+                LogHelper.LogInfo("保存参数配置");
+
+                try
+                {
+                    string configId = ExtractValue(postData, "configId");
+                    string parametersJson = ExtractValue(postData, "parameters");
+
+                    if (string.IsNullOrEmpty(configId))
+                    {
+                        return CreateErrorResponse("配置ID不能为空");
+                    }
+
+                    string result = _statConfigService.SaveParamConfig(configId, parametersJson);
+                    return Encoding.UTF8.GetBytes(result);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogException(ex, "保存参数配置失败");
+                    return CreateErrorResponse(ex.Message);
+                }
             }
         }
     }
