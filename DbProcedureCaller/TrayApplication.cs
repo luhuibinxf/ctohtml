@@ -11,7 +11,7 @@ namespace DbProcedureCaller
         private static NotifyIcon trayIcon;
         private static ContextMenuStrip trayMenu;
         private static Thread serverThread;
-        private static string serverPort = "9094";
+        private static string serverPort = "12345";
 
         [STAThread]
         public static void Main()
@@ -194,6 +194,8 @@ namespace DbProcedureCaller
                 
                 ConsoleProgram.StopServer();
                 System.Threading.Thread.Sleep(1000);
+                
+                LoadServerConfig();
                 
                 StartServerInBackground();
                 

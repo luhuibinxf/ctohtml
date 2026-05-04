@@ -272,6 +272,6 @@ namespace DbProcedureCaller.Config
     {
         public const string DefaultAdminUser = "lhbdb";
         public const string DefaultAdminPassword = "241023";
-        public const string DefaultPort = "9094";
+        public const string DefaultPort = "50000";
     }
 }

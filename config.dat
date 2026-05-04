@@ -1,2 +1,1 @@
 Server=127.0.0.1;Database=WiNEX_PACS;User ID=sa;Password=P@ssw0rd;Integrated Security=False;TrustServerCertificate=True;
-Port=50000

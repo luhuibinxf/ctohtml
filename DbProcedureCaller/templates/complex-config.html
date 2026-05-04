@@ -14,23 +14,23 @@
         
         .page-header {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 24px;
+            padding: 10px 20px;
             background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
-            border-radius: 16px;
-            margin: 16px;
-            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+            border-radius: 12px;
+            margin: 12px;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
         }
         .page-header-title {
-            display: flex; align-items: center; gap: 14px;
-            color: white; font-size: 19px; font-weight: 700;
+            display: flex; align-items: center; gap: 10px;
+            color: white; font-size: 16px; font-weight: 600;
         }
-        .page-header-title i { font-size: 24px; }
-        .page-header-right { display: flex; align-items: center; gap: 16px; }
+        .page-header-title i { font-size: 18px; }
+        .page-header-right { display: flex; align-items: center; gap: 12px; }
         .btn-back {
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 6px;
             background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 10px; padding: 10px 18px;
-            color: white; font-weight: 600; font-size: 14px;
+            border-radius: 8px; padding: 6px 12px;
+            color: white; font-weight: 500; font-size: 13px;
             cursor: pointer; transition: all 0.25s;
         }
         .btn-back:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
@@ -102,6 +102,60 @@
         .btn-secondary:hover { background: #e2e8f0; }
         .btn-sm {
             padding: 6px 12px; font-size: 12px;
+        }
+        
+        .compact-card {
+            padding: 12px;
+        }
+        .compact-card .card-header {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+        .compact-search {
+            margin-bottom: 8px;
+        }
+        .compact-search .form-control {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        .compact-list {
+            max-height: 200px;
+        }
+        .compact-list .proc-item {
+            padding: 8px 10px;
+            margin-bottom: 4px;
+        }
+        .compact-list .proc-name {
+            font-size: 13px;
+        }
+        .compact-list .proc-desc {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .compact-list .btn-sm {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+        
+        .bottom-toolbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        .bottom-toolbar .btn {
+            min-width: 100px;
+        }
+        .content-wrapper {
+            padding-bottom: 80px;
         }
         
         .proc-search-box {
@@ -292,8 +346,9 @@
             </div>
         </div>
         
+        <div class="content-wrapper">
         <div class="page-content">
-            <div class="config-panel" style="max-width: 400px;">
+            <div class="config-panel" style="max-width: 450px;">
                 <div class="config-card">
                     <div class="card-header">
                         <div class="card-title">
@@ -320,18 +375,28 @@
                     </div>
                 </div>
                 
-                <div class="config-card">
+                <div class="config-card compact-card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="fa-solid fa-sliders"></i>
-                            入参配置
+                            <i class="fa-solid fa-list"></i>
+                            已配置列表
                         </div>
+                        <button class="btn btn-primary btn-sm" onclick="loadConfigList()">
+                            <i class="fa-solid fa-refresh"></i>
+                            刷新
+                        </button>
                     </div>
                     
-                    <div id="paramConfigSection">
-                        <div class="empty-state" style="padding: 20px;">
-                            <i class="fa-solid fa-params"></i>
-                            <p>请先选择存储过程</p>
+                    <div class="proc-search-box compact-search">
+                        <input type="text" class="form-control" id="configSearchInput" 
+                               placeholder="搜索配置名称" 
+                               onkeyup="filterConfigList()">
+                    </div>
+                    
+                    <div class="stored-proc-list compact-list" id="configList">
+                        <div class="empty-state" style="padding: 12px;">
+                            <i class="fa-solid fa-list"></i>
+                            <p>暂无配置</p>
                         </div>
                     </div>
                 </div>
@@ -341,16 +406,45 @@
                 <div class="config-card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="fa-solid fa-list-columns"></i>
-                            返回列配置
+                            <i class="fa-solid fa-code"></i>
+                            自定义HTML
                         </div>
                         <div class="section-tabs">
-                            <div class="tab-item active" onclick="switchTab('columns')">列配置</div>
+                            <div class="tab-item active" onclick="switchTab('html')">HTML编辑</div>
+                            <div class="tab-item" onclick="switchTab('columns')">返回列</div>
                             <div class="tab-item" onclick="switchTab('preview')">预览数据</div>
                         </div>
                     </div>
                     
-                    <div id="columnConfigTab">
+                    <div id="htmlTab">
+                        <div class="form-group">
+                            <label>模板名称 <span style="color: #ef4444;">*</span></label>
+                            <input type="text" class="form-control" id="templateName" placeholder="输入模板名称，用于标识此配置">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="isActive" checked>
+                                启用此配置
+                            </label>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 4px;">勾选后将在统计分析菜单中显示</p>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="hasDetailProc" onchange="toggleDetailProcSection()">
+                                配置明细存储过程
+                            </label>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 4px;">勾选后可配置查询明细的存储过程</p>
+                        </div>
+                        <div id="detailProcSection" style="display: none; border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 8px;">
+                            <div class="form-group">
+                                <label>明细存储过程名称</label>
+                                <input type="text" class="form-control" id="detailProcName" placeholder="请输入明细存储过程名称，如：usp_TJFX_RadiologyWorkloadStatistics_Detail">
+                                <p style="font-size: 12px; color: #64748b; margin-top: 4px;">用于查看详细数据的存储过程，执行主存储后可查看明细</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="columnConfigTab" style="display: none;">
                         <div id="columnConfigSection">
                             <div class="empty-state">
                                 <i class="fa-solid fa-table"></i>
@@ -363,7 +457,7 @@
                         <div class="preview-section" id="previewSection">
                             <div class="empty-state">
                                 <i class="fa-solid fa-eye"></i>
-                                <p>请先选择存储过程并配置参数</p>
+                                <p>请先选择存储过程</p>
                             </div>
                         </div>
                     </div>
@@ -373,32 +467,54 @@
                     <div class="card-header">
                         <div class="card-title">
                             <i class="fa-solid fa-save"></i>
-                            保存配置
+                            菜单配置
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>配置名称</label>
-                        <input type="text" class="form-control" id="configName" placeholder="输入配置名称">
+                        <label>菜单名称 <span style="color: #ef4444;">*</span></label>
+                        <input type="text" class="form-control" id="configName" placeholder="显示在主界面菜单中的名称">
                     </div>
                     
                     <div class="form-group">
-                        <label>配置描述</label>
-                        <textarea class="form-control" id="configDesc" rows="3" placeholder="输入配置描述"></textarea>
+                        <label>菜单描述</label>
+                        <textarea class="form-control" id="configDesc" rows="2" placeholder="鼠标悬停时显示的提示文字"></textarea>
                     </div>
                     
-                    <div class="config-actions">
-                        <button class="btn btn-secondary" onclick="resetConfig()">
-                            <i class="fa-solid fa-rotate-left"></i>
-                            重置
-                        </button>
-                        <button class="btn btn-success" onclick="saveConfig()">
-                            <i class="fa-solid fa-save"></i>
-                            保存配置
-                        </button>
+                    <div class="form-group">
+                        <label>菜单图标</label>
+                        <select class="form-control" id="menuIcon">
+                            <option value="fa-chart-bar">📊 图表</option>
+                            <option value="fa-table">📋 表格</option>
+                            <option value="fa-bar-chart">📈 柱状图</option>
+                            <option value="fa-pie-chart">🥧 饼图</option>
+                            <option value="fa-line-chart">📉 折线图</option>
+                            <option value="fa-list">📝 列表</option>
+                            <option value="fa-database">🗄️ 数据库</option>
+                            <option value="fa-file-text">📄 报告</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>排序序号</label>
+                        <input type="number" class="form-control" id="sortOrder" placeholder="菜单显示顺序" value="100">
+                    </div>
+                    
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        
+        <div class="bottom-toolbar">
+            <button class="btn btn-secondary" onclick="resetConfig()">
+                <i class="fa-solid fa-rotate-left"></i>
+                重置
+            </button>
+            <button class="btn btn-success" onclick="saveConfig()">
+                <i class="fa-solid fa-save"></i>
+                保存配置
+            </button>
         </div>
     </div>
     
@@ -408,6 +524,31 @@
         var procParams = [];
         var procColumns = [];
         var currentConfig = {};
+        var currentPreviewData = [];
+        var allConfigs = [];
+        
+        $(function() {
+            checkUpgradeMessages();
+            loadConfigList();
+        });
+        
+        function checkUpgradeMessages() {
+            $.ajax({
+                url: '/get-upgrade-messages',
+                method: 'GET',
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success && data.data && data.data.length > 0) {
+                        data.data.forEach(function(msg) {
+                            showToast('📊 ' + msg, 'success');
+                        });
+                    }
+                },
+                error: function() {
+                    console.log('检查升级消息失败');
+                }
+            });
+        }
         
         function handleProcSearchKeydown(e) {
             if (e.key === 'Enter') {
@@ -683,16 +824,77 @@
         
         function switchTab(tab) {
             $('.tab-item').removeClass('active');
-            $(`.tab-item:contains("${tab === 'columns' ? '列配置' : '预览数据'}")`).addClass('active');
+            var tabNames = { 'html': 'HTML编辑', 'columns': '返回列', 'preview': '预览数据' };
+            $(`.tab-item:contains("${tabNames[tab]}")`).addClass('active');
             
-            if (tab === 'columns') {
+            $('#htmlTab').hide();
+            $('#columnConfigTab').hide();
+            $('#previewTab').hide();
+            
+            if (tab === 'html') {
+                $('#htmlTab').show();
+            } else if (tab === 'columns') {
                 $('#columnConfigTab').show();
-                $('#previewTab').hide();
-            } else {
-                $('#columnConfigTab').hide();
+            } else if (tab === 'preview') {
                 $('#previewTab').show();
                 executePreview();
             }
+        }
+        
+        function toggleDetailProcSection() {
+            var hasDetail = $('#hasDetailProc').is(':checked');
+            $('#detailProcSection').toggle(hasDetail);
+        }
+        
+        function loadTemplate() {
+            var template = $('#htmlTemplate').val();
+            var templates = {
+                'table': `<div class="table-container" style="max-height: 400px; overflow-y: auto;">
+    <table class="result-table">
+        <thead>
+            <tr>{{columnNames.map(c => '<th>'+c+'</th>').join('')}}</tr>
+        </thead>
+        <tbody>
+            {{data.map(row => '<tr>'+columnNames.map(col => '<td>'+(row[col] || '')+'</td>').join('')+'</tr>').join('')}}
+        </tbody>
+    </table>
+    <div style="text-align: center; margin-top: 10px; color: #64748b; font-size: 13px;">共 {{rowCount}} 条记录</div>
+</div>`,
+                'chart': `<div style="padding: 20px;">
+    <div class="chart-container" style="height: 300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center; color: white;">
+            <div style="font-size: 4rem; margin-bottom: 10px;">📊</div>
+            <div style="font-size: 18px; font-weight: 600;">图表展示区域</div>
+            <div style="font-size: 13px; opacity: 0.8;">使用ECharts等图表库展示数据</div>
+        </div>
+    </div>
+    <div style="margin-top: 15px; font-size: 13px; color: #64748b;">提示：需要引入图表库并编写相应的渲染逻辑</div>
+</div>`,
+                'card': `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+    {{data.slice(0, 6).map((row, i) => '<div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">' + 
+        '<div style="font-size: 24px; font-weight: 700; color: #1e293b;">' + (row[columnNames[1]] || '-') + '</div>' + 
+        '<div style="font-size: 13px; color: #64748b; margin-top: 5px;">' + (row[columnNames[0]] || '数据') + '</div>' + 
+    '</div>').join('')}}
+</div>`,
+                'custom': ''
+            };
+            if (templates[template]) {
+                $('#customHtml').val(templates[template]);
+            }
+        }
+        
+        function clearHtml() {
+            $('#customHtml').val('');
+            $('#htmlTemplate').val('');
+        }
+        
+        function previewHtml() {
+            var html = $('#customHtml').val();
+            if (!html.trim()) {
+                showToast('请先输入HTML内容', 'warning');
+                return;
+            }
+            switchTab('preview');
         }
         
         function executePreview() {
@@ -907,33 +1109,46 @@
         }
         
         function saveConfig() {
+            console.log('saveConfig called');
+            var templateName = $('#templateName').val().trim();
             var configName = $('#configName').val().trim();
-            if (!configName) {
-                showToast('请输入配置名称', 'error');
+            var procName = currentProc ? currentProc.name : '';
+            
+            console.log('templateName:', templateName);
+            console.log('configName:', configName);
+            console.log('procName:', procName);
+            
+            if (!templateName) {
+                showToast('请输入模板名称', 'error');
                 return;
             }
             
+            if (!configName) {
+                showToast('请输入菜单名称', 'error');
+                return;
+            }
+            
+            if (!procName) {
+                showToast('请先选择存储过程', 'error');
+                return;
+            }
+            
+            var saveBtn = $('.bottom-toolbar .btn-success');
+            saveBtn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> 保存中...');
+            
             currentConfig = {
+                id: currentConfig.id || '',
                 name: configName,
                 description: $('#configDesc').val(),
-                procName: currentProc ? currentProc.name : '',
-                parameters: procParams.map((p, i) => ({
-                    name: p.name,
-                    displayName: $(`#param_display_${i}`).val(),
-                    type: $(`#param_type_${i}`).val(),
-                    options: $(`#param_options_${i}`).val(),
-                    isMultiple: $('#param_multiple_' + i).is(':checked'),
-                    defaultValue: $(`#param_default_${i}`).val(),
-                    isRequired: $('#param_required_' + i).is(':checked'),
-                    enabled: $('#param_enabled_' + i).is(':checked'),
-                    description: $(`#param_desc_${i}`).val()
-                })),
-                columns: procColumns.map(c => ({
-                    name: c.name,
-                    width: c.width,
-                    sort: c.sort,
-                    visible: c.visible !== false
-                }))
+                icon: $('#menuIcon').val(),
+                sortOrder: parseInt($('#sortOrder').val()) || 100,
+                templateName: templateName,
+                procName: procName,
+                hasDetailProc: $('#hasDetailProc').is(':checked'),
+                detailProcName: $('#detailProcName').val() || '',
+                isActive: $('#isActive').is(':checked'),
+                parameters: [],
+                columns: []
             };
             
             $.ajax({
@@ -941,11 +1156,26 @@
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(currentConfig),
-                success: function() {
-                    showToast('配置保存成功', 'success');
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success) {
+                        showToast('✅ 配置保存成功！', 'success');
+                        currentConfig.id = data.data || currentConfig.id || '';
+                    } else {
+                        showToast('❌ 保存失败：' + (data.message || '未知错误'), 'error');
+                    }
+                    saveBtn.prop('disabled', false).html('<i class="fa-solid fa-save"></i> 保存配置');
                 },
-                error: function() {
-                    showToast('保存失败', 'error');
+                error: function(xhr) {
+                    var errorMsg = '保存失败';
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        errorMsg = response.message || errorMsg;
+                    } catch(e) {
+                        errorMsg = xhr.statusText || errorMsg;
+                    }
+                    showToast('❌ ' + errorMsg, 'error');
+                    saveBtn.prop('disabled', false).html('<i class="fa-solid fa-save"></i> 保存配置');
                 }
             });
         }
@@ -953,8 +1183,152 @@
         function resetConfig() {
             $('#configName').val('');
             $('#configDesc').val('');
+            $('#templateName').val('');
+            $('#sortOrder').val('100');
+            $('#menuIcon').val('fa-chart-bar');
+            $('#isActive').prop('checked', true);
+            $('#hasDetailProc').prop('checked', false);
+            $('#detailProcName').val('');
+            $('#detailProcSection').hide();
             currentConfig = {};
+            currentProc = null;
+            $('.proc-item').removeClass('active');
             showToast('已重置', 'success');
+        }
+        
+        function loadConfigList() {
+            $.ajax({
+                url: '/get-proc-configs',
+                method: 'GET',
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success && data.data && data.data.length > 0) {
+                        allConfigs = data.data;
+                        renderConfigList(data.data);
+                    } else {
+                        allConfigs = [];
+                        $('#configList').html(`
+                            <div class="empty-state" style="padding: 12px;">
+                                <i class="fa-solid fa-list"></i>
+                                <p>暂无配置</p>
+                            </div>
+                        `);
+                    }
+                },
+                error: function() {
+                    showToast('加载配置列表失败', 'error');
+                }
+            });
+        }
+        
+        function filterConfigList() {
+            var searchText = $('#configSearchInput').val().toLowerCase().trim();
+            if (!searchText) {
+                renderConfigList(allConfigs);
+                return;
+            }
+            
+            var filtered = allConfigs.filter(function(config) {
+                return config.name.toLowerCase().includes(searchText) ||
+                       config.procName.toLowerCase().includes(searchText);
+            });
+            
+            if (filtered.length > 0) {
+                renderConfigList(filtered);
+            } else {
+                $('#configList').html(`
+                    <div class="empty-state" style="padding: 12px;">
+                        <i class="fa-solid fa-search"></i>
+                        <p>未找到匹配的配置</p>
+                    </div>
+                `);
+            }
+        }
+        
+        function renderConfigList(configs) {
+            var html = '';
+            configs.forEach(function(config) {
+                var escapedName = config.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
+                html += `<div class="proc-item" style="position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div class="proc-name">${config.name}</div>
+                            <div class="proc-desc">存储过程: ${config.procName}</div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-secondary btn-sm" onclick="editConfig('${config.id}')">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteConfig('${config.id}', '${escapedName}')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            $('#configList').html(html);
+        }
+        
+        function editConfig(configId) {
+            $.ajax({
+                url: '/get-proc-config?id=' + configId,
+                method: 'GET',
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success && data.data) {
+                        var config = data.data;
+                        currentConfig = config;
+                        
+                        $('#configName').val(config.name);
+                        $('#configDesc').val(config.description || '');
+                        $('#templateName').val(config.templateName);
+                        $('#sortOrder').val(config.sortOrder || 100);
+                        $('#menuIcon').val(config.icon || 'fa-chart-bar');
+                        $('#isActive').prop('checked', config.isActive !== false);
+                        $('#hasDetailProc').prop('checked', config.hasDetailProc === true);
+                        $('#detailProcName').val(config.detailProcName || '');
+                        
+                        if (config.hasDetailProc) {
+                            $('#detailProcSection').show();
+                        } else {
+                            $('#detailProcSection').hide();
+                        }
+                        
+                        currentProc = { name: config.procName, description: '' };
+                        loadProcMetadata(config.procName);
+                        showToast('已加载配置，可进行修改', 'success');
+                    } else {
+                        showToast('加载配置失败: ' + (data.error || '未知错误'), 'error');
+                    }
+                },
+                error: function() {
+                    showToast('加载配置失败', 'error');
+                }
+            });
+        }
+        
+        function deleteConfig(configId, configName) {
+            if (!confirm('确定要删除配置 "' + configName + '" 吗？')) {
+                return;
+            }
+            
+            $.ajax({
+                url: '/delete-proc-config?id=' + configId,
+                method: 'POST',
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success) {
+                        showToast('配置已删除', 'success');
+                        loadConfigList();
+                        resetConfig();
+                    } else {
+                        showToast('删除失败: ' + (data.error || '未知错误'), 'error');
+                    }
+                },
+                error: function() {
+                    showToast('删除失败', 'error');
+                }
+            });
         }
         
         function showToast(message, type) {

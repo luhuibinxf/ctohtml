@@ -111,6 +111,29 @@ namespace DbProcedureCaller.Core
 
                 LogHelper.LogInfo($"=====DEBUG_START===== Method:{method}, Url:{url}, AbsolutePath:{absolutePath}");
 
+                if (absolutePath == "/test-api" && method == "POST")
+                {
+                    byte[] responseBytes = System.Text.Encoding.UTF8.GetBytes("{\"success\":true,\"message\":\"Test API works!\"}");
+                    response.ContentType = "application/json; charset=utf-8";
+                    response.StatusCode = 200;
+                    response.ContentLength64 = responseBytes.Length;
+                    response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
+                    response.Close();
+                    return;
+                }
+
+                if (absolutePath == "/search-stored-proc" && method == "POST")
+                {
+                    LogHelper.LogInfo("=====Handling search-stored-proc=====");
+                    byte[] responseBytes = apiHandler.HandleRequest(url, method, request.InputStream);
+                    response.ContentType = "application/json; charset=utf-8";
+                    response.StatusCode = 200;
+                    response.ContentLength64 = responseBytes.Length;
+                    response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
+                    response.Close();
+                    return;
+                }
+
                 if ((absolutePath == "/" || absolutePath == "/login") && method == "GET")
                 {
                     string loginHtml = @"<!DOCTYPE html>
@@ -175,6 +198,19 @@ namespace DbProcedureCaller.Core
                         LogHelper.LogInfo($"文件不存在: {filePath}");
                         SendNotFoundResponse(response);
                     }
+                }
+                else if (absolutePath == "/search-stored-proc" || 
+                         absolutePath == "/get-proc-metadata" || 
+                         absolutePath == "/execute-stored-proc" || 
+                         absolutePath == "/save-proc-config" || 
+                         absolutePath == "/get-proc-configs" || 
+                         absolutePath.StartsWith("/delete-proc-config"))
+                {
+                    byte[] responseBytes = apiHandler.HandleRequest(url, method, request.InputStream);
+                    response.ContentType = "application/json; charset=utf-8";
+                    response.StatusCode = 200;
+                    response.ContentLength64 = responseBytes.Length;
+                    response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
                 }
                 else if (IsJsonEndpoint(absolutePath))
                 {
@@ -258,6 +294,7 @@ namespace DbProcedureCaller.Core
                    url == "/generate-token" ||
                    url == "/get-tokens" ||
                    url == "/delete-token" ||
+                   url == "/test-api" ||
                    url == "/search-stored-proc" ||
                    url == "/get-proc-metadata" ||
                    url == "/execute-stored-proc" ||

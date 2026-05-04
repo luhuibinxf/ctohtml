@@ -430,7 +430,15 @@ namespace DbProcedureCaller
                    url == "/token-login" ||
                    url == "/generate-token" ||
                    url == "/get-tokens" ||
-                   url == "/delete-token";
+                   url == "/delete-token" ||
+                   url == "/search-stored-proc" ||
+                   url == "/get-proc-metadata" ||
+                   url == "/execute-stored-proc" ||
+                   url == "/save-proc-config" ||
+                   url == "/get-proc-configs" ||
+                   url.StartsWith("/get-proc-config") ||
+                   url.StartsWith("/delete-proc-config") ||
+                   url == "/get-upgrade-messages";
         }
 
         private static string GetFilePath(string url)

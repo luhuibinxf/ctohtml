@@ -17,7 +17,8 @@ namespace DbProcedureCaller.API
         private DailyAnalysisService _dailyAnalysisService;
         private TokenService _tokenService;
         private PermissionService _permissionService;
-        public static string RunningPort { get; set; } = "9094";
+        private StatConfigService _statConfigService;
+        public static string RunningPort { get; set; } = "12345";
 
         public ApiHandler()
         {
@@ -25,6 +26,7 @@ namespace DbProcedureCaller.API
             _dailyAnalysisService = new DailyAnalysisService();
             _tokenService = new TokenService();
             _permissionService = new PermissionService();
+            _statConfigService = new StatConfigService();
         }
 
         public byte[] HandleRequest(string url, string httpMethod, Stream inputStream)
@@ -236,9 +238,17 @@ namespace DbProcedureCaller.API
                 {
                     return HandleGetProcConfigs();
                 }
+                else if (url.StartsWith("/get-proc-config") && httpMethod == "GET")
+                {
+                    return HandleGetProcConfig(url);
+                }
                 else if (url.StartsWith("/delete-proc-config") && httpMethod == "POST")
                 {
                     return HandleDeleteProcConfig(url, inputStream);
+                }
+                else if (url == "/get-upgrade-messages" && httpMethod == "GET")
+                {
+                    return HandleGetUpgradeMessages();
                 }
                 else
                 {
@@ -1393,16 +1403,16 @@ namespace DbProcedureCaller.API
             {
                 string postData = reader.ReadToEnd();
 
-                LogHelper.LogInfo("保存存储过程配置");
+                LogHelper.LogInfo("保存统计配置到数据库");
 
                 try
                 {
-                    string result = _dailyAnalysisService.SaveStoredProcConfig(postData);
+                    string result = _statConfigService.SaveConfig(postData);
                     return Encoding.UTF8.GetBytes(result);
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LogException(ex, "保存存储过程配置失败");
+                    LogHelper.LogException(ex, "保存统计配置失败");
                     return CreateErrorResponse(ex.Message);
                 }
             }
@@ -1410,16 +1420,34 @@ namespace DbProcedureCaller.API
 
         private byte[] HandleGetProcConfigs()
         {
-            LogHelper.LogInfo("获取所有存储过程配置");
+            LogHelper.LogInfo("从数据库获取所有统计配置");
 
             try
             {
-                string result = _dailyAnalysisService.GetStoredProcConfigs();
+                string result = _statConfigService.GetConfigs();
                 return Encoding.UTF8.GetBytes(result);
             }
             catch (Exception ex)
             {
-                LogHelper.LogException(ex, "获取存储过程配置失败");
+                LogHelper.LogException(ex, "获取统计配置失败");
+                return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleGetProcConfig(string url)
+        {
+            string configId = ExtractUrlParam(url, "id");
+            
+            LogHelper.LogInfo($"获取统计配置: {configId}");
+
+            try
+            {
+                string result = _statConfigService.GetConfigById(configId);
+                return Encoding.UTF8.GetBytes(result);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "获取统计配置失败");
                 return CreateErrorResponse(ex.Message);
             }
         }
@@ -1428,16 +1456,32 @@ namespace DbProcedureCaller.API
         {
             string configId = ExtractUrlParam(url, "id");
 
-            LogHelper.LogInfo($"删除存储过程配置: {configId}");
+            LogHelper.LogInfo($"删除统计配置: {configId}");
 
             try
             {
-                string result = _dailyAnalysisService.DeleteStoredProcConfig(configId);
+                string result = _statConfigService.DeleteConfig(configId);
                 return Encoding.UTF8.GetBytes(result);
             }
             catch (Exception ex)
             {
-                LogHelper.LogException(ex, "删除存储过程配置失败");
+                LogHelper.LogException(ex, "删除统计配置失败");
+                return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleGetUpgradeMessages()
+        {
+            LogHelper.LogInfo("获取数据库升级消息");
+
+            try
+            {
+                string result = _statConfigService.GetUpgradeMessages();
+                return Encoding.UTF8.GetBytes(result);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "获取升级消息失败");
                 return CreateErrorResponse(ex.Message);
             }
         }

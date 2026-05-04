@@ -1823,7 +1823,7 @@ END";
                 string connectionString = ConnectionStrings.GetConnectionString();
                 if (string.IsNullOrEmpty(connectionString))
                 {
-                    return "{\"success\": false, \"error\": \"请先配置数据库连接\", \"data\": []}";
+                    return "{\"success\": false, \"error\": \"请先在系统设置中配置数据库连接\", \"data\": []}";
                 }
 
                 using (SqlConnection conn = DatabaseConnection.GetConnection(connectionString))
@@ -1851,16 +1851,41 @@ END";
                                     { "description", reader["description"].ToString() }
                                 });
                             }
-                            return string.Format("{{\"success\": true, \"data\": {0}}}",
-                                Newtonsoft.Json.JsonConvert.SerializeObject(list));
+                            
+                            if (list.Count == 0)
+                            {
+                                return "{\"success\": true, \"data\": [], \"message\": \"未找到匹配的存储过程，请尝试其他关键词\"}";
+                            }
+                            
+                            return string.Format("{{\"success\": true, \"data\": {0}, \"message\": \"找到 {1} 个匹配的存储过程\"}}",
+                                Newtonsoft.Json.JsonConvert.SerializeObject(list),
+                                list.Count);
                         }
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                LogHelper.LogException(ex, "搜索存储过程失败");
+                string friendlyMessage = "数据库查询失败";
+                if (ex.Number == 4060)
+                {
+                    friendlyMessage = "无法连接到指定的数据库，请检查数据库配置";
+                }
+                else if (ex.Number == 18456)
+                {
+                    friendlyMessage = "数据库登录失败，请检查用户名和密码";
+                }
+                else if (ex.Number == 53)
+                {
+                    friendlyMessage = "无法连接到数据库服务器，请检查网络连接和服务器地址";
+                }
+                return "{\"success\": false, \"error\": \"" + friendlyMessage + "\", \"data\": []}";
+            }
             catch (Exception ex)
             {
                 LogHelper.LogException(ex, "搜索存储过程失败");
-                return "{\"success\": false, \"error\": \"" + ex.Message.Replace("\"", "'") + "\", \"data\": []}";
+                return "{\"success\": false, \"error\": \"搜索存储过程时发生错误: " + ex.Message.Replace("\"", "'") + "\", \"data\": []}";
             }
         }
 
@@ -1993,18 +2018,24 @@ END";
 
         public string ExecuteStoredProcedure(string jsonData)
         {
+            string procName = "";
             try
             {
                 var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
-                string procName = data.ContainsKey("procName") ? data["procName"].ToString() : "";
+                procName = data.ContainsKey("procName") ? data["procName"].ToString() : "";
                 var parameters = data.ContainsKey("parameters") ? 
                     Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(data["parameters"].ToString()) : 
                     new Dictionary<string, object>();
 
+                if (string.IsNullOrEmpty(procName))
+                {
+                    return "{\"success\": false, \"error\": \"存储过程名称不能为空\"}";
+                }
+
                 string connectionString = ConnectionStrings.GetConnectionString();
                 if (string.IsNullOrEmpty(connectionString))
                 {
-                    return "{\"success\": false, \"error\": \"请先配置数据库连接\"}";
+                    return "{\"success\": false, \"error\": \"请先在系统设置中配置数据库连接\"}";
                 }
 
                 using (SqlConnection conn = DatabaseConnection.GetConnection(connectionString))
@@ -2033,14 +2064,49 @@ END";
                             adapter.Fill(dt);
                         }
 
-                        return ConvertDataTableToJsonSimple(dt);
+                        if (dt.Rows.Count == 0)
+                        {
+                            return "{\"success\": true, \"data\": [], \"message\": \"存储过程执行成功，但未返回数据\"}";
+                        }
+                        
+                        return "{\"success\": true, \"data\": " + ConvertDataTableToJsonSimple(dt) + ", \"message\": \"存储过程执行成功，返回 " + dt.Rows.Count + " 条数据\"}";
                     }
                 }
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.LogException(ex, "执行存储过程失败");
+                string friendlyMessage = "执行存储过程失败";
+                if (ex.Number == 2812)
+                {
+                    friendlyMessage = "未找到存储过程 '" + procName + "'，请检查存储过程名称是否正确";
+                }
+                else if (ex.Number == 4060)
+                {
+                    friendlyMessage = "无法连接到指定的数据库，请检查数据库配置";
+                }
+                else if (ex.Number == 18456)
+                {
+                    friendlyMessage = "数据库登录失败，请检查用户名和密码";
+                }
+                else if (ex.Number == 53)
+                {
+                    friendlyMessage = "无法连接到数据库服务器，请检查网络连接和服务器地址";
+                }
+                else if (ex.Number == 8114)
+                {
+                    friendlyMessage = "参数数据类型错误，请检查输入参数的类型是否正确";
+                }
+                else if (ex.Number == 515)
+                {
+                    friendlyMessage = "存储过程需要必填参数，请检查是否遗漏了必要的参数";
+                }
+                return "{\"success\": false, \"error\": \"" + friendlyMessage + "\"}";
             }
             catch (Exception ex)
             {
                 LogHelper.LogException(ex, "执行存储过程失败");
-                return "{\"success\": false, \"error\": \"" + ex.Message.Replace("\"", "'") + "\"}";
+                return "{\"success\": false, \"error\": \"执行存储过程时发生错误: " + ex.Message.Replace("\"", "'") + "\"}";
             }
         }
 
