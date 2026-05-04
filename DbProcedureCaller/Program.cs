@@ -88,13 +88,13 @@ namespace DbProcedureCaller
 
                 if (string.IsNullOrEmpty(serverPort))
                 {
-                    serverPort = "8081";
+                    serverPort = "9095";
                     LogHelper.LogInfo("使用默认端口: " + serverPort);
                 }
             }
             catch (Exception ex)
             {
-                serverPort = "8081";
+                serverPort = "9095";
                 LogHelper.LogException(ex, "加载服务器配置失败，使用默认端口");
             }
         }

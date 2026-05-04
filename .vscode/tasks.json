@@ -1,0 +1,59 @@
+﻿{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "dotnet build",
+            "args": [
+                "-c",
+                "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/DbProcedureCaller"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "${workspaceFolder}/DbProcedureCaller/bin/Debug/net8.0-windows/DbProcedureCallerModular.exe",
+            "options": {
+                "cwd": "${workspaceFolder}/DbProcedureCaller/bin/Debug/net8.0-windows"
+            },
+            "dependsOn": "Build",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Backup",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Compress-Archive -Path '*' -DestinationPath 'backup_$(Get-Date -Format ''yyyyMMdd_HHmmss'').zip' -Force"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Restore Backup",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Expand-Archive -Path 'backup_*.zip' -DestinationPath '.' -Force"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DbProcedureCallerModular")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ab9f7f8e6a11d7d66bb30a9e72f7a971fa41e25")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("DbProcedureCallerModular")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DbProcedureCallerModular")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

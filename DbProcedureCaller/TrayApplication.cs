@@ -11,19 +11,35 @@ namespace DbProcedureCaller
         private static NotifyIcon trayIcon;
         private static ContextMenuStrip trayMenu;
         private static Thread serverThread;
-        private static string serverPort = "8081";
+        private static string serverPort = "9094";
 
         [STAThread]
         public static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            bool createdNew;
+            Mutex mutex = new Mutex(true, @"Global\DbProcedureCallerModularSingleInstanceMutex", out createdNew);
+            
+            try
+            {
+                if (!createdNew)
+                {
+                    MessageBox.Show("程序已经在运行中，不能启动多个实例。\n\n可以在系统托盘中找到运行中的程序。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-            LoadServerConfig();
-            InitializeTrayIcon();
-            StartServerInBackground();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run();
+                LoadServerConfig();
+                InitializeTrayIcon();
+                StartServerInBackground();
+
+                Application.Run();
+            }
+            finally
+            {
+                mutex?.Close();
+            }
         }
 
         private static void LoadServerConfig()
@@ -64,7 +80,7 @@ namespace DbProcedureCaller
             }
             catch
             {
-                serverPort = "8081";
+                serverPort = "9094";
             }
         }
 
@@ -86,6 +102,7 @@ namespace DbProcedureCaller
             trayMenu = new ContextMenuStrip();
             trayMenu.Items.Add("打开管理页面", null, OpenBrowser);
             trayMenu.Items.Add("显示日志", null, ShowLog);
+            trayMenu.Items.Add("重启服务", null, RestartServer);
             trayMenu.Items.Add("-");
             trayMenu.Items.Add("退出", null, ExitApplication);
 
@@ -166,6 +183,25 @@ namespace DbProcedureCaller
             catch (Exception ex)
             {
                 trayIcon.ShowBalloonTip(2000, "错误", ex.Message, ToolTipIcon.Error);
+            }
+        }
+
+        private static void RestartServer(object sender, EventArgs e)
+        {
+            try
+            {
+                trayIcon.ShowBalloonTip(2000, "提示", "正在重启服务...", ToolTipIcon.Info);
+                
+                ConsoleProgram.StopServer();
+                System.Threading.Thread.Sleep(1000);
+                
+                StartServerInBackground();
+                
+                trayIcon.ShowBalloonTip(2000, "服务已重启", $"HTTP服务器运行在端口 {serverPort}", ToolTipIcon.Info);
+            }
+            catch (Exception ex)
+            {
+                trayIcon.ShowBalloonTip(2000, "重启失败", ex.Message, ToolTipIcon.Error);
             }
         }
 

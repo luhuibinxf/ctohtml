@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务配置 - 统计分析系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; }
+        .page-container { width: 100vw; height: 100vh; display: flex; flex-direction: column; }
+        .page-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            padding: 1rem 1.5rem; display: flex; align-items: center; gap: 20px;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.15); flex-shrink: 0;
+        }
+        .btn-back {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(96, 165, 250, 0.15); border: 1px solid rgba(96, 165, 250, 0.3);
+            color: #60a5fa; border-radius: 10px; padding: 8px 16px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-back:hover { background: rgba(96, 165, 250, 0.25); border-color: rgba(96, 165, 250, 0.5); }
+        .page-header h2 { color: #f8fafc; margin: 0; font-weight: 700; font-size: 1.3rem; }
+        .page-content { flex: 1; overflow-y: auto; padding: 2rem; display: flex; justify-content: center; align-items: flex-start; }
+        .config-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; width: 100%; }
+        @media (max-width: 768px) { .config-grid { grid-template-columns: 1fr; } }
+        .config-card {
+            background: linear-gradient(145deg, #1e293b, #263348); border-radius: 20px; padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .config-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+        .config-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: white; margin-bottom: 1rem; }
+        .config-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .config-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .config-card h4 { color: #f8fafc; font-weight: 700; margin-bottom: 0.5rem; }
+        .config-card p { color: #64748b; font-size: 0.9rem; margin: 0 0 1rem; }
+        .config-card .arrow { color: #3b82f6; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+        .info-badge { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; padding: 10px 20px; border-radius: 12px; font-weight: 600; margin-top: 1.5rem; display: inline-block; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
+        .modal-content { position: relative; background: #1e293b; border-radius: 16px; width: 90%; max-width: 480px; border: 1px solid rgba(255,255,255,0.08); animation: modalIn 0.3s; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-header { padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .modal-header h5 { color: #f8fafc; margin: 0; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .modal-close { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.06); border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .modal-close:hover { background: rgba(239,68,68,0.2); color: #f87171; }
+        .modal-body { padding: 24px; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; color: #cbd5e1; font-weight: 600; font-size: 13px; margin-bottom: 6px; }
+        .form-control { width: 100%; height: 42px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15,23,42,0.6); color: #f1f5f9; padding: 0 12px; font-size: 14px; outline: none; }
+        .form-control:focus { border-color: #3b82f6; }
+        .form-control[readonly] { opacity: 0.6; cursor: not-allowed; }
+        .alert-warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: #fbbf24; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; }
+        .modal-footer { padding: 16px 24px; display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .btn-cancel { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0 16px; height: 38px; color: #94a3b8; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); border: none; border-radius: 8px; padding: 0 20px; height: 38px; color: white; font-weight: 600; cursor: pointer; }
+        .btn-success { background: linear-gradient(135deg, #22c55e, #16a34a); border: none; border-radius: 8px; padding: 0 20px; height: 38px; color: white; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <button class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> 返回</button>
+            <h2><i class="fa-solid fa-server me-2"></i>服务配置</h2>
+        </div>
+        <div class="page-content">
+            <div style="width: 100%; max-width: 900px;">
+                <div class="config-grid">
+                    <div class="config-card" onclick="showDbModal()">
+                        <div class="config-icon blue"><i class="fa-solid fa-database"></i></div>
+                        <h4>数据库配置</h4>
+                        <p>配置数据库连接信息</p>
+                        <div class="arrow"><span>修改配置</span> <i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                    <div class="config-card" onclick="showPortModal()">
+                        <div class="config-icon green"><i class="fa-solid fa-network-wired"></i></div>
+                        <h4>端口配置</h4>
+                        <p>配置服务监听端口</p>
+                        <div class="arrow"><span>修改端口</span> <i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <span class="info-badge">当前端口: <span id="currentPort">--</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dbModal" class="modal">
+        <div class="modal-backdrop" onclick="hideDbModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5><i class="fa-solid fa-database" style="color:#3b82f6;"></i> 数据库连接配置</h5>
+                <button class="modal-close" onclick="hideDbModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label class="form-label">服务器地址</label><input type="text" class="form-control" id="dbServer" placeholder="127.0.0.1"></div>
+                <div class="form-group"><label class="form-label">数据库名称</label><input type="text" class="form-control" id="dbName" placeholder="WiNEX_PACS"></div>
+                <div class="form-group"><label class="form-label">用户名</label><input type="text" class="form-control" id="dbUser" placeholder="sa"></div>
+                <div class="form-group"><label class="form-label">密码</label><input type="password" class="form-control" id="dbPassword" placeholder="输入密码"></div>
+                <div id="dbResult"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="hideDbModal()">取消</button>
+                <button class="btn-success" onclick="testDbConnection()"><i class="fa-solid fa-plug me-1"></i>测试连接</button>
+                <button class="btn-primary" onclick="saveDbConfig()"><i class="fa-solid fa-floppy-disk me-1"></i>保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="portModal" class="modal">
+        <div class="modal-backdrop" onclick="hidePortModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5><i class="fa-solid fa-network-wired" style="color:#22c55e;"></i> 服务端口配置</h5>
+                <button class="modal-close" onclick="hidePortModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-warning"><i class="fa-solid fa-triangle-exclamation me-2"></i>端口修改后需要重启程序才能生效</div>
+                <div class="form-group"><label class="form-label">当前运行端口</label><input type="text" class="form-control" id="runningPort" readonly></div>
+                <div class="form-group"><label class="form-label">新服务端口</label><input type="number" class="form-control" id="newPort" placeholder="9094" min="1" max="65535"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="hidePortModal()">取消</button>
+                <button class="btn-primary" onclick="savePortConfig()"><i class="fa-solid fa-floppy-disk me-1"></i>保存端口</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function goBack() { window.location.href = '/index'; }
+        $(document).ready(function() { loadCurrentPort(); });
+        function loadCurrentPort() {
+            $.get('/get-port', function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success) {
+                    $('#currentPort').text(r.data.runningPort);
+                    $('#runningPort').val(r.data.runningPort);
+                }
+            });
+        }
+        function showDbModal() {
+            $.get('/get-db-config', function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success && r.data) {
+                    $('#dbServer').val(r.data.server || '');
+                    $('#dbName').val(r.data.database || '');
+                    $('#dbUser').val(r.data.username || '');
+                    $('#dbPassword').val(r.data.password || '');
+                }
+            });
+            $('#dbModal').addClass('show');
+        }
+        function hideDbModal() { $('#dbModal').removeClass('show'); }
+        function showPortModal() { $('#portModal').addClass('show'); }
+        function hidePortModal() { $('#portModal').removeClass('show'); }
+        function testDbConnection() {
+            $.ajax({ url: '/test-db-connection', type: 'POST', contentType: 'application/json', data: JSON.stringify({server: $('#dbServer').val(), database: $('#dbName').val(), username: $('#dbUser').val(), password: $('#dbPassword').val()}),
+                success: function(res) {
+                    var r = typeof res === 'string' ? JSON.parse(res) : res;
+                    if (r && r.success) { $('#dbResult').html('<div style="color:#4ade80;padding:10px;background:rgba(34,197,94,0.15);border-radius:8px;"><i class="fa-solid fa-check me-2"></i>连接成功！</div>'); }
+                    else { $('#dbResult').html('<div style="color:#f87171;padding:10px;background:rgba(239,68,68,0.15);border-radius:8px;"><i class="fa-solid fa-xmark me-2"></i>'+(r&&r.error||'连接失败')+'</div>'); }
+                }
+            });
+        }
+        function saveDbConfig() {
+            $.ajax({ url: '/update-db-config', type: 'POST', contentType: 'application/json', data: JSON.stringify({server: $('#dbServer').val(), database: $('#dbName').val(), username: $('#dbUser').val(), password: $('#dbPassword').val()}),
+                success: function(res) {
+                    var r = typeof res === 'string' ? JSON.parse(res) : res;
+                    if (r && r.success) { alert('配置已保存，重启程序后生效'); hideDbModal(); }
+                    else { alert('保存失败'); }
+                }
+            });
+        }
+        function savePortConfig() {
+            var port = $('#newPort').val();
+            if (!port || port < 1 || port > 65535) { alert('请输入有效的端口号（1-65535）'); return; }
+            $.ajax({ url: '/set-port', type: 'POST', contentType: 'application/json', data: JSON.stringify({port: port}),
+                success: function(res) {
+                    var r = typeof res === 'string' ? JSON.parse(res) : res;
+                    if (r && r.success) { alert('端口配置已保存，重启程序后生效'); hidePortModal(); loadCurrentPort(); }
+                    else { alert('保存失败'); }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

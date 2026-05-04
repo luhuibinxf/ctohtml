@@ -402,6 +402,7 @@ namespace DbProcedureCaller
 
         private static bool IsJsonEndpoint(string url)
         {
+            if (url.EndsWith(".html")) return false;
             return url == "/call-procedure" ||
                    url == "/get-users" ||
                    url.StartsWith("/get-user") ||

@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>综合配置 - 存储过程管理</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        .page-container { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .page-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
+            border-radius: 16px;
+            margin: 16px;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+        }
+        .page-header-title {
+            display: flex; align-items: center; gap: 14px;
+            color: white; font-size: 19px; font-weight: 700;
+        }
+        .page-header-title i { font-size: 24px; }
+        .page-header-right { display: flex; align-items: center; gap: 16px; }
+        .btn-back {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 10px; padding: 10px 18px;
+            color: white; font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: all 0.25s;
+        }
+        .btn-back:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+        
+        .page-content { flex: 1; overflow-y: auto; padding: 16px; display: flex; gap: 16px; }
+        
+        .config-panel {
+            flex: 1; display: flex; flex-direction: column;
+            gap: 16px;
+        }
+        
+        .config-card {
+            background: white; border-radius: 16px; padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .card-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 16px; font-weight: 600; color: #1e293b;
+        }
+        .card-title i { color: #3b82f6; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { 
+            display: block; font-weight: 500; color: #475569; 
+            margin-bottom: 6px; font-size: 14px;
+        }
+        .form-control {
+            width: 100%; padding: 10px 14px;
+            border: 1px solid #e2e8f0; border-radius: 10px;
+            font-size: 14px; background: #f8fafc;
+            transition: all 0.2s;
+        }
+        .form-control:focus {
+            outline: none; border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 11px 20px; border-radius: 10px;
+            font-weight: 600; font-size: 14px;
+            cursor: pointer; border: none;
+            transition: all 0.25s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); }
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4); }
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+        .btn-secondary {
+            background: #f1f5f9; color: #475569;
+        }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-sm {
+            padding: 6px 12px; font-size: 12px;
+        }
+        
+        .proc-search-box {
+            display: flex; gap: 12px;
+        }
+        .proc-search-box .form-control {
+            flex: 1;
+        }
+        
+        .param-table {
+            width: 100%; border-collapse: collapse;
+            margin-top: 12px;
+        }
+        .param-table th, .param-table td {
+            padding: 10px 12px; text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .param-table th {
+            background: #f8fafc; font-weight: 600; font-size: 12px; color: #64748b;
+        }
+        .param-table tr:hover { background: #f8fafc; }
+        .param-table tr.disabled-row {
+            background: #f8fafc; opacity: 0.5;
+        }
+        .param-table tr.disabled-row input:disabled,
+        .param-table tr.disabled-row select:disabled {
+            background: #e2e8f0; color: #94a3b8;
+        }
+        .param-original-name {
+            font-family: monospace; font-weight: 500; color: #3b82f6;
+        }
+        
+        .col-config-list {
+            max-height: 300px; overflow-y: auto;
+            margin-top: 12px;
+        }
+        .col-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px;
+            background: #f8fafc; border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+        .col-item:hover { background: #f1f5f9; }
+        .col-item.selected {
+            background: #eff6ff; border: 1px solid #3b82f6;
+        }
+        .col-name { flex: 1; font-weight: 500; color: #1e293b; }
+        .col-width { width: 80px; }
+        .col-width input {
+            width: 100%; padding: 6px; border: 1px solid #e2e8f0;
+            border-radius: 6px; font-size: 12px;
+        }
+        .col-sort { width: 60px; text-align: center; }
+        .col-sort select {
+            padding: 6px; border: 1px solid #e2e8f0;
+            border-radius: 6px; font-size: 12px;
+        }
+        .col-visible { width: 50px; text-align: center; }
+        
+        .stored-proc-list {
+            max-height: 200px; overflow-y: auto;
+            margin-top: 12px;
+        }
+        .proc-item {
+            padding: 12px; background: #f8fafc;
+            border-radius: 10px; margin-bottom: 8px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .proc-item:hover { background: #f1f5f9; }
+        .proc-item.active {
+            background: #eff6ff; border: 1px solid #3b82f6;
+        }
+        .proc-name { font-weight: 600; color: #1e293b; }
+        .proc-desc { font-size: 12px; color: #64748b; margin-top: 4px; }
+        
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); display: flex;
+            align-items: center; justify-content: center;
+            z-index: 1000; animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content {
+            background: white; border-radius: 12px;
+            width: 90%; max-width: 1200px; max-height: 80vh;
+            overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;
+        }
+        .modal-title {
+            font-size: 16px; font-weight: 600; color: #1e293b;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .modal-close {
+            width: 32px; height: 32px; border: none; background: transparent;
+            border-radius: 8px; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            color: #64748b; transition: all 0.2s;
+        }
+        .modal-close:hover { background: #e2e8f0; color: #1e293b; }
+        .modal-body {
+            padding: 20px; overflow-y: auto; max-height: calc(80vh - 60px);
+        }
+        .modal-info {
+            font-size: 13px; color: #64748b; margin-bottom: 12px;
+        }
+        
+        .preview-tip {
+            font-size: 12px; color: #3b82f6; margin-right: 12px;
+        }
+        
+        .preview-section {
+            margin-top: 24px;
+        }
+        .preview-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .preview-info { font-size: 14px; color: #64748b; }
+        
+        .table-container { overflow-x: auto; }
+        .data-table {
+            width: 100%; border-collapse: collapse;
+            border-radius: 12px; overflow: hidden;
+        }
+        .data-table th, .data-table td {
+            padding: 10px 12px; text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            font-weight: 600; color: #475569;
+        }
+        .data-table tr:hover { background: #f8fafc; }
+        
+        .toast {
+            position: fixed; top: 100px; right: 24px;
+            padding: 16px 24px; border-radius: 12px;
+            color: white; font-weight: 500;
+            z-index: 10000; animation: slideIn 0.3s ease-out;
+        }
+        .toast.success { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .toast.error { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+        
+        .empty-state {
+            text-align: center; padding: 40px;
+            color: #94a3b8;
+        }
+        .empty-state i { font-size: 3rem; margin-bottom: 12px; }
+        
+        .section-tabs {
+            display: flex; gap: 8px; margin-bottom: 16px;
+        }
+        .tab-item {
+            padding: 10px 20px; border-radius: 10px;
+            cursor: pointer; font-weight: 500; font-size: 14px;
+            background: #f1f5f9; color: #64748b;
+            transition: all 0.2s;
+        }
+        .tab-item.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        .config-actions {
+            display: flex; gap: 12px; margin-top: 20px;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <div class="page-header-title">
+                <i class="fa-solid fa-database"></i>
+                综合配置 - 存储过程管理
+            </div>
+            <div class="page-header-right">
+                <button class="btn-back" onclick="goBack()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    返回主菜单
+                </button>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="config-panel" style="max-width: 400px;">
+                <div class="config-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-search"></i>
+                            存储过程注册
+                        </div>
+                    </div>
+                    
+                    <div class="proc-search-box">
+                        <input type="text" class="form-control" id="procNameInput" 
+                               placeholder="输入存储过程名称后回车" 
+                               onkeydown="handleProcSearchKeydown(event)">
+                        <button class="btn btn-primary" onclick="searchStoredProc()">
+                            <i class="fa-solid fa-search"></i>
+                            搜索
+                        </button>
+                    </div>
+                    
+                    <div class="stored-proc-list" id="storedProcList">
+                        <div class="empty-state" style="padding: 20px;">
+                            <i class="fa-solid fa-database"></i>
+                            <p>搜索存储过程</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-sliders"></i>
+                            入参配置
+                        </div>
+                    </div>
+                    
+                    <div id="paramConfigSection">
+                        <div class="empty-state" style="padding: 20px;">
+                            <i class="fa-solid fa-params"></i>
+                            <p>请先选择存储过程</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="config-panel" style="flex: 2;">
+                <div class="config-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-list-columns"></i>
+                            返回列配置
+                        </div>
+                        <div class="section-tabs">
+                            <div class="tab-item active" onclick="switchTab('columns')">列配置</div>
+                            <div class="tab-item" onclick="switchTab('preview')">预览数据</div>
+                        </div>
+                    </div>
+                    
+                    <div id="columnConfigTab">
+                        <div id="columnConfigSection">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-table"></i>
+                                <p>请先选择存储过程</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="previewTab" style="display: none;">
+                        <div class="preview-section" id="previewSection">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-eye"></i>
+                                <p>请先选择存储过程并配置参数</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-save"></i>
+                            保存配置
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>配置名称</label>
+                        <input type="text" class="form-control" id="configName" placeholder="输入配置名称">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>配置描述</label>
+                        <textarea class="form-control" id="configDesc" rows="3" placeholder="输入配置描述"></textarea>
+                    </div>
+                    
+                    <div class="config-actions">
+                        <button class="btn btn-secondary" onclick="resetConfig()">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            重置
+                        </button>
+                        <button class="btn btn-success" onclick="saveConfig()">
+                            <i class="fa-solid fa-save"></i>
+                            保存配置
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var currentProc = null;
+        var procParams = [];
+        var procColumns = [];
+        var currentConfig = {};
+        
+        function handleProcSearchKeydown(e) {
+            if (e.key === 'Enter') {
+                searchStoredProc();
+            }
+        }
+        
+        function searchStoredProc() {
+            var procName = $('#procNameInput').val().trim();
+            if (!procName) {
+                showToast('请输入存储过程名称', 'warning');
+                return;
+            }
+            
+            $('#storedProcList').html(`
+                <div class="empty-state" style="padding: 20px;">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>正在搜索存储过程...</p>
+                </div>
+            `);
+            
+            $.ajax({
+                url: '/search-stored-proc',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ procName: procName }),
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success) {
+                        if (data.data && data.data.length > 0) {
+                            renderProcList(data.data);
+                            showToast(`找到 ${data.data.length} 个存储过程`, 'success');
+                        } else {
+                            $('#storedProcList').html(`
+                                <div class="empty-state" style="padding: 20px;">
+                                    <i class="fa-solid fa-search"></i>
+                                    <p>未找到匹配的存储过程</p>
+                                    <p style="font-size: 12px; color: #94a3b8;">提示：请检查存储过程名称是否正确，或尝试使用通配符搜索</p>
+                                </div>
+                            `);
+                            showToast('未找到存储过程', 'warning');
+                        }
+                    } else {
+                        $('#storedProcList').html(`
+                            <div class="empty-state" style="padding: 20px;">
+                                <i class="fa-solid fa-exclamation-triangle"></i>
+                                <p>搜索失败</p>
+                                <p style="font-size: 12px; color: #ef4444;">${data.error || '未知错误'}</p>
+                            </div>
+                        `);
+                        showToast('搜索失败: ' + (data.error || '未知错误'), 'error');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('搜索失败:', xhr.responseText);
+                    $('#storedProcList').html(`
+                        <div class="empty-state" style="padding: 20px;">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <p>网络请求失败</p>
+                            <p style="font-size: 12px; color: #ef4444;">${xhr.responseText || error}</p>
+                        </div>
+                    `);
+                    showToast('搜索失败: ' + (xhr.responseText || error), 'error');
+                }
+            });
+        }
+        
+        function renderProcList(procs) {
+            var html = '';
+            procs.forEach(function(proc) {
+                html += `<div class="proc-item" onclick="selectProc('${proc.name}', '${proc.description || ''}')">
+                    <div class="proc-name">${proc.name}</div>
+                    <div class="proc-desc">${proc.description || '无描述'}</div>
+                </div>`;
+            });
+            $('#storedProcList').html(html);
+        }
+        
+        function selectProc(name, desc) {
+            currentProc = { name: name, description: desc };
+            $('.proc-item').removeClass('active');
+            $('.proc-item:contains("' + name + '")').addClass('active');
+            
+            loadProcMetadata(name);
+        }
+        
+        function loadProcMetadata(procName) {
+            $.ajax({
+                url: '/get-proc-metadata',
+                method: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                data: { procName: procName },
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    procParams = data.parameters || [];
+                    procColumns = data.columns || [];
+                    
+                    renderParams();
+                    renderColumns();
+                    
+                    showToast('已加载存储过程元数据', 'success');
+                },
+                error: function() {
+                    showToast('加载元数据失败', 'error');
+                }
+            });
+        }
+        
+        function renderParams() {
+            if (procParams.length === 0) {
+                $('#paramConfigSection').html(`
+                    <div class="empty-state" style="padding: 20px;">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <p>该存储过程无参数</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            var html = `<table class="param-table">
+                <tr>
+                    <th>启用</th>
+                    <th>参数名</th>
+                    <th>显示名称</th>
+                    <th>类型</th>
+                    <th>选项值</th>
+                    <th>多选</th>
+                    <th>默认值</th>
+                    <th>必填</th>
+                    <th>输入值</th>
+                    <th>描述</th>
+                </tr>`;
+            
+            procParams.forEach(function(param, index) {
+                var displayName = param.displayName || param.name.replace('@', '');
+                var options = param.options || '';
+                var hasOptions = options && options.trim().length > 0;
+                var optionList = hasOptions ? options.split(',').map(o => o.trim()).filter(o => o.length > 0) : [];
+                var isMultiple = param.isMultiple || false;
+                var currentValue = $(`#param_value_${index}`).val() || param.defaultValue || '';
+                var selectedValues = currentValue ? currentValue.split(',') : [];
+                
+                html += `<tr>
+                    <td><input type="checkbox" checked id="param_enabled_${index}" onchange="toggleParamEnabled(${index})"></td>
+                    <td><span class="param-original-name">${param.name}</span></td>
+                    <td><input type="text" class="form-control" style="width: 100%;" 
+                        id="param_display_${index}" placeholder="显示名称" value="${displayName}"></td>
+                    <td>
+                        <select class="form-control" style="width: 100%;" id="param_type_${index}">
+                            <option value="varchar" ${(param.type || '').toLowerCase().includes('char') ? 'selected' : ''}>varchar</option>
+                            <option value="int" ${(param.type || '').toLowerCase() === 'int' ? 'selected' : ''}>int</option>
+                            <option value="datetime" ${(param.type || '').toLowerCase().includes('date') ? 'selected' : ''}>datetime</option>
+                            <option value="decimal" ${(param.type || '').toLowerCase() === 'decimal' ? 'selected' : ''}>decimal</option>
+                            <option value="bit" ${(param.type || '').toLowerCase() === 'bit' ? 'selected' : ''}>bit</option>
+                            <option value="nvarchar" ${(param.type || '').toLowerCase() === 'nvarchar' ? 'selected' : ''}>nvarchar</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="form-control" style="width: 100%;" 
+                        id="param_options_${index}" placeholder="选项值，逗号分隔(如: 1,2,3)" value="${options}" 
+                        onchange="updateParamOptions(${index})"></td>
+                    <td><input type="checkbox" ${isMultiple ? 'checked' : ''} id="param_multiple_${index}" 
+                        onchange="toggleParamMultiple(${index})"></td>
+                    <td><input type="text" class="form-control" style="width: 100%;" 
+                        id="param_default_${index}" placeholder="默认值" value="${param.defaultValue || ''}"></td>
+                    <td><input type="checkbox" ${param.isRequired ? 'checked' : ''} id="param_required_${index}" onchange="toggleParamRequired(${index})"></td>
+                    <td id="param_value_cell_${index}">`;
+                
+                if (hasOptions && optionList.length > 0) {
+                    var multipleAttr = isMultiple ? 'multiple size="3"' : '';
+                    html += `<select class="form-control" style="width: 100%;" id="param_value_${index}" ${multipleAttr}>`;
+                    if (!isMultiple) {
+                        html += `<option value="">请选择</option>`;
+                    }
+                    optionList.forEach(function(opt) {
+                        var isSelected = isMultiple ? selectedValues.includes(opt) : (opt === currentValue);
+                        var selected = isSelected ? 'selected' : '';
+                        html += `<option value="${opt}" ${selected}>${opt}</option>`;
+                    });
+                    html += `</select>`;
+                } else {
+                    html += `<input type="text" class="form-control" style="width: 100%;" 
+                        id="param_value_${index}" placeholder="输入值" value="${currentValue}">`;
+                }
+                
+                html += `</td>
+                    <td><input type="text" class="form-control" style="width: 100%;" 
+                        id="param_desc_${index}" placeholder="参数描述" value="${param.description || ''}"></td>
+                </tr>`;
+            });
+            
+            html += '</table>';
+            $('#paramConfigSection').html(html);
+        }
+        
+        function updateParamOptions(index) {
+            var options = $('#param_options_' + index).val();
+            procParams[index].options = options;
+            renderParams();
+        }
+        
+        function toggleParamMultiple(index) {
+            var isMultiple = $('#param_multiple_' + index).is(':checked');
+            procParams[index].isMultiple = isMultiple;
+            renderParams();
+        }
+        
+        function toggleParamEnabled(index) {
+            var enabled = $('#param_enabled_' + index).is(':checked');
+            var row = $('#param_enabled_' + index).closest('tr');
+            if (enabled) {
+                row.find('input, select').prop('disabled', false);
+                row.removeClass('disabled-row');
+            } else {
+                row.find('input, select').not('#param_enabled_' + index).prop('disabled', true);
+                row.addClass('disabled-row');
+            }
+        }
+        
+        function toggleParamRequired(index) {
+            var required = $('#param_required_' + index).is(':checked');
+            procParams[index].isRequired = required;
+        }
+        
+        function renderColumns() {
+            if (procColumns.length === 0) {
+                $('#columnConfigSection').html(`
+                    <div class="empty-state">
+                        <i class="fa-solid fa-table"></i>
+                        <p>无法获取返回列信息</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            var html = '<div class="col-config-list">';
+            procColumns.forEach(function(col, index) {
+                html += `<div class="col-item" data-column="${col.name}">
+                    <div class="col-name">${col.name}</div>
+                    <div class="col-width">
+                        <input type="number" min="50" max="500" value="${col.width || 120}" 
+                            placeholder="宽度" onchange="updateColumnWidth('${col.name}', this.value)">
+                    </div>
+                    <div class="col-sort">
+                        <select onchange="updateColumnSort('${col.name}', this.value)">
+                            <option value="none">--</option>
+                            <option value="asc">↑</option>
+                            <option value="desc">↓</option>
+                        </select>
+                    </div>
+                    <div class="col-visible">
+                        <input type="checkbox" checked onchange="toggleColumnVisible('${col.name}', this.checked)">
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            
+            $('#columnConfigSection').html(html);
+        }
+        
+        function updateColumnWidth(colName, width) {
+            var col = procColumns.find(c => c.name === colName);
+            if (col) col.width = parseInt(width);
+        }
+        
+        function updateColumnSort(colName, sort) {
+            procColumns.forEach(c => c.sort = c.name === colName ? sort : 'none');
+        }
+        
+        function toggleColumnVisible(colName, visible) {
+            var col = procColumns.find(c => c.name === colName);
+            if (col) col.visible = visible;
+        }
+        
+        function switchTab(tab) {
+            $('.tab-item').removeClass('active');
+            $(`.tab-item:contains("${tab === 'columns' ? '列配置' : '预览数据'}")`).addClass('active');
+            
+            if (tab === 'columns') {
+                $('#columnConfigTab').show();
+                $('#previewTab').hide();
+            } else {
+                $('#columnConfigTab').hide();
+                $('#previewTab').show();
+                executePreview();
+            }
+        }
+        
+        function executePreview() {
+            if (!currentProc) {
+                $('#previewSection').html(`
+                    <div class="empty-state">
+                        <i class="fa-solid fa-eye"></i>
+                        <p>请先选择存储过程</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            var params = {};
+            procParams.forEach((param, index) => {
+                var enabled = $('#param_enabled_' + index).is(':checked');
+                if (enabled) {
+                    var isMultiple = $('#param_multiple_' + index).is(':checked');
+                    var value = '';
+                    if (isMultiple) {
+                        var selectedOptions = $(`#param_value_${index} option:selected`);
+                        var selectedValues = [];
+                        selectedOptions.each(function() {
+                            selectedValues.push($(this).val());
+                        });
+                        value = selectedValues.join(',');
+                    } else {
+                        value = $(`#param_value_${index}`).val() || $(`#param_default_${index}`).val() || '';
+                    }
+                    params[param.name] = value;
+                }
+            });
+            
+            $.ajax({
+                url: '/execute-stored-proc',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    procName: currentProc.name,
+                    parameters: params
+                }),
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    renderPreview(data);
+                },
+                error: function() {
+                    showToast('执行失败', 'error');
+                }
+            });
+        }
+        
+        function renderPreview(data) {
+            if (!data || data.length === 0) {
+                $('#previewSection').html(`
+                    <div class="empty-state">
+                        <i class="fa-solid fa-database"></i>
+                        <p>查询结果为空</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            var visibleCols = procColumns.filter(c => c.visible !== false);
+            var headers = visibleCols.map(c => c.name);
+            
+            var isSummaryProc = currentProc && currentProc.name && 
+                currentProc.name.toLowerCase().includes('statistics') && 
+                !currentProc.name.toLowerCase().includes('_detail');
+            var hasDetailAction = isSummaryProc;
+            
+            var html = `<div class="preview-header">
+                <div class="preview-info">执行结果：共 ${data.length} 条记录</div>
+                ${hasDetailAction ? '<div class="preview-tip"><i class="fa-solid fa-info-circle"></i> 点击"查看明细"可查看详细数据</div>' : ''}
+                <button class="btn btn-secondary btn-sm" onclick="exportPreview()">
+                    <i class="fa-solid fa-download"></i>
+                    导出
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>`;
+            
+            headers.forEach(function(h) {
+                var col = procColumns.find(c => c.name === h);
+                var style = col && col.width ? `style="width: ${col.width}px;"` : '';
+                html += `<th ${style}>${h}</th>`;
+            });
+            if (hasDetailAction) {
+                html += '<th>操作</th>';
+            }
+            html += '</tr></thead><tbody>';
+            
+            data.forEach(function(row, rowIndex) {
+                html += '<tr>';
+                headers.forEach(function(h) {
+                    html += `<td>${row[h] !== undefined ? row[h] : ''}</td>`;
+                });
+                if (hasDetailAction) {
+                    html += `<td><button class="btn btn-sm btn-primary" onclick="viewDetail(${rowIndex})">
+                        <i class="fa-solid fa-search"></i> 查看明细
+                    </button></td>`;
+                }
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table></div>';
+            $('#previewSection').html(html);
+            
+            currentPreviewData = data;
+        }
+        
+        function viewDetail(rowIndex) {
+            if (!currentPreviewData || !currentPreviewData[rowIndex]) {
+                showToast('未找到对应数据', 'error');
+                return;
+            }
+            
+            var rowData = currentPreviewData[rowIndex];
+            var detailProcName = currentProc.name.replace('Statistics', 'Statistics_Detail');
+            
+            var params = {};
+            procParams.forEach((param, index) => {
+                var enabled = $('#param_enabled_' + index).is(':checked');
+                if (enabled) {
+                    var isMultiple = $('#param_multiple_' + index).is(':checked');
+                    var value = '';
+                    if (isMultiple) {
+                        var selectedOptions = $(`#param_value_${index} option:selected`);
+                        var selectedValues = [];
+                        selectedOptions.each(function() {
+                            selectedValues.push($(this).val());
+                        });
+                        value = selectedValues.join(',');
+                    } else {
+                        value = $(`#param_value_${index}`).val() || $(`#param_default_${index}`).val() || '';
+                    }
+                    params[param.name] = value;
+                }
+            });
+            
+            showToast('正在查询明细...', 'success');
+            
+            $.ajax({
+                url: '/execute-stored-proc',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    procName: detailProcName,
+                    parameters: params
+                }),
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    renderDetailModal(data, detailProcName);
+                },
+                error: function() {
+                    showToast('查询明细失败', 'error');
+                }
+            });
+        }
+        
+        function renderDetailModal(data, procName) {
+            if (!data || data.length === 0) {
+                showToast('明细数据为空', 'warning');
+                return;
+            }
+            
+            var headers = Object.keys(data[0]);
+            
+            var html = `<div class="modal-overlay" onclick="closeDetailModal()">
+                <div class="modal-content" onclick="event.stopPropagation()">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            <i class="fa-solid fa-list"></i>
+                            ${procName} - 明细数据
+                        </div>
+                        <button class="modal-close" onclick="closeDetailModal()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-info">共 ${data.length} 条明细记录</div>
+                        <div class="table-container" style="max-height: 500px;">
+                            <table class="data-table">
+                                <thead><tr>`;
+            
+            headers.forEach(h => {
+                html += `<th>${h}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            data.forEach(row => {
+                html += '<tr>';
+                headers.forEach(h => {
+                    html += `<td>${row[h] !== undefined ? row[h] : ''}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table></div>';
+            html += '</div></div></div>';
+            
+            $('body').append(html);
+        }
+        
+        function closeDetailModal() {
+            $('.modal-overlay').remove();
+        }
+        
+        function exportPreview() {
+            showToast('导出功能开发中', 'error');
+        }
+        
+        function saveConfig() {
+            var configName = $('#configName').val().trim();
+            if (!configName) {
+                showToast('请输入配置名称', 'error');
+                return;
+            }
+            
+            currentConfig = {
+                name: configName,
+                description: $('#configDesc').val(),
+                procName: currentProc ? currentProc.name : '',
+                parameters: procParams.map((p, i) => ({
+                    name: p.name,
+                    displayName: $(`#param_display_${i}`).val(),
+                    type: $(`#param_type_${i}`).val(),
+                    options: $(`#param_options_${i}`).val(),
+                    isMultiple: $('#param_multiple_' + i).is(':checked'),
+                    defaultValue: $(`#param_default_${i}`).val(),
+                    isRequired: $('#param_required_' + i).is(':checked'),
+                    enabled: $('#param_enabled_' + i).is(':checked'),
+                    description: $(`#param_desc_${i}`).val()
+                })),
+                columns: procColumns.map(c => ({
+                    name: c.name,
+                    width: c.width,
+                    sort: c.sort,
+                    visible: c.visible !== false
+                }))
+            };
+            
+            $.ajax({
+                url: '/save-proc-config',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(currentConfig),
+                success: function() {
+                    showToast('配置保存成功', 'success');
+                },
+                error: function() {
+                    showToast('保存失败', 'error');
+                }
+            });
+        }
+        
+        function resetConfig() {
+            $('#configName').val('');
+            $('#configDesc').val('');
+            currentConfig = {};
+            showToast('已重置', 'success');
+        }
+        
+        function showToast(message, type) {
+            var toast = $('<div class="toast ' + type + '">' + message + '</div>');
+            $('body').append(toast);
+            setTimeout(function() {
+                toast.remove();
+            }, 3000);
+        }
+        
+        function goBack() { 
+            if (window.parent !== window) {
+                window.parent.closeContent && window.parent.closeContent();
+            } else {
+                window.location.href = '/main';
+            }
+        }
+    </script>
+</body>
+</html>

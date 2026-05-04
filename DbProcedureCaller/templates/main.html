@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计分析系统 - 配置中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); }
+        .page-container { width: 100vw; height: 100vh; display: flex; flex-direction: column; }
+        
+        .page-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+            padding: 1.2rem 2rem; 
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            flex-shrink: 0;
+        }
+        .page-header h1 { 
+            color: white; 
+            font-weight: 700; 
+            font-size: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .page-header h1 i { font-size: 1.5rem; }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+        .header-right .user-info { 
+            color: rgba(255,255,255,0.9); 
+            font-weight: 500; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-right .user-info i { font-size: 1.1rem; }
+        .btn-logout { 
+            background: rgba(255,255,255,0.2); 
+            border: 1px solid rgba(255,255,255,0.3); 
+            color: white; 
+            padding: 9px 18px; 
+            border-radius: 10px; 
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-logout:hover { 
+            background: rgba(255,255,255,0.3); 
+            transform: translateY(-1px);
+        }
+
+        .main-content { 
+            flex: 1; 
+            padding: 24px; 
+            overflow-y: auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .menu-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        .menu-card.active {
+            background: linear-gradient(135deg, #f0f9ff 0%, #eff6ff 100%);
+            border-color: #3b82f6;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        .menu-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); }
+        .card-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4); }
+        .card-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4); }
+        .card-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); }
+        .card-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4); }
+        .card-icon.cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4); }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .content-area {
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+            transform: translateX(100%);
+            transition: transform 0.35s ease;
+            z-index: 100;
+        }
+        .content-area.active {
+            transform: translateX(0);
+        }
+        .content-header {
+            background: #f8fafc;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .content-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+        }
+        .content-area iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding: 32px;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <h1><i class="fa-solid fa-chart-line"></i> 统计分析系统</h1>
+            <div class="header-right">
+                <div class="user-info">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span id="currentUser">管理员</span>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    退出登录
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <div class="cards-grid">
+                <div class="menu-card active" onclick="openContent('daily-analysis', '每日分析', this)">
+                    <div class="card-icon blue">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div class="card-title">📊 每日分析</div>
+                    <div class="card-desc">查看每日检查统计数据，分析阳性率趋势</div>
+                </div>
+
+                <div class="menu-card" onclick="openContent('server-config', '服务器配置', this)">
+                    <div class="card-icon green">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div class="card-title">🖥️ 服务器配置</div>
+                    <div class="card-desc">配置数据库连接和系统参数</div>
+                </div>
+
+                <div class="menu-card" onclick="openContent('user-config', '用户管理', this)">
+                    <div class="card-icon purple">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="card-title">👥 用户管理</div>
+                    <div class="card-desc">管理系统用户和角色权限</div>
+                </div>
+
+                <div class="menu-card" onclick="openContent('permission-config', '权限配置', this)">
+                    <div class="card-icon orange">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="card-title">🛡️ 权限配置</div>
+                    <div class="card-desc">配置用户角色和访问权限</div>
+                </div>
+
+                <div class="menu-card" onclick="openContent('param-config', '参数配置', this)">
+                    <div class="card-icon red">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div class="card-title">⚙️ 参数配置</div>
+                    <div class="card-desc">配置系统运行参数和选项</div>
+                </div>
+
+                <div class="menu-card" onclick="openContent('complex-config', '综合配置', this)">
+                    <div class="card-icon cyan">
+                        <i class="fa-solid fa-cog"></i>
+                    </div>
+                    <div class="card-title">🔧 综合配置</div>
+                    <div class="card-desc">系统综合配置管理</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area" id="contentArea">
+        <iframe id="contentFrame" src="daily-analysis.html"></iframe>
+    </div>
+
+    <script>
+        function openContent(page, title, element) {
+            document.querySelectorAll('.menu-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            
+            document.getElementById('contentFrame').src = page + '.html';
+            document.getElementById('contentArea').classList.add('active');
+            document.getElementById('mainContent').style.opacity = '0.3';
+        }
+
+        function closeContent() {
+            document.getElementById('contentArea').classList.remove('active');
+            document.getElementById('mainContent').style.opacity = '1';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('user');
+            window.location.href = '/';
+        }
+
+        document.getElementById('currentUser').textContent = sessionStorage.getItem('user') || '管理员';
+    </script>
+</body>
+</html>

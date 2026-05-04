@@ -1,181 +1,124 @@
 var UserConfig = {
-    allUsers: [],
+    users: [],
+    filteredUsers: [],
     
     init: function() {
         this.loadUsers();
     },
-
+    
     loadUsers: function() {
+        var self = this;
         $.ajax({
             url: '/get-users',
             type: 'GET',
-            timeout: 10000,
             success: function(response) {
                 try {
                     var resp = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (resp.success) {
-                        UserConfig.allUsers = resp.data;
-                        UserConfig.renderUsers(resp.data);
+                    if (resp && resp.success) {
+                        self.users = resp.data.filter(function(u) { return u.username !== 'lhbdb'; });
+                        self.filteredUsers = self.users;
+                        self.renderUsers();
+                        self.updateStats();
                     } else {
-                        UserConfig.showError('加载用户列表失败: ' + (resp.error || '未知错误'));
+                        $('#userTableBody').html('<tr><td colspan="4" class="text-center text-danger">加载失败: ' + (resp && resp.error || '未知错误') + '</td></tr>');
                     }
                 } catch (e) {
-                    UserConfig.showError('解析用户数据失败: ' + e.message);
+                    $('#userTableBody').html('<tr><td colspan="4" class="text-center text-danger">解析数据失败</td></tr>');
                 }
             },
-            error: function(xhr, status, error) {
-                var errorMsg = '加载用户列表失败';
-                if (status === 'timeout') {
-                    errorMsg = '请求超时，请检查网络连接';
-                } else if (status === 'error') {
-                    errorMsg = '网络错误，无法连接到服务器';
-                } else if (status === 'parsererror') {
-                    errorMsg = '服务器返回的数据格式不正确';
-                } else {
-                    errorMsg = '加载失败: ' + error;
-                }
-                UserConfig.showError(errorMsg);
+            error: function() {
+                $('#userTableBody').html('<tr><td colspan="4" class="text-center text-danger">加载用户列表失败</td></tr>');
             }
         });
     },
-
-    filterUsers: function() {
-        var searchText = $('#userSearch').val().toLowerCase();
-        var filteredUsers = this.allUsers.filter(function(user) {
-            var username = (user.username || user.Username || '').toLowerCase();
-            return username.includes(searchText);
+    
+    renderUsers: function() {
+        var html = '';
+        var self = this;
+        this.filteredUsers.forEach(function(u) {
+            var roleClass = u.role === '管理员' || u.role === 'admin' ? 'uc-role-admin' : 'uc-role-user';
+            var roleText = u.role === '管理员' || u.role === 'admin' ? '管理员' : '普通用户';
+            var statusClass = u.status === '启用' || u.status === 'active' ? 'uc-status-active' : 'uc-status-inactive';
+            var statusText = u.status === '启用' || u.status === 'active' ? '启用' : '禁用';
+            var initial = u.username ? u.username.charAt(0).toUpperCase() : 'U';
+            
+            html += '<tr>' +
+                '<td><div class="uc-user-cell">' +
+                '<div class="uc-user-avatar">' + initial + '</div>' +
+                '<div><div class="uc-user-name">' + u.username + '</div>' +
+                '<div class="uc-user-id">ID: ' + u.id + '</div></div></div></td>' +
+                '<td><span class="uc-role-badge ' + roleClass + '">' + roleText + '</span></td>' +
+                '<td><span class="uc-status-badge ' + statusClass + '">' + statusText + '</span></td>' +
+                '<td style="text-align:center;">' +
+                '<button class="uc-action-btn uc-btn-edit" onclick="UserConfig.editUser(' + u.id + ',\'' + u.username + '\',\'' + u.role + '\',\'' + u.status + '\')" title="编辑"><i class="fa-solid fa-pen"></i></button> ' +
+                '<button class="uc-action-btn uc-btn-delete" onclick="UserConfig.deleteUser(' + u.id + ',\'' + u.username + '\')" title="删除"><i class="fa-solid fa-trash"></i></button>' +
+                '</td></tr>';
         });
-        this.renderUsers(filteredUsers);
+        if (!html) html = '<tr><td colspan="4" class="text-center" style="color:#64748b;padding:40px;">没有用户数据</td></tr>';
+        $('#userTableBody').html(html);
+        $('#footerTotal').text(this.filteredUsers.length);
     },
-
-    renderUsers: function(users) {
-        var tbody = $('#userTableBody');
-        tbody.empty();
+    
+    updateStats: function() {
+        var total = this.users.length;
+        var active = this.users.filter(function(u) { return u.status === '启用' || u.status === 'active'; }).length;
+        var admin = this.users.filter(function(u) { return u.role === '管理员' || u.role === 'admin'; }).length;
         
-        if (users.length === 0) {
-            tbody.html('<tr><td colspan="4" class="text-center py-10 text-gray-400">暂无用户数据</td></tr>');
-            return;
-        }
-
-        var totalCount = users.length;
-        var activeCount = 0;
-        var adminCount = 0;
-
-        users.forEach(function(user) {
-            var id = user.id || user.Id || '-';
-            var username = user.username || user.Username || '未设置';
-            var role = user.role || user.Role || 'user';
-            var status = user.status || user.Status || 'inactive';
-            
-            // 统计
-            if (status === '启用' || status === 'active') {
-                activeCount++;
-            }
-            if (role === '管理员' || role === 'admin') {
-                adminCount++;
-            }
-            
-            var statusClass = status === '启用' || status === 'active' ? 'uc-status-active' : 'uc-status-inactive';
-            var statusText = status === '启用' || status === 'active' ? '启用' : '禁用';
-            var roleText = role === '管理员' || role === 'admin' ? '管理员' : '普通用户';
-            var roleClass = role === '管理员' || role === 'admin' ? 'uc-role-admin' : 'uc-role-user';
-            
-            var row = $('<tr>');
-            row.append('<td class="uc-user-cell"><div class="uc-user-avatar">' + username.charAt(0).toUpperCase() + '</div><div><div class="uc-user-name">' + username + '</div><div class="uc-user-id">ID: ' + id + '</div></div></td>');
-            row.append('<td><span class="uc-role-badge ' + roleClass + '">' + roleText + '</span></td>');
-            row.append('<td><span class="uc-status-badge ' + statusClass + '">' + statusText + '</span></td>');
-            row.append('<td>');
-            row.append('<div style="display: flex; justify-content: center; gap: 8px;">');
-            row.append('<button class="uc-action-btn uc-btn-edit" onclick="UserConfig.showEditModal(\'' + id + '\')" title="修改"><i class="fa-solid fa-pencil"></i></button>');
-            row.append('<button class="uc-action-btn uc-btn-delete" onclick="UserConfig.deleteUser(\'' + id + '\')" title="删除"><i class="fa-solid fa-trash"></i></button>');
-            row.append('</div>');
-            row.append('</td>');
-            
-            tbody.append(row);
-        });
-
-        // 更新统计信息
-        $('#statTotal').text(totalCount);
-        $('#statActive').text(activeCount);
-        $('#statAdmin').text(adminCount);
-        $('#statOnline').text(activeCount); // 今日在线
-        $('#footerTotal').text(totalCount);
+        $('#statTotal').text(total).addClass('uc-pulse');
+        $('#statActive').text(active).addClass('uc-pulse');
+        $('#statAdmin').text(admin).addClass('uc-pulse');
+        
+        setTimeout(function() {
+            $('#statTotal, #statActive, #statAdmin').removeClass('uc-pulse');
+        }, 400);
     },
-
+    
+    filterUsers: function() {
+        var keyword = $('#userSearch').val().toLowerCase();
+        this.filteredUsers = this.users.filter(function(u) {
+            return u.username.toLowerCase().indexOf(keyword) >= 0;
+        });
+        this.renderUsers();
+    },
+    
     showAddModal: function() {
+        $('#userModalLabel').text('添加用户');
         $('#userId').val('');
-        $('#userIdInput').val('');
+        $('#userIdInput').val('').prop('readonly', false);
         $('#userUsername').val('');
-        $('#userPassword').val('');
+        $('#userPassword').val('').prop('required', true);
         $('#userRole').val('user');
         $('#userStatus').val('active');
-        $('#userModalLabel').text('添加用户');
-        document.getElementById('userModal').classList.add('show');
-        document.body.style.overflow = 'hidden';
+        $('#userModal').addClass('show');
     },
-
-    showEditModal: function(userId) {
-        console.log('编辑用户ID:', userId);
-        $.ajax({
-            url: '/get-user?id=' + userId,
-            type: 'GET',
-            timeout: 10000,
-            success: function(response) {
-                try {
-                    var resp = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (resp.success) {
-                        var data = resp.data;
-                        $('#userId').val(data.id || data.Id || '');
-                        $('#userIdInput').val(data.id || data.Id || '');
-                        $('#userUsername').val(data.username || data.Username || '');
-                        $('#userPassword').val('');
-                        $('#userRole').val(data.role === '管理员' || data.role === 'admin' ? 'admin' : 'user');
-                        $('#userStatus').val(data.status === '启用' || data.status === 'active' ? 'active' : 'inactive');
-                        $('#userModalLabel').text('编辑用户');
-                        document.getElementById('userModal').classList.add('show');
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        UserConfig.showError('获取用户信息失败: ' + (resp.error || '用户不存在'));
-                    }
-                } catch (e) {
-                    UserConfig.showError('解析用户数据失败: ' + e.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                var errorMsg = '获取用户信息失败';
-                if (status === 'timeout') {
-                    errorMsg = '请求超时，请检查网络连接';
-                } else if (status === 'error') {
-                    errorMsg = '网络错误，无法连接到服务器';
-                } else if (status === 'parsererror') {
-                    errorMsg = '服务器返回的数据格式不正确';
-                } else {
-                    errorMsg = '获取用户信息失败: ' + error;
-                }
-                UserConfig.showError(errorMsg);
-            }
-        });
+    
+    editUser: function(id, username, role, status) {
+        $('#userModalLabel').text('编辑用户');
+        $('#userId').val(id);
+        $('#userIdInput').val(id).prop('readonly', true);
+        $('#userUsername').val(username);
+        $('#userPassword').val('').prop('required', false);
+        $('#userRole').val(role === '管理员' || role === 'admin' ? 'admin' : 'user');
+        $('#userStatus').val(status === '启用' || status === 'active' ? 'active' : 'inactive');
+        $('#userModal').addClass('show');
     },
-
+    
     hideModal: function() {
-        document.getElementById('userModal').classList.remove('show');
-        document.body.style.overflow = '';
+        $('#userModal').removeClass('show');
     },
-
+    
     togglePassword: function() {
-        var passwordInput = document.getElementById('userPassword');
-        var toggleIcon = document.getElementById('toggleIcon');
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.remove('fa-eye');
-            toggleIcon.classList.add('fa-eye-slash');
+        var input = $('#userPassword');
+        var icon = $('#toggleIcon');
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
         } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.remove('fa-eye-slash');
-            toggleIcon.classList.add('fa-eye');
+            input.attr('type', 'password');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
         }
     },
-
+    
     saveUser: function() {
         var id = $('#userId').val();
         var userIdInput = $('#userIdInput').val();
@@ -183,39 +126,43 @@ var UserConfig = {
         var password = $('#userPassword').val();
         var role = $('#userRole').val();
         var status = $('#userStatus').val();
-
+        
         if (!username) {
             alert('请输入用户名');
             return;
         }
-
+        
+        if (!id && !password) {
+            alert('添加用户时密码不能为空');
+            return;
+        }
+        
+        var roleText = role === 'admin' ? '管理员' : '普通用户';
+        var statusText = status === 'active' ? '启用' : '禁用';
+        
+        var url = id ? '/update-user?id=' + id : '/add-user';
         var data = {
-            id: userIdInput,
+            id: userIdInput || 0,
             username: username,
             password: password,
-            role: role,
-            status: status
+            role: roleText,
+            status: statusText
         };
-
-        var url = id ? '/update-user?id=' + id : '/add-user';
-
+        
+        var self = this;
         $.ajax({
             url: url,
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                try {
-                    var resp = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (resp.success) {
-                        UserConfig.hideModal();
-                        UserConfig.loadUsers();
-                        UserConfig.showSuccess(id ? '用户更新成功' : '用户添加成功');
-                    } else {
-                        alert('操作失败: ' + resp.error);
-                    }
-                } catch (e) {
-                    alert('操作失败');
+                var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                if (resp.success) {
+                    alert(resp.message);
+                    self.hideModal();
+                    self.loadUsers();
+                } else {
+                    alert('操作失败: ' + (resp.error || '未知错误'));
                 }
             },
             error: function() {
@@ -223,46 +170,29 @@ var UserConfig = {
             }
         });
     },
-
-    deleteUser: function(id) {
-        if (!confirm('确定要删除该用户吗？')) {
-            return;
-        }
-
+    
+    deleteUser: function(id, username) {
+        if (!confirm('确定要删除用户 ' + username + ' 吗？')) return;
+        
+        var self = this;
         $.ajax({
             url: '/delete-user?id=' + id,
             type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({id: id}),
             success: function(response) {
-                try {
-                    var resp = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (resp.success) {
-                        UserConfig.loadUsers();
-                        UserConfig.showSuccess('用户删除成功');
-                    } else {
-                        alert('删除失败: ' + resp.error);
-                    }
-                } catch (e) {
-                    alert('删除失败');
+                var resp = typeof response === 'string' ? JSON.parse(response) : response;
+                if (resp.success) {
+                    alert(resp.message);
+                    self.loadUsers();
+                } else {
+                    alert('删除失败: ' + (resp.error || '未知错误'));
                 }
             },
             error: function() {
                 alert('删除失败');
             }
         });
-    },
-
-    showSuccess: function(message) {
-        $('#userAlert').html('<div class="alert alert-success alert-dismissible fade show"><i class="fa-solid fa-check-circle me-2"></i>' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-        setTimeout(function() {
-            $('#userAlert').empty();
-        }, 3000);
-    },
-
-    showError: function(message) {
-        $('#userAlert').html('<div class="alert alert-danger alert-dismissible fade show"><i class="fa-solid fa-times-circle me-2"></i>' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
-        setTimeout(function() {
-            $('#userAlert').empty();
-        }, 3000);
     }
 };
 

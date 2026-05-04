@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>执行存储过程</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-success:hover { background: #059669; }
+        .btn-secondary { background: #6b7280; color: white; }
+        .btn-secondary:hover { background: #4b5563; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .card-title { font-size: 16px; font-weight: 600; color: #1f2937; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 14px; color: #4b5563; margin-bottom: 5px; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 14px; }
+        .form-control:focus { outline: none; border-color: #3b82f6; }
+        .param-row { display: flex; gap: 15px; }
+        .param-row .form-group { flex: 1; }
+        .result-section { margin-top: 20px; }
+        .result-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .result-info { font-size: 14px; color: #6b7280; }
+        .table-container { max-height: 400px; overflow: auto; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .data-table th, .data-table td { padding: 10px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        .data-table th { background: #f9fafb; font-weight: 600; color: #374151; position: sticky; top: 0; }
+        .data-table tr:hover { background: #f9fafb; }
+        .empty-state { text-align: center; padding: 40px; color: #9ca3af; }
+        .empty-state i { font-size: 48px; margin-bottom: 15px; }
+        .toast { position: fixed; top: 20px; right: 20px; padding: 15px 25px; border-radius: 8px; color: white; font-size: 14px; z-index: 1000; animation: slideIn 0.3s ease; }
+        .toast.success { background: #10b981; }
+        .toast.error { background: #ef4444; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .proc-selector { margin-bottom: 20px; }
+        .proc-option { padding: 10px 15px; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; margin-right: 10px; display: inline-block; transition: all 0.2s; }
+        .proc-option:hover { border-color: #3b82f6; }
+        .proc-option.active { border-color: #3b82f6; background: #eff6ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>执行存储过程</h1>
+            <button class="btn btn-secondary" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i> 返回
+            </button>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">选择存储过程</div>
+            <div class="proc-selector">
+                <div class="proc-option active" onclick="selectProc('summary')">
+                    <i class="fa-solid fa-chart-bar"></i> usp_TJFX_RadiologyWorkloadStatistics (汇总)
+                </div>
+                <div class="proc-option" onclick="selectProc('detail')">
+                    <i class="fa-solid fa-list"></i> usp_TJFX_RadiologyWorkloadStatistics_Detail (明细)
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">参数配置</div>
+            <div class="param-row">
+                <div class="form-group">
+                    <label for="startDate">开始日期</label>
+                    <input type="date" class="form-control" id="startDate" value="">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">结束日期</label>
+                    <input type="date" class="form-control" id="endDate" value="">
+                </div>
+                <div class="form-group">
+                    <label for="system">系统（可选）</label>
+                    <input type="text" class="form-control" id="system" placeholder="留空则查询全部">
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="executeProc()" style="width: 100%; padding: 12px;">
+                <i class="fa-solid fa-play"></i> 执行存储过程
+            </button>
+        </div>
+        
+        <div class="card result-section">
+            <div class="result-header">
+                <div class="result-info" id="resultInfo">执行结果：等待执行...</div>
+                <button class="btn btn-secondary btn-sm" onclick="exportResult()" style="display: none;" id="exportBtn">
+                    <i class="fa-solid fa-download"></i> 导出
+                </button>
+            </div>
+            <div class="table-container" id="resultContainer">
+                <div class="empty-state">
+                    <i class="fa-solid fa-database"></i>
+                    <p>点击上方按钮执行存储过程</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        var currentProc = 'summary';
+        var currentResult = [];
+        
+        function selectProc(proc) {
+            currentProc = proc;
+            $('.proc-option').removeClass('active');
+            $(`.proc-option:contains("${proc === 'summary' ? '汇总' : '明细'}")`).addClass('active');
+        }
+        
+        function executeProc() {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var system = $('#system').val();
+            
+            if (!startDate || !endDate) {
+                showToast('请选择日期范围', 'error');
+                return;
+            }
+            
+            var url = currentProc === 'summary' ? '/execute-radiology-summary' : '/execute-radiology-detail';
+            
+            $('#resultContainer').html(`
+                <div class="empty-state">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>正在执行...</p>
+                </div>
+            `);
+            $('#exportBtn').hide();
+            
+            $.ajax({
+                url: url,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    startDate: startDate,
+                    endDate: endDate,
+                    system: system
+                }),
+                success: function(response) {
+                    var data = typeof response === 'string' ? JSON.parse(response) : response;
+                    if (data.success) {
+                        renderResult(data.data);
+                        $('#resultInfo').text(`执行成功：共 ${data.data.length} 条记录`);
+                        showToast('执行成功', 'success');
+                    } else {
+                        $('#resultContainer').html(`
+                            <div class="empty-state">
+                                <i class="fa-solid fa-exclamation-circle"></i>
+                                <p>${data.error}</p>
+                            </div>
+                        `);
+                        showToast('执行失败: ' + data.error, 'error');
+                    }
+                },
+                error: function() {
+                    $('#resultContainer').html(`
+                        <div class="empty-state">
+                            <i class="fa-solid fa-exclamation-circle"></i>
+                            <p>请求失败，请检查网络连接</p>
+                        </div>
+                    `);
+                    showToast('请求失败', 'error');
+                }
+            });
+        }
+        
+        function renderResult(data) {
+            if (!data || data.length === 0) {
+                $('#resultContainer').html(`
+                    <div class="empty-state">
+                        <i class="fa-solid fa-database"></i>
+                        <p>查询结果为空</p>
+                    </div>
+                `);
+                return;
+            }
+            
+            currentResult = data;
+            var headers = Object.keys(data[0]);
+            
+            var html = `<table class="data-table">
+                <thead><tr>`;
+            headers.forEach(h => {
+                html += `<th>${h}</th>`;
+            });
+            html += `</tr></thead><tbody>`;
+            
+            data.forEach(row => {
+                html += `<tr>`;
+                headers.forEach(h => {
+                    html += `<td>${row[h] || ''}</td>`;
+                });
+                html += `</tr>`;
+            });
+            html += `</tbody></table>`;
+            
+            $('#resultContainer').html(html);
+            $('#exportBtn').show();
+        }
+        
+        function exportResult() {
+            if (currentResult.length === 0) return;
+            
+            var headers = Object.keys(currentResult[0]);
+            var csv = headers.join(',') + '\n';
+            
+            currentResult.forEach(row => {
+                var rowData = headers.map(h => {
+                    var value = row[h] || '';
+                    return `"${value.toString().replace(/"/g, '""')}"`;
+                });
+                csv += rowData.join(',') + '\n';
+            });
+            
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `result_${currentProc}_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        }
+        
+        function showToast(message, type) {
+            var toast = $(`<div class="toast ${type}">${message}</div>`);
+            $('body').append(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        function goBack() {
+            window.location.href = '/main.html';
+        }
+        
+        $(function() {
+            var today = new Date().toISOString().split('T')[0];
+            $('#endDate').val(today);
+            $('#startDate').val(today);
+        });
+    </script>
+</body>
+</html>
