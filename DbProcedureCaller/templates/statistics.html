@@ -815,6 +815,12 @@
                 url: url,
                 method: 'GET',
                 success: function(templateHtml) {
+                    var styleContent = '';
+                    var styleMatch = templateHtml.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+                    if (styleMatch && styleMatch[1]) {
+                        styleContent = '<style>' + styleMatch[1].trim() + '</style>';
+                    }
+                    
                     var extractedContent = templateHtml;
                     var bodyMatch = templateHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
                     if (bodyMatch && bodyMatch[1]) {
@@ -832,20 +838,43 @@
                     $('#searchPanel').hide();
                     $('#statsContainer').hide();
                     
-                    $('#resultContainer').html(`
-                        <div class="result-header">
-                            <h3>${config.name}</h3>
-                            <button class="btn btn-secondary btn-sm" onclick="exportData()">
-                                <i class="fa-solid fa-download"></i>
-                                导出
-                            </button>
+                    var finalHtml = `
+                        ${styleContent}
+                        <div id="customTemplateWrapper" style="all: unset;">
+                            ${renderedHtml}
                         </div>
-                        <div style="padding: 20px;">${renderedHtml}</div>
-                    `);
+                    `;
+                    
+                    $('#resultContainer').html(finalHtml);
+                    
+                    fillParamsToTemplate(config.parameters);
+                    
                     updateStats(data.length, 0, '-', '-');
                 },
                 error: function() {
                     renderCustomData(data, config);
+                }
+            });
+        }
+        
+        function fillParamsToTemplate(paramsJson) {
+            if (!paramsJson) return;
+            
+            var params = typeof paramsJson === 'string' ? JSON.parse(paramsJson) : paramsJson;
+            
+            params.forEach(function(param) {
+                var paramName = param.name;
+                if (paramName.startsWith('@')) {
+                    paramName = paramName.substring(1);
+                }
+                
+                var defaultValue = param.defaultValue || '';
+                
+                var inputSelector = `[name="${param.name}"], [name="${paramName}"], #${param.name}, #${paramName}`;
+                var $input = $(inputSelector);
+                
+                if ($input.length > 0) {
+                    $input.val(defaultValue);
                 }
             });
         }
