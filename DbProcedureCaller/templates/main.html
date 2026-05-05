@@ -211,6 +211,14 @@
                     <div class="card-desc">查看各类自定义统计分析报表</div>
                 </div>
 
+                <div class="menu-card" onclick="openIndependentPage('rad_workload', this)">
+                    <div class="card-icon green">
+                        <i class="fa-solid fa-hospital"></i>
+                    </div>
+                    <div class="card-title">🏥 影像中心工作量</div>
+                    <div class="card-desc">放射科书写组分值计算表（独立页面）</div>
+                </div>
+
                 <div class="menu-card" onclick="openContent('server-config', '服务器配置', this)">
                     <div class="card-icon green">
                         <i class="fa-solid fa-server"></i>
@@ -282,6 +290,10 @@
             document.getElementById('contentFrame').src = page + '.html';
             document.getElementById('contentArea').classList.add('active');
             document.getElementById('mainContent').style.opacity = '0.3';
+        }
+
+        function openIndependentPage(page, element) {
+            window.open(page + '.html', '_blank');
         }
 
         function closeContent() {
