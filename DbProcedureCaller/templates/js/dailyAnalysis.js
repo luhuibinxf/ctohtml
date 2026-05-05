@@ -1081,7 +1081,7 @@ var DailyAnalysis = (function() {
                     <div class="query-header">
                         <div class="date-range">
                             <label>日期范围</label>
-                            <input type="date" id="startDate" value="2026-03-31" class="date-input">
+                            <input type="date" id="startDate" value="2026-04-01" class="date-input">
                             <span style="color:#9ca3af;">至</span>
                             <input type="date" id="endDate" value="2026-04-30" class="date-input">
                             <select class="quick-select" onchange="DailyAnalysis.quickQuery(this.value)">
@@ -1210,9 +1210,9 @@ var DailyAnalysis = (function() {
                     <div class="panel-header">
                         <h2>📋 统计分析结果</h2>
                         <div class="panel-actions">
-                            <button class="export-btn" onclick="DailyAnalysis.getDepartmentStatistics()">📊 科室</button>
-                            <button class="export-btn" onclick="DailyAnalysis.getDoctorStatistics()">👨⚕️ 医生</button>
-                            <button class="export-btn" onclick="DailyAnalysis.getCategoryStatistics()">📋 类型</button>
+                            <button class="export-btn" id="btnDeptStats">📊 科室</button>
+                            <button class="export-btn" id="btnDoctorStats">👨⚕️ 医生</button>
+                            <button class="export-btn" id="btnCategoryStats">📋 类型</button>
                             <button class="export-btn" onclick="DailyAnalysis.exportData()">📥 导出</button>
                         </div>
                     </div>
@@ -1261,6 +1261,19 @@ var DailyAnalysis = (function() {
             e.preventDefault();
             queryData();
         });
+        
+        $('#btnDeptStats').on('click', function() {
+            DailyAnalysis.getDepartmentStatistics();
+        });
+        
+        $('#btnDoctorStats').on('click', function() {
+            DailyAnalysis.getDoctorStatistics();
+        });
+        
+        $('#btnCategoryStats').on('click', function() {
+            DailyAnalysis.getCategoryStatistics();
+        });
+        
         populateDropdowns();
     }
 
@@ -1396,8 +1409,8 @@ var DailyAnalysis = (function() {
     }
 
     function resetForm() {
-        $('#startDate').val('2026-03-31');
-        $('#endDate').val('2026-04-30');
+        $('#startDate').val('2006-01-01');
+        $('#endDate').val('2006-12-31');
 
         var dropdowns = ['system', 'patientType', 'reporter', 'reviewer', 'technician', 'department', 'category', 'resultStatus'];
         dropdowns.forEach(function(id) {

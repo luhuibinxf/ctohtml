@@ -438,7 +438,11 @@ namespace DbProcedureCaller
                    url == "/get-proc-configs" ||
                    url.StartsWith("/get-proc-config") ||
                    url.StartsWith("/delete-proc-config") ||
-                   url == "/get-upgrade-messages";
+                   url == "/get-upgrade-messages" ||
+                   url == "/save-param-config" ||
+                   url.StartsWith("/check-admin") ||
+                   url.StartsWith("/api/system-configs") ||
+                   url.StartsWith("/api/menu-config-list");
         }
 
         private static string GetFilePath(string url)

@@ -296,9 +296,10 @@ namespace DbProcedureCaller.Services
 
                     LogHelper.LogInfo($"GetConfigById - 尝试查询配置, configId: '{configId}', 长度: {configId.Length}");
 
-                    string sql = "SELECT * FROM TJ_TJFX_CONFIG WHERE NAME = @NAME AND IS_ENABLED = 1";
+                    string sql = "SELECT * FROM TJ_TJFX_CONFIG WHERE (ID = @ID OR NAME = @NAME) AND IS_ENABLED = 1";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
+                        cmd.Parameters.AddWithValue("@ID", configId);
                         cmd.Parameters.AddWithValue("@NAME", configId);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())

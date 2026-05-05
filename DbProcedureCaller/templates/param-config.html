@@ -8,39 +8,379 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { overflow: hidden; background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-        .page-container { width: 100vw; min-height: 100vh; animation: fadeIn 0.4s ease-out; }
+        html, body { height: 100%; overflow: hidden; }
+        body { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        .page-container { width: 100%; height: 100%; display: flex; flex-direction: column; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
         .page-header {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 24px;
+            padding: 8px 16px;
+            height: 42px;
             background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
-            border-radius: 16px;
-            margin: 16px;
-            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+            border-radius: 10px;
+            margin: 12px;
+            box-shadow: 0 3px 12px rgba(30, 64, 175, 0.2);
         }
         .page-header-title {
-            display: flex; align-items: center; gap: 14px;
-            color: white; font-size: 19px; font-weight: 700;
-        }
-        .page-header-title i { font-size: 24px; }
-        .page-header-right { display: flex; align-items: center; gap: 16px; }
-        .btn-back {
             display: flex; align-items: center; gap: 8px;
-            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 10px; padding: 10px 18px;
+            color: white; font-size: 13px; font-weight: 600;
+        }
+        .page-header-title i { font-size: 14px; }
+        .page-header-right { display: flex; align-items: center; gap: 10px; }
+        
+        .btn-back {
+            display: flex; align-items: center; gap: 4px;
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px; padding: 5px 10px;
+            color: white; font-weight: 500; font-size: 11px;
+            cursor: pointer; transition: all 0.25s;
+        }
+        .btn-back:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
+        
+        .page-content { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 16px; 
+            max-height: calc(100vh - 80px);
+        }
+        
+        .config-section {
+            background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .config-section-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 16px; font-weight: 600; color: #1e293b;
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .config-section-title i { color: #3b82f6; }
+        
+        .config-row {
+            display: flex; align-items: center; gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .config-row:last-child { border-bottom: none; }
+        
+        .config-label {
+            flex: 0 0 220px;
+            font-weight: 500; color: #475569;
+        }
+        .config-value {
+            flex: 1;
+            display: flex; align-items: center; gap: 12px;
+        }
+        
+        .config-input {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+        .config-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .config-select {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .toggle-switch {
+            width: 48px;
+            height: 26px;
+            background: #e2e8f0;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+        .toggle-switch.active {
+            background: #3b82f6;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.25s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .toggle-switch.active::after {
+            left: 24px;
+        }
+        
+        .cache-info {
+            background: rgba(59,130,246,0.05);
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #475569;
+            margin-top: 8px;
+        }
+        
+        .btn-group {
+            display: flex; gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .btn-save {
+            display: flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border: none; border-radius: 10px;
+            padding: 10px 24px;
             color: white; font-weight: 600; font-size: 14px;
             cursor: pointer; transition: all 0.25s;
         }
-        .btn-back:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
-        .page-content { flex: 1; overflow-y: auto; padding: 2rem; display: flex; align-items: center; justify-content: center; }
-        .dev-card {
-            background: linear-gradient(145deg, #1e293b, #263348); border-radius: 20px; padding: 3rem 4rem;
-            border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 32px rgba(0,0,0,0.3); text-align: center;
+        .btn-save:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3); }
+        
+        .btn-clear-cache {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3); border-radius: 10px;
+            padding: 10px 24px;
+            color: #ef4444; font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: all 0.25s;
         }
-        .dev-icon { font-size: 4rem; margin-bottom: 1.5rem; }
-        .dev-card h3 { color: #f8fafc; font-weight: 700; margin-bottom: 0.5rem; }
-        .dev-card p { color: #64748b; }
+        .btn-clear-cache:hover { background: rgba(239,68,68,0.2); }
+        
+        .btn-refresh-data {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.3); border-radius: 10px;
+            padding: 10px 24px;
+            color: #3b82f6; font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: all 0.25s;
+        }
+        .btn-refresh-data:hover { background: rgba(59,130,246,0.2); }
+        
+        .alert {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .alert-success {
+            background: rgba(34,197,94,0.1);
+            color: #16a34a;
+            border: 1px solid rgba(34,197,94,0.2);
+        }
+        .alert-error {
+            background: rgba(239,68,68,0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        
+        .cache-status-card {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .cache-status-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 4px solid #3b82f6;
+        }
+        .cache-status-item.valid { border-left-color: #22c55e; }
+        .cache-status-item.expired { border-left-color: #f59e0b; }
+        .cache-status-item.empty { border-left-color: #94a3b8; }
+        .cache-status-title { font-size: 13px; color: #64748b; margin-bottom: 4px; }
+        .cache-status-value { font-size: 16px; font-weight: 600; color: #1e293b; }
+        .cache-status-time { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        .config-table th, .config-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .config-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+        }
+        .config-table tr:hover {
+            background: #f8fafc;
+        }
+        .config-table .config-type {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            background: rgba(59,130,246,0.1);
+            color: #3b82f6;
+        }
+        .config-table .config-type.BOOLEAN {
+            background: rgba(34,197,94,0.1);
+            color: #22c55e;
+        }
+        .config-table .config-type.INTEGER {
+            background: rgba(245,158,11,0.1);
+            color: #f59e0b;
+        }
+        .config-table .config-type.STRING {
+            background: rgba(139,92,246,0.1);
+            color: #8b5cf6;
+        }
+        .config-table .btn-edit {
+            padding: 4px 8px;
+            background: rgba(59,130,246,0.1);
+            color: #3b82f6;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .config-table .btn-delete {
+            padding: 4px 8px;
+            background: rgba(239,68,68,0.1);
+            color: #ef4444;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+        
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            min-width: 400px;
+            max-width: 90vw;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #475569;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        .btn-add {
+            display: flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: none; border-radius: 10px;
+            padding: 8px 20px;
+            color: white; font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: all 0.25s;
+        }
+        .btn-add:hover { transform: translateY(-1px); }
+
+        .menu-group-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.05) 100%);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .menu-group-header:hover {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.1) 100%);
+        }
+        .menu-group-header i {
+            font-size: 18px;
+            color: #3b82f6;
+            transition: transform 0.3s;
+        }
+        .menu-group-header.expanded i {
+            transform: rotate(90deg);
+        }
+        .menu-group-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .menu-group-count {
+            margin-left: auto;
+            font-size: 12px;
+            color: #64748b;
+            background: rgba(100,116,139,0.1);
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+        .menu-group-content {
+            padding-left: 16px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .menu-group-content.expanded {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -57,16 +397,458 @@
                 </button>
             </div>
         </div>
+        
         <div class="page-content">
-            <div class="dev-card">
-                <div class="dev-icon">⚙️</div>
-                <h3>功能开发中</h3>
-                <p>系统参数配置功能正在开发中...</p>
+            <div id="alertMessage" class="alert"></div>
+            
+            <div class="config-section">
+                <div class="config-section-title">
+                    <i class="fa-solid fa-sliders"></i>
+                    菜单参数配置
+                </div>
+                
+                <div class="menu-group-header" id="dailyAnalysisGroup" onclick="toggleMenuGroup('dailyAnalysisGroup')">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <div class="menu-group-title">每日检查分析</div>
+                    <div class="menu-group-count">6项</div>
+                </div>
+                <div class="menu-group-content" id="dailyAnalysisContent">
+                    <div class="config-row">
+                        <div class="config-label">启用前端缓存</div>
+                        <div class="config-value">
+                            <div class="toggle-switch" id="cacheEnabledToggle" onclick="toggleCacheEnabled()"></div>
+                            <span id="cacheEnabledText">已启用</span>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="config-label">缓存有效期（分钟）</div>
+                        <div class="config-value">
+                            <input type="number" class="config-input" id="cacheExpireMinutes" min="1" max="120" value="5">
+                            <span style="color: #64748b;">分钟</span>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="config-label">默认自动刷新间隔</div>
+                        <div class="config-value">
+                            <select class="config-select" id="defaultRefreshInterval">
+                                <option value="30">30秒</option>
+                                <option value="60">1分钟</option>
+                                <option value="120">2分钟</option>
+                                <option value="300">5分钟</option>
+                                <option value="600">10分钟</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="config-label">默认启用自动刷新</div>
+                        <div class="config-value">
+                            <div class="toggle-switch" id="autoRefreshToggle" onclick="toggleAutoRefreshEnabled()"></div>
+                            <span id="autoRefreshText">已禁用</span>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="config-label">默认显示图表</div>
+                        <div class="config-value">
+                            <div class="toggle-switch" id="showChartsToggle" onclick="toggleShowCharts()"></div>
+                            <span id="showChartsText">已启用</span>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="config-label">默认图表类型</div>
+                        <div class="config-value">
+                            <select class="config-select" id="defaultChartType">
+                                <option value="bar">柱状图</option>
+                                <option value="line">折线图</option>
+                                <option value="pie">饼图</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cache-info">
+                        <i class="fa-solid fa-info-circle"></i>
+                        前端缓存可以减少API请求次数，提升页面加载速度。缓存过期后会自动重新加载数据。
+                    </div>
+                </div>
+                
+                <div class="menu-group-header expanded" id="systemGroup" onclick="toggleMenuGroup('systemGroup')">
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <div class="menu-group-title">系统参数列表</div>
+                    <div class="menu-group-count">自定义</div>
+                </div>
+                <div class="menu-group-content expanded" id="systemContent">
+                    <button class="btn-add" style="margin-bottom: 16px;" onclick="showAddConfigModal()">
+                        <i class="fa-solid fa-plus"></i>
+                        添加参数
+                    </button>
+                    
+                    <table class="config-table">
+                        <thead>
+                            <tr>
+                                <th>参数键</th>
+                                <th>参数值</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="configTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn-save" onclick="saveConfig()">
+                    <i class="fa-solid fa-save"></i>
+                    保存配置
+                </button>
+                <button class="btn-refresh-data" onclick="refreshCacheData()">
+                    <i class="fa-solid fa-refresh"></i>
+                    刷新缓存数据
+                </button>
+                <button class="btn-clear-cache" onclick="clearAllCache()">
+                    <i class="fa-solid fa-trash"></i>
+                    一键清除缓存
+                </button>
             </div>
         </div>
     </div>
+    
+    <div class="modal-overlay" id="addConfigModal" onclick="closeAddConfigModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title">添加系统参数</div>
+                <button class="modal-close" onclick="closeAddConfigModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>参数键</label>
+                    <input type="text" id="newConfigKey" placeholder="请输入参数键">
+                </div>
+                <div class="form-group">
+                    <label>参数值</label>
+                    <input type="text" id="newConfigValue" placeholder="请输入参数值">
+                </div>
+                <div class="form-group">
+                    <label>类型</label>
+                    <select id="newConfigType">
+                        <option value="STRING">字符串</option>
+                        <option value="INTEGER">整数</option>
+                        <option value="BOOLEAN">布尔值</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>描述</label>
+                    <textarea id="newConfigDescription" placeholder="请输入参数描述"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-save" onclick="addConfig()">保存</button>
+                <button class="btn-back" onclick="closeAddConfigModal()">取消</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        var CACHE_KEY = 'dailyAnalysisOptions';
+        var systemConfigs = {};
+        
+        $(document).ready(function() {
+            loadConfig();
+        });
+        
+        function loadConfig() {
+            $.get('/get-system-configs', function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success && r.data) {
+                    systemConfigs = {};
+                    r.data.forEach(function(item) {
+                        systemConfigs[item.configKey] = item;
+                    });
+                    
+                    populateForm();
+                    populateTable();
+                } else {
+                    showAlert('error', '加载配置失败');
+                }
+            }).fail(function() {
+                showAlert('error', '加载配置失败');
+                loadDefaultConfig();
+            });
+        }
+        
+        function loadDefaultConfig() {
+            systemConfigs = {
+                'CACHE_ENABLED': { configKey: 'CACHE_ENABLED', configValue: 'true', configType: 'BOOLEAN', description: '是否启用前端缓存' },
+                'CACHE_EXPIRE_MINUTES': { configKey: 'CACHE_EXPIRE_MINUTES', configValue: '5', configType: 'INTEGER', description: '缓存有效期（分钟）' },
+                'DEFAULT_REFRESH_INTERVAL': { configKey: 'DEFAULT_REFRESH_INTERVAL', configValue: '30', configType: 'INTEGER', description: '默认自动刷新间隔（秒）' },
+                'AUTO_REFRESH_ENABLED': { configKey: 'AUTO_REFRESH_ENABLED', configValue: 'false', configType: 'BOOLEAN', description: '是否默认启用自动刷新' },
+                'SHOW_CHARTS': { configKey: 'SHOW_CHARTS', configValue: 'true', configType: 'BOOLEAN', description: '是否默认显示图表' },
+                'DEFAULT_CHART_TYPE': { configKey: 'DEFAULT_CHART_TYPE', configValue: 'bar', configType: 'STRING', description: '默认图表类型' },
+                'CHART_ANIMATION_DURATION': { configKey: 'CHART_ANIMATION_DURATION', configValue: '800', configType: 'INTEGER', description: '图表动画时长（毫秒）' },
+                'DATA_SYNC_INTERVAL': { configKey: 'DATA_SYNC_INTERVAL', configValue: '60', configType: 'INTEGER', description: '数据同步间隔（分钟）' },
+                'MAX_RESULTS_LIMIT': { configKey: 'MAX_RESULTS_LIMIT', configValue: '1000', configType: 'INTEGER', description: '最大查询结果限制' }
+            };
+            populateForm();
+            populateTable();
+        }
+        
+        function populateForm() {
+            $('#cacheExpireMinutes').val(systemConfigs['CACHE_EXPIRE_MINUTES']?.configValue || '5');
+            $('#defaultRefreshInterval').val(systemConfigs['DEFAULT_REFRESH_INTERVAL']?.configValue || '30');
+            $('#defaultChartType').val(systemConfigs['DEFAULT_CHART_TYPE']?.configValue || 'bar');
+            
+            var cacheEnabled = systemConfigs['CACHE_ENABLED']?.configValue === 'true';
+            var autoRefreshEnabled = systemConfigs['AUTO_REFRESH_ENABLED']?.configValue === 'true';
+            var showCharts = systemConfigs['SHOW_CHARTS']?.configValue === 'true';
+            
+            if (cacheEnabled) {
+                $('#cacheEnabledToggle').addClass('active');
+                $('#cacheEnabledText').text('已启用');
+            } else {
+                $('#cacheEnabledToggle').removeClass('active');
+                $('#cacheEnabledText').text('已禁用');
+            }
+            
+            if (autoRefreshEnabled) {
+                $('#autoRefreshToggle').addClass('active');
+                $('#autoRefreshText').text('已启用');
+            } else {
+                $('#autoRefreshToggle').removeClass('active');
+                $('#autoRefreshText').text('已禁用');
+            }
+            
+            if (showCharts) {
+                $('#showChartsToggle').addClass('active');
+                $('#showChartsText').text('已启用');
+            } else {
+                $('#showChartsToggle').removeClass('active');
+                $('#showChartsText').text('已禁用');
+            }
+        }
+        
+        function populateTable() {
+            var html = '';
+            Object.keys(systemConfigs).forEach(function(key) {
+                var config = systemConfigs[key];
+                html += '<tr>';
+                html += '<td>' + config.configKey + '</td>';
+                html += '<td>' + config.configValue + '</td>';
+                html += '<td><span class="config-type ' + config.configType + '">' + getTypeLabel(config.configType) + '</span></td>';
+                html += '<td>' + (config.description || '-') + '</td>';
+                html += '<td>';
+                html += '<button class="btn-edit" onclick="editConfig(\'' + key + '\')"><i class="fa-solid fa-pencil"></i></button> ';
+                html += '<button class="btn-delete" onclick="deleteConfig(\'' + key + '\')"><i class="fa-solid fa-trash"></i></button>';
+                html += '</td>';
+                html += '</tr>';
+            });
+            $('#configTableBody').html(html);
+        }
+        
+        function getTypeLabel(type) {
+            switch(type) {
+                case 'STRING': return '字符串';
+                case 'INTEGER': return '整数';
+                case 'BOOLEAN': return '布尔值';
+                default: return type;
+            }
+        }
+        
+        function toggleCacheEnabled() {
+            var toggle = $('#cacheEnabledToggle');
+            var text = $('#cacheEnabledText');
+            
+            if (toggle.hasClass('active')) {
+                toggle.removeClass('active');
+                text.text('已禁用');
+            } else {
+                toggle.addClass('active');
+                text.text('已启用');
+            }
+        }
+        
+        function toggleAutoRefreshEnabled() {
+            var toggle = $('#autoRefreshToggle');
+            var text = $('#autoRefreshText');
+            
+            if (toggle.hasClass('active')) {
+                toggle.removeClass('active');
+                text.text('已禁用');
+            } else {
+                toggle.addClass('active');
+                text.text('已启用');
+            }
+        }
+        
+        function toggleShowCharts() {
+            var toggle = $('#showChartsToggle');
+            var text = $('#showChartsText');
+            
+            if (toggle.hasClass('active')) {
+                toggle.removeClass('active');
+                text.text('已禁用');
+            } else {
+                toggle.addClass('active');
+                text.text('已启用');
+            }
+        }
+        
+        function toggleMenuGroup(groupId) {
+            var header = $('#' + groupId);
+            var content = $('#' + groupId.replace('Group', 'Content'));
+            
+            header.toggleClass('expanded');
+            content.toggleClass('expanded');
+        }
+        
+        function saveConfig() {
+            var configs = {
+                'CACHE_ENABLED': $('#cacheEnabledToggle').hasClass('active') ? 'true' : 'false',
+                'CACHE_EXPIRE_MINUTES': $('#cacheExpireMinutes').val(),
+                'DEFAULT_REFRESH_INTERVAL': $('#defaultRefreshInterval').val(),
+                'AUTO_REFRESH_ENABLED': $('#autoRefreshToggle').hasClass('active') ? 'true' : 'false',
+                'SHOW_CHARTS': $('#showChartsToggle').hasClass('active') ? 'true' : 'false',
+                'DEFAULT_CHART_TYPE': $('#defaultChartType').val()
+            };
+            
+            $.post('/update-system-configs', JSON.stringify(configs), function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success) {
+                    showAlert('success', '配置已保存');
+                    loadConfig();
+                } else {
+                    showAlert('error', '保存失败');
+                }
+            }).fail(function() {
+                showAlert('error', '保存失败');
+            });
+        }
+        
+        function showAddConfigModal() {
+            $('#newConfigKey').val('');
+            $('#newConfigValue').val('');
+            $('#newConfigType').val('STRING');
+            $('#newConfigDescription').val('');
+            $('#addConfigModal').addClass('show');
+        }
+        
+        function closeAddConfigModal() {
+            $('#addConfigModal').removeClass('show');
+        }
+        
+        function addConfig() {
+            var config = {
+                configKey: $('#newConfigKey').val(),
+                configValue: $('#newConfigValue').val(),
+                configType: $('#newConfigType').val(),
+                description: $('#newConfigDescription').val(),
+                isEnabled: true
+            };
+            
+            if (!config.configKey) {
+                showAlert('error', '参数键不能为空');
+                return;
+            }
+            
+            $.post('/add-system-config', JSON.stringify(config), function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success) {
+                    showAlert('success', '参数添加成功');
+                    closeAddConfigModal();
+                    loadConfig();
+                } else {
+                    showAlert('error', '添加失败');
+                }
+            }).fail(function() {
+                showAlert('error', '添加失败');
+            });
+        }
+        
+        function editConfig(key) {
+            var config = systemConfigs[key];
+            if (!config) return;
+            
+            var newValue = prompt('请输入新的参数值', config.configValue);
+            if (newValue !== null) {
+                $.post('/update-system-config', { configKey: key, configValue: newValue }, function(res) {
+                    var r = typeof res === 'string' ? JSON.parse(res) : res;
+                    if (r && r.success) {
+                        showAlert('success', '更新成功');
+                        loadConfig();
+                    } else {
+                        showAlert('error', '更新失败');
+                    }
+                }).fail(function() {
+                    showAlert('error', '更新失败');
+                });
+            }
+        }
+        
+        function deleteConfig(key) {
+            if (!confirm('确定要删除参数 ' + key + ' 吗？')) {
+                return;
+            }
+            
+            $.post('/delete-system-config?key=' + key, function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success) {
+                    showAlert('success', '删除成功');
+                    loadConfig();
+                } else {
+                    showAlert('error', '删除失败');
+                }
+            }).fail(function() {
+                showAlert('error', '删除失败');
+            });
+        }
+        
+        function clearAllCache() {
+            if (!confirm('确定要清除所有缓存吗？清除后下次访问将重新加载数据。')) {
+                return;
+            }
+            
+            try {
+                localStorage.removeItem(CACHE_KEY);
+                showAlert('success', '缓存已清除');
+            } catch (e) {
+                showAlert('error', '清除缓存失败');
+            }
+        }
+        
+        function refreshCacheData() {
+            if (!confirm('确定要刷新缓存数据吗？这将重新从服务器获取最新数据。')) {
+                return;
+            }
+            
+            $.get('/get-all-options', function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success && r.data) {
+                    try {
+                        localStorage.setItem(CACHE_KEY, JSON.stringify({
+                            timestamp: Date.now(),
+                            options: r.data
+                        }));
+                        showAlert('success', '缓存数据已刷新');
+                    } catch (e) {
+                        showAlert('error', '刷新缓存失败');
+                    }
+                } else {
+                    showAlert('error', '获取数据失败');
+                }
+            }).fail(function() {
+                showAlert('error', '获取数据失败');
+            });
+        }
+        
+        function showAlert(type, message) {
+            var alert = $('#alertMessage');
+            alert.removeClass('alert-success alert-error');
+            alert.addClass('alert alert-' + type);
+            alert.html('<i class="fa-solid fa-' + (type === 'success' ? 'check-circle' : 'x-circle') + '"></i> ' + message);
+            alert.show();
+            setTimeout(function() { alert.fadeOut(); }, 3000);
+        }
+        
         function goBack() { 
             if (window.parent !== window) {
                 window.parent.closeContent && window.parent.closeContent();

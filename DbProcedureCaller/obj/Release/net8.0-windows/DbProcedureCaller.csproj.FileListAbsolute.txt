@@ -22,3 +22,8 @@ D:\AI\tran\DbProcedureCaller\obj\Release\net8.0-windows\refint\DbProcedureCaller
 D:\AI\tran\DbProcedureCaller\obj\Release\net8.0-windows\DbProcedureCallerModular.pdb
 D:\AI\tran\DbProcedureCaller\obj\Release\net8.0-windows\DbProcedureCaller.genruntimeconfig.cache
 D:\AI\tran\DbProcedureCaller\obj\Release\net8.0-windows\ref\DbProcedureCallerModular.dll
+D:\AI\tran\bin\Release\net8.0-windows\DbProcedureCallerModular.exe
+D:\AI\tran\bin\Release\net8.0-windows\DbProcedureCallerModular.deps.json
+D:\AI\tran\bin\Release\net8.0-windows\DbProcedureCallerModular.runtimeconfig.json
+D:\AI\tran\bin\Release\net8.0-windows\DbProcedureCallerModular.dll
+D:\AI\tran\bin\Release\net8.0-windows\DbProcedureCallerModular.pdb

@@ -8,46 +8,50 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { overflow: hidden; background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); }
-        .page-container { width: 100vw; height: 100vh; display: flex; flex-direction: column; }
+        html, body { height: 100%; overflow: hidden; }
+        body { background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); }
+        .page-container { width: 100%; height: 100%; display: flex; flex-direction: column; }
         
         .page-header {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-            padding: 1.2rem 2rem; 
+            padding: 0.6rem 1.5rem; 
+            height: 50px;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 3px 15px rgba(59, 130, 246, 0.25);
             flex-shrink: 0;
         }
         .page-header h1 { 
             color: white; 
-            font-weight: 700; 
-            font-size: 1.5rem; 
+            font-weight: 600; 
+            font-size: 1.1rem; 
             display: flex; 
             align-items: center; 
-            gap: 12px; 
+            gap: 8px; 
         }
-        .page-header h1 i { font-size: 1.5rem; }
-        .header-right { display: flex; align-items: center; gap: 16px; }
+        .page-header h1 i { font-size: 1.1rem; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
         .header-right .user-info { 
-            color: rgba(255,255,255,0.9); 
+            color: rgba(255,255,255,0.85); 
             font-weight: 500; 
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .header-right .user-info i { font-size: 1.1rem; }
-        .btn-logout { 
-            background: rgba(255,255,255,0.2); 
-            border: 1px solid rgba(255,255,255,0.3); 
-            color: white; 
-            padding: 9px 18px; 
-            border-radius: 10px; 
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.25s;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+        .header-right .user-info i { font-size: 0.9rem; }
+        .btn-logout { 
+            background: rgba(255,255,255,0.18); 
+            border: 1px solid rgba(255,255,255,0.25); 
+            color: white; 
+            padding: 6px 12px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .btn-logout:hover { 
             background: rgba(255,255,255,0.3); 

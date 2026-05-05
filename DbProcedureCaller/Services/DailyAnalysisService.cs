@@ -12,6 +12,10 @@ namespace DbProcedureCaller.Services
 {
     public class DailyAnalysisService
     {
+        private static string _cachedAllOptions = "";
+        private static DateTime _cacheTime = DateTime.MinValue;
+        private const int CacheDurationMinutes = 5;
+
         public DataTable GetAnalysisData(
             string startDate = "",
             string endDate = "",
@@ -79,6 +83,13 @@ namespace DbProcedureCaller.Services
         {
             try
             {
+                if (string.IsNullOrEmpty(system) && !string.IsNullOrEmpty(_cachedAllOptions) && 
+                    DateTime.Now - _cacheTime < TimeSpan.FromMinutes(CacheDurationMinutes))
+                {
+                    LogHelper.LogInfo("使用缓存的下拉框选项数据");
+                    return _cachedAllOptions;
+                }
+
                 string connectionString = ConnectionStrings.GetConnectionString();
                 if (string.IsNullOrEmpty(connectionString))
                 {
@@ -89,11 +100,11 @@ namespace DbProcedureCaller.Services
                 using (SqlConnection conn = DatabaseConnection.GetConnection(connectionString))
                 {
                     var systems = new List<Dictionary<string, string>>();
-                    var reporters = new List<string>();
-                    var reviewers = new List<string>();
-                    var technicians = new List<string>();
-                    var departments = new List<string>();
-                    var categories = new List<string>();
+                    var reporters = new List<Dictionary<string, string>>();
+                    var reviewers = new List<Dictionary<string, string>>();
+                    var technicians = new List<Dictionary<string, string>>();
+                    var departments = new List<Dictionary<string, string>>();
+                    var categories = new List<Dictionary<string, string>>();
                     var patientTypes = new List<Dictionary<string, string>>();
                     var resultStatus = new List<Dictionary<string, string>>();
 
@@ -120,7 +131,8 @@ namespace DbProcedureCaller.Services
                             systems.Add(new Dictionary<string, string>
                             {
                                 { "code", code },
-                                { "name", name }
+                                { "name", name },
+                                { "pinyin", "" }
                             });
                         }
                     }
@@ -147,7 +159,11 @@ namespace DbProcedureCaller.Services
                                 string name = reader["name"]?.ToString() ?? "";
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    reporters.Add(name);
+                                    reporters.Add(new Dictionary<string, string>
+                                    {
+                                        { "name", name },
+                                        { "pinyin", "" }
+                                    });
                                 }
                             }
                         }
@@ -175,7 +191,11 @@ namespace DbProcedureCaller.Services
                                 string name = reader["name"]?.ToString() ?? "";
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    reviewers.Add(name);
+                                    reviewers.Add(new Dictionary<string, string>
+                                    {
+                                        { "name", name },
+                                        { "pinyin", "" }
+                                    });
                                 }
                             }
                         }
@@ -202,7 +222,11 @@ namespace DbProcedureCaller.Services
                                 string name = reader["name"]?.ToString() ?? "";
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    technicians.Add(name);
+                                    technicians.Add(new Dictionary<string, string>
+                                    {
+                                        { "name", name },
+                                        { "pinyin", "" }
+                                    });
                                 }
                             }
                         }
@@ -229,7 +253,11 @@ namespace DbProcedureCaller.Services
                                 string name = reader["name"]?.ToString() ?? "";
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    departments.Add(name);
+                                    departments.Add(new Dictionary<string, string>
+                                    {
+                                        { "name", name },
+                                        { "pinyin", "" }
+                                    });
                                 }
                             }
                         }
@@ -256,10 +284,39 @@ namespace DbProcedureCaller.Services
                                 string name = reader["name"]?.ToString() ?? "";
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    categories.Add(name);
+                                    categories.Add(new Dictionary<string, string>
+                                    {
+                                        { "name", name },
+                                        { "pinyin", "" }
+                                    });
                                 }
                             }
                         }
+                    }
+
+                    foreach (var item in systems)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+                    foreach (var item in reporters)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+                    foreach (var item in reviewers)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+                    foreach (var item in technicians)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+                    foreach (var item in departments)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+                    foreach (var item in categories)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
                     }
 
                     sql = @"SELECT DISTINCT t.ENCOUNTER_TYPE_NO as code, 
@@ -293,11 +350,17 @@ namespace DbProcedureCaller.Services
                                     patientTypes.Add(new Dictionary<string, string>
                                     {
                                         { "code", code },
-                                        { "name", name }
+                                        { "name", name },
+                                        { "pinyin", "" }
                                     });
                                 }
                             }
                         }
+                    }
+
+                    foreach (var item in patientTypes)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
                     }
 
                     sql = @"SELECT DISTINCT r.NEG_POS_CODE as code 
@@ -318,13 +381,19 @@ namespace DbProcedureCaller.Services
                                 resultStatus.Add(new Dictionary<string, string>
                                 {
                                     { "code", code },
-                                    { "name", name }
+                                    { "name", name },
+                                    { "pinyin", "" }
                                 });
                             }
                         }
                     }
 
-                    return string.Format("{{\"success\":true,\"data\":{{\"systems\":{0},\"reporters\":{1},\"reviewers\":{2},\"technicians\":{3},\"departments\":{4},\"categories\":{5},\"patientTypes\":{6},\"resultStatus\":{7}}}}}",
+                    foreach (var item in resultStatus)
+                    {
+                        item["pinyin"] = GetPinyinFromDatabase(conn, item["name"]);
+                    }
+
+                    string result = string.Format("{{\"success\":true,\"data\":{{\"systems\":{0},\"reporters\":{1},\"reviewers\":{2},\"technicians\":{3},\"departments\":{4},\"categories\":{5},\"patientTypes\":{6},\"resultStatus\":{7}}}}}",
                         Newtonsoft.Json.JsonConvert.SerializeObject(systems),
                         Newtonsoft.Json.JsonConvert.SerializeObject(reporters),
                         Newtonsoft.Json.JsonConvert.SerializeObject(reviewers),
@@ -333,6 +402,15 @@ namespace DbProcedureCaller.Services
                         Newtonsoft.Json.JsonConvert.SerializeObject(categories),
                         Newtonsoft.Json.JsonConvert.SerializeObject(patientTypes),
                         Newtonsoft.Json.JsonConvert.SerializeObject(resultStatus));
+
+                if (string.IsNullOrEmpty(system))
+                {
+                    _cachedAllOptions = result;
+                    _cacheTime = DateTime.Now;
+                    LogHelper.LogInfo("已缓存下拉框选项数据");
+                }
+
+                return result;
                 }
             }
             catch (Exception ex)
@@ -654,6 +732,31 @@ namespace DbProcedureCaller.Services
             }
         }
 
+        private string GetPinyinFromDatabase(SqlConnection conn, string chineseText)
+        {
+            if (string.IsNullOrEmpty(chineseText))
+            {
+                return "";
+            }
+
+            try
+            {
+                string sql = "SELECT dbo.fun_GetChineseCode(@Text, 0)";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Text", chineseText);
+                    object result = cmd.ExecuteScalar();
+                    string pinyin = result?.ToString()?.Trim()?.ToLower() ?? "";
+                    return pinyin.Replace(" ", "");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "调用 fun_GetChineseCode 失败");
+                return "";
+            }
+        }
+
         public string GetReporters(string system)
         {
             try
@@ -965,58 +1068,99 @@ namespace DbProcedureCaller.Services
             ref int paramIndex)
         {
             StringBuilder sqlBuilder = new StringBuilder();
+            
+            string selectFields = string.Empty;
+            string groupByClause = string.Empty;
+            
+            switch (groupBy?.ToLower())
+            {
+                case "department":
+                    selectFields = @"
+                    SELECT
+                        ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                        COUNT(*) AS 检查总次数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                        CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率";
+                    groupByClause = @"GROUP BY ISNULL(t.EXEC_DEPT_NAME, '')";
+                    break;
+                case "doctor":
+                    selectFields = @"
+                    SELECT
+                        ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                        ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                        COUNT(*) AS 检查总次数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                        CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率";
+                    groupByClause = @"GROUP BY ISNULL(r.REPORTER_NAME, ''), ISNULL(r.REVIEWER_NAME, '')";
+                    break;
+                case "category":
+                    selectFields = @"
+                    SELECT
+                        ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                        COUNT(*) AS 检查总次数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                        CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率";
+                    groupByClause = @"GROUP BY ISNULL(t.EXAM_CATEGORY_NAME, '')";
+                    break;
+                default:
+                    selectFields = @"
+                    SELECT
+                        ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                            WHEN 'UIS' THEN '超声' 
+                            WHEN 'RIS' THEN '放射' 
+                            WHEN 'EIS' THEN '内镜' 
+                            WHEN 'PIS' THEN '病理'
+                            WHEN 'NMS' THEN '核医学'
+                            ELSE t.SYSTEM_SOURCE_NO 
+                        END, '') AS 系统,
+                        ISNULL(r.REPORTER_NAME, '') AS 报告医生,
+                        ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
+                        ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
+                        ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                        ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
+                        COUNT(*) AS 检查总次数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                        ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                        CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率";
+                    groupByClause = @"GROUP BY
+                        ISNULL(CASE t.SYSTEM_SOURCE_NO 
+                            WHEN 'UIS' THEN '超声' 
+                            WHEN 'RIS' THEN '放射' 
+                            WHEN 'EIS' THEN '内镜' 
+                            WHEN 'PIS' THEN '病理'
+                            WHEN 'NMS' THEN '核医学'
+                            ELSE t.SYSTEM_SOURCE_NO 
+                        END, ''),
+                        ISNULL(r.REPORTER_NAME, ''),
+                        ISNULL(r.REVIEWER_NAME, ''),
+                        ISNULL(t.TECHNICIAN_NAME, ''),
+                        ISNULL(t.EXEC_DEPT_NAME, ''),
+                        ISNULL(t.EXAM_CATEGORY_NAME, '')";
+                    break;
+            }
+            
+            sqlBuilder.Append(selectFields);
             sqlBuilder.Append(@"
-                SELECT
-                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
-                        WHEN 'UIS' THEN '超声' 
-                        WHEN 'RIS' THEN '放射' 
-                        WHEN 'EIS' THEN '内镜' 
-                        WHEN 'PIS' THEN '病理'
-                        WHEN 'NMS' THEN '核医学'
-                        ELSE t.SYSTEM_SOURCE_NO 
-                    END, '') AS 系统,
-                    ISNULL(r.REPORTER_NAME, '') AS 报告医生,
-                    ISNULL(r.REVIEWER_NAME, '') AS 审核医生,
-                    ISNULL(t.TECHNICIAN_NAME, '') AS 技师,
-                    ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
-                    ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
-                    ISNULL(CASE t.ENCOUNTER_TYPE_NO 
-                        WHEN '1' THEN '门诊' 
-                        WHEN '2' THEN '住院' 
-                        WHEN '3' THEN '急诊' 
-                        WHEN '4' THEN '体检'
-                        WHEN '138138' THEN '门诊' 
-                        WHEN '138139' THEN '急诊'
-                        WHEN '138140' THEN '体检' 
-                        WHEN '145235' THEN '住院'
-                        WHEN 'OPD' THEN '门诊' 
-                        WHEN 'IPD' THEN '住院' 
-                        WHEN 'EMER' THEN '急诊' 
-                        WHEN 'CHECKUP' THEN '体检'
-                        ELSE ISNULL(d.cValue, t.ENCOUNTER_TYPE_NO) 
-                    END, '') AS 病人类型,
-                    ISNULL(CASE r.NEG_POS_CODE WHEN '383927' THEN '阳性' WHEN '383926' THEN '阴性' WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' WHEN 'Y' THEN '阳性' WHEN 'POS' THEN '阳性' WHEN 'NEG' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
-                    COUNT(*) AS 任务数量,
-                    SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END) AS 阳性数量,
-                    SUM(CASE WHEN r.NEG_POS_CODE = '383926' THEN 1 ELSE 0 END) AS 阴性数量,
-                    ROUND(CASE WHEN COUNT(*) > 0 THEN SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1.0 ELSE 0.0 END) * 100.0 / COUNT(*) ELSE 0.0 END, 2) AS 阳性率
-                FROM EXAM_TASK t WITH(NOLOCK)
-                INNER JOIN EXAM_REPORT r WITH(NOLOCK) ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
-                LEFT JOIN Pacs_SysDict d WITH(NOLOCK) ON d.TableName='EXAM_TASK' AND d.FieldName='ENCOUNTER_TYPE_NO' 
-                    AND (CAST(d.nValue AS VARCHAR(50)) = t.ENCOUNTER_TYPE_NO OR d.cValue = t.ENCOUNTER_TYPE_NO)
-                WHERE t.IS_DEL = 0");
+                FROM EXAM_TASK t
+                INNER JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
+                WHERE t.IS_DEL = 0
+                  AND t.EXAM_TASK_STATUS >= 50
+                  AND t.LABEL_NO <> ''");
 
             List<string> conditions = new List<string>();
 
             if (!string.IsNullOrEmpty(startDate))
             {
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
-                conditions.Add("t.CREATED_AT >= @StartDate");
+                conditions.Add("t.REGISTER_AT >= @StartDate");
             }
             if (!string.IsNullOrEmpty(endDate))
             {
                 cmd.Parameters.AddWithValue("@EndDate", endDate);
-                conditions.Add("t.CREATED_AT < DATEADD(DAY, 1, @EndDate)");
+                conditions.Add("t.REGISTER_AT < DATEADD(DAY, 1, @EndDate)");
             }
             if (!string.IsNullOrEmpty(system))
                 conditions.Add(BuildInCondition("t.SYSTEM_SOURCE_NO", system, cmd, ref paramIndex));
@@ -1038,37 +1182,7 @@ namespace DbProcedureCaller.Services
             if (conditions.Count > 0)
                 sqlBuilder.Append(" AND " + string.Join(" AND ", conditions));
 
-            sqlBuilder.Append(@"
-                GROUP BY
-                    ISNULL(CASE t.SYSTEM_SOURCE_NO 
-                        WHEN 'UIS' THEN '超声' 
-                        WHEN 'RIS' THEN '放射' 
-                        WHEN 'EIS' THEN '内镜' 
-                        WHEN 'PIS' THEN '病理'
-                        WHEN 'NMS' THEN '核医学'
-                        ELSE t.SYSTEM_SOURCE_NO 
-                    END, ''),
-                    ISNULL(r.REPORTER_NAME, ''),
-                    ISNULL(r.REVIEWER_NAME, ''),
-                    ISNULL(t.TECHNICIAN_NAME, ''),
-                    ISNULL(t.EXEC_DEPT_NAME, ''),
-                    ISNULL(t.EXAM_CATEGORY_NAME, ''),
-                    ISNULL(CASE t.ENCOUNTER_TYPE_NO 
-                        WHEN '1' THEN '门诊' 
-                        WHEN '2' THEN '住院' 
-                        WHEN '3' THEN '急诊' 
-                        WHEN '4' THEN '体检'
-                        WHEN '138138' THEN '门诊' 
-                        WHEN '138139' THEN '急诊'
-                        WHEN '138140' THEN '体检' 
-                        WHEN '145235' THEN '住院'
-                        WHEN 'OPD' THEN '门诊' 
-                        WHEN 'IPD' THEN '住院' 
-                        WHEN 'EMER' THEN '急诊' 
-                        WHEN 'CHECKUP' THEN '体检'
-                        ELSE ISNULL(d.cValue, t.ENCOUNTER_TYPE_NO) 
-                    END, ''),
-                    ISNULL(CASE r.NEG_POS_CODE WHEN '383927' THEN '阳性' WHEN '383926' THEN '阴性' WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' WHEN 'Y' THEN '阳性' WHEN 'POS' THEN '阳性' WHEN 'NEG' THEN '阴性' ELSE '未知' END, '')");
+            sqlBuilder.Append(groupByClause);
 
             string validSortBy = ValidateSortField(sortBy);
             string validSortOrder = sortOrder.ToUpper() == "ASC" ? "ASC" : "DESC";
@@ -1116,8 +1230,8 @@ namespace DbProcedureCaller.Services
 
         private string ValidateSortField(string sortBy)
         {
-            string[] validFields = { "系统", "报告医生", "审核医生", "技师", "执行科室", "检查类型", "病人类型", "结果状态", "任务数量", "阳性数量", "阴性数量", "阳性率" };
-            return validFields.Contains(sortBy) ? sortBy : "任务数量";
+            string[] validFields = { "系统", "报告医生", "审核医生", "技师", "执行科室", "检查类型", "检查总次数", "阳性数", "阴性数", "阳性率" };
+            return validFields.Contains(sortBy) ? sortBy : "检查总次数";
         }
 
         private void RecordQueryHistory(string startDate, string endDate, string system,
@@ -1175,22 +1289,23 @@ namespace DbProcedureCaller.Services
                 {
                     string sql = @"
                         SELECT
-                            t.EXEC_DEPT_NAME AS 执行科室,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
-                            COUNT(*) AS 任务数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'P' THEN 1 ELSE 0 END), 0) AS 阳性数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'N' THEN 1 ELSE 0 END), 0) AS 阴性数量,
-                            ISNULL(AVG(CASE WHEN r.NEG_POS_CODE = 'P' THEN 100.0 ELSE 0 END), 0) AS 阳性率
+                            ISNULL(t.EXEC_DEPT_NAME, '') AS 执行科室,
+                            COUNT(*) AS 检查总次数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                            CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率
                         FROM EXAM_TASK t
                         LEFT JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
                         WHERE t.IS_DEL = 0
-                            AND t.CREATED_AT >= @StartDate
-                            AND t.CREATED_AT < DATEADD(DAY, 1, @EndDate)
+                            AND t.EXAM_TASK_STATUS >= 50
+                            AND t.LABEL_NO <> ''
+                            AND t.REGISTER_AT >= @StartDate
+                            AND t.REGISTER_AT < DATEADD(DAY, 1, @EndDate)
                             AND (@System IS NULL OR @System = '' OR t.SYSTEM_SOURCE_NO = @System)
+                            AND t.EXEC_DEPT_NAME IS NOT NULL
                         GROUP BY
-                            t.EXEC_DEPT_NAME,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '')
-                        ORDER BY 任务数量 DESC";
+                            t.EXEC_DEPT_NAME
+                        ORDER BY 检查总次数 DESC";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
@@ -1237,41 +1352,41 @@ namespace DbProcedureCaller.Services
                         SELECT
                             ISNULL(r.REVIEWER_NAME, '') AS 医生姓名,
                             '审核医生' AS 医生类型,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
-                            COUNT(*) AS 任务数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'P' THEN 1 ELSE 0 END), 0) AS 阳性数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'N' THEN 1 ELSE 0 END), 0) AS 阴性数量,
-                            ISNULL(AVG(CASE WHEN r.NEG_POS_CODE = 'P' THEN 100.0 ELSE 0 END), 0) AS 阳性率
+                            COUNT(*) AS 检查总次数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                            CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率
                         FROM EXAM_TASK t
                         LEFT JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
                         WHERE t.IS_DEL = 0
-                            AND t.CREATED_AT >= @StartDate
-                            AND t.CREATED_AT < DATEADD(DAY, 1, @EndDate)
+                            AND t.EXAM_TASK_STATUS >= 50
+                            AND t.LABEL_NO <> ''
+                            AND t.REGISTER_AT >= @StartDate
+                            AND t.REGISTER_AT < DATEADD(DAY, 1, @EndDate)
                             AND (@System IS NULL OR @System = '' OR t.SYSTEM_SOURCE_NO = @System)
                             AND r.REVIEWER_NAME IS NOT NULL
                         GROUP BY
-                            r.REVIEWER_NAME,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '')
-                        ORDER BY 任务数量 DESC" : @"
+                            r.REVIEWER_NAME
+                        ORDER BY 检查总次数 DESC" : @"
                         SELECT
                             ISNULL(r.REPORTER_NAME, '') AS 医生姓名,
                             '报告医生' AS 医生类型,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
-                            COUNT(*) AS 任务数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'P' THEN 1 ELSE 0 END), 0) AS 阳性数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'N' THEN 1 ELSE 0 END), 0) AS 阴性数量,
-                            ISNULL(AVG(CASE WHEN r.NEG_POS_CODE = 'P' THEN 100.0 ELSE 0 END), 0) AS 阳性率
+                            COUNT(*) AS 检查总次数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                            CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率
                         FROM EXAM_TASK t
                         LEFT JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
                         WHERE t.IS_DEL = 0
-                            AND t.CREATED_AT >= @StartDate
-                            AND t.CREATED_AT < DATEADD(DAY, 1, @EndDate)
+                            AND t.EXAM_TASK_STATUS >= 50
+                            AND t.LABEL_NO <> ''
+                            AND t.REGISTER_AT >= @StartDate
+                            AND t.REGISTER_AT < DATEADD(DAY, 1, @EndDate)
                             AND (@System IS NULL OR @System = '' OR t.SYSTEM_SOURCE_NO = @System)
                             AND r.REPORTER_NAME IS NOT NULL
                         GROUP BY
-                            r.REPORTER_NAME,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '')
-                        ORDER BY 任务数量 DESC";
+                            r.REPORTER_NAME
+                        ORDER BY 检查总次数 DESC";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
@@ -1317,23 +1432,21 @@ namespace DbProcedureCaller.Services
                     string sql = @"
                         SELECT
                             ISNULL(t.EXAM_CATEGORY_NAME, '') AS 检查类型,
-                            t.EXEC_DEPT_NAME AS 所属科室,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '') AS 结果状态,
-                            COUNT(*) AS 任务数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'P' THEN 1 ELSE 0 END), 0) AS 阳性数量,
-                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = 'N' THEN 1 ELSE 0 END), 0) AS 阴性数量,
-                            ISNULL(AVG(CASE WHEN r.NEG_POS_CODE = 'P' THEN 100.0 ELSE 0 END), 0) AS 阳性率
+                            COUNT(*) AS 检查总次数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 1 ELSE 0 END), 0) AS 阳性数,
+                            ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383926' OR r.NEG_POS_CODE IS NULL OR r.NEG_POS_CODE = '' THEN 1 ELSE 0 END), 0) AS 阴性数,
+                            CASE WHEN COUNT(*) > 0 THEN ISNULL(SUM(CASE WHEN r.NEG_POS_CODE = '383927' THEN 100.0 ELSE 0 END) / COUNT(*), 0) ELSE 0 END AS 阳性率
                         FROM EXAM_TASK t
                         LEFT JOIN EXAM_REPORT r ON t.EXAM_TASK_ID = r.EXAM_TASK_ID
                         WHERE t.IS_DEL = 0
-                            AND t.CREATED_AT >= @StartDate
-                            AND t.CREATED_AT < DATEADD(DAY, 1, @EndDate)
+                            AND t.EXAM_TASK_STATUS >= 50
+                            AND t.LABEL_NO <> ''
+                            AND t.REGISTER_AT >= @StartDate
+                            AND t.REGISTER_AT < DATEADD(DAY, 1, @EndDate)
                             AND (@System IS NULL OR @System = '' OR t.SYSTEM_SOURCE_NO = @System)
                         GROUP BY
-                            t.EXAM_CATEGORY_NAME,
-                            t.EXEC_DEPT_NAME,
-                            ISNULL(CASE r.NEG_POS_CODE WHEN 'P' THEN '阳性' WHEN 'N' THEN '阴性' ELSE '未知' END, '')
-                        ORDER BY 任务数量 DESC";
+                            t.EXAM_CATEGORY_NAME
+                        ORDER BY 检查总次数 DESC";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {

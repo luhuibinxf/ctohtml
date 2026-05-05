@@ -300,7 +300,11 @@ namespace DbProcedureCaller.Core
                    url == "/execute-stored-proc" ||
                    url == "/save-proc-config" ||
                    url == "/get-proc-configs" ||
-                   url.StartsWith("/delete-proc-config");
+                   url.StartsWith("/get-proc-config") ||
+                   url.StartsWith("/delete-proc-config") ||
+                   url == "/get-upgrade-messages" ||
+                   url == "/save-param-config" ||
+                   url.StartsWith("/check-admin");
         }
 
         private string GetFilePath(string url)

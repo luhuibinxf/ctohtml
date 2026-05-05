@@ -9,12 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow: hidden; }
         body { 
-            overflow: hidden; 
             background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
-        .da-page { width: 100vw; min-height: 100vh; animation: daFadeIn 0.4s ease-out; }
+        .da-page { width: 100%; height: 100%; animation: daFadeIn 0.4s ease-out; }
         @keyframes daFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .da-container { width: 100%; padding: 16px 20px; }
 
@@ -22,58 +22,59 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 3px 10px;
             background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
-            border-radius: 12px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            box-shadow: 0 2px 6px rgba(30, 64, 175, 0.12);
+            height: 34px;
         }
         .da-header-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             color: white;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 500;
         }
-        .da-header-title i { font-size: 18px; }
-        .da-header-right { display: flex; align-items: center; gap: 12px; }
+        .da-header-title i { font-size: 12px; }
+        .da-header-right { display: flex; align-items: center; gap: 5px; }
         .da-btn-back {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 8px;
-            padding: 6px 12px;
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 4px;
+            padding: 2px 6px;
             color: white;
-            font-weight: 500;
-            font-size: 13px;
+            font-weight: 400;
+            font-size: 10px;
             cursor: pointer;
             transition: all 0.25s;
         }
-        .da-btn-back:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+        .da-btn-back:hover { background: rgba(255,255,255,0.2); }
         .da-refresh-control {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 12px;
-            border-radius: 8px;
+            gap: 6px;
+            background: rgba(255,255,255,0.08);
+            padding: 3px 8px;
+            border-radius: 6px;
         }
         .da-auto-refresh-toggle {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,0.9);
-            font-size: 13px;
+            gap: 6px;
+            color: rgba(255,255,255,0.85);
+            font-size: 11px;
             cursor: pointer;
         }
         .da-toggle-switch {
-            width: 42px;
-            height: 24px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
+            width: 36px;
+            height: 20px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 10px;
             position: relative;
             transition: all 0.3s;
         }
@@ -81,70 +82,197 @@
         .da-toggle-switch::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
             background: white;
             border-radius: 50%;
             top: 3px;
             left: 3px;
             transition: all 0.3s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
-        .da-toggle-switch.active::after { left: 21px; }
+        .da-toggle-switch.active::after { left: 19px; }
         .da-refresh-interval {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,0.8);
-            font-size: 13px;
+            gap: 6px;
+            color: rgba(255,255,255,0.75);
+            font-size: 11px;
         }
         .da-refresh-interval select {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
-            border-radius: 8px;
-            padding: 4px 8px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            padding: 3px 6px;
             color: white;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
         }
         .da-last-update {
-            color: rgba(255,255,255,0.6);
-            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            font-size: 11px;
         }
         .da-refresh-btn {
-            background: rgba(34,197,94,0.2);
-            border: 1px solid rgba(34,197,94,0.4);
-            border-radius: 8px;
-            padding: 6px 12px;
+            background: rgba(34,197,94,0.18);
+            border: 1px solid rgba(34,197,94,0.35);
+            border-radius: 6px;
+            padding: 4px 10px;
             color: #4ade80;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.25s;
+            font-size: 12px;
         }
-        .da-refresh-btn:hover { background: rgba(34,197,94,0.3); }
+        .da-refresh-btn:hover { background: rgba(34,197,94,0.25); }
         .da-refresh-btn.refreshing { animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
+        .da-btn-cache {
+            background: rgba(59,130,246,0.18);
+            border: 1px solid rgba(59,130,246,0.35);
+            border-radius: 6px;
+            padding: 4px 10px;
+            color: #60a5fa;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.25s;
+            font-size: 12px;
+        }
+        .da-btn-cache:hover { background: rgba(59,130,246,0.25); }
+
+        .da-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .da-modal-overlay.show { display: flex; }
+
+        .da-modal {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            min-width: 400px;
+            max-width: 90vw;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .da-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #334155;
+        }
+        .da-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        .da-modal-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .da-modal-close:hover { color: #f1f5f9; }
+
+        .da-cache-info {
+            margin-bottom: 20px;
+        }
+        .da-cache-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .da-cache-item:last-child { margin-bottom: 0; }
+        .da-cache-name { color: #e2e8f0; }
+        .da-cache-status {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .da-cache-status.valid {
+            background: rgba(34,197,94,0.2);
+            color: #4ade80;
+        }
+        .da-cache-status.expired {
+            background: rgba(239,68,68,0.2);
+            color: #f87171;
+        }
+        .da-cache-status.empty {
+            background: rgba(148,163,184,0.2);
+            color: #94a3b8;
+        }
+        .da-cache-time {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .da-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 1px solid #334155;
+        }
+        .da-btn-secondary {
+            background: rgba(148,163,184,0.2);
+            border: 1px solid rgba(148,163,184,0.4);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .da-btn-secondary:hover { background: rgba(148,163,184,0.3); }
+        .da-btn-danger {
+            background: rgba(239,68,68,0.2);
+            border: 1px solid rgba(239,68,68,0.4);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: #f87171;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .da-btn-danger:hover { background: rgba(239,68,68,0.3); }
+
         .da-stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
         }
         .da-stat-card {
             background: white;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            padding: 14px 16px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            height: 72px;
         }
         .da-stat-card::before {
             content: '';
@@ -161,240 +289,291 @@
             border-color: rgba(59,130,246,0.15);
         }
         .da-stat-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 18px;
             color: white;
             flex-shrink: 0;
             position: relative;
         }
-        .da-stat-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
-        .da-stat-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 6px 20px rgba(34,197,94,0.4); }
-        .da-stat-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 6px 20px rgba(239,68,68,0.4); }
-        .da-stat-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245,158,11,0.4); }
+        .da-stat-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
+        .da-stat-icon.green { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 14px rgba(34,197,94,0.35); }
+        .da-stat-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239,68,68,0.35); }
+        .da-stat-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 14px rgba(245,158,11,0.35); }
         .da-stat-info { flex: 1; }
-        .da-stat-label { color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-        .da-stat-value { color: #1e293b; font-size: 30px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+        .da-stat-label { color: #64748b; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+        .da-stat-value { color: #1e293b; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; }
         .da-stat-value.up { color: #22c55e; }
         .da-stat-value.down { color: #ef4444; }
-        .da-stat-change { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .da-stat-change { font-size: 10px; color: #94a3b8; margin-top: 3px; }
 
         .da-query-card {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .da-query-row {
             display: flex;
             align-items: flex-end;
-            gap: 24px;
+            gap: 16px;
             flex-wrap: wrap;
         }
         .da-query-label {
-            color: #475569;
+            font-size: 11px;
             font-weight: 600;
-            font-size: 13px;
+            color: #475569;
+            margin-bottom: 5px;
             display: block;
-            margin-bottom: 8px;
         }
         .da-date-inputs {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
         .da-date-input {
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-            background: #f8fafc;
-            color: #1e293b;
-            padding: 0 16px;
-            font-size: 14px;
-            height: 44px;
+            padding: 6px 10px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #334155;
+            background: white;
             cursor: pointer;
-            width: 160px;
             transition: all 0.25s;
         }
         .da-date-input:focus {
+            outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-            outline: none;
-            background: white;
         }
-        .da-date-separator { color: #94a3b8; font-size: 14px; font-weight: 500; }
+        .da-date-separator {
+            color: #94a3b8;
+            font-weight: 500;
+        }
         .da-query-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-        .da-btn-outline {
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 0 20px;
-            height: 44px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #475569;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .da-btn-outline:hover {
-            background: #f8fafc;
-            border-color: #93c5fd;
-            color: #1e40af;
+            gap: 10px;
         }
         .da-btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 0 26px;
-            height: 44px;
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 4px 16px rgba(59,130,246,0.35);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .da-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(59,130,246,0.45);
-        }
-        .da-btn-secondary {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 0 22px;
-            height: 44px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .da-btn-secondary:hover {
-            background: #f1f5f9;
-            color: #334155;
-            border-color: #cbd5e1;
-        }
-
-        .da-dropdown-wrapper { position: relative; }
-        .da-dropdown-menu {
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 32px rgba(0,0,0,0.12);
-            padding: 8px;
-            min-width: 170px;
-            background: white;
-            animation: slideDown 0.2s ease-out;
-            list-style: none;
-            margin: 8px 0 0 0;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            display: none;
-        }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-        .da-dropdown-menu li { margin: 2px 0; }
-        .da-dropdown-menu a {
-            display: block;
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-size: 14px;
-            color: #334155;
-            text-decoration: none;
-            transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 14px;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 3px 10px rgba(59,130,246,0.28);
         }
-        .da-dropdown-menu a:hover {
+        .da-btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(59,130,246,0.35);
+        }
+        .da-btn-secondary {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 7px 14px;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .da-btn-secondary:hover {
+            border-color: #cbd5e1;
+            color: #475569;
+        }
+        .da-btn-outline {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             background: rgba(59,130,246,0.08);
-            color: #1e40af;
-            padding-left: 20px;
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 8px;
+            padding: 7px 12px;
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .da-btn-outline:hover {
+            background: rgba(59,130,246,0.12);
+            border-color: rgba(59,130,246,0.3);
+        }
+        .da-dropdown-wrapper { position: relative; }
+        .da-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 100;
+            display: none;
+        }
+        .da-dropdown-menu li { list-style: none; }
+        .da-dropdown-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: #334155;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .da-dropdown-menu li a:hover {
+            background: #f1f5f9;
         }
 
         .da-filter-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            align-items: flex-end;
+            gap: 12px;
+            margin-top: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
         }
         .da-filter-item {
-            display: flex;
-            flex-direction: column;
-            min-width: 160px;
-            max-width: 200px;
+            min-width: 140px;
+            flex: 1;
         }
         .da-filter-item label {
-            color: #475569;
-            font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 6px;
         }
         .da-filter-item select {
-            border-radius: 10px;
+            width: 100%;
+            padding: 8px 12px;
             border: 2px solid #e2e8f0;
-            padding: 0 14px;
-            font-size: 14px;
-            background: #f8fafc;
-            color: #1e293b;
-            height: 42px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #334155;
+            background: white;
             cursor: pointer;
             transition: all 0.25s;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
         }
         .da-filter-item select:focus {
+            outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+
+        .da-searchable-select {
+            position: relative;
+            width: 100%;
+        }
+        .da-search-input-wrapper {
+            position: relative;
+        }
+        .da-search-input {
+            width: 100%;
+            padding: 8px 12px 8px 32px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #334155;
+            background: white;
+            transition: all 0.25s;
+        }
+        .da-search-input:focus {
             outline: none;
-            background-color: white;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        .da-search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 13px;
+        }
+        .da-search-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            z-index: 100;
+            display: none;
+        }
+        .da-search-dropdown.show {
+            display: block;
+        }
+        .da-search-dropdown::-webkit-scrollbar { width: 4px; }
+        .da-search-dropdown::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+        .da-search-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #334155;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .da-search-option:hover {
+            background: #f1f5f9;
+        }
+        .da-search-option.active {
+            background: rgba(59,130,246,0.1);
+            color: #1e40af;
+        }
+        .da-search-option.highlight {
+            background: rgba(245,158,11,0.1);
+        }
+        .da-search-no-result {
+            padding: 12px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
         }
 
         .da-result-card {
             background: white;
             border-radius: 16px;
             padding: 24px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             border: 1px solid rgba(0,0,0,0.06);
-            margin-bottom: 20px;
-            overflow: hidden;
         }
         .da-card-header {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .da-card-title {
             font-size: 18px;
@@ -442,8 +621,17 @@
             overflow: hidden;
             border: 1px solid #e2e8f0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 420px);
+            min-height: 200px;
+            background: white;
+        }
+        .da-table-scroll {
+            flex: 1;
             overflow-y: auto;
+            background: white;
+            max-height: calc(100vh - 480px);
         }
         .da-table-wrapper::-webkit-scrollbar { width: 6px; }
         .da-table-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -611,6 +799,160 @@
             .da-filter-item { min-width: 140px; }
             .da-charts-row { grid-template-columns: 1fr; }
         }
+
+        .da-chart-toggle-btn {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.15);
+        }
+        .da-chart-toggle-btn:hover {
+            background: rgba(255,255,255,1);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .da-chart-toggle-btn i {
+            color: #64748b;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .da-chart-toggle-btn:hover i {
+            color: #3b82f6;
+        }
+        .da-chart-toggle-btn.charts-hidden i {
+            transform: rotate(180deg);
+        }
+        .da-chart-toggle-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+        }
+
+        .da-chart-panel {
+            position: fixed;
+            right: -820px;
+            top: 70px;
+            width: 800px;
+            bottom: 20px;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(30px);
+            border-radius: 28px 0 0 28px;
+            box-shadow: -10px 0 35px rgba(0,0,0,0.15);
+            padding: 32px;
+            overflow-y: auto;
+            transition: right 0.35s ease;
+            z-index: 9998;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        .da-chart-panel.visible {
+            right: 0;
+        }
+        .da-chart-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .da-chart-panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .da-chart-panel-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .da-chart-panel-close:hover {
+            color: #334155;
+        }
+        .da-chart-panel .da-chart-card {
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+        .da-chart-panel .da-chart-container {
+            height: 200px;
+        }
+
+        .da-pagination-container {
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0 0 12px 12px;
+        }
+        .da-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #f8fafc;
+        }
+        .da-pagination-info {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .da-pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .da-pagination-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .da-pagination-btn:hover:not(:disabled) {
+            background: rgba(59,130,246,0.08);
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .da-pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .da-pagination-page {
+            min-width: 40px;
+            text-align: center;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .da-pagination-page.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        .da-page-size-selector {
+            padding: 6px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -644,6 +986,10 @@
                         </button>
                     </div>
                     <span class="da-last-update" id="lastUpdateTime">上次更新: --</span>
+                    <button class="da-btn-cache" onclick="showCacheInfo()">
+                        <i class="fa-solid fa-database"></i>
+                        缓存管理
+                    </button>
                     <button class="da-btn-back" onclick="goBack()">
                         <i class="fa-solid fa-arrow-left"></i>
                         返回主菜单
@@ -689,7 +1035,7 @@
             <div class="da-query-card">
                 <div class="da-query-row">
                     <div>
-                        <label class="da-query-label">📅 日期范围</label>
+                        <label class="da-query-label">日期范围</label>
                         <div class="da-date-inputs">
                             <input type="date" id="startDate" class="da-date-input">
                             <span class="da-date-separator">至</span>
@@ -700,15 +1046,15 @@
                         <label class="da-query-label">&nbsp;</label>
                         <div class="da-query-actions">
                             <div class="da-dropdown-wrapper">
-                                <button type="button" class="da-btn-outline" id="dateDropdownBtn">⚡ 快捷选择 ▾</button>
+                                <button type="button" class="da-btn-outline" id="dateDropdownBtn">快捷选择 ▾</button>
                                 <ul class="da-dropdown-menu" id="dateDropdown">
-                                    <li><a href="#" onclick="setDateRange('today');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar-day"></i> 今天</a></li>
-                                    <li><a href="#" onclick="setDateRange('yesterday');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar-days"></i> 昨天</a></li>
-                                    <li><a href="#" onclick="setDateRange('thisweek');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar-week"></i> 本周</a></li>
-                                    <li><a href="#" onclick="setDateRange('lastweek');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar"></i> 上周</a></li>
+                                    <li><a href="#" onclick="setDateRange('today');$('#dateDropdown').hide();return false;">今天</a></li>
+                                    <li><a href="#" onclick="setDateRange('yesterday');$('#dateDropdown').hide();return false;">昨天</a></li>
+                                    <li><a href="#" onclick="setDateRange('thisweek');$('#dateDropdown').hide();return false;">本周</a></li>
+                                    <li><a href="#" onclick="setDateRange('lastweek');$('#dateDropdown').hide();return false;">上周</a></li>
                                     <li style="height:1px;background:#e2e8f0;margin:4px 0;"></li>
-                                    <li><a href="#" onclick="setDateRange('thismonth');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar-days"></i> 本月</a></li>
-                                    <li><a href="#" onclick="setDateRange('lastmonth');$('#dateDropdown').hide();return false;"><i class="fa-solid fa-calendar-days"></i> 上月</a></li>
+                                    <li><a href="#" onclick="setDateRange('thismonth');$('#dateDropdown').hide();return false;">本月</a></li>
+                                    <li><a href="#" onclick="setDateRange('lastmonth');$('#dateDropdown').hide();return false;">上月</a></li>
                                 </ul>
                             </div>
                             <button class="da-btn-primary" onclick="runDailyAnalysis()">
@@ -724,52 +1070,92 @@
                 <div class="da-filter-section">
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-building"></i> 科室</label>
-                        <select id="department">
-                            <option value="">全部科室</option>
-                        </select>
+                        <div class="da-searchable-select" id="deptSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索科室..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-flask-vial"></i> 检查类型</label>
-                        <select id="category">
-                            <option value="">全部类型</option>
-                        </select>
+                        <div class="da-searchable-select" id="categorySearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索检查类型..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-user-doctor"></i> 报告医生</label>
-                        <select id="reporter">
-                            <option value="">全部医生</option>
-                        </select>
+                        <div class="da-searchable-select" id="reporterSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索报告医生..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-user-nurse"></i> 审核医生</label>
-                        <select id="reviewer">
-                            <option value="">全部审核医生</option>
-                        </select>
+                        <div class="da-searchable-select" id="reviewerSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索审核医生..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-server"></i> 检查系统</label>
-                        <select id="system">
-                            <option value="">全部系统</option>
-                        </select>
+                        <div class="da-searchable-select" id="systemSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索检查系统..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-wrench"></i> 技师</label>
-                        <select id="technician">
-                            <option value="">全部技师</option>
-                        </select>
+                        <div class="da-searchable-select" id="technicianSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索技师..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-user"></i> 病人类型</label>
-                        <select id="patientType">
-                            <option value="">全部类型</option>
-                        </select>
+                        <div class="da-searchable-select" id="patientTypeSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索病人类型..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
                     <div class="da-filter-item">
                         <label><i class="fa-solid fa-check-circle"></i> 阴阳性</label>
-                        <select id="resultStatus">
-                            <option value="">全部状态</option>
-                        </select>
+                        <div class="da-searchable-select" id="resultStatusSearchSelect">
+                            <div class="da-search-input-wrapper">
+                                <i class="fa-solid fa-search da-search-icon"></i>
+                                <input type="text" class="da-search-input" placeholder="搜索阴阳性..." >
+                            </div>
+                            <div class="da-search-dropdown"></div>
+                        </div>
                     </div>
+                    <input type="hidden" id="department" name="department">
+                    <input type="hidden" id="category" name="category">
+                    <input type="hidden" id="reporter" name="reporter">
+                    <input type="hidden" id="reviewer" name="reviewer">
+                    <input type="hidden" id="system" name="system">
+                    <input type="hidden" id="technician" name="technician">
+                    <input type="hidden" id="patientType" name="patientType">
+                    <input type="hidden" id="resultStatus" name="resultStatus">
                 </div>
             </div>
 
@@ -801,33 +1187,43 @@
                 </div>
             </div>
 
-            <div class="da-charts-row">
-                <div class="da-chart-card">
-                    <div class="da-chart-header">
-                        <div class="da-chart-title">
-                            <i class="fa-solid fa-bar-chart"></i> 检查结果统计
-                        </div>
-                        <div class="da-chart-type-selector">
-                            <button class="da-chart-type-btn active" onclick="switchChartType('bar')">柱状图</button>
-                            <button class="da-chart-type-btn" onclick="switchChartType('line')">折线图</button>
-                            <button class="da-chart-type-btn" onclick="switchChartType('pie')">饼图</button>
-                        </div>
-                    </div>
-                    <div class="da-chart-container" id="chartContainer1"></div>
-                </div>
-                <div class="da-chart-card">
-                    <div class="da-chart-header">
-                        <div class="da-chart-title">
-                            <i class="fa-solid fa-trending-up"></i> 阳性率趋势
-                        </div>
-                        <div class="da-chart-type-selector">
-                            <button class="da-chart-type-btn active" onclick="switchChartType2('line')">折线图</button>
-                            <button class="da-chart-type-btn" onclick="switchChartType2('area')">面积图</button>
-                        </div>
-                    </div>
-                    <div class="da-chart-container" id="chartContainer2"></div>
-                </div>
+            <button class="da-chart-toggle-btn" id="chartToggleBtn">
+            <i class="fa-solid fa-chart-line"></i>
+        </button>
+
+        <div class="da-chart-panel" id="chartPanel">
+            <div class="da-chart-panel-header">
+                <div class="da-chart-panel-title">统计图表</div>
+                <button class="da-chart-panel-close" onclick="toggleCharts()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
+            <div class="da-chart-card">
+                <div class="da-chart-header">
+                    <div class="da-chart-title">
+                        <i class="fa-solid fa-bar-chart"></i> 检查结果统计
+                    </div>
+                    <div class="da-chart-type-selector">
+                        <button class="da-chart-type-btn active" onclick="switchChartType('bar')">柱状图</button>
+                        <button class="da-chart-type-btn" onclick="switchChartType('line')">折线图</button>
+                        <button class="da-chart-type-btn" onclick="switchChartType('pie')">饼图</button>
+                    </div>
+                </div>
+                <div class="da-chart-container" id="chartContainer1"></div>
+            </div>
+            <div class="da-chart-card">
+                <div class="da-chart-header">
+                    <div class="da-chart-title">
+                        <i class="fa-solid fa-trending-up"></i> 阳性率趋势
+                    </div>
+                    <div class="da-chart-type-selector">
+                        <button class="da-chart-type-btn active" onclick="switchChartType2('line')">折线图</button>
+                        <button class="da-chart-type-btn" onclick="switchChartType2('area')">面积图</button>
+                    </div>
+                </div>
+                <div class="da-chart-container" id="chartContainer2"></div>
+            </div>
+        </div>
         </div>
     </div>
 
@@ -844,6 +1240,11 @@
         var refreshInterval = 30;
         var refreshTimer = null;
         var previousStats = { rate: 0, total: 0, positive: 0, negative: 0 };
+        var searchSelectConfigs = {};
+        
+        var allData = [];
+        var currentPage = 1;
+        var pageSize = 20;
 
         function goBack() { 
             if (window.parent !== window) {
@@ -855,10 +1256,25 @@
 
         $(document).ready(function() {
             var today = new Date();
-            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-            $('#startDate').val(firstDay.toISOString().split('T')[0]);
-            $('#endDate').val(today.toISOString().split('T')[0]);
+            var year = today.getFullYear();
+            var month = today.getMonth();
+            var startDate = new Date(year, month - 1, 1);
+            var endDate = new Date(year, month, 0);
+            $('#startDate').val(formatDate(startDate));
+            $('#endDate').val(formatDate(endDate));
             loadAllOptions();
+            loadChartConfig();
+
+            setTimeout(function() {
+                var btn = document.getElementById('chartToggleBtn');
+                if (btn) {
+                    btn.addEventListener('click', toggleCharts);
+                }
+            }, 100);
+
+            setTimeout(function() {
+                $('#queryBtn').click();
+            }, 800);
 
             $('#dateDropdownBtn').on('click', function(e) {
                 e.stopPropagation();
@@ -868,30 +1284,283 @@
                 $('#dateDropdown').hide();
             });
         });
-
-        function loadAllOptions() {
-            $.get('/get-all-options', function(res) {
+        
+        function loadChartConfig() {
+            $.get('/get-system-configs', function(res) {
                 var r = typeof res === 'string' ? JSON.parse(res) : res;
                 if (r && r.success && r.data) {
-                    fillSelect('department', r.data.departments || [], '科室');
-                    fillSelect('category', r.data.categories || [], '检查类型');
-                    fillSelect('reporter', r.data.reporters || [], '报告医生');
-                    fillSelect('reviewer', r.data.reviewers || [], '审核医生');
-                    fillSelect('system', r.data.systems || [], '检查系统');
-                    fillSelect('technician', r.data.technicians || [], '技师');
-                    fillSelect('patientType', r.data.patientTypes || [], '病人类型');
-                    fillSelect('resultStatus', r.data.resultStatus || [], '阴阳性');
+                    var showCharts = true;
+                    r.data.forEach(function(item) {
+                        if (item.configKey === 'SHOW_CHARTS') {
+                            showCharts = item.configValue === 'true';
+                        }
+                    });
+                    var chartPanel = document.getElementById('chartPanel');
+                    var toggleBtn = document.getElementById('chartToggleBtn');
+                    if (showCharts) {
+                        chartPanel.classList.add('visible');
+                        toggleBtn.classList.add('charts-hidden');
+                    }
                 }
             });
         }
 
-        function fillSelect(id, data, placeholder) {
-            var select = $('#' + id);
-            select.empty();
-            select.append('<option value="">全部' + placeholder + '</option>');
-            data.forEach(function(item) {
-                select.append('<option value="' + htmlEncode(item.code) + '">' + htmlEncode(item.name) + '</option>');
+        var CACHE_KEY = 'dailyAnalysisOptions';
+        var CACHE_EXPIRE_MINUTES = 5;
+
+        function loadAllOptions() {
+            var cachedData = getCachedOptions();
+            if (cachedData) {
+                initSearchSelect('deptSearchSelect', 'department', cachedData.departments || [], '科室');
+                initSearchSelect('categorySearchSelect', 'category', cachedData.categories || [], '检查类型');
+                initSearchSelect('reporterSearchSelect', 'reporter', cachedData.reporters || [], '报告医生');
+                initSearchSelect('reviewerSearchSelect', 'reviewer', cachedData.reviewers || [], '审核医生');
+                initSearchSelect('systemSearchSelect', 'system', cachedData.systems || [], '检查系统');
+                initSearchSelect('technicianSearchSelect', 'technician', cachedData.technicians || [], '技师');
+                initSearchSelect('patientTypeSearchSelect', 'patientType', cachedData.patientTypes || [], '病人类型');
+                initSearchSelect('resultStatusSearchSelect', 'resultStatus', cachedData.resultStatus || [], '阴阳性');
+                return;
+            }
+
+            $.get('/get-all-options', function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success && r.data) {
+                    setCachedOptions(r.data);
+                    initSearchSelect('deptSearchSelect', 'department', r.data.departments || [], '科室');
+                    initSearchSelect('categorySearchSelect', 'category', r.data.categories || [], '检查类型');
+                    initSearchSelect('reporterSearchSelect', 'reporter', r.data.reporters || [], '报告医生');
+                    initSearchSelect('reviewerSearchSelect', 'reviewer', r.data.reviewers || [], '审核医生');
+                    initSearchSelect('systemSearchSelect', 'system', r.data.systems || [], '检查系统');
+                    initSearchSelect('technicianSearchSelect', 'technician', r.data.technicians || [], '技师');
+                    initSearchSelect('patientTypeSearchSelect', 'patientType', r.data.patientTypes || [], '病人类型');
+                    initSearchSelect('resultStatusSearchSelect', 'resultStatus', r.data.resultStatus || [], '阴阳性');
+                }
+            }).fail(function() {
+                showAlert('error', '加载选项数据失败');
             });
+        }
+
+        function getCachedOptions() {
+            try {
+                var cached = localStorage.getItem(CACHE_KEY);
+                if (!cached) return null;
+                
+                var data = JSON.parse(cached);
+                var now = Date.now();
+                if (data.timestamp && (now - data.timestamp) < CACHE_EXPIRE_MINUTES * 60 * 1000) {
+                    return data.options;
+                }
+            } catch (e) {
+                console.log('读取缓存失败:', e);
+            }
+            return null;
+        }
+
+        function setCachedOptions(options) {
+            try {
+                var cached = {
+                    timestamp: Date.now(),
+                    options: options
+                };
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cached));
+            } catch (e) {
+                console.log('写入缓存失败:', e);
+            }
+        }
+
+        function initSearchSelect(containerId, hiddenId, data, placeholder) {
+            var container = $('#' + containerId);
+            var input = container.find('.da-search-input');
+            var dropdown = container.find('.da-search-dropdown');
+            var hidden = $('#' + hiddenId);
+            
+            searchSelectConfigs[hiddenId] = {
+                data: data,
+                placeholder: placeholder,
+                container: container,
+                input: input,
+                dropdown: dropdown,
+                hidden: hidden
+            };
+
+            input.val('全部' + placeholder);
+            
+            input.on('click', function(e) {
+                e.stopPropagation();
+                if ($(this).val() === '全部' + placeholder) {
+                    $(this).val('');
+                }
+                toggleDropdown(containerId, true);
+            });
+
+            input.on('input', function() {
+                filterOptions(containerId, $(this).val());
+            });
+
+            input.on('keydown', function(e) {
+                handleKeydown(containerId, e);
+            });
+
+            container.on('click', '.da-search-option', function() {
+                selectOption(containerId, $(this).data('value'), $(this).data('text'));
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.da-searchable-select').length) {
+                    $('.da-search-dropdown').removeClass('show');
+                }
+            });
+
+            renderOptions(containerId, data);
+        }
+
+        function renderOptions(containerId, data) {
+            var config = searchSelectConfigs[getHiddenIdFromContainer(containerId)];
+            if (!config) return;
+
+            var dropdown = config.dropdown;
+            dropdown.empty();
+
+            dropdown.append('<div class="da-search-option" data-value="" data-text="全部' + config.placeholder + '" data-pinyin="quanbu' + pinyinMapping[config.placeholder] + '">全部' + config.placeholder + '</div>');
+            
+            data.forEach(function(item) {
+                var value = '';
+                var text = '';
+                if (typeof item === 'object' && item !== null) {
+                    value = item.code || item.name || '';
+                    text = item.name || item.code || '';
+                } else {
+                    value = item || '';
+                    text = item || '';
+                }
+                dropdown.append('<div class="da-search-option" data-value="' + htmlEncode(value) + '" data-text="' + htmlEncode(text) + '" data-pinyin="' + htmlEncode(item.pinyin || '') + '">' + htmlEncode(text) + '</div>');
+            });
+        }
+
+        function filterOptions(containerId, keyword) {
+            var config = searchSelectConfigs[getHiddenIdFromContainer(containerId)];
+            if (!config) return;
+
+            var dropdown = config.dropdown;
+            
+            var searchKeyword = keyword.trim();
+            if (config.placeholder && searchKeyword.startsWith('全部' + config.placeholder)) {
+                searchKeyword = searchKeyword.replace('全部' + config.placeholder, '').trim();
+            }
+            
+            if (!searchKeyword) {
+                renderOptions(containerId, config.data);
+                toggleDropdown(containerId, true);
+                return;
+            }
+
+            var lowerKeyword = searchKeyword.toLowerCase();
+            var options = dropdown.find('.da-search-option');
+            var hasVisible = false;
+            
+            if (options.length === 0) {
+                renderOptions(containerId, config.data);
+                options = dropdown.find('.da-search-option');
+            }
+            
+            options.each(function() {
+                var text = ($(this).data('text') || '').toLowerCase();
+                var pinyin = ($(this).data('pinyin') || '').toLowerCase().replace(/\s+/g, '');
+                var textMatches = text.includes(lowerKeyword);
+                var pinyinMatches = pinyin.includes(lowerKeyword);
+                var matches = textMatches || pinyinMatches;
+                if (matches) hasVisible = true;
+                $(this).toggle(matches);
+            });
+
+            if (!hasVisible) {
+                dropdown.html('<div class="da-search-no-result">没有找到匹配的结果</div>');
+            }
+
+            toggleDropdown(containerId, true);
+        }
+
+        function selectOption(containerId, value, text) {
+            var config = searchSelectConfigs[getHiddenIdFromContainer(containerId)];
+            if (!config) return;
+
+            config.hidden.val(value);
+            config.input.val(text || ('全部' + config.placeholder));
+            config.dropdown.removeClass('show');
+        }
+
+        function toggleDropdown(containerId, show) {
+            var config = searchSelectConfigs[getHiddenIdFromContainer(containerId)];
+            if (!config) return;
+
+            if (show) {
+                config.dropdown.addClass('show');
+            } else {
+                config.dropdown.removeClass('show');
+            }
+        }
+
+        function handleKeydown(containerId, e) {
+            var config = searchSelectConfigs[getHiddenIdFromContainer(containerId)];
+            if (!config) return;
+
+            var dropdown = config.dropdown;
+            var options = dropdown.find('.da-search-option:visible');
+            var activeOption = options.filter('.active');
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                var nextOption = activeOption.length ? activeOption.nextAll('.da-search-option:visible').first() : options.first();
+                options.removeClass('active');
+                nextOption.addClass('active');
+                nextOption[0]?.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                var prevOption = activeOption.length ? activeOption.prevAll('.da-search-option:visible').first() : options.last();
+                options.removeClass('active');
+                prevOption.addClass('active');
+                prevOption[0]?.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                var selectedOption = activeOption.length ? activeOption : options.first();
+                if (selectedOption.length) {
+                    selectOption(containerId, selectedOption.data('value'), selectedOption.data('text'));
+                }
+            } else if (e.key === 'Escape') {
+                dropdown.removeClass('show');
+            }
+        }
+
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0');
+            var day = String(date.getDate()).padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        }
+
+        var pinyinMapping = {
+            '科室': 'keshi',
+            '检查类型': 'jianchaleixing',
+            '报告医生': 'baogaoyisheng',
+            '审核医生': 'shenheyisheng',
+            '检查系统': 'jianchaxitong',
+            '技师': 'jishi',
+            '病人类型': 'bingrenleixing',
+            '阴阳性': 'yinyangxing'
+        };
+
+        function getHiddenIdFromContainer(containerId) {
+            var map = {
+                'deptSearchSelect': 'department',
+                'categorySearchSelect': 'category',
+                'reporterSearchSelect': 'reporter',
+                'reviewerSearchSelect': 'reviewer',
+                'systemSearchSelect': 'system',
+                'technicianSearchSelect': 'technician',
+                'patientTypeSearchSelect': 'patientType',
+                'resultStatusSearchSelect': 'resultStatus'
+            };
+            return map[containerId] || containerId.replace('SearchSelect', '');
         }
 
         function htmlEncode(str) {
@@ -902,483 +1571,440 @@
         function setDateRange(range) {
             var today = new Date();
             var startDate, endDate;
-            switch (range) {
-                case 'today': startDate = endDate = today; break;
-                case 'yesterday': startDate = endDate = new Date(today.getTime() - 86400000); break;
+            
+            switch(range) {
+                case 'today':
+                    startDate = today;
+                    endDate = today;
+                    break;
+                case 'yesterday':
+                    startDate = new Date(today);
+                    startDate.setDate(startDate.getDate() - 1);
+                    endDate = startDate;
+                    break;
                 case 'thisweek':
-                    var day = today.getDay();
-                    var diff = today.getDate() - day + (day === 0 ? -6 : 1);
-                    startDate = new Date(today.setDate(diff));
-                    endDate = new Date();
+                    startDate = new Date(today);
+                    startDate.setDate(startDate.getDate() - today.getDay() + 1);
+                    endDate = today;
                     break;
                 case 'lastweek':
-                    var lastWeekStart = new Date(today.getTime() - 7 * 86400000);
-                    var lastDay = lastWeekStart.getDay();
-                    var lastDiff = lastWeekStart.getDate() - lastDay + (lastDay === 0 ? -6 : 1);
-                    startDate = new Date(lastWeekStart.setDate(lastDiff));
-                    endDate = new Date(startDate.getTime() + 6 * 86400000);
+                    startDate = new Date(today);
+                    startDate.setDate(startDate.getDate() - today.getDay() - 6);
+                    endDate = new Date(startDate);
+                    endDate.setDate(endDate.getDate() + 6);
                     break;
                 case 'thismonth':
                     startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-                    endDate = new Date();
+                    endDate = today;
                     break;
                 case 'lastmonth':
                     startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
                     endDate = new Date(today.getFullYear(), today.getMonth(), 0);
                     break;
             }
-            $('#startDate').val(startDate.toISOString().split('T')[0]);
-            $('#endDate').val(endDate.toISOString().split('T')[0]);
-        }
-
-        function showAlert(message, type) {
-            type = type || 'warning';
-            var icon = type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle';
-            $('#daAlert').html('<div class="da-alert ' + type + '"><i class="fa-solid ' + icon + '"></i>' + message + '</div>');
-            $('#daAlert').show();
-            setTimeout(function() { $('#daAlert').fadeOut(); }, 5000);
+            
+            $('#startDate').val(formatDate(startDate));
+            $('#endDate').val(formatDate(endDate));
         }
 
         function runDailyAnalysis() {
             var startDate = $('#startDate').val();
             var endDate = $('#endDate').val();
-
+            
             if (!startDate || !endDate) {
-                showAlert('请选择日期范围', 'warning');
+                showAlert('warning', '请选择日期范围');
                 return;
             }
 
-            var data = {
+            var params = {
                 startDate: startDate,
                 endDate: endDate,
-                department: $('#department').val() || '',
-                category: $('#category').val() || '',
-                reporter: $('#reporter').val() || '',
-                reviewer: $('#reviewer').val() || '',
-                system: $('#system').val() || '',
-                technician: $('#technician').val() || '',
-                patientType: $('#patientType').val() || '',
-                resultStatus: $('#resultStatus').val() || '',
-                sortBy: sortColumn || '任务数量',
-                sortOrder: sortDirection
+                department: $('#department').val(),
+                category: $('#category').val(),
+                reporter: $('#reporter').val(),
+                reviewer: $('#reviewer').val(),
+                system: $('#system').val(),
+                technician: $('#technician').val(),
+                patientType: $('#patientType').val(),
+                resultStatus: $('#resultStatus').val(),
+                groupBy: groupByType
             };
 
-            $('#analysisResult').html('<div class="da-loading"><div class="da-loading-spinner"></div><span>数据加载中...</span></div>');
-
-            $.ajax({
-                url: '/daily-analysis',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function(response) {
-                    var r = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (r && r.success && r.data && r.data.length > 0) {
-                        displayAnalysisResult(r.data);
-                        updateStatistics(r.data);
-                        renderCharts(r.data);
-                        updateLastUpdateTime();
-                    } else {
-                        resetStatistics();
-                        $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-inbox"></i><div>没有查询到数据</div></div>');
-                        hideCharts();
-                    }
-                },
-                error: function() {
-                    showAlert('请求失败，请稍后重试', 'error');
-                    resetStatistics();
-                }
-            });
-        }
-
-        function runAnalysis(type) {
-            var startDate = $('#startDate').val();
-            var endDate = $('#endDate').val();
-
-            if (!startDate || !endDate) {
-                showAlert('请选择日期范围', 'warning');
-                return;
-            }
-
-            var url = '/daily-analysis';
-            var data = { startDate: startDate, endDate: endDate };
-
-            if (type === 'department') {
-                url = '/department-statistics';
-            } else if (type === 'doctor') {
-                url = '/doctor-statistics';
-                data.doctorType = 'reporter';
-            } else if (type === 'category') {
-                url = '/category-statistics';
-            }
-
-            $('#analysisResult').html('<div class="da-loading"><div class="da-loading-spinner"></div><span>数据加载中...</span></div>');
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function(response) {
-                    var r = typeof response === 'string' ? JSON.parse(response) : response;
-                    if (r && r.success && r.data && r.data.length > 0) {
-                        displayAnalysisResult(r.data);
-                        updateStatistics(r.data);
-                        renderCharts(r.data);
-                        updateLastUpdateTime();
-                    } else {
-                        resetStatistics();
-                        $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-inbox"></i><div>没有查询到数据</div></div>');
-                        hideCharts();
-                    }
-                },
-                error: function() {
-                    showAlert('请求失败，请稍后重试', 'error');
-                }
-            });
-        }
-
-        function setGroupBy(type) {
-            groupByType = type;
-            $('.da-sub-btn').removeClass('active');
-            $('#btn' + type.charAt(0).toUpperCase() + type.slice(1)).addClass('active');
+            $('#analysisResult').html('<div class="da-loading"><div class="da-loading-spinner"></div><div>加载中...</div></div>');
             
-            if (type === 'all') {
-                runDailyAnalysis();
-            } else {
-                runAnalysis(type);
-            }
-        }
-
-        function displayAnalysisResult(data) {
-            if (!data || data.length === 0) {
-                $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-inbox"></i><div>没有查询到数据</div></div>');
-                return;
-            }
-
-            var columns = Object.keys(data[0]);
-            var tableHtml = '<div class="da-table-wrapper"><table class="da-table"><thead><tr>';
-
-            for (var i = 0; i < columns.length; i++) {
-                var col = columns[i];
-                var sortable = col === '阳性率' || col === '任务数量' || col === '阳性数量' || col === '阴性数量';
-                var sortIcon = sortColumn === col ? (sortDirection === 'ASC' ? ' ▲' : ' ▼') : '';
-                tableHtml += '<th ' + (sortable ? 'class="sortable"' : '') + ' onclick="sortByColumn(\'' + col + '\')">' + htmlEncode(col) + sortIcon + '</th>';
-            }
-
-            tableHtml += '</tr></thead><tbody>';
-
-            for (var i = 0; i < data.length; i++) {
-                tableHtml += '<tr' + (i === 0 ? ' class="da-highlight-row"' : '') + '>';
-                for (var j = 0; j < columns.length; j++) {
-                    var value = data[i][columns[j]];
-                    if (columns[j] === '阳性率') {
-                        var rate = parseFloat(value) || 0;
-                        var rateClass = rate >= 50 ? 'da-positive-rate' : 'da-negative-rate';
-                        tableHtml += '<td class="' + rateClass + '">' + rate.toFixed(2) + '%</td>';
-                    } else {
-                        tableHtml += '<td>' + htmlEncode(value !== null && value !== undefined ? value : '') + '</td>';
-                    }
+            $.post('/daily-analysis', JSON.stringify(params), function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r && r.success && r.data) {
+                    updateStats(r.data.summary);
+                    renderResultTable(r.data.details);
+                    renderCharts(r.data.details);
+                    updateLastUpdateTime();
+                } else {
+                    showAlert('error', r ? r.error || '查询失败' : '查询失败');
+                    $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-chart-bar"></i><div>查询失败，请稍后重试</div></div>');
                 }
-                tableHtml += '</tr>';
+            }).fail(function() {
+                showAlert('error', '请求失败，请检查网络连接');
+                $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-chart-bar"></i><div>请求失败，请检查网络连接</div></div>');
+            });
+        }
+
+        function updateStats(summary) {
+            if (!summary) return;
+            
+            var rate = summary.positiveRate !== undefined && summary.positiveRate !== null ? (summary.positiveRate * 100).toFixed(2) + '%' : '-';
+            var total = summary.totalCount || 0;
+            var positive = summary.positiveCount || 0;
+            var negative = summary.negativeCount || 0;
+
+            updateStatValue('statRate', rate);
+            updateStatValue('statTotal', total.toLocaleString());
+            updateStatValue('statPositive', positive.toLocaleString());
+            updateStatValue('statNegative', negative.toLocaleString());
+
+            if (previousStats.rate > 0) {
+                updateStatChange('statRateChange', summary.positiveRate, previousStats.rate);
+                updateStatChange('statTotalChange', total, previousStats.total);
+                updateStatChange('statPositiveChange', positive, previousStats.positive);
+                updateStatChange('statNegativeChange', negative, previousStats.negative);
             }
 
-            tableHtml += '</tbody></table></div>';
-            tableHtml += '<div style="margin-top:12px;color:#64748b;font-size:13px;">共 ' + data.length + ' 条记录（点击列头排序）</div>';
-            $('#analysisResult').html(tableHtml);
+            previousStats = {
+                rate: summary.positiveRate || 0,
+                total: total,
+                positive: positive,
+                negative: negative
+            };
         }
 
-        function sortByColumn(column) {
-            if (sortColumn === column) {
-                sortDirection = sortDirection === 'ASC' ? 'DESC' : 'ASC';
-            } else {
-                sortColumn = column;
-                sortDirection = 'DESC';
-            }
-            runDailyAnalysis();
+        function updateStatValue(elemId, value) {
+            $('#' + elemId).text(value);
         }
 
-        function clearAllFilters() {
-            var today = new Date();
-            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-            $('#startDate').val(firstDay.toISOString().split('T')[0]);
-            $('#endDate').val(today.toISOString().split('T')[0]);
-            $('#department').val('');
-            $('#category').val('');
-            $('#reporter').val('');
-            $('#reviewer').val('');
-            $('#system').val('');
-            $('#technician').val('');
-            $('#patientType').val('');
-            $('#resultStatus').val('');
-            sortColumn = '';
-            sortDirection = 'DESC';
-            groupByType = 'all';
-            $('.da-sub-btn').removeClass('active');
-            $('#btnAll').addClass('active');
-            resetStatistics();
-            hideCharts();
-            $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-chart-bar"></i><div>请选择日期范围并点击查询</div></div>');
-        }
-
-        function updateStatistics(data) {
-            if (!data || data.length === 0) {
-                resetStatistics();
+        function updateStatChange(elemId, current, previous) {
+            if (previous <= 0) {
+                $('#' + elemId).text('');
                 return;
             }
 
-            var total = 0, positive = 0, negative = 0;
-            data.forEach(function(row) {
-                total += parseInt(row['任务数量']) || 0;
-                positive += parseInt(row['阳性数量']) || 0;
-                negative += parseInt(row['阴性数量']) || 0;
+            var change = current - previous;
+            var percent = ((change / previous) * 100).toFixed(1);
+            var icon = change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+            var color = change >= 0 ? 'style="color: #22c55e"' : 'style="color: #ef4444"';
+
+            $('#' + elemId).html('<i class="fa-solid ' + icon + '" ' + color + '></i> ' + (change >= 0 ? '+' : '') + percent + '%');
+        }
+
+        function renderResultTable(data) {
+            allData = data || [];
+            currentPage = 1;
+            var selector = document.getElementById('pageSizeSelector');
+            pageSize = selector ? parseInt(selector.value) : 20;
+            
+            if (!data || data.length === 0) {
+                $('#analysisResult').html('<div class="da-empty-state"><i class="fa-solid fa-chart-bar"></i><div>暂无数据</div></div>');
+                return;
+            }
+
+            updatePagination();
+            renderCurrentPage();
+        }
+
+        function renderCurrentPage() {
+            var startIndex = (currentPage - 1) * pageSize;
+            var endIndex = startIndex + pageSize;
+            var pageData = allData.slice(startIndex, endIndex);
+
+            var cols = [];
+            if (groupByType === 'all') {
+                cols = ['department', 'category', 'reporter', 'reviewer', 'system', 'total', 'positive', 'negative', 'positiveRate'];
+            } else if (groupByType === 'department') {
+                cols = ['department', 'total', 'positive', 'negative', 'positiveRate'];
+            } else if (groupByType === 'doctor') {
+                cols = ['reporter', 'total', 'positive', 'negative', 'positiveRate'];
+            } else if (groupByType === 'category') {
+                cols = ['category', 'total', 'positive', 'negative', 'positiveRate'];
+            }
+
+            var headers = {
+                department: '科室',
+                category: '检查类型',
+                reporter: '报告医生',
+                reviewer: '审核医生',
+                system: '检查系统',
+                total: '检查总次数',
+                positive: '阳性数',
+                negative: '阴性数',
+                positiveRate: '阳性率'
+            };
+
+            var html = '<table class="da-table"><thead><tr><th style="width: 60px;">序号</th>';
+            cols.forEach(function(col) {
+                html += '<th class="sortable">' + headers[col] + '</th>';
+            });
+            html += '</tr></thead><tbody>';
+
+            pageData.forEach(function(row, index) {
+                if (!row) return;
+                var globalIndex = startIndex + index;
+                var rowClass = globalIndex === 0 && groupByType === 'all' ? 'da-highlight-row' : '';
+                html += '<tr' + (rowClass ? ' class="' + rowClass + '"' : '') + '>';
+                html += '<td style="text-align: center; color: #64748b;">' + (globalIndex + 1) + '</td>';
+                cols.forEach(function(col) {
+                    var value = row[col];
+                    if (col === 'positiveRate') {
+                        if (value === null || value === undefined || value === '') {
+                            value = '-';
+                        } else {
+                            var rateValue = parseFloat(value);
+                            if (rateValue >= 100) {
+                                rateValue = rateValue / 100;
+                            }
+                            value = rateValue.toFixed(2) + '%';
+                        }
+                        html += '<td class="' + (value !== '-' && parseFloat(value) > 30 ? 'da-positive-rate' : 'da-negative-rate') + '">' + value + '</td>';
+                    } else if (col === 'total' || col === 'positive' || col === 'negative') {
+                        html += '<td>' + (value ? value.toLocaleString() : '0') + '</td>';
+                    } else {
+                        html += '<td>' + htmlEncode(value || '-') + '</td>';
+                    }
+                });
+                html += '</tr>';
             });
 
-            var rate = total > 0 ? (positive / total * 100) : 0;
-
-            updateStatWithChange('statRate', rate.toFixed(2) + '%', previousStats.rate, rate);
-            updateStatWithChange('statTotal', total.toLocaleString(), previousStats.total, total);
-            updateStatWithChange('statPositive', positive.toLocaleString(), previousStats.positive, positive);
-            updateStatWithChange('statNegative', negative.toLocaleString(), previousStats.negative, negative);
-
-            previousStats = { rate: rate, total: total, positive: positive, negative: negative };
+            html += '</tbody></table>';
+            var paginationHtml = '<div id="paginationContainer" class="da-pagination-container"><div class="da-pagination"><div class="da-pagination-info" id="paginationInfo">显示 1-20 条，共 ' + allData.length + ' 条</div><div class="da-pagination-controls"><button class="da-pagination-btn" id="btnFirst" onclick="goToFirstPage()" disabled><i class="fa-solid fa-chevron-double-left"></i></button><button class="da-pagination-btn" id="btnPrev" onclick="goToPrevPage()" disabled><i class="fa-solid fa-chevron-left"></i></button><span class="da-pagination-page active" id="currentPage">1</span><span style="color: #94a3b8;">/</span><span class="da-pagination-page" id="totalPages">' + Math.ceil(allData.length / pageSize) + '</span><button class="da-pagination-btn" id="btnNext" onclick="goToNextPage()"><i class="fa-solid fa-chevron-right"></i></button><button class="da-pagination-btn" id="btnLast" onclick="goToLastPage()"><i class="fa-solid fa-chevron-double-right"></i></button><select class="da-page-size-selector" id="pageSizeSelector" onchange="changePageSize()"><option value="10">10条/页</option><option value="20" selected>20条/页</option><option value="50">50条/页</option><option value="100">100条/页</option></select></div></div></div>';
+            $('#analysisResult').html('<div class="da-table-wrapper"><div class="da-table-scroll">' + html + '</div>' + paginationHtml + '</div>');
         }
 
-        function updateStatWithChange(elementId, value, oldValue, newValue) {
-            $('#' + elementId).text(value);
-            var changeElement = $('#' + elementId + 'Change');
-            if (oldValue > 0) {
-                var change = ((newValue - oldValue) / oldValue * 100).toFixed(1);
-                if (change > 0) {
-                    changeElement.html('<i class="fa-solid fa-arrow-up" style="color:#22c55e;"></i> +' + change + '%');
-                } else if (change < 0) {
-                    changeElement.html('<i class="fa-solid fa-arrow-down" style="color:#ef4444;"></i> ' + change + '%');
-                } else {
-                    changeElement.html('<i class="fa-solid fa-minus" style="color:#94a3b8;"></i> 持平');
-                }
-            } else {
-                changeElement.html('');
+        function updatePagination() {
+            var totalRecords = allData.length;
+            var totalPages = Math.ceil(totalRecords / pageSize);
+            
+            var currentPageEl = document.getElementById('currentPage');
+            var totalPagesEl = document.getElementById('totalPages');
+            var paginationInfoEl = document.getElementById('paginationInfo');
+            var btnFirst = document.getElementById('btnFirst');
+            var btnPrev = document.getElementById('btnPrev');
+            var btnNext = document.getElementById('btnNext');
+            var btnLast = document.getElementById('btnLast');
+            var paginationContainer = document.getElementById('paginationContainer');
+            
+            if (currentPageEl) currentPageEl.textContent = currentPage;
+            if (totalPagesEl) totalPagesEl.textContent = totalPages;
+            
+            var startRecord = (currentPage - 1) * pageSize + 1;
+            var endRecord = Math.min(currentPage * pageSize, totalRecords);
+            if (paginationInfoEl) paginationInfoEl.textContent = '显示 ' + startRecord + '-' + endRecord + ' 条，共 ' + totalRecords + ' 条';
+            
+            if (btnFirst) btnFirst.disabled = currentPage === 1;
+            if (btnPrev) btnPrev.disabled = currentPage === 1;
+            if (btnNext) btnNext.disabled = currentPage >= totalPages;
+            if (btnLast) btnLast.disabled = currentPage >= totalPages;
+            
+            if (paginationContainer) paginationContainer.style.display = totalRecords > 0 ? 'block' : 'none';
+        }
+
+        function goToFirstPage() {
+            currentPage = 1;
+            renderCurrentPage();
+            updatePagination();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderCurrentPage();
+                updatePagination();
             }
         }
 
-        function resetStatistics() {
-            $('#statRate').text('-');
-            $('#statTotal').text('-');
-            $('#statPositive').text('-');
-            $('#statNegative').text('-');
-            $('#statRateChange').html('');
-            $('#statTotalChange').html('');
-            $('#statPositiveChange').html('');
-            $('#statNegativeChange').html('');
-            previousStats = { rate: 0, total: 0, positive: 0, negative: 0 };
+        function goToNextPage() {
+            var totalPages = Math.ceil(allData.length / pageSize);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderCurrentPage();
+                updatePagination();
+            }
         }
 
-        function hideCharts() {
-            if (chartInstance1) { chartInstance1.dispose(); chartInstance1 = null; }
-            if (chartInstance2) { chartInstance2.dispose(); chartInstance2 = null; }
+        function goToLastPage() {
+            var totalPages = Math.ceil(allData.length / pageSize);
+            currentPage = totalPages;
+            renderCurrentPage();
+            updatePagination();
+        }
+
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSizeSelector').value) || 20;
+            currentPage = 1;
+            renderCurrentPage();
+            updatePagination();
         }
 
         function renderCharts(data) {
-            if (!data || data.length === 0) {
-                hideCharts();
-                return;
-            }
+            if (!data || data.length === 0) return;
 
-            renderChart1(data);
-            renderChart2(data);
-        }
-
-        function renderChart1(data) {
-            var container = document.getElementById('chartContainer1');
-            if (!container) return;
-
-            if (chartInstance1) chartInstance1.dispose();
-            chartInstance1 = echarts.init(container);
-
-            var categoryData = [];
+            var categories = [];
             var positiveData = [];
             var negativeData = [];
+            var rateData = [];
 
-            var topData = data.slice(0, 10);
-            topData.forEach(function(row) {
-                var name = row['报告医生'] || row['执行科室'] || row['检查类型'] || row['系统'] || '未知';
-                categoryData.push(name.length > 8 ? name.substring(0, 8) + '..' : name);
-                positiveData.push(row['阳性数量'] || 0);
-                negativeData.push(row['阴性数量'] || 0);
+            data.forEach(function(row) {
+                var label = '';
+                if (groupByType === 'all') {
+                    label = row.department || row.category || row.reporter || '-';
+                } else if (groupByType === 'department') {
+                    label = row.department || '-';
+                } else if (groupByType === 'doctor') {
+                    label = row.reporter || '-';
+                } else if (groupByType === 'category') {
+                    label = row.category || '-';
+                }
+                categories.push(label);
+                positiveData.push(row.positive || 0);
+                negativeData.push(row.negative || 0);
+                rateData.push(row.positiveRate || 0);
             });
 
-            var option;
+            if (chartInstance1) chartInstance1.dispose();
+            if (chartInstance2) chartInstance2.dispose();
+
+            chartInstance1 = echarts.init(document.getElementById('chartContainer1'));
+            chartInstance2 = echarts.init(document.getElementById('chartContainer2'));
+
+            var option1 = {
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['阳性', '阴性'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+                xAxis: { type: 'category', data: categories, axisLabel: { rotate: categories.length > 6 ? 30 : 0 } },
+                yAxis: { type: 'value' },
+                series: []
+            };
+
             if (chartType1 === 'pie') {
-                option = {
-                    backgroundColor: 'transparent',
-                    tooltip: {
-                        trigger: 'item',
-                        backgroundColor: 'rgba(255,255,255,0.95)',
-                        borderColor: '#e2e8f0',
-                        textStyle: { color: '#334155' }
-                    },
-                    legend: { bottom: 10, textStyle: { color: '#64748b', fontSize: 12 } },
+                option1 = {
+                    tooltip: { trigger: 'item' },
+                    legend: { bottom: 0 },
                     series: [{
-                        name: '检查结果',
                         type: 'pie',
                         radius: ['40%', '70%'],
-                        center: ['50%', '50%'],
+                        center: ['50%', '45%'],
                         avoidLabelOverlap: false,
                         itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
-                        label: { show: false, position: 'center' },
-                        emphasis: {
-                            label: { show: true, fontSize: 16, fontWeight: 'bold' }
-                        },
-                        labelLine: { show: false },
+                        label: { show: true },
+                        emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
                         data: [
-                            { value: positiveData.reduce((a,b) => a+b, 0), name: '阳性', itemStyle: { color: '#ef4444' } },
-                            { value: negativeData.reduce((a,b) => a+b, 0), name: '阴性', itemStyle: { color: '#22c55e' } }
+                            { value: positiveData.reduce(function(a,b) { return a+b; }, 0), name: '阳性' },
+                            { value: negativeData.reduce(function(a,b) { return a+b; }, 0), name: '阴性' }
                         ]
                     }]
                 };
-            } else if (chartType1 === 'line') {
-                option = {
-                    backgroundColor: 'transparent',
-                    tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#e2e8f0', textStyle: { color: '#334155' } },
-                    legend: { data: ['阳性', '阴性'], bottom: 10, textStyle: { color: '#64748b' } },
-                    grid: { left: '3%', right: '4%', bottom: '18%', top: '10%', containLabel: true },
-                    xAxis: { type: 'category', data: categoryData, axisLabel: { rotate: 30, color: '#64748b', fontSize: 11 } },
-                    yAxis: { type: 'value', axisLabel: { color: '#64748b' } },
-                    series: [
-                        { name: '阳性', type: 'line', smooth: true, data: positiveData, lineStyle: { color: '#ef4444', width: 3 }, itemStyle: { color: '#ef4444' } },
-                        { name: '阴性', type: 'line', smooth: true, data: negativeData, lineStyle: { color: '#22c55e', width: 3 }, itemStyle: { color: '#22c55e' } }
-                    ]
-                };
             } else {
-                option = {
-                    backgroundColor: 'transparent',
-                    tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#e2e8f0', textStyle: { color: '#334155' } },
-                    legend: { data: ['阳性', '阴性'], bottom: 10, textStyle: { color: '#64748b' } },
-                    grid: { left: '3%', right: '4%', bottom: '18%', top: '10%', containLabel: true },
-                    xAxis: { type: 'category', data: categoryData, axisLabel: { rotate: 30, color: '#64748b', fontSize: 11 } },
-                    yAxis: { type: 'value', axisLabel: { color: '#64748b' } },
-                    series: [
-                        { name: '阳性', type: 'bar', barWidth: '35%', itemStyle: { color: '#ef4444', borderRadius: [6,6,0,0] }, data: positiveData },
-                        { name: '阴性', type: 'bar', barWidth: '35%', itemStyle: { color: '#22c55e', borderRadius: [6,6,0,0] }, data: negativeData }
-                    ]
-                };
+                option1.series = [
+                    { name: '阳性', type: chartType1, data: positiveData, itemStyle: { color: '#ef4444' } },
+                    { name: '阴性', type: chartType1, data: negativeData, itemStyle: { color: '#22c55e' } }
+                ];
             }
 
-            chartInstance1.setOption(option);
-            window.addEventListener('resize', function() { if (chartInstance1) chartInstance1.resize(); });
-        }
+            var option2 = {
+                tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+                xAxis: { type: 'category', data: categories, axisLabel: { rotate: categories.length > 6 ? 30 : 0 } },
+                yAxis: { type: 'value', axisLabel: { formatter: '{value}%' }, max: 100 },
+                series: [{
+                    name: '阳性率',
+                    type: chartType2,
+                    data: rateData,
+                    smooth: true,
+                    itemStyle: { color: '#f59e0b' },
+                    areaStyle: chartType2 === 'area' ? { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(245,158,11,0.3)' }, { offset: 1, color: 'rgba(245,158,11,0.05)' }] } } : null
+                }]
+            };
 
-        function renderChart2(data) {
-            var container = document.getElementById('chartContainer2');
-            if (!container) return;
-
-            if (chartInstance2) chartInstance2.dispose();
-            chartInstance2 = echarts.init(container);
-
-            var categoryData = [];
-            var rateData = [];
-
-            var topData = data.slice(0, 10);
-            topData.forEach(function(row) {
-                var name = row['报告医生'] || row['执行科室'] || row['检查类型'] || row['系统'] || '未知';
-                categoryData.push(name.length > 8 ? name.substring(0, 8) + '..' : name);
-                rateData.push(parseFloat(row['阳性率']) || 0);
-            });
-
-            var option;
-            if (chartType2 === 'area') {
-                option = {
-                    backgroundColor: 'transparent',
-                    tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#e2e8f0', textStyle: { color: '#334155' }, formatter: '{b}<br/>阳性率: {c}%' },
-                    grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
-                    xAxis: { type: 'category', data: categoryData, axisLabel: { rotate: 30, color: '#64748b', fontSize: 11 } },
-                    yAxis: { type: 'value', name: '阳性率(%)', nameTextStyle: { color: '#64748b' }, axisLabel: { color: '#64748b', formatter: '{value}%' }, min: 0, max: 100 },
-                    series: [{
-                        name: '阳性率',
-                        type: 'line',
-                        smooth: true,
-                        areaStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                { offset: 0, color: 'rgba(245,158,11,0.4)' },
-                                { offset: 1, color: 'rgba(245,158,11,0.05)' }
-                            ])
-                        },
-                        lineStyle: { color: '#f59e0b', width: 3 },
-                        itemStyle: { color: '#f59e0b' },
-                        data: rateData
-                    }]
-                };
-            } else {
-                option = {
-                    backgroundColor: 'transparent',
-                    tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#e2e8f0', textStyle: { color: '#334155' }, formatter: '{b}<br/>阳性率: {c}%' },
-                    grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
-                    xAxis: { type: 'category', data: categoryData, axisLabel: { rotate: 30, color: '#64748b', fontSize: 11 } },
-                    yAxis: { type: 'value', name: '阳性率(%)', nameTextStyle: { color: '#64748b' }, axisLabel: { color: '#64748b', formatter: '{value}%' }, min: 0, max: 100 },
-                    series: [{
-                        name: '阳性率',
-                        type: 'line',
-                        smooth: true,
-                        lineStyle: { color: '#f59e0b', width: 3 },
-                        itemStyle: { color: '#f59e0b' },
-                        symbol: 'circle',
-                        symbolSize: 8,
-                        data: rateData
-                    }]
-                };
-            }
-
-            chartInstance2.setOption(option);
-            window.addEventListener('resize', function() { if (chartInstance2) chartInstance2.resize(); });
+            chartInstance1.setOption(option1);
+            chartInstance2.setOption(option2);
         }
 
         function switchChartType(type) {
             chartType1 = type;
-            $('#chartContainer1').parent().find('.da-chart-type-btn').removeClass('active');
-            $('#chartContainer1').parent().find('.da-chart-type-btn:contains("' + (type === 'bar' ? '柱状图' : type === 'line' ? '折线图' : '饼图') + '")').addClass('active');
+            $('.da-chart-type-btn').removeClass('active');
+            if (type === 'bar') {
+                $('#chartContainer1').parent().find('.da-chart-type-btn').eq(0).addClass('active');
+            } else if (type === 'line') {
+                $('#chartContainer1').parent().find('.da-chart-type-btn').eq(1).addClass('active');
+            } else {
+                $('#chartContainer1').parent().find('.da-chart-type-btn').eq(2).addClass('active');
+            }
             runDailyAnalysis();
         }
 
         function switchChartType2(type) {
             chartType2 = type;
-            $('#chartContainer2').parent().find('.da-chart-type-btn').removeClass('active');
-            $('#chartContainer2').parent().find('.da-chart-type-btn:contains("' + (type === 'line' ? '折线图' : '面积图') + '")').addClass('active');
+            $('.da-chart-type-btn').removeClass('active');
+            if (type === 'line') {
+                $('#chartContainer2').parent().find('.da-chart-type-btn').eq(0).addClass('active');
+            } else {
+                $('#chartContainer2').parent().find('.da-chart-type-btn').eq(1).addClass('active');
+            }
             runDailyAnalysis();
+        }
+
+        function setGroupBy(type) {
+            groupByType = type;
+            $('.da-sub-btn').removeClass('active');
+            if (type === 'all') {
+                $('#btnAll').addClass('active');
+            } else if (type === 'department') {
+                $('#btnDepartment').addClass('active');
+            } else if (type === 'doctor') {
+                $('#btnDoctor').addClass('active');
+            } else {
+                $('#btnCategory').addClass('active');
+            }
+            runDailyAnalysis();
+        }
+
+        function clearAllFilters() {
+            var fields = ['department', 'category', 'reporter', 'reviewer', 'system', 'technician', 'patientType', 'resultStatus'];
+            fields.forEach(function(field) {
+                var config = searchSelectConfigs[field];
+                if (config) {
+                    config.hidden.val('');
+                    config.input.val('全部' + config.placeholder);
+                }
+            });
         }
 
         function toggleAutoRefresh() {
             autoRefreshEnabled = !autoRefreshEnabled;
-            var toggle = $('#autoRefreshToggle');
-            toggle.toggleClass('active');
-            
+            $('#autoRefreshToggle').toggleClass('active');
+
             if (autoRefreshEnabled) {
-                showAlert('自动刷新已开启，每' + refreshInterval + '秒刷新一次', 'success');
-                startRefreshTimer();
+                startAutoRefresh();
             } else {
-                showAlert('自动刷新已关闭', 'warning');
-                stopRefreshTimer();
+                stopAutoRefresh();
+            }
+        }
+
+        function startAutoRefresh() {
+            stopAutoRefresh();
+            refreshTimer = setInterval(function() {
+                runDailyAnalysis();
+            }, refreshInterval * 1000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+                refreshTimer = null;
             }
         }
 
         function updateRefreshInterval() {
             refreshInterval = parseInt($('#refreshInterval').val());
             if (autoRefreshEnabled) {
-                stopRefreshTimer();
-                startRefreshTimer();
-                showAlert('自动刷新间隔已改为 ' + refreshInterval + '秒', 'success');
-            }
-        }
-
-        function startRefreshTimer() {
-            stopRefreshTimer();
-            refreshTimer = setInterval(function() {
-                manualRefresh();
-            }, refreshInterval * 1000);
-        }
-
-        function stopRefreshTimer() {
-            if (refreshTimer) {
-                clearInterval(refreshTimer);
-                refreshTimer = null;
+                startAutoRefresh();
             }
         }
 
@@ -1391,12 +2017,131 @@
 
         function updateLastUpdateTime() {
             var now = new Date();
-            var timeStr = now.toLocaleString('zh-CN', { 
+            var timeStr = now.toLocaleString('zh-CN', {
                 year: 'numeric', month: '2-digit', day: '2-digit',
                 hour: '2-digit', minute: '2-digit', second: '2-digit'
             });
             $('#lastUpdateTime').text('上次更新: ' + timeStr);
         }
+
+        function showAlert(type, message) {
+            var alert = $('#daAlert');
+            alert.removeClass('da-alert-warning da-alert-error da-alert-success');
+            alert.addClass('da-alert da-alert-' + type);
+            alert.html('<i class="fa-solid fa-' + (type === 'warning' ? 'triangle-exclamation' : type === 'error' ? 'x-circle' : 'check-circle') + '"></i> ' + message);
+            alert.show();
+            setTimeout(function() { alert.fadeOut(); }, 3000);
+        }
+
+        function showCacheInfo() {
+            var cacheData = getCacheInfo();
+            var html = '';
+            cacheData.forEach(function(item) {
+                var statusClass = item.status === 'valid' ? 'valid' : item.status === 'expired' ? 'expired' : 'empty';
+                html += '<div class="da-cache-item">';
+                html += '<div>';
+                html += '<div class="da-cache-name">' + item.name + '</div>';
+                html += item.time ? '<div class="da-cache-time">' + item.time + '</div>' : '';
+                html += '</div>';
+                html += '<span class="da-cache-status ' + statusClass + '">' + item.statusText + '</span>';
+                html += '</div>';
+            });
+            $('#cacheInfoContent').html(html);
+            $('#cacheModal').addClass('show');
+        }
+
+        function getCacheInfo() {
+            var result = [];
+            var now = Date.now();
+            
+            try {
+                var cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    var data = JSON.parse(cached);
+                    var ageMinutes = Math.floor((now - data.timestamp) / 60000);
+                    var isValid = (now - data.timestamp) < CACHE_EXPIRE_MINUTES * 60 * 1000;
+                    
+                    var options = data.options || {};
+                    var dataCount = 0;
+                    if (options.departments) dataCount += options.departments.length;
+                    if (options.categories) dataCount += options.categories.length;
+                    if (options.reporters) dataCount += options.reporters.length;
+                    if (options.reviewers) dataCount += options.reviewers.length;
+                    if (options.systems) dataCount += options.systems.length;
+                    if (options.technicians) dataCount += options.technicians.length;
+                    if (options.patientTypes) dataCount += options.patientTypes.length;
+                    if (options.resultStatus) dataCount += options.resultStatus.length;
+                    
+                    result.push({
+                        name: '筛选选项数据 (' + dataCount + '条)',
+                        status: isValid ? 'valid' : 'expired',
+                        statusText: isValid ? '有效' : '已过期',
+                        time: '缓存时间: ' + new Date(data.timestamp).toLocaleString('zh-CN') + ' (已' + ageMinutes + '分钟)'
+                    });
+                } else {
+                    result.push({
+                        name: '筛选选项数据',
+                        status: 'empty',
+                        statusText: '无缓存',
+                        time: ''
+                    });
+                }
+            } catch (e) {
+                result.push({
+                    name: '筛选选项数据',
+                    status: 'empty',
+                    statusText: '读取失败',
+                    time: ''
+                });
+            }
+            
+            return result;
+        }
+
+        function clearAllCache() {
+            if (!confirm('确定要清除所有缓存吗？')) {
+                return;
+            }
+            
+            try {
+                localStorage.removeItem(CACHE_KEY);
+                $('#cacheModal').removeClass('show');
+                showAlert('success', '缓存已清除，刷新页面后将重新加载数据');
+            } catch (e) {
+                showAlert('error', '清除缓存失败');
+            }
+        }
+
+        function closeCacheModal() {
+            $('#cacheModal').removeClass('show');
+        }
+
+        function toggleCharts() {
+            var chartPanel = document.getElementById('chartPanel');
+            var toggleBtn = document.getElementById('chartToggleBtn');
+            
+            if (chartPanel.classList.contains('visible')) {
+                chartPanel.classList.remove('visible');
+                toggleBtn.classList.remove('charts-hidden');
+            } else {
+                chartPanel.classList.add('visible');
+                toggleBtn.classList.add('charts-hidden');
+            }
+        }
     </script>
+
+    <div class="da-modal-overlay" id="cacheModal" onclick="closeCacheModal()">
+        <div class="da-modal" onclick="event.stopPropagation()">
+            <div class="da-modal-header">
+                <div class="da-modal-title">缓存管理</div>
+                <button class="da-modal-close" onclick="closeCacheModal()">&times;</button>
+            </div>
+            <div class="da-cache-info" id="cacheInfoContent"></div>
+            <div class="da-modal-footer">
+                <button class="da-btn-secondary" onclick="closeCacheModal()">关闭</button>
+                <button class="da-btn-danger" onclick="clearAllCache()">一键清除缓存</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

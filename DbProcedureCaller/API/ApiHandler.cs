@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -18,6 +19,7 @@ namespace DbProcedureCaller.API
         private TokenService _tokenService;
         private PermissionService _permissionService;
         private StatConfigService _statConfigService;
+        private SystemConfigService _systemConfigService;
         public static string RunningPort { get; set; } = "12345";
 
         public ApiHandler()
@@ -27,6 +29,7 @@ namespace DbProcedureCaller.API
             _tokenService = new TokenService();
             _permissionService = new PermissionService();
             _statConfigService = new StatConfigService();
+            _systemConfigService = new SystemConfigService();
         }
 
         public byte[] HandleRequest(string url, string httpMethod, Stream inputStream)
@@ -258,6 +261,46 @@ namespace DbProcedureCaller.API
                 {
                     return HandleSaveParamConfig(inputStream);
                 }
+                else if (url == "/get-system-configs" && httpMethod == "GET")
+                {
+                    return HandleGetSystemConfigs();
+                }
+                else if (url.StartsWith("/get-system-config") && httpMethod == "GET")
+                {
+                    return HandleGetSystemConfig(url);
+                }
+                else if (url == "/update-system-config" && httpMethod == "POST")
+                {
+                    return HandleUpdateSystemConfig(inputStream);
+                }
+                else if (url == "/update-system-configs" && httpMethod == "POST")
+                {
+                    return HandleUpdateSystemConfigs(inputStream);
+                }
+                else if (url == "/system-configs" && httpMethod == "GET")
+                {
+                    return HandleGetSystemConfigs();
+                }
+                else if (url.StartsWith("/api/system-configs") && httpMethod == "GET")
+                {
+                    return HandleGetSystemConfigs();
+                }
+                else if (url.StartsWith("/api/menu-config-list") && httpMethod == "GET")
+                {
+                    return HandleGetMenuConfigList();
+                }
+                else if (url == "/cache-configs" && httpMethod == "GET")
+                {
+                    return HandleGetSystemConfigs();
+                }
+                else if (url == "/add-system-config" && httpMethod == "POST")
+                {
+                    return HandleAddSystemConfig(inputStream);
+                }
+                else if (url.StartsWith("/delete-system-config") && httpMethod == "POST")
+                {
+                    return HandleDeleteSystemConfig(url, inputStream);
+                }
                 else
                 {
                     return Encoding.UTF8.GetBytes("{\"success\": false, \"error\": \"未知的API端点\"}");
@@ -436,18 +479,114 @@ namespace DbProcedureCaller.API
                 string category = ExtractValue(postData, "category");
                 string patientType = ExtractValue(postData, "patientType");
                 string resultStatus = ExtractValue(postData, "resultStatus");
+                string groupBy = ExtractValue(postData, "groupBy");
                 string sortBy = ExtractValue(postData, "sortBy");
                 string sortOrder = ExtractValue(postData, "sortOrder");
                 int pageSize = int.TryParse(ExtractValue(postData, "pageSize"), out int ps) ? ps : 0;
                 int pageIndex = int.TryParse(ExtractValue(postData, "pageIndex"), out int pi) ? pi : 1;
 
-                LogHelper.LogInfo($"每日分析请求: startDate={startDate}, endDate={endDate}, system={system}, reporter={reporter}, reviewer={reviewer}, technician={technician}, department={department}, category={category}, patientType={patientType}, resultStatus={resultStatus}, sortBy={sortBy}, sortOrder={sortOrder}, pageSize={pageSize}, pageIndex={pageIndex}");
+                LogHelper.LogInfo($"每日分析请求: startDate={startDate}, endDate={endDate}, system={system}, reporter={reporter}, reviewer={reviewer}, technician={technician}, department={department}, category={category}, patientType={patientType}, resultStatus={resultStatus}, groupBy={groupBy}, sortBy={sortBy}, sortOrder={sortOrder}, pageSize={pageSize}, pageIndex={pageIndex}");
 
                 DataTable result = _dailyAnalysisService.GetAnalysisData(
                     startDate, endDate, system, reporter, reviewer, technician, department, category, patientType, resultStatus,
-                    "", sortBy, sortOrder, pageSize, pageIndex);
+                    groupBy, sortBy, sortOrder, pageSize, pageIndex);
 
-                string json = ConvertDataTableToJson(result);
+                var fieldMapping = new Dictionary<string, string>
+                {
+                    { "执行科室", "department" },
+                    { "科室", "department" },
+                    { "检查类型", "category" },
+                    { "报告医生", "reporter" },
+                    { "审核医生", "reviewer" },
+                    { "系统", "system" },
+                    { "检查系统", "system" },
+                    { "技师", "technician" },
+                    { "病人类型", "patientType" },
+                    { "结果状态", "resultStatus" },
+                    { "阴阳性", "resultStatus" },
+                    { "任务数量", "total" },
+                    { "检查总次数", "total" },
+                    { "阳性数量", "positive" },
+                    { "阳性数", "positive" },
+                    { "阴性数量", "negative" },
+                    { "阴性数", "negative" },
+                    { "阳性率", "positiveRate" }
+                };
+
+                var rows = new List<Dictionary<string, object>>();
+                foreach (DataRow dr in result.Rows)
+                {
+                    var row = new Dictionary<string, object>();
+                    foreach (DataColumn col in result.Columns)
+                    {
+                        string fieldName = col.ColumnName;
+                        if (fieldMapping.ContainsKey(fieldName))
+                        {
+                            fieldName = fieldMapping[fieldName];
+                        }
+
+                        object value = dr[col] != DBNull.Value ? dr[col] : null;
+                        if (value is string)
+                        {
+                            row.Add(fieldName, HttpUtility.HtmlEncode(value.ToString()));
+                        }
+                        else if (value is decimal || value is int)
+                        {
+                            row.Add(fieldName, Convert.ToDouble(value));
+                        }
+                        else
+                        {
+                            row.Add(fieldName, value);
+                        }
+                    }
+                    if (!row.ContainsKey("total")) row["total"] = 0;
+                    if (!row.ContainsKey("positive")) row["positive"] = 0;
+                    if (!row.ContainsKey("negative")) row["negative"] = 0;
+                    if (!row.ContainsKey("positiveRate")) row["positiveRate"] = 0;
+                    rows.Add(row);
+                }
+
+                var summary = new Dictionary<string, object>();
+                if (rows.Count > 0)
+                {
+                    decimal totalCount = 0;
+                    decimal positiveCount = 0;
+                    foreach (var row in rows)
+                    {
+                        if (row.ContainsKey("total") && row["total"] != null)
+                        {
+                            totalCount += Convert.ToDecimal(row["total"]);
+                        }
+                        else if (row.ContainsKey("任务数量") && row["任务数量"] != null)
+                        {
+                            totalCount += Convert.ToDecimal(row["任务数量"]);
+                        }
+                        if (row.ContainsKey("positive") && row["positive"] != null)
+                        {
+                            positiveCount += Convert.ToDecimal(row["positive"]);
+                        }
+                        else if (row.ContainsKey("阳性数") && row["阳性数"] != null)
+                        {
+                            positiveCount += Convert.ToDecimal(row["阳性数"]);
+                        }
+                    }
+                    summary["totalCount"] = totalCount;
+                    summary["positiveCount"] = positiveCount;
+                    summary["negativeCount"] = totalCount - positiveCount;
+                    summary["positiveRate"] = totalCount > 0 ? (double)(positiveCount / totalCount) : 0;
+                }
+
+                var response = new
+                {
+                    success = true,
+                    data = new
+                    {
+                        summary = summary,
+                        details = rows
+                    }
+                };
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(response);
                 return Encoding.UTF8.GetBytes(json);
             }
         }
@@ -1081,7 +1220,7 @@ namespace DbProcedureCaller.API
                 {
                     param = param.Substring(0, param.IndexOf("&"));
                 }
-                return param;
+                return System.Net.WebUtility.UrlDecode(param);
             }
             return "";
         }
@@ -1576,6 +1715,162 @@ namespace DbProcedureCaller.API
                     LogHelper.LogException(ex, "保存参数配置失败");
                     return CreateErrorResponse(ex.Message);
                 }
+            }
+        }
+
+        private byte[] HandleGetSystemConfigs()
+        {
+            LogHelper.LogInfo("获取系统配置列表");
+
+            try
+            {
+                var configs = _systemConfigService.GetAllConfigs();
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    success = true,
+                    data = configs
+                });
+                return Encoding.UTF8.GetBytes(json);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "获取系统配置列表失败");
+                return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleGetMenuConfigList()
+        {
+            LogHelper.LogInfo("获取菜单配置列表");
+
+            try
+            {
+                string result = _statConfigService.GetConfigs();
+                return Encoding.UTF8.GetBytes(result);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "获取菜单配置列表失败");
+                return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleGetSystemConfig(string url)
+        {
+            string configKey = ExtractUrlParam(url, "key");
+            LogHelper.LogInfo($"获取系统配置: {configKey}");
+
+            try
+            {
+                var config = _systemConfigService.GetConfigByKey(configKey);
+                if (config != null)
+                {
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        success = true,
+                        data = config
+                    });
+                    return Encoding.UTF8.GetBytes(json);
+                }
+                else
+                {
+                    return Encoding.UTF8.GetBytes("{\"success\": false, \"error\": \"配置不存在\"}");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "获取系统配置失败");
+                return CreateErrorResponse(ex.Message);
+            }
+        }
+
+        private byte[] HandleUpdateSystemConfig(Stream inputStream)
+        {
+            using (StreamReader reader = new StreamReader(inputStream, Encoding.UTF8))
+            {
+                string postData = reader.ReadToEnd();
+
+                LogHelper.LogInfo("更新系统配置");
+
+                try
+                {
+                    string configKey = ExtractValue(postData, "configKey");
+                    string configValue = ExtractValue(postData, "configValue");
+
+                    if (string.IsNullOrEmpty(configKey))
+                    {
+                        return CreateErrorResponse("配置键不能为空");
+                    }
+
+                    bool success = _systemConfigService.UpdateConfig(configKey, configValue);
+                    return Encoding.UTF8.GetBytes("{\"success\": " + success.ToString().ToLower() + "}");
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogException(ex, "更新系统配置失败");
+                    return CreateErrorResponse(ex.Message);
+                }
+            }
+        }
+
+        private byte[] HandleUpdateSystemConfigs(Stream inputStream)
+        {
+            using (StreamReader reader = new StreamReader(inputStream, Encoding.UTF8))
+            {
+                string postData = reader.ReadToEnd();
+
+                LogHelper.LogInfo("批量更新系统配置");
+
+                try
+                {
+                    var configs = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(postData);
+                    bool success = _systemConfigService.UpdateConfigs(configs);
+                    return Encoding.UTF8.GetBytes("{\"success\": " + success.ToString().ToLower() + "}");
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogException(ex, "批量更新系统配置失败");
+                    return CreateErrorResponse(ex.Message);
+                }
+            }
+        }
+
+        private byte[] HandleAddSystemConfig(Stream inputStream)
+        {
+            using (StreamReader reader = new StreamReader(inputStream, Encoding.UTF8))
+            {
+                string postData = reader.ReadToEnd();
+
+                LogHelper.LogInfo("添加系统配置");
+
+                try
+                {
+                    var config = Newtonsoft.Json.JsonConvert.DeserializeObject<Services.SystemConfigItem>(postData);
+                    bool success = _systemConfigService.AddConfig(config);
+                    return Encoding.UTF8.GetBytes("{\"success\": " + success.ToString().ToLower() + "}");
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogException(ex, "添加系统配置失败");
+                    return CreateErrorResponse(ex.Message);
+                }
+            }
+        }
+
+        private byte[] HandleDeleteSystemConfig(string url, Stream inputStream)
+        {
+            string configKey = ExtractUrlParam(url, "key");
+            LogHelper.LogInfo($"删除系统配置: {configKey}");
+
+            try
+            {
+                bool success = _systemConfigService.DeleteConfig(configKey);
+                return Encoding.UTF8.GetBytes("{\"success\": " + success.ToString().ToLower() + "}");
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogException(ex, "删除系统配置失败");
+                return CreateErrorResponse(ex.Message);
             }
         }
     }
