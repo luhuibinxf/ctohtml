@@ -727,35 +727,35 @@
                                 renderCustomParamInputs(config.parameters);
                             }
                             
-                            var parameters = {};
-                            $('.param-value-input').each(function() {
-                                var paramName = $(this).data('param-name');
-                                var paramValue = $(this).val();
-                                if (paramValue && paramValue.trim()) {
-                                    parameters[paramName] = paramValue;
-                                }
-                            });
-                            
-                            $.ajax({
-                                url: '/execute-stored-proc',
-                                method: 'POST',
-                                contentType: 'application/json',
-                                data: JSON.stringify({
-                                    procName: config.procName,
-                                    parameters: parameters
-                                }),
-                                success: function(result) {
-                                    var resultData = typeof result === 'string' ? JSON.parse(result) : result;
-                                    if (config.templateName && config.templateName.trim()) {
-                                        loadCustomTemplate(config.templateName, resultData, config);
-                                    } else {
-                                        renderCustomData(resultData, config);
+                            if (config.templateName && config.templateName.trim()) {
+                                loadCustomTemplate(config.templateName, [], config);
+                            } else {
+                                var parameters = {};
+                                $('.param-value-input').each(function() {
+                                    var paramName = $(this).data('param-name');
+                                    var paramValue = $(this).val();
+                                    if (paramValue && paramValue.trim()) {
+                                        parameters[paramName] = paramValue;
                                     }
-                                },
-                                error: function() {
-                                    showEmptyResult();
-                                }
-                            });
+                                });
+                                
+                                $.ajax({
+                                    url: '/execute-stored-proc',
+                                    method: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        procName: config.procName,
+                                        parameters: parameters
+                                    }),
+                                    success: function(result) {
+                                        var resultData = typeof result === 'string' ? JSON.parse(result) : result;
+                                        renderCustomData(resultData, config);
+                                    },
+                                    error: function() {
+                                        showEmptyResult();
+                                    }
+                                });
+                            }
                         }
                     }
                 }
@@ -847,7 +847,12 @@
                     
                     $('#resultContainer').html(finalHtml);
                     
-                    fillParamsToTemplate(config.parameters);
+                    setTimeout(function() {
+                        if (window.initCustomTemplate && typeof window.initCustomTemplate === 'function') {
+                            window.initCustomTemplate(config);
+                        }
+                        fillParamsToTemplate(config.parameters);
+                    }, 100);
                     
                     updateStats(data.length, 0, '-', '-');
                 },

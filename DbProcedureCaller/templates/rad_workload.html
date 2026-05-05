@@ -108,10 +108,9 @@
             <input type="date" id="startDate" value="2026-01-01">
             <label>结束日期：</label>
             <input type="date" id="endDate" value="2026-01-31">
-            <button id="btnQuery" onclick="loadData()">查询</button>
-            <button id="btnDatabase" onclick="loadFromDatabase()">
+            <button id="btnQuery" onclick="loadData()">
                 <span id="loadingIcon"></span>
-                从数据库加载
+                查询
             </button>
         </div>
         
@@ -226,55 +225,61 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        const STORAGE_PROCEDURE_NAME = 'proc_RadiologyWorkload';
+        let currentConfig = null;
         
-        const mockData = [
-            { '医生姓名': '贾永庚', DR: 2, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 12, 'CT增强': 1, 'MRI平扫': 2, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
-            { '医生姓名': '陈丽娟', DR: 0, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 20, 'CT增强': 0, 'MRI平扫': 0, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
-            { '医生姓名': '陈丽娟', DR: 0, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 6, 'CT平扫': 612, 'CT增强': 57, 'MRI平扫': 169, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 6, 'MRI增强': 8, 乳腺: 0, 心脏: 0 },
-            { '医生姓名': '张代文', DR: 410, '下肢及脊柱全长拍片': 10, 钼靶: 10, 造影: 6, 'CT平扫': 612, 'CT增强': 57, 'MRI平扫': 169, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 6, 'MRI增强': 8, 乳腺: 0, 心脏: 0 },
-            { '医生姓名': '陈天虎', DR: 17, '下肢及脊柱全长拍片': 1, 钼靶: 0, 造影: 0, 'CT平扫': 39, 'CT增强': 2, 'MRI平扫': 11, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 }
-        ];
-
-        const mockDetailData = {
-            '贾永庚': [
-                { '患者姓名': '张三', '患者ID': 'P001', '检查类别': '普放', '检查项目': '胸部正位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 09:30', '报告时间': '2026-01-15 10:15' },
-                { '患者姓名': '李四', '患者ID': 'P002', '检查类别': '普放', '检查项目': '颈椎正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:45' },
-                { '患者姓名': '王五', '患者ID': 'P003', '检查类别': 'CT', '检查项目': '头部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 11:00', '报告时间': '2026-01-15 11:30' },
-                { '患者姓名': '赵六', '患者ID': 'P004', '检查类别': 'CT', '检查项目': '胸部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 11:30', '报告时间': '2026-01-15 12:00' },
-                { '患者姓名': '钱七', '患者ID': 'P005', '检查类别': '核磁共振', '检查项目': '脑部MRI平扫', '工作分组': 'MRI组', '细分类别': 'MRI平扫', '执行科室': 'MRI室', '检查时间': '2026-01-15 14:00', '报告时间': '2026-01-15 14:45' },
-            ],
-            '陈丽娟': [
-                { '患者姓名': '孙八', '患者ID': 'P006', '检查类别': 'CT', '检查项目': '腹部CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 08:30', '报告时间': '2026-01-15 09:00' },
-                { '患者姓名': '周九', '患者ID': 'P007', '检查类别': 'CT', '检查项目': '胸部CTA', '工作分组': 'CT组', '细分类别': 'CT增强', '执行科室': 'CT室', '检查时间': '2026-01-15 09:00', '报告时间': '2026-01-15 09:45' },
-                { '患者姓名': '吴十', '患者ID': 'P008', '检查类别': '核磁共振', '检查项目': '腰椎MRI平扫', '工作分组': 'MRI组', '细分类别': 'MRI平扫', '执行科室': 'MRI室', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:45' },
-            ],
-            '张代文': [
-                { '患者姓名': '郑十一', '患者ID': 'P009', '检查类别': '普放', '检查项目': '腰椎正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 08:00', '报告时间': '2026-01-15 08:30' },
-                { '患者姓名': '王十二', '患者ID': 'P010', '检查类别': '钼靶', '检查项目': '乳腺钼靶', '工作分组': '普放组', '细分类别': '钼靶', '执行科室': '放射科', '检查时间': '2026-01-15 08:30', '报告时间': '2026-01-15 09:00' },
-            ],
-            '陈天虎': [
-                { '患者姓名': '李十三', '患者ID': 'P011', '检查类别': '普放', '检查项目': '膝关节正侧位', '工作分组': '普放组', '细分类别': 'DR', '执行科室': '放射科', '检查时间': '2026-01-15 09:00', '报告时间': '2026-01-15 09:30' },
-                { '患者姓名': '赵十四', '患者ID': 'P012', '检查类别': 'CT', '检查项目': '颈椎CT平扫', '工作分组': 'CT组', '细分类别': 'CT平扫', '执行科室': 'CT室', '检查时间': '2026-01-15 10:00', '报告时间': '2026-01-15 10:30' },
-            ]
-        };
-
         const columns = ['医生姓名', 'DR', '下肢及脊柱全长拍片', '钼靶', '造影', 'CT平扫', 'CT增强', 'MRI平扫', 'MRA', 'MRU', 'MRCP', '腹部盆腔前列腺直肠癌胎儿胎盘', 'MRI增强', '乳腺', '心脏'];
 
-        function loadData() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const statisticsType = document.getElementById('statisticsType').value;
+        function init(config) {
+            if (config && typeof config === 'object') {
+                currentConfig = config;
+                console.log('初始化配置:', currentConfig);
+                
+                if (currentConfig.parameters) {
+                    fillParamsFromConfig(currentConfig.parameters);
+                }
+                
+                loadData();
+            }
+        }
+        
+        window.initCustomTemplate = init;
+
+        function fillParamsFromConfig(paramsConfig) {
+            if (!paramsConfig) return;
             
-            updateHeaderDate(startDate, statisticsType);
+            const params = typeof paramsConfig === 'string' ? JSON.parse(paramsConfig) : paramsConfig;
             
-            renderTable(mockData);
-            calculateSummary(mockData);
-            
-            showToast('已加载示例数据', 'info');
+            params.forEach(param => {
+                let paramName = param.name.replace(/^@/, '');
+                
+                let input = document.getElementById(paramName);
+                
+                if (!input) {
+                    paramName = paramName.charAt(0).toUpperCase() + paramName.slice(1);
+                    input = document.getElementById(paramName);
+                }
+                
+                if (!input) {
+                    paramName = paramName.toLowerCase();
+                    input = document.getElementById(paramName);
+                }
+                
+                if (!input) {
+                    paramName = paramName.charAt(0).toUpperCase() + paramName.slice(1);
+                    input = document.getElementById(paramName);
+                }
+                
+                if (input && param.defaultValue) {
+                    input.value = param.defaultValue;
+                }
+            });
         }
 
-        async function loadFromDatabase() {
+        function getProcName() {
+            return currentConfig?.mainProcName || currentConfig?.procName || 'proc_RadiologyWorkload';
+        }
+
+        function loadData() {
             const params = collectParams();
             
             if (!params['@StartDate'] || !params['@EndDate']) {
@@ -284,42 +289,53 @@
             
             setLoading(true);
             
-            try {
-                const response = await fetch('/execute-stored-proc', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        procName: STORAGE_PROCEDURE_NAME,
-                        parameters: params
-                    })
-                });
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    
-                    if (result.success && result.data && result.data.length > 0) {
-                        const data = transformData(result.data);
-                        renderTable(data);
-                        calculateSummary(data);
-                        updateHeaderDate(params['@StartDate'], params['@StatisticsType']);
-                        showToast('数据加载成功', 'success');
-                    } else if (result.error) {
-                        throw new Error(result.error);
-                    } else {
-                        showToast('数据库无数据，显示示例数据', 'info');
-                        loadData();
-                    }
+            fetch('/execute-stored-proc', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    procName: getProcName(),
+                    parameters: params
+                })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('服务器返回错误');
+                return response.json();
+            })
+            .then(result => {
+                if (result.success && result.data && result.data.length > 0) {
+                    const data = transformData(result.data);
+                    renderTable(data);
+                    calculateSummary(data);
+                    updateHeaderDate(params['@StartDate'], params['@StatisticsType']);
+                    showToast('数据加载成功', 'success');
+                } else if (result.error) {
+                    throw new Error(result.error);
                 } else {
-                    throw new Error('服务器返回错误');
+                    showToast('数据库无数据', 'info');
+                    renderEmptyTable();
                 }
-            } catch (error) {
+            })
+            .catch(error => {
                 console.error('数据库查询失败:', error);
-                showToast(`加载失败：${error.message}，使用示例数据`, 'error');
-                loadData();
-            } finally {
+                showToast(`加载失败：${error.message}`, 'error');
+                renderEmptyTable();
+            })
+            .finally(() => {
                 setLoading(false);
-            }
+            });
         }
+
+        function renderEmptyTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '<tr><td colspan="16" style="text-align: center; padding: 20px;">暂无数据</td></tr>';
+            document.getElementById('totalPufang').textContent = '0';
+            document.getElementById('totalCt').textContent = '0';
+            document.getElementById('totalMri').textContent = '0';
+            document.getElementById('totalDr').textContent = '0';
+            document.getElementById('totalAll').textContent = '0';
+        }
+
+        
 
         function collectParams() {
             const startDate = document.getElementById('startDate').value;
@@ -428,18 +444,50 @@
             document.getElementById('totalAll').textContent = totalPufang + totalCt + totalMri;
         }
 
+        function getDetailProcName() {
+            const mainProc = getProcName();
+            return mainProc + 'Detail';
+        }
+
         function showDetail(workerName) {
             const modal = document.getElementById('detailModal');
             const title = document.getElementById('modalTitle');
-            const detailBody = document.getElementById('detailBody');
             
             title.textContent = `${workerName} - 工作量明细`;
             
-            const detailData = mockDetailData[workerName] || [];
-            renderDetailTable(detailData);
-            calculateDetailSummary(detailData);
+            const params = collectParams();
+            params['@WorkerName'] = workerName;
             
-            modal.classList.add('active');
+            setLoading(true);
+            
+            fetch('/execute-stored-proc', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    procName: getDetailProcName(),
+                    parameters: params
+                })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('服务器返回错误');
+                return response.json();
+            })
+            .then(result => {
+                const detailData = (result.success && result.data) || [];
+                renderDetailTable(detailData);
+                calculateDetailSummary(detailData);
+                modal.classList.add('active');
+            })
+            .catch(error => {
+                console.error('明细查询失败:', error);
+                showToast(`加载明细失败：${error.message}`, 'error');
+                renderDetailTable([]);
+                calculateDetailSummary([]);
+                modal.classList.add('active');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
         }
 
         function renderDetailTable(data) {
@@ -494,7 +542,7 @@
         }
 
         function setLoading(isLoading) {
-            const btn = document.getElementById('btnDatabase');
+            const btn = document.getElementById('btnQuery');
             const icon = document.getElementById('loadingIcon');
             
             if (isLoading) {
@@ -547,8 +595,6 @@
         document.getElementById('detailModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('detailModal')) closeModal();
         });
-        
-        loadData();
     </script>
 </body>
 </html>
