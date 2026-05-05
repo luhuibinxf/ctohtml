@@ -763,6 +763,8 @@
         }
         
         function renderCustomParamInputs(paramsJson) {
+            $('#searchPanel .search-row .custom-param-group').remove();
+            
             var params = typeof paramsJson === 'string' ? JSON.parse(paramsJson) : paramsJson;
             var html = '';
             
@@ -777,7 +779,7 @@
                 var isDateType = param.type && param.type.toLowerCase().includes('date');
                 
                 html += `
-                    <div class="search-group">
+                    <div class="search-group custom-param-group">
                         <label>${displayName}</label>
                 `;
                 
