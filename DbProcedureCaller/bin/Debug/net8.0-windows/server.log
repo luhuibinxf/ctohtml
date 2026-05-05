@@ -6769,3 +6769,163 @@
 [2026-05-05 20:12:04] [INFO] API请求: POST /execute-stored-proc
 [2026-05-05 20:12:04] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
 [2026-05-05 20:12:04] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:14] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:14] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:14] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:14] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:14] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:14] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:14] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:17] [INFO] 请求: GET /main
+[2026-05-05 20:43:17] [INFO] 请求: GET /daily-analysis.html
+[2026-05-05 20:43:17] [INFO] 请求: GET /get-all-options
+[2026-05-05 20:43:17] [INFO] 请求: GET /get-system-configs
+[2026-05-05 20:43:17] [INFO] API请求: GET /get-all-options
+[2026-05-05 20:43:17] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-05 20:43:17] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\get-system-configs.html
+[2026-05-05 20:43:18] [INFO] 请求: GET /statistics.html
+[2026-05-05 20:43:18] [INFO] 请求: GET /check-admin?username=lhbdb
+[2026-05-05 20:43:18] [INFO] API请求: GET /check-admin?username=lhbdb
+[2026-05-05 20:43:18] [INFO] 检查用户是否是管理员: lhbdb
+[2026-05-05 20:43:18] [INFO] 用户 lhbdb 的管理员检查结果: True
+[2026-05-05 20:43:18] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:18] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:18] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:25] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:25] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:25] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:25] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:25] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:25] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:25] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:26] [INFO] 已缓存下拉框选项数据
+[2026-05-05 20:43:26] [ERROR] HTTP监听器异常: 指定的网络名不再可用。
+[2026-05-05 20:43:29] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:29] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:29] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:29] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:29] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:29] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:29] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:29] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:29] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:29] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:29] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:29] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:29] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:29] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:30] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:30] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:30] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:30] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:30] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:30] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:30] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:30] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:30] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:30] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:30] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:31] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:31] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:31] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:31] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:31] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:31] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:31] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:31] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:31] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:43:31] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:43:31] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:43:31] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:43:31] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:43:31] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:45:43] [INFO] 请求: GET /main
+[2026-05-05 20:45:43] [INFO] 请求: GET /daily-analysis.html
+[2026-05-05 20:45:43] [INFO] 请求: GET /get-all-options
+[2026-05-05 20:45:43] [INFO] 请求: GET /get-system-configs
+[2026-05-05 20:45:43] [INFO] API请求: GET /get-all-options
+[2026-05-05 20:45:43] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\get-system-configs.html
+[2026-05-05 20:45:43] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-05 20:45:43] [INFO] 使用缓存的下拉框选项数据
+[2026-05-05 20:45:44] [INFO] 请求: GET /statistics.html
+[2026-05-05 20:45:44] [INFO] 请求: GET /check-admin?username=lhbdb
+[2026-05-05 20:45:44] [INFO] API请求: GET /check-admin?username=lhbdb
+[2026-05-05 20:45:44] [INFO] 检查用户是否是管理员: lhbdb
+[2026-05-05 20:45:44] [INFO] 用户 lhbdb 的管理员检查结果: True
+[2026-05-05 20:45:44] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:45:44] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:45:44] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:45:45] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 20:45:45] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 20:45:45] [INFO] 从数据库获取所有统计配置
+[2026-05-05 20:45:46] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 20:45:46] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 20:45:46] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 20:45:46] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 20:47:02] [INFO] 请求: POST /api/RadiologyWorkload
+[2026-05-05 20:47:02] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\api/RadiologyWorkload.html
+[2026-05-05 20:47:09] [INFO] 请求: POST /api/RadiologyWorkload
+[2026-05-05 20:47:09] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\api/RadiologyWorkload.html
+[2026-05-05 21:03:25] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 21:03:25] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 21:03:25] [INFO] 从数据库获取所有统计配置
+[2026-05-05 21:03:25] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 21:03:25] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 21:03:25] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 21:03:25] [INFO] 请求: GET /rad_workload.html
+[2026-05-05 21:03:27] [INFO] 请求: GET /main
+[2026-05-05 21:03:27] [INFO] 请求: GET /daily-analysis.html
+[2026-05-05 21:03:27] [INFO] 请求: GET /get-all-options
+[2026-05-05 21:03:27] [INFO] API请求: GET /get-all-options
+[2026-05-05 21:03:27] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-05 21:03:27] [INFO] 请求: GET /get-system-configs
+[2026-05-05 21:03:27] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\get-system-configs.html
+[2026-05-05 21:03:28] [INFO] 请求: GET /daily-analysis.html
+[2026-05-05 21:03:28] [INFO] 请求: GET /get-all-options
+[2026-05-05 21:03:28] [INFO] 请求: GET /get-system-configs
+[2026-05-05 21:03:28] [INFO] API请求: GET /get-all-options
+[2026-05-05 21:03:28] [INFO] 文件不存在: D:\AI\tran\DbProcedureCaller\templates\get-system-configs.html
+[2026-05-05 21:03:28] [INFO] 获取所有下拉框选项（聚合API）
+[2026-05-05 21:03:31] [INFO] 请求: GET /statistics.html
+[2026-05-05 21:03:32] [INFO] 请求: GET /check-admin?username=lhbdb
+[2026-05-05 21:03:32] [INFO] API请求: GET /check-admin?username=lhbdb
+[2026-05-05 21:03:32] [INFO] 检查用户是否是管理员: lhbdb
+[2026-05-05 21:03:32] [INFO] 用户 lhbdb 的管理员检查结果: True
+[2026-05-05 21:03:32] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 21:03:32] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 21:03:32] [INFO] 从数据库获取所有统计配置
+[2026-05-05 21:03:35] [INFO] 已缓存下拉框选项数据
+[2026-05-05 21:03:35] [INFO] 已缓存下拉框选项数据
+[2026-05-05 21:03:35] [ERROR] HTTP监听器异常: 指定的网络名不再可用。
+[2026-05-05 21:03:35] [ERROR] HTTP监听器异常: 指定的网络名不再可用。
+[2026-05-05 21:03:36] [INFO] 请求: GET /get-proc-configs
+[2026-05-05 21:03:36] [INFO] API请求: GET /get-proc-configs
+[2026-05-05 21:03:36] [INFO] 从数据库获取所有统计配置
+[2026-05-05 21:03:36] [INFO] 请求: POST /execute-stored-proc
+[2026-05-05 21:03:36] [INFO] API请求: POST /execute-stored-proc
+[2026-05-05 21:03:36] [INFO] 执行存储过程: usp_TJFX_RadiologyWorkloadStatistics_Detail
+[2026-05-05 21:03:36] [INFO] 请求: GET /rad_workload.html

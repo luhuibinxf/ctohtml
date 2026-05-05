@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -19,8 +18,14 @@
         .filter-bar { display: flex; gap: 15px; align-items: center; margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; flex-wrap: wrap; }
         .filter-bar label { font-weight: 500; color: #333; }
         .filter-bar select, .filter-bar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-        .filter-bar button { padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .filter-bar button { padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; position: relative; }
         .filter-bar button:hover { background: #0056b3; }
+        .filter-bar button:disabled { background: #ccc; cursor: not-allowed; }
+        .filter-bar .loading { display: inline-block; width: 16px; height: 16px; border: 2px solid #fff; border-radius: 50%; border-top-color: transparent; animation: spin 0.6s linear infinite; margin-right: 5px; }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         
         .table-wrapper { overflow-x: auto; }
         .workload-table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -75,6 +80,12 @@
         .modal-summary-item { text-align: center; }
         .modal-summary-item .label { font-size: 12px; color: #666; }
         .modal-summary-item .value { font-size: 20px; font-weight: 600; }
+        
+        .toast { position: fixed; bottom: 30px; right: 30px; padding: 15px 25px; border-radius: 8px; color: white; font-size: 14px; z-index: 2000; opacity: 0; transform: translateY(20px); transition: all 0.3s; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background: #28a745; }
+        .toast.error { background: #dc3545; }
+        .toast.info { background: #17a2b8; }
     </style>
 </head>
 <body>
@@ -97,8 +108,11 @@
             <input type="date" id="startDate" value="2026-01-01">
             <label>结束日期：</label>
             <input type="date" id="endDate" value="2026-01-31">
-            <button onclick="loadData()">查询</button>
-            <button onclick="loadFromDatabase()">从数据库加载</button>
+            <button id="btnQuery" onclick="loadData()">查询</button>
+            <button id="btnDatabase" onclick="loadFromDatabase()">
+                <span id="loadingIcon"></span>
+                从数据库加载
+            </button>
         </div>
         
         <div class="legend">
@@ -208,8 +222,12 @@
             </div>
         </div>
     </div>
+    
+    <div class="toast" id="toast"></div>
 
     <script>
+        const STORAGE_PROCEDURE_NAME = 'proc_RadiologyWorkload';
+        
         const mockData = [
             { '医生姓名': '贾永庚', DR: 2, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 12, 'CT增强': 1, 'MRI平扫': 2, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
             { '医生姓名': '陈丽娟', DR: 0, '下肢及脊柱全长拍片': 0, 钼靶: 0, 造影: 0, 'CT平扫': 20, 'CT增强': 0, 'MRI平扫': 0, MRA: 0, MRU: 0, MRCP: 0, '腹部盆腔前列腺直肠癌胎儿胎盘': 0, 'MRI增强': 0, 乳腺: 0, 心脏: 0 },
@@ -248,42 +266,89 @@
             const endDate = document.getElementById('endDate').value;
             const statisticsType = document.getElementById('statisticsType').value;
             
-            const year = startDate.substring(0, 4);
-            const month = startDate.substring(5, 7);
-            document.getElementById('currentDate').textContent = `统计日期：${year}年${parseInt(month)}月 (${statisticsType})`;
+            updateHeaderDate(startDate, statisticsType);
             
             renderTable(mockData);
             calculateSummary(mockData);
+            
+            showToast('已加载示例数据', 'info');
         }
 
         async function loadFromDatabase() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const statisticsType = document.getElementById('statisticsType').value;
+            const params = collectParams();
+            
+            if (!params['@StartDate'] || !params['@EndDate']) {
+                showToast('请选择日期范围', 'error');
+                return;
+            }
+            
+            setLoading(true);
             
             try {
-                const response = await fetch('/api/RadiologyWorkload', {
+                const response = await fetch('/execute-stored-proc', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        StartDate: startDate,
-                        EndDate: endDate,
-                        StatisticsType: statisticsType
+                        procName: STORAGE_PROCEDURE_NAME,
+                        parameters: params
                     })
                 });
                 
                 if (response.ok) {
-                    const data = await response.json();
-                    renderTable(data);
-                    calculateSummary(data);
+                    const result = await response.json();
+                    
+                    if (result.success && result.data && result.data.length > 0) {
+                        const data = transformData(result.data);
+                        renderTable(data);
+                        calculateSummary(data);
+                        updateHeaderDate(params['@StartDate'], params['@StatisticsType']);
+                        showToast('数据加载成功', 'success');
+                    } else if (result.error) {
+                        throw new Error(result.error);
+                    } else {
+                        showToast('数据库无数据，显示示例数据', 'info');
+                        loadData();
+                    }
                 } else {
-                    alert('从数据库加载失败，使用Mock数据');
-                    loadData();
+                    throw new Error('服务器返回错误');
                 }
             } catch (error) {
-                alert('网络连接失败，使用Mock数据');
+                console.error('数据库查询失败:', error);
+                showToast(`加载失败：${error.message}，使用示例数据`, 'error');
                 loadData();
+            } finally {
+                setLoading(false);
             }
+        }
+
+        function collectParams() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statisticsType = document.getElementById('statisticsType').value;
+            
+            return {
+                '@StartDate': startDate,
+                '@EndDate': endDate,
+                '@StatisticsType': statisticsType
+            };
+        }
+
+        function transformData(rawData) {
+            return rawData.map(item => {
+                const transformed = {};
+                Object.keys(item).forEach(key => {
+                    const newKey = key.replace(/^@/, '');
+                    transformed[newKey] = item[key];
+                });
+                return transformed;
+            });
+        }
+
+        function updateHeaderDate(dateStr, statisticsType) {
+            if (!dateStr) return;
+            const year = dateStr.substring(0, 4);
+            const month = dateStr.substring(5, 7);
+            document.getElementById('currentDate').textContent = `统计日期：${year}年${parseInt(month)}月 (${statisticsType})`;
         }
 
         function renderTable(data) {
@@ -298,13 +363,13 @@
                 let rowTotal = 0;
                 
                 columns.forEach(col => {
-                    const value = item[col] || 0;
+                    const value = parseInt(item[col]) || 0;
                     rowTotal += value;
                     totals[col] += value;
                     
                     const cell = document.createElement('td');
                     if (col === '医生姓名') {
-                        cell.textContent = value;
+                        cell.textContent = value || '';
                         cell.className = 'clickable';
                         cell.onclick = () => showDetail(value);
                     } else {
@@ -349,11 +414,11 @@
             let totalPufang = 0, totalCt = 0, totalMri = 0, totalDr = 0;
             
             data.forEach(item => {
-                totalDr += item['DR'] || 0;
-                totalPufang += (item['DR'] || 0) + (item['下肢及脊柱全长拍片'] || 0) + (item['钼靶'] || 0) + (item['造影'] || 0);
-                totalCt += (item['CT平扫'] || 0) + (item['CT增强'] || 0);
-                totalMri += (item['MRI平扫'] || 0) + (item['MRA'] || 0) + (item['MRU'] || 0) + (item['MRCP'] || 0) + 
-                           (item['腹部盆腔前列腺直肠癌胎儿胎盘'] || 0) + (item['MRI增强'] || 0) + (item['乳腺'] || 0) + (item['心脏'] || 0);
+                totalDr += parseInt(item['DR']) || 0;
+                totalPufang += (parseInt(item['DR']) || 0) + (parseInt(item['下肢及脊柱全长拍片']) || 0) + (parseInt(item['钼靶']) || 0) + (parseInt(item['造影']) || 0);
+                totalCt += (parseInt(item['CT平扫']) || 0) + (parseInt(item['CT增强']) || 0);
+                totalMri += (parseInt(item['MRI平扫']) || 0) + (parseInt(item['MRA']) || 0) + (parseInt(item['MRU']) || 0) + (parseInt(item['MRCP']) || 0) + 
+                           (parseInt(item['腹部盆腔前列腺直肠癌胎儿胎盘']) || 0) + (parseInt(item['MRI增强']) || 0) + (parseInt(item['乳腺']) || 0) + (parseInt(item['心脏']) || 0);
             });
             
             document.getElementById('totalPufang').textContent = totalPufang;
@@ -428,39 +493,52 @@
             document.getElementById('detailModal').classList.remove('active');
         }
 
-        async function loadDetailFromDatabase(workerName) {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const statisticsType = document.getElementById('statisticsType').value;
+        function setLoading(isLoading) {
+            const btn = document.getElementById('btnDatabase');
+            const icon = document.getElementById('loadingIcon');
             
-            try {
-                const response = await fetch('/api/RadiologyWorkload/Detail', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        StartDate: startDate,
-                        EndDate: endDate,
-                        WorkerName: workerName,
-                        StatisticsType: statisticsType
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    renderDetailTable(data);
-                    calculateDetailSummary(data);
-                } else {
-                    alert('从数据库加载明细失败，使用Mock数据');
-                    const detailData = mockDetailData[workerName] || [];
-                    renderDetailTable(detailData);
-                    calculateDetailSummary(detailData);
-                }
-            } catch (error) {
-                alert('网络连接失败，使用Mock数据');
-                const detailData = mockDetailData[workerName] || [];
-                renderDetailTable(detailData);
-                calculateDetailSummary(detailData);
+            if (isLoading) {
+                btn.disabled = true;
+                icon.innerHTML = '<span class="loading"></span>';
+            } else {
+                btn.disabled = false;
+                icon.innerHTML = '';
             }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function exportTable() {
+            const table = document.getElementById('workloadTable');
+            const header = '医生姓名\tDR\t下肢及脊柱全长拍片\t钼靶\t造影\tCT平扫\tCT增强\tMRI平扫\tMRA\tMRU\tMRCP\t腹部盆腔前列腺直肠癌胎儿胎盘\tMRI增强\t乳腺\t心脏\t合计\n';
+            
+            let csv = header;
+            const rows = table.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = [];
+                cells.forEach(cell => {
+                    rowData.push(cell.textContent);
+                });
+                csv += rowData.join('\t') + '\n';
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `放射科工作量_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            
+            showToast('导出成功', 'success');
         }
 
         document.getElementById('startDate').addEventListener('change', loadData);

@@ -301,6 +301,10 @@ namespace DbProcedureCaller.API
                 {
                     return HandleDeleteSystemConfig(url, inputStream);
                 }
+                else if (url == "/parse-sql-proc" && httpMethod == "POST")
+                {
+                    return HandleParseSqlProc(inputStream);
+                }
                 else
                 {
                     return Encoding.UTF8.GetBytes("{\"success\": false, \"error\": \"未知的API端点\"}");
@@ -1872,6 +1876,138 @@ namespace DbProcedureCaller.API
                 LogHelper.LogException(ex, "删除系统配置失败");
                 return CreateErrorResponse(ex.Message);
             }
+        }
+
+        private byte[] HandleParseSqlProc(Stream inputStream)
+        {
+            using (StreamReader reader = new StreamReader(inputStream, Encoding.UTF8))
+            {
+                string postData = reader.ReadToEnd();
+                string sql = ExtractValue(postData, "sql");
+
+                LogHelper.LogInfo("解析SQL存储过程");
+
+                try
+                {
+                    var result = ParseSqlProcedure(sql);
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+                    return Encoding.UTF8.GetBytes(json);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogException(ex, "解析SQL存储过程失败");
+                    return Encoding.UTF8.GetBytes("{\"success\": false, \"error\": \"" + ex.Message.Replace("\"", "'") + "\"}");
+                }
+            }
+        }
+
+        private dynamic ParseSqlProcedure(string sql)
+        {
+            var result = new System.Dynamic.ExpandoObject();
+            result.success = true;
+            result.procName = "";
+            result.configId = "";
+            result.configName = "";
+            result.parameters = new List<dynamic>();
+
+            var procMatch = System.Text.RegularExpressions.Regex.Match(sql, @"CREATE\s+PROC(?:EDURE)?\s+([a-zA-Z_][a-zA-Z0-9_]*)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (procMatch.Success)
+            {
+                result.procName = procMatch.Groups[1].Value;
+                result.configId = GenerateConfigId(result.procName);
+                result.configName = GenerateDisplayName(result.procName);
+            }
+
+            var paramSection = System.Text.RegularExpressions.Regex.Match(sql, @"CREATE\s+PROC(?:EDURE)?\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(([\s\S]*?)\)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (paramSection.Success)
+            {
+                string paramsText = paramSection.Groups[1].Value;
+                List<string> paramsList = new List<string>();
+                int depth = 0;
+                string current = "";
+
+                foreach (char c in paramsText)
+                {
+                    if (c == '(' || c == '[') depth++;
+                    else if (c == ')' || c == ']') depth--;
+                    else if (c == ',' && depth == 0)
+                    {
+                        paramsList.Add(current.Trim());
+                        current = "";
+                        continue;
+                    }
+                    current += c;
+                }
+                if (!string.IsNullOrWhiteSpace(current)) paramsList.Add(current.Trim());
+
+                foreach (string p in paramsList)
+                {
+                    var paramMatch = System.Text.RegularExpressions.Regex.Match(p, @"(@[a-zA-Z_][a-zA-Z0-9_]*)\s+([a-zA-Z]+(?:\([^)]*\))?)");
+                    if (paramMatch.Success)
+                    {
+                        string name = paramMatch.Groups[1].Value;
+                        string sqlType = paramMatch.Groups[2].Value.ToUpper();
+                        string type = "varchar";
+
+                        if (sqlType.Contains("DATE") || sqlType.Contains("TIME"))
+                            type = "datetime";
+                        else if (sqlType.Contains("INT") || sqlType.Contains("DECIMAL") || sqlType.Contains("FLOAT") || sqlType.Contains("NUMERIC"))
+                            type = "int";
+
+                        var defaultValueMatch = System.Text.RegularExpressions.Regex.Match(p, @"=\s*([^\s,)]+)");
+                        string defaultValue = defaultValueMatch.Success ? defaultValueMatch.Groups[1].Value : "";
+
+                        dynamic param = new System.Dynamic.ExpandoObject();
+                        param.name = name;
+                        param.displayName = GenerateDisplayName(name);
+                        param.type = type;
+                        param.defaultValue = defaultValue;
+                        param.options = "";
+                        param.isRequired = string.IsNullOrEmpty(defaultValue);
+                        param.isMultiple = false;
+
+                        result.parameters.Add(param);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private string GenerateConfigId(string name)
+        {
+            string id = name.Replace("proc_", "").Replace("sp_", "").Replace("usp_", "");
+            id = System.Text.RegularExpressions.Regex.Replace(id, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
+            return id;
+        }
+
+        private string GenerateDisplayName(string name)
+        {
+            Dictionary<string, string> mappings = new Dictionary<string, string>
+            {
+                {"StartDate", "开始日期"}, {"EndDate", "结束日期"}, {"StatDate", "统计日期"},
+                {"SystemType", "系统类型"}, {"Department", "科室"}, {"Doctor", "医生"},
+                {"Reporter", "报告医生"}, {"Reviewer", "审核医生"}, {"Technician", "技师"},
+                {"Category", "检查类别"}, {"Type", "类型"}, {"Status", "状态"},
+                {"Start", "开始"}, {"End", "结束"}, {"Date", "日期"}, {"Stat", "统计"},
+                {"System", "系统"}, {"Department", "科室"}, {"Doctor", "医生"}
+            };
+
+            string cleanName = name.Replace("@", "");
+            if (mappings.ContainsKey(cleanName))
+                return mappings[cleanName];
+
+            var words = System.Text.RegularExpressions.Regex.Matches(cleanName, @"[A-Z][a-z]*|[a-z]+|[0-9]+");
+            string result = "";
+            foreach (System.Text.RegularExpressions.Match word in words)
+            {
+                string w = word.Value;
+                if (mappings.ContainsKey(w))
+                    result += mappings[w];
+                else
+                    result += w;
+            }
+            return result;
         }
     }
 }
