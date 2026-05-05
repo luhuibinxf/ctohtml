@@ -829,6 +829,9 @@
                         .replace(/\{\{rowCount\}\}/g, rowCount)
                         .replace(/\{\{data\}\}/g, JSON.stringify(data));
                     
+                    $('#searchPanel').hide();
+                    $('#statsContainer').hide();
+                    
                     $('#resultContainer').html(`
                         <div class="result-header">
                             <h3>${config.name}</h3>
