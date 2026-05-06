@@ -105,9 +105,9 @@
                 <option value="技师">技师</option>
             </select>
             <label>开始日期：</label>
-            <input type="date" id="startDate" value="2026-01-01">
+            <input type="date" id="startDate">
             <label>结束日期：</label>
-            <input type="date" id="endDate" value="2026-01-31">
+            <input type="date" id="endDate">
             <button id="btnQuery" onclick="loadData()">
                 <span id="loadingIcon"></span>
                 查询
@@ -225,52 +225,55 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        let currentConfig = null;
+        var currentConfig = window.radWorkloadCurrentConfig || null;
+        window.radWorkloadCurrentConfig = currentConfig;
         
-        const columns = ['医生姓名', 'DR', '下肢及脊柱全长拍片', '钼靶', '造影', 'CT平扫', 'CT增强', 'MRI平扫', 'MRA', 'MRU', 'MRCP', '腹部盆腔前列腺直肠癌胎儿胎盘', 'MRI增强', '乳腺', '心脏'];
+        const radWorkloadColumns = ['医生姓名', 'DR', '下肢及脊柱全长拍片', '钼靶', '造影', 'CT平扫', 'CT增强', 'MRI平扫', 'MRA', 'MRU', 'MRCP', '腹部盆腔前列腺直肠癌胎儿胎盘', 'MRI增强', '乳腺', '心脏'];
+        
+        console.log('========== rad_workload.html 加载完成 ==========');
+        console.log('jQuery 可用:', typeof $ !== 'undefined');
+        console.log('startDate 元素:', document.getElementById('startDate'));
+        console.log('btnQuery 元素:', document.getElementById('btnQuery'));
 
         function init(config) {
             if (config && typeof config === 'object') {
                 currentConfig = config;
-                console.log('初始化配置:', currentConfig);
                 
-                if (currentConfig.parameters) {
-                    fillParamsFromConfig(currentConfig.parameters);
-                }
-                
-                loadData();
+                setTimeout(function() {
+                    if (currentConfig.parameters) {
+                        fillParamsFromConfig(currentConfig.parameters);
+                    }
+                }, 100);
             }
         }
         
         window.initCustomTemplate = init;
 
-        function fillParamsFromConfig(paramsConfig) {
-            if (!paramsConfig) return;
+        function fillParamsFromConfig(paramsJson) {
+            if (!paramsJson) return;
             
-            const params = typeof paramsConfig === 'string' ? JSON.parse(paramsConfig) : paramsConfig;
+            var params = typeof paramsJson === 'string' ? JSON.parse(paramsJson) : paramsJson;
             
-            params.forEach(param => {
-                let paramName = param.name.replace(/^@/, '');
-                
-                let input = document.getElementById(paramName);
-                
-                if (!input) {
-                    paramName = paramName.charAt(0).toUpperCase() + paramName.slice(1);
-                    input = document.getElementById(paramName);
+            params.forEach(function(param) {
+                var paramName = param.name;
+                var cleanParamName = paramName;
+                if (cleanParamName.startsWith('@')) {
+                    cleanParamName = cleanParamName.substring(1);
                 }
                 
-                if (!input) {
-                    paramName = paramName.toLowerCase();
-                    input = document.getElementById(paramName);
-                }
+                var defaultValue = param.defaultValue || '';
                 
-                if (!input) {
-                    paramName = paramName.charAt(0).toUpperCase() + paramName.slice(1);
-                    input = document.getElementById(paramName);
-                }
+                var $input = $('input, select, textarea').filter(function() {
+                    var name = $(this).attr('name') || '';
+                    var id = $(this).attr('id') || '';
+                    return name === param.name || name === cleanParamName || 
+                           id === cleanParamName || id === param.name ||
+                           id.toLowerCase() === cleanParamName.toLowerCase() ||
+                           name.toLowerCase() === cleanParamName.toLowerCase();
+                });
                 
-                if (input && param.defaultValue) {
-                    input.value = param.defaultValue;
+                if ($input.length > 0 && !$input.val()) {
+                    $input.val(defaultValue);
                 }
             });
         }
@@ -338,14 +341,33 @@
         
 
         function collectParams() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const statisticsType = document.getElementById('statisticsType').value;
+            const jqueryStartDate = $('#startDate').val();
+            const domStartDate = document.getElementById('startDate')?.value;
+            const jqueryEndDate = $('#endDate').val();
+            const domEndDate = document.getElementById('endDate')?.value;
+            
+            console.log('========== 参数获取详情 ==========');
+            console.log('jQuery startDate:', jqueryStartDate);
+            console.log('DOM startDate:', domStartDate);
+            console.log('jQuery endDate:', jqueryEndDate);
+            console.log('DOM endDate:', domEndDate);
+            console.log('匹配到的 startDate 元素数量:', $('input[id="startDate"]').length);
+            console.log('========================================');
+            
+            const startDate = jqueryStartDate || domStartDate || '';
+            const endDate = jqueryEndDate || domEndDate || '';
+            const statisticsType = $('#statisticsType').val() || document.getElementById('statisticsType')?.value || '报告医生';
+            
+            const typeMap = {
+                '报告医生': 'reporter',
+                '审核医生': 'reviewer',
+                '技师': 'technician'
+            };
             
             return {
                 '@StartDate': startDate,
                 '@EndDate': endDate,
-                '@StatisticsType': statisticsType
+                '@StatisticsType': typeMap[statisticsType] || 'reporter'
             };
         }
 
@@ -372,13 +394,13 @@
             tbody.innerHTML = '';
             
             let totals = {};
-            columns.forEach(col => totals[col] = 0);
+            radWorkloadColumns.forEach(col => totals[col] = 0);
             
             data.forEach(item => {
                 const row = document.createElement('tr');
                 let rowTotal = 0;
                 
-                columns.forEach(col => {
+                radWorkloadColumns.forEach(col => {
                     const value = parseInt(item[col]) || 0;
                     rowTotal += value;
                     totals[col] += value;
@@ -404,7 +426,7 @@
             const summaryRow = document.createElement('tr');
             summaryRow.className = 'summary-row';
             
-            columns.forEach(col => {
+            radWorkloadColumns.forEach(col => {
                 const cell = document.createElement('td');
                 if (col === '医生姓名') {
                     cell.innerHTML = '<strong>合计</strong>';

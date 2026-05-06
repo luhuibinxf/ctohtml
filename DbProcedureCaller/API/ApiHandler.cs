@@ -1901,21 +1901,22 @@ namespace DbProcedureCaller.API
             }
         }
 
-        private dynamic ParseSqlProcedure(string sql)
+        private Dictionary<string, object> ParseSqlProcedure(string sql)
         {
-            var result = new System.Dynamic.ExpandoObject();
-            result.success = true;
-            result.procName = "";
-            result.configId = "";
-            result.configName = "";
-            result.parameters = new List<dynamic>();
+            var result = new Dictionary<string, object>();
+            result["success"] = true;
+            result["procName"] = "";
+            result["configId"] = "";
+            result["configName"] = "";
+            result["parameters"] = new List<Dictionary<string, object>>();
 
             var procMatch = System.Text.RegularExpressions.Regex.Match(sql, @"CREATE\s+PROC(?:EDURE)?\s+([a-zA-Z_][a-zA-Z0-9_]*)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             if (procMatch.Success)
             {
-                result.procName = procMatch.Groups[1].Value;
-                result.configId = GenerateConfigId(result.procName);
-                result.configName = GenerateDisplayName(result.procName);
+                string procName = procMatch.Groups[1].Value;
+                result["procName"] = procName;
+                result["configId"] = GenerateConfigId(procName);
+                result["configName"] = GenerateDisplayName(procName);
             }
 
             var paramSection = System.Text.RegularExpressions.Regex.Match(sql, @"CREATE\s+PROC(?:EDURE)?\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(([\s\S]*?)\)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
@@ -1940,6 +1941,7 @@ namespace DbProcedureCaller.API
                 }
                 if (!string.IsNullOrWhiteSpace(current)) paramsList.Add(current.Trim());
 
+                var parameters = (List<Dictionary<string, object>>)result["parameters"];
                 foreach (string p in paramsList)
                 {
                     var paramMatch = System.Text.RegularExpressions.Regex.Match(p, @"(@[a-zA-Z_][a-zA-Z0-9_]*)\s+([a-zA-Z]+(?:\([^)]*\))?)");
@@ -1957,16 +1959,16 @@ namespace DbProcedureCaller.API
                         var defaultValueMatch = System.Text.RegularExpressions.Regex.Match(p, @"=\s*([^\s,)]+)");
                         string defaultValue = defaultValueMatch.Success ? defaultValueMatch.Groups[1].Value : "";
 
-                        dynamic param = new System.Dynamic.ExpandoObject();
-                        param.name = name;
-                        param.displayName = GenerateDisplayName(name);
-                        param.type = type;
-                        param.defaultValue = defaultValue;
-                        param.options = "";
-                        param.isRequired = string.IsNullOrEmpty(defaultValue);
-                        param.isMultiple = false;
+                        var param = new Dictionary<string, object>();
+                        param["name"] = name;
+                        param["displayName"] = GenerateDisplayName(name);
+                        param["type"] = type;
+                        param["defaultValue"] = defaultValue;
+                        param["options"] = "";
+                        param["isRequired"] = string.IsNullOrEmpty(defaultValue);
+                        param["isMultiple"] = false;
 
-                        result.parameters.Add(param);
+                        parameters.Add(param);
                     }
                 }
             }

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义统计配置流程汇总</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .nav-tabs .nav-link { font-weight: 500; }
+        .card { border-radius: 12px; }
+        .card-header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: white; border-radius: 12px 12px 0 0 !important; }
+        .card-header h3 { font-size: 1.1rem; margin: 0; }
+        .code-block { background: #1e293b; color: #e2e8f0; padding: 12px 16px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 13px; overflow-x: auto; }
+        .table th { background: #f8fafc; }
+        .badge { font-size: 11px; padding: 2px 8px; }
+        .badge-get { background: #22c55e; }
+        .badge-post { background: #3b82f6; }
+        .flow-step { position: relative; padding-left: 30px; margin-bottom: 16px; }
+        .flow-step::before { content: attr(data-step); position: absolute; left: 0; width: 24px; height: 24px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+        .relation-box { border: 2px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+        .relation-box label { font-weight: 600; color: #475569; }
+        .relation-box code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container mt-6">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">自定义统计配置流程汇总</h1>
+            <p class="text-gray-600 mt-2">本页面详细描述自定义统计功能的配置流程、API接口、前端处理逻辑、数据库表结构及事件触发条件</p>
+        </div>
+
+        <ul class="nav nav-tabs mb-6" id="summaryTabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="flow-tab" data-bs-toggle="tab" href="#flow">配置流程</a></li>
+            <li class="nav-item"><a class="nav-link" id="api-tab" data-bs-toggle="tab" href="#api">API接口</a></li>
+            <li class="nav-item"><a class="nav-link" id="frontend-tab" data-bs-toggle="tab" href="#frontend">前端处理</a></li>
+            <li class="nav-item"><a class="nav-link" id="tables-tab" data-bs-toggle="tab" href="#tables">数据库表</a></li>
+            <li class="nav-item"><a class="nav-link" id="events-tab" data-bs-toggle="tab" href="#events">事件触发</a></li>
+            <li class="nav-item"><a class="nav-link text-danger" id="issues-tab" data-bs-toggle="tab" href="#issues"><i class="fa-solid fa-exclamation-triangle"></i> 问题记录</a></li>
+        </ul>
+
+        <div class="tab-content" id="summaryTabsContent">
+            <div class="tab-pane fade show active" id="flow">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-arrow-right"></i> 配置流程</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="flow-step" data-step="1">
+                            <h4>创建配置记录</h4>
+                            <p>通过综合配置页面或直接执行SQL插入 <code>TJ_TJFX_CONFIG</code> 表，创建统计配置记录</p>
+                            <div class="code-block mt-2">INSERT INTO TJ_TJFX_CONFIG (ID, NAME, PROC_NAME, TEMPLATE_NAME, PARAMETERS) VALUES (...)
+</div>
+                        </div>
+                        <div class="flow-step" data-step="2">
+                            <h4>配置参数映射</h4>
+                            <p>定义存储过程参数与前端控件的映射关系，包括：显示名称、默认值、选项配置、是否多选等</p>
+                        </div>
+                        <div class="flow-step" data-step="3">
+                            <h4>配置模板页面（可选）</h4>
+                            <p>如果需要自定义展示样式，创建独立的HTML模板页面（如 <code>rad_workload.html</code>）</p>
+                        </div>
+                        <div class="flow-step" data-step="4">
+                            <h4>加载统计菜单</h4>
+                            <p><code>statistics.html</code> 页面初始化时调用 <code>/get-proc-configs</code> API加载所有配置，动态生成左侧菜单</p>
+                        </div>
+                        <div class="flow-step" data-step="5">
+                            <h4>用户选择统计项</h4>
+                            <p>用户点击菜单项后，根据配置决定是：加载自定义模板页面 或 直接调用存储过程</p>
+                        </div>
+                        <div class="flow-step" data-step="6">
+                            <h4>执行查询</h4>
+                            <p>收集前端参数，调用 <code>/execute-stored-proc</code> API执行存储过程，返回JSON数据</p>
+                        </div>
+                        <div class="flow-step" data-step="7">
+                            <h4>渲染结果</h4>
+                            <p>根据返回数据动态渲染表格或调用模板页面的初始化函数</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-sitemap"></i> 数据流转关系图</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="relation-box">
+                            <label>配置层</label>
+                            <p><code>TJ_TJFX_CONFIG</code> 表 → <code>StatConfigService</code> → <code>/get-proc-configs</code> API</p>
+                        </div>
+                        <div class="relation-box">
+                            <label>展示层</label>
+                            <p><code>statistics.html</code> → 动态菜单 → 用户选择 → 加载 <code>rad_workload.html</code> 或直接渲染</p>
+                        </div>
+                        <div class="relation-box">
+                            <label>数据层</label>
+                            <p><code>/execute-stored-proc</code> → 执行 <code>PROC_NAME</code> → 返回JSON → 前端渲染</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="api">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-plug"></i> 配置管理API</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>API路径</th>
+                                    <th>方法</th>
+                                    <th>功能描述</th>
+                                    <th>参数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/get-proc-configs</code></td>
+                                    <td><span class="badge badge-get">GET</span></td>
+                                    <td>获取所有启用的统计配置列表</td>
+                                    <td>无</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/get-proc-config?id=xxx</code></td>
+                                    <td><span class="badge badge-get">GET</span></td>
+                                    <td>根据ID或名称获取单个配置详情</td>
+                                    <td><code>id</code>: 配置ID或名称</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/save-proc-config</code></td>
+                                    <td><span class="badge badge-post">POST</span></td>
+                                    <td>保存或更新统计配置（MERGE操作）</td>
+                                    <td>完整配置JSON对象</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/delete-proc-config?id=xxx</code></td>
+                                    <td><span class="badge badge-post">POST</span></td>
+                                    <td>删除指定的统计配置</td>
+                                    <td><code>id</code>: 配置ID</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/save-param-config</code></td>
+                                    <td><span class="badge badge-post">POST</span></td>
+                                    <td>保存参数配置（仅更新PARAMETERS字段）</td>
+                                    <td><code>configId</code>, <code>parameters</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-database"></i> 数据执行API</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>API路径</th>
+                                    <th>方法</th>
+                                    <th>功能描述</th>
+                                    <th>参数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/execute-stored-proc</code></td>
+                                    <td><span class="badge badge-post">POST</span></td>
+                                    <td>执行指定的存储过程并返回结果</td>
+                                    <td><code>procName</code>: 存储过程名<br><code>parameters</code>: 参数对象</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/get-proc-metadata</code></td>
+                                    <td><span class="badge badge-post">POST</span></td>
+                                    <td>获取存储过程的参数元信息</td>
+                                    <td><code>procName</code>: 存储过程名</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                            <h5 class="font-semibold mb-2">请求示例</h5>
+                            <div class="code-block">{
+  "procName": "usp_TJFX_RadiologyWorkloadStatistics",
+  "parameters": {
+    "@StartDate": "2026-01-01",
+    "@EndDate": "2026-01-31",
+    "@StatisticsType": "报告医生"
+  }
+}
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="frontend">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-file-code"></i> statistics.html - 主统计页面</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="font-semibold mb-3">核心函数</h4>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>函数名</th>
+                                    <th>功能描述</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>loadCustomStats()</code></td>
+                                    <td>加载所有自定义统计配置，生成左侧菜单</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadStat(statId)</code></td>
+                                    <td>加载指定统计项，根据配置决定渲染方式</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadCustomStat(configId)</code></td>
+                                    <td>加载自定义统计配置并处理</td>
+                                </tr>
+                                <tr>
+                                    <td><code>renderCustomParamInputs(paramsJson)</code></td>
+                                    <td>根据参数配置动态生成表单控件</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadCustomTemplate(templateName, data, config)</code></td>
+                                    <td>加载独立HTML模板页面</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fillParamsToTemplate(paramsJson)</code></td>
+                                    <td>将参数默认值填充到模板控件</td>
+                                </tr>
+                                <tr>
+                                    <td><code>executeSearch()</code></td>
+                                    <td>执行查询，收集参数并调用API</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-file-code"></i> rad_workload.html - 模板页面规范</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="font-semibold mb-3">必须实现的函数</h4>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>函数名</th>
+                                    <th>功能描述</th>
+                                    <th>参数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>init(config)</code></td>
+                                    <td>初始化函数，接收配置对象</td>
+                                    <td><code>config</code>: 配置信息（含参数、存储过程名等）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>getProcName()</code></td>
+                                    <td>获取主存储过程名（优先读取mainProcName）</td>
+                                    <td>无</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fillParamsFromConfig(paramsJson)</code></td>
+                                    <td>从配置填充参数到页面控件（大小写不敏感）</td>
+                                    <td><code>paramsJson</code>: 参数JSON字符串</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadData()</code></td>
+                                    <td>加载数据（不应在页面加载时自动调用）</td>
+                                    <td>无</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                            <h5 class="font-semibold mb-2">参数传递规范</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">参数名统一使用大写开头（如 <code>@StartDate</code>）</li>
+                                <li class="list-group-item">参数匹配采用大小写不敏感方式</li>
+                                <li class="list-group-item">配置中的参数名应与存储过程参数名完全一致</li>
+                                <li class="list-group-item">日期类型参数统一使用 <code>YYYY-MM-DD</code> 格式</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tables">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-table"></i> TJ_TJFX_CONFIG - 主配置表</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>字段名</th>
+                                    <th>类型</th>
+                                    <th>默认值</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>ID</code></td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>-</td>
+                                    <td>主键，唯一标识</td>
+                                </tr>
+                                <tr>
+                                    <td><code>NAME</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>-</td>
+                                    <td>统计名称（显示用）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>DESCRIPTION</code></td>
+                                    <td>VARCHAR(500)</td>
+                                    <td>-</td>
+                                    <td>描述说明</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ICON</code></td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>fa-chart-bar</td>
+                                    <td>FontAwesome图标类名</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SORT_ORDER</code></td>
+                                    <td>INT</td>
+                                    <td>100</td>
+                                    <td>排序顺序</td>
+                                </tr>
+                                <tr>
+                                    <td><code>TEMPLATE_NAME</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>-</td>
+                                    <td>自定义模板HTML文件名</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PROC_NAME</code></td>
+                                    <td>VARCHAR(200)</td>
+                                    <td>-</td>
+                                    <td>主存储过程名称</td>
+                                </tr>
+                                <tr>
+                                    <td><code>HAS_DETAIL_PROC</code></td>
+                                    <td>BIT</td>
+                                    <td>0</td>
+                                    <td>是否有明细存储过程</td>
+                                </tr>
+                                <tr>
+                                    <td><code>DETAIL_PROC_NAME</code></td>
+                                    <td>VARCHAR(200)</td>
+                                    <td>-</td>
+                                    <td>明细存储过程名称（如 xxx_Detail）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>IS_ENABLED</code></td>
+                                    <td>BIT</td>
+                                    <td>1</td>
+                                    <td>是否启用</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PARAMETERS</code></td>
+                                    <td>TEXT</td>
+                                    <td>-</td>
+                                    <td>参数配置JSON</td>
+                                </tr>
+                                <tr>
+                                    <td><code>COLUMNS</code></td>
+                                    <td>TEXT</td>
+                                    <td>-</td>
+                                    <td>列配置JSON</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PERMISSION</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>-</td>
+                                    <td>权限标识</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CREATE_TIME</code></td>
+                                    <td>DATETIME</td>
+                                    <td>GETDATE()</td>
+                                    <td>创建时间</td>
+                                </tr>
+                                <tr>
+                                    <td><code>UPDATE_TIME</code></td>
+                                    <td>DATETIME</td>
+                                    <td>GETDATE()</td>
+                                    <td>更新时间</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-table"></i> PROC_CONFIGS - 旧版配置表</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-warning mb-3"><i class="fa-solid fa-exclamation-triangle"></i> 此表为旧版配置表，建议使用 <code>TJ_TJFX_CONFIG</code> 表</p>
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>字段名</th>
+                                    <th>类型</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>id</code></td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>主键</td>
+                                </tr>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>统计名称</td>
+                                </tr>
+                                <tr>
+                                    <td><code>icon</code></td>
+                                    <td>VARCHAR(50)</td>
+                                    <td>图标</td>
+                                </tr>
+                                <tr>
+                                    <td><code>procName</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>存储过程名</td>
+                                </tr>
+                                <tr>
+                                    <td><code>templateName</code></td>
+                                    <td>VARCHAR(100)</td>
+                                    <td>模板文件名</td>
+                                </tr>
+                                <tr>
+                                    <td><code>parameters</code></td>
+                                    <td>TEXT</td>
+                                    <td>参数JSON</td>
+                                </tr>
+                                <tr>
+                                    <td><code>enabled</code></td>
+                                    <td>BIT</td>
+                                    <td>是否启用</td>
+                                </tr>
+                                <tr>
+                                    <td><code>sortOrder</code></td>
+                                    <td>INT</td>
+                                    <td>排序</td>
+                                </tr>
+                                <tr>
+                                    <td><code>description</code></td>
+                                    <td>VARCHAR(500)</td>
+                                    <td>描述</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="events">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-bolt"></i> 事件触发条件</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>事件名称</th>
+                                    <th>触发条件</th>
+                                    <th>处理逻辑</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>页面初始化</code></td>
+                                    <td><code>document.ready</code></td>
+                                    <td>检查管理员状态 → 加载自定义统计菜单 → 初始化日期控件</td>
+                                </tr>
+                                <tr>
+                                    <td><code>菜单点击</code></td>
+                                    <td>用户点击左侧菜单项</td>
+                                    <td>调用 <code>loadStat()</code> → 获取配置 → 渲染参数面板或加载模板</td>
+                                </tr>
+                                <tr>
+                                    <td><code>查询按钮点击</code></td>
+                                    <td>用户点击"查询"按钮</td>
+                                    <td>收集参数 → 调用 <code>/execute-stored-proc</code> → 渲染结果</td>
+                                </tr>
+                                <tr>
+                                    <td><code>刷新按钮点击</code></td>
+                                    <td>用户点击"刷新"按钮</td>
+                                    <td>重新加载当前统计项数据</td>
+                                </tr>
+                                <tr>
+                                    <td><code>编辑按钮点击</code></td>
+                                    <td>管理员点击菜单旁的编辑图标</td>
+                                    <td>打开参数配置弹窗 → 加载存储过程元数据 → 保存参数配置</td>
+                                </tr>
+                                <tr>
+                                    <td><code>模板加载完成</code></td>
+                                    <td>自定义HTML模板加载完成</td>
+                                    <td>调用 <code>initCustomTemplate(config)</code> → 填充参数 → 初始化模板</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-arrows-left-right"></i> 参数传递流程</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="flow-step" data-step="1">
+                            <h4>配置层参数定义</h4>
+                            <p><code>TJ_TJFX_CONFIG.PARAMETERS</code> 字段存储JSON格式的参数配置</p>
+                            <div class="code-block mt-2">[
+  {"name":"@StartDate","displayName":"开始日期","type":"datetime","defaultValue":"2026-01-01","isRequired":true},
+  {"name":"@EndDate","displayName":"结束日期","type":"datetime","defaultValue":"2026-01-31","isRequired":true},
+  {"name":"@StatisticsType","displayName":"统计类型","type":"varchar","options":"报告医生,审核医生,技师","defaultValue":"报告医生"}
+]
+</div>
+                        </div>
+                        <div class="flow-step" data-step="2">
+                            <h4>前端动态渲染</h4>
+                            <p><code>renderCustomParamInputs()</code> 解析JSON，根据类型生成日期选择器、下拉框或文本框</p>
+                        </div>
+                        <div class="flow-step" data-step="3">
+                            <h4>参数收集</h4>
+                            <p>查询时遍历 <code>.param-value-input</code> 控件，构建参数对象</p>
+                        </div>
+                        <div class="flow-step" data-step="4">
+                            <h4>API调用</h4>
+                            <p>POST到 <code>/execute-stored-proc</code>，包含 <code>procName</code> 和 <code>parameters</code></p>
+                        </div>
+                        <div class="flow-step" data-step="5">
+                            <h4>数据库执行</h4>
+                            <p>服务端构建SQL命令，执行存储过程，返回DataTable并序列化为JSON</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-code-branch"></i> 存储过程调用逻辑</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="font-semibold mb-3">主存储过程调用</h4>
+                        <p>当配置中存在 <code>TEMPLATE_NAME</code> 且不为空时：</p>
+                        <ol>
+                            <li>加载独立HTML模板页面</li>
+                            <li>调用模板的 <code>init(config)</code> 函数传入配置</li>
+                            <li>模板内部调用 <code>getProcName()</code> 获取主存储过程名</li>
+                            <li>模板内部调用 <code>loadData()</code> 执行查询</li>
+                        </ol>
+                        
+                        <h4 class="font-semibold mb-3 mt-4">明细存储过程调用</h4>
+                        <p>仅当 <code>HAS_DETAIL_PROC = 1</code> 时才调用明细存储过程：</p>
+                        <ol>
+                            <li>用户点击汇总数据行触发</li>
+                            <li>调用 <code>DETAIL_PROC_NAME</code> 指定的存储过程</li>
+                            <li>传入额外的筛选参数（如科室、医生等）</li>
+                        </ol>
+                        
+                        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                            <h5 class="font-semibold mb-2">存储过程命名规范</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">主存储过程：<code>usp_TJFX_XXXStatistics</code> 或 <code>proc_XXX</code></li>
+                                <li class="list-group-item">明细存储过程：<code>usp_TJFX_XXXStatistics_Detail</code> 或 <code>proc_XXX_Detail</code></li>
+                                <li class="list-group-item">配置中 <code>PROC_NAME</code> 应为主存储过程名</li>
+                                <li class="list-group-item">模板页面通过 <code>mainProcName</code> 字段获取主存储过程名</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 text-center text-gray-500 text-sm">
+            <p>自定义统计配置流程汇总 - 最后更新: 2026-05-07</p>
+        </div>
+
+        <!-- 问题记录 -->
+        <div class="tab-pane fade" id="issues">
+            <div class="card mb-6 border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3><i class="fa-solid fa-exclamation-triangle"></i> 2026-05-06 问题记录与修改错误示范</h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="alert alert-danger mb-4">
+                        <h4 class="alert-heading"><i class="fa-solid fa-bug"></i> 核心问题：参数值重复导致默认值覆盖</h4>
+                        <hr>
+                        <p class="mb-0"><strong>问题现象：</strong>用户修改参数后，发送给后端的仍然是配置的默认值，而不是用户修改后的值。</p>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fa-solid fa-times-circle"></i> 错误示范一：硬编码存储过程名称</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>错误代码：</strong></p>
+                            <div class="code-block">function getProcName() {
+    return 'sp_RadiologyWorkloadStatistics'; // 硬编码！
+}</div>
+                            <hr>
+                            <p><strong>问题原因：</strong>破坏了模块化设计原则，存储过程名称应该从配置中获取。</p>
+                            <p><strong>正确做法：</strong></p>
+                            <div class="code-block">function getProcName() {
+    return currentConfig?.mainProcName || currentConfig?.procName || 'proc_RadiologyWorkload';
+}</div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fa-solid fa-times-circle"></i> 错误示范二：硬编码默认值覆盖配置</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>错误代码：</strong></p>
+                            <div class="code-block">&lt;input type="date" id="startDate" value="2026-01-01"&gt;  &lt;!-- HTML中硬编码 --&gt;</div>
+                            <hr>
+                            <p><strong>问题原因：</strong>HTML中硬编码的默认值会覆盖配置中的默认值，且无法动态更新。</p>
+                            <p><strong>正确做法：</strong></p>
+                            <div class="code-block">&lt;input type="date" id="startDate"&gt;  &lt;!-- 不设置value，由JS从配置填充 --&gt;</div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fa-solid fa-times-circle"></i> 错误示范三：重复生成参数输入框</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>错误代码：</strong></p>
+                            <div class="code-block">// statistics.html 中的错误逻辑
+if (config.parameters && (!config.templateName || !config.templateName.trim())) {
+    renderCustomParamInputs(config.parameters);  // 生成输入框
+}
+
+if (config.templateName && config.templateName.trim()) {
+    loadCustomTemplate(config.templateName, [], config);  // 加载模板
+    // 模板中又有自己的输入框，导致重复！
+}</div>
+                            <hr>
+                            <p><strong>问题原因：</strong>当有自定义模板时，statistics.html 仍然会生成参数输入框，导致页面上有两个相同ID的输入框。</p>
+                            <p><strong>正确做法：</strong></p>
+                            <div class="code-block">// 修改后的逻辑 - 互斥处理
+if (config.templateName && config.templateName.trim()) {
+    // 有自定义模板时，直接加载模板，由模板负责参数管理
+    loadCustomTemplate(config.templateName, [], config);
+} else if (config.parameters) {
+    // 没有自定义模板时，才生成参数输入框
+    renderCustomParamInputs(config.parameters);
+}</div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fa-solid fa-times-circle"></i> 错误示范四：jQuery选择器匹配多个元素</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>错误代码：</strong></p>
+                            <div class="code-block">// 由于有两个相同ID的输入框
+$('#startDate').val()  // jQuery获取到的是第一个，但用户看到的是第二个</div>
+                            <hr>
+                            <p><strong>问题原因：</strong>页面上有两个相同ID的输入框，jQuery获取到的是DOM中的第一个，而不是用户看到和修改的那个。</p>
+                            <p><strong>调试方法：</strong></p>
+                            <div class="code-block">console.log('匹配到的 startDate 元素数量:', $('input[id="startDate"]').length);
+// 应该显示 1，如果显示 2 则说明有重复</div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5><i class="fa-solid fa-times-circle"></i> 错误示范五：$(document).ready 无条件覆盖默认值</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>错误代码：</strong></p>
+                            <div class="code-block">$(document).ready(function() {
+    var today = new Date().toISOString().split('T')[0];
+    $('#startDate').val(today);  // 无条件覆盖配置默认值
+});</div>
+                            <hr>
+                            <p><strong>问题原因：</strong>$(document).ready 在页面加载时会无条件设置日期为今天，覆盖了配置的默认值。</p>
+                            <p><strong>正确做法：</strong></p>
+                            <div class="code-block">$(document).ready(function() {
+    var today = new Date().toISOString().split('T')[0];
+    if (!$('#startDate').val()) {  // 只在为空时设置
+        $('#startDate').val(today);
+    }
+});</div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success mb-4">
+                        <h4 class="alert-heading"><i class="fa-solid fa-check-circle"></i> 正确的参数传递流程</h4>
+                        <hr>
+                        <ol class="mb-0">
+                            <li><strong>页面加载</strong>：从配置中获取默认值并设置到输入框（仅当输入框为空时）</li>
+                            <li><strong>用户修改</strong>：用户可以修改输入框的值</li>
+                            <li><strong>执行查询</strong>：获取输入框的当前值（而不是配置的默认值）</li>
+                            <li><strong>传递给后端</strong>：将当前值作为参数传递</li>
+                        </ol>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading"><i class="fa-solid fa-lightbulb"></i> 设计原则总结</h4>
+                        <hr>
+                        <ul class="mb-0">
+                            <li><strong>配置驱动</strong>：存储过程名称和默认值应从数据库配置读取</li>
+                            <li><strong>模块化</strong>：自定义模板应完全负责自己的参数管理，statistics.html 不应生成冲突的输入框</li>
+                            <li><strong>避免硬编码</strong>：所有可配置的值都不应硬编码在代码中</li>
+                            <li><strong>唯一性</strong>：同一页面中相同ID的元素只能有一个</li>
+                            <li><strong>参数优先</strong>：用户修改的值优先于配置的默认值</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

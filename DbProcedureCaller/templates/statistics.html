@@ -572,10 +572,6 @@
         }
         
         $(document).ready(function() {
-            var today = new Date().toISOString().split('T')[0];
-            $('#startDate').val(today);
-            $('#endDate').val(today);
-            
             checkAdminStatus();
         });
         
@@ -723,7 +719,7 @@
                         if (config) {
                             $('#pageTitle').html(`<i class="fa-solid ${config.icon || 'fa-chart-bar'}"></i> ${config.name}`);
                             
-                            if (config.parameters) {
+                            if (config.parameters && (!config.templateName || !config.templateName.trim())) {
                                 renderCustomParamInputs(config.parameters);
                             }
                             
@@ -851,7 +847,6 @@
                         if (window.initCustomTemplate && typeof window.initCustomTemplate === 'function') {
                             window.initCustomTemplate(config);
                         }
-                        fillParamsToTemplate(config.parameters);
                     }, 100);
                     
                     updateStats(data.length, 0, '-', '-');
@@ -869,16 +864,20 @@
             
             params.forEach(function(param) {
                 var paramName = param.name;
-                if (paramName.startsWith('@')) {
-                    paramName = paramName.substring(1);
+                var cleanParamName = paramName;
+                if (cleanParamName.startsWith('@')) {
+                    cleanParamName = cleanParamName.substring(1);
                 }
                 
                 var defaultValue = param.defaultValue || '';
                 
-                var inputSelector = `[name="${param.name}"], [name="${paramName}"], #${param.name}, #${paramName}`;
-                var $input = $(inputSelector);
+                var $input = $('input, select, textarea').filter(function() {
+                    var name = $(this).attr('name') || '';
+                    var id = $(this).attr('id') || '';
+                    return name === param.name || name === cleanParamName || id === cleanParamName || id === param.name;
+                });
                 
-                if ($input.length > 0) {
+                if ($input.length > 0 && !$input.val()) {
                     $input.val(defaultValue);
                 }
             });
