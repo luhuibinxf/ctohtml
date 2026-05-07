@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义模板示例</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; background: #f8fafc; }
+        
+        .template-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .template-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .template-meta { font-size: 13px; opacity: 0.9; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .stat-label { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #1e293b; }
+        .stat-value.primary { color: #3b82f6; }
+        .stat-value.success { color: #22c55e; }
+        .stat-value.warning { color: #f59e0b; }
+        
+        .data-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .table-header {
+            background: #f8fafc;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #475569;
+        }
+        .table-body { max-height: 400px; overflow-y: auto; }
+        .table-row {
+            display: flex;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s;
+        }
+        .table-row:hover { background: #f8fafc; }
+        .table-row.header {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+            position: sticky;
+            top: 0;
+        }
+        .table-cell {
+            flex: 1;
+            min-width: 100px;
+            font-size: 14px;
+            color: #1e293b;
+        }
+        .table-cell.number { text-align: right; }
+        .table-cell.primary { color: #3b82f6; font-weight: 500; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+        }
+        .empty-state i { font-size: 48px; margin-bottom: 12px; }
+        
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .chart-title { font-size: 14px; font-weight: 600; color: #475569; margin-bottom: 16px; }
+        .chart-bars { display: flex; align-items: flex-end; height: 200px; gap: 12px; }
+        .chart-bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .chart-bar {
+            width: 100%;
+            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 8px 8px 0 0;
+            transition: height 0.5s ease;
+            min-height: 20px;
+        }
+        .chart-label { font-size: 12px; color: #64748b; margin-top: 8px; text-align: center; }
+        .chart-value { font-size: 12px; font-weight: 600; color: #1e293b; }
+    </style>
+</head>
+<body>
+    <div class="template-header">
+        <div class="template-title">{{title}}</div>
+        <div class="template-meta">共 {{rowCount}} 条记录 | 更新时间：{{currentTime}}</div>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">总任务数</div>
+            <div class="stat-value primary">{{summary.totalCount || 0}}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">阳性数</div>
+            <div class="stat-value success">{{summary.positiveCount || 0}}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">阴性数</div>
+            <div class="stat-value">{{summary.negativeCount || 0}}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">阳性率</div>
+            <div class="stat-value warning">{{(summary.positiveRate * 100 || 0).toFixed(1)}}%</div>
+        </div>
+    </div>
+    
+    <div class="data-table">
+        <div class="table-header">详细数据</div>
+        <div class="table-body">
+            <div class="table-row header">
+                {{#each columnNames}}
+                <div class="table-cell">{{this}}</div>
+                {{/each}}
+            </div>
+            {{#each data}}
+            <div class="table-row">
+                {{#each this}}
+                <div class="table-cell{{#if (isNumber this)}} number{{/if}}">{{this}}</div>
+                {{/each}}
+            </div>
+            {{/each}}
+            {{#if (isEmpty data)}}
+            <div class="empty-state">
+                <i class="fa-solid fa-inbox"></i>
+                <p>暂无数据</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <div class="chart-title">数据可视化</div>
+        <div class="chart-bars">
+            {{#each data}}
+            <div class="chart-bar-wrapper">
+                <div class="chart-value">{{this.任务数量 || this.total || 0}}</div>
+                <div class="chart-bar" style="height: {{getBarHeight this}}%"></div>
+                <div class="chart-label">{{this.报告医生 || this.科室 || this.检查类型 || '未知'}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+</html>

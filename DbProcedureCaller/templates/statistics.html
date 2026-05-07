@@ -466,10 +466,6 @@
                         <i class="fa-solid fa-bars"></i>
                         菜单
                     </button>
-                    <button class="btn btn-primary" onclick="refreshData()">
-                        <i class="fa-solid fa-refresh"></i>
-                        刷新数据
-                    </button>
                 </div>
             </div>
             
@@ -719,12 +715,12 @@
                         if (config) {
                             $('#pageTitle').html(`<i class="fa-solid ${config.icon || 'fa-chart-bar'}"></i> ${config.name}`);
                             
-                            if (config.parameters && (!config.templateName || !config.templateName.trim())) {
-                                renderCustomParamInputs(config.parameters);
-                            }
-                            
                             if (config.templateName && config.templateName.trim()) {
+                                // 有自定义模板时，直接加载模板，由模板负责参数管理
                                 loadCustomTemplate(config.templateName, [], config);
+                            } else if (config.parameters) {
+                                // 没有自定义模板时，才生成参数输入框
+                                renderCustomParamInputs(config.parameters);
                             } else {
                                 var parameters = {};
                                 $('.param-value-input').each(function() {
@@ -831,8 +827,8 @@
                         .replace(/\{\{rowCount\}\}/g, rowCount)
                         .replace(/\{\{data\}\}/g, JSON.stringify(data));
                     
-                    $('#searchPanel').hide();
-                    $('#statsContainer').hide();
+                    $('#searchPanel').remove();
+                    $('#statsContainer').remove();
                     
                     var finalHtml = `
                         ${styleContent}
@@ -887,10 +883,6 @@
             $('#sidebar').addClass('collapsed');
             sidebarVisible = false;
             
-            loadStat(currentStat);
-        }
-        
-        function refreshData() {
             loadStat(currentStat);
         }
         

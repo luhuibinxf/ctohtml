@@ -290,6 +290,11 @@
                 return;
             }
             
+            console.log('========== 存储过程调用详情 ==========');
+            console.log('存储过程名称:', getProcName());
+            console.log('完整入参:', JSON.stringify(params, null, 2));
+            console.log('========================================');
+            
             setLoading(true);
             
             fetch('/execute-stored-proc', {
@@ -356,18 +361,12 @@
             
             const startDate = jqueryStartDate || domStartDate || '';
             const endDate = jqueryEndDate || domEndDate || '';
-            const statisticsType = $('#statisticsType').val() || document.getElementById('statisticsType')?.value || '报告医生';
-            
-            const typeMap = {
-                '报告医生': 'reporter',
-                '审核医生': 'reviewer',
-                '技师': 'technician'
-            };
+            const statisticsType = $('#statisticsType').val() || document.getElementById('statisticsType')?.value || '';
             
             return {
                 '@StartDate': startDate,
                 '@EndDate': endDate,
-                '@StatisticsType': typeMap[statisticsType] || 'reporter'
+                '@StatisticsType': statisticsType
             };
         }
 
@@ -401,13 +400,18 @@
                 let rowTotal = 0;
                 
                 radWorkloadColumns.forEach(col => {
-                    const value = parseInt(item[col]) || 0;
-                    rowTotal += value;
-                    totals[col] += value;
+                    let value;
+                    if (col === '医生姓名') {
+                        value = item[col] || '';
+                    } else {
+                        value = parseInt(item[col]) || 0;
+                        rowTotal += value;
+                        totals[col] += value;
+                    }
                     
                     const cell = document.createElement('td');
                     if (col === '医生姓名') {
-                        cell.textContent = value || '';
+                        cell.textContent = value;
                         cell.className = 'clickable';
                         cell.onclick = () => showDetail(value);
                     } else {
@@ -472,6 +476,13 @@
         }
 
         function showDetail(workerName) {
+            console.log('========== 点击医生姓名 ==========');
+            console.log('医生姓名:', workerName);
+            console.log('当前配置:', currentConfig);
+            console.log('主存储过程:', getProcName());
+            console.log('明细存储过程:', getDetailProcName());
+            console.log('========================================');
+            
             const modal = document.getElementById('detailModal');
             const title = document.getElementById('modalTitle');
             

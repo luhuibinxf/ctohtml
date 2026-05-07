@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL配置 - 统计分析系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow: hidden; }
+        body { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .page-container { width: 100%; height: 100%; display: flex; flex-direction: column; }
+        
+        .page-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 16px; height: 42px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
+            border-radius: 10px; margin: 12px;
+            box-shadow: 0 3px 12px rgba(30, 64, 175, 0.2);
+        }
+        .page-header-title { display: flex; align-items: center; gap: 8px; color: white; font-size: 13px; font-weight: 600; }
+        .page-header-title i { font-size: 14px; }
+        .page-header-right { display: flex; align-items: center; gap: 10px; }
+        
+        .btn-back {
+            display: flex; align-items: center; gap: 4px;
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px; padding: 5px 10px; color: white; font-weight: 500; font-size: 11px;
+            cursor: pointer; transition: all 0.25s;
+        }
+        .btn-back:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
+        
+        .page-content { flex: 1; display: flex; gap: 12px; padding: 0 12px 12px; overflow: hidden; }
+        
+        .panel {
+            flex: 1; background: white; border-radius: 12px;
+            display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .panel-header {
+            padding: 12px 16px; border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .panel-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+        
+        .panel-body { flex: 1; padding: 16px; overflow-y: auto; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            font-size: 13px; font-weight: 500; color: #475569;
+            margin-bottom: 6px; display: block;
+        }
+        .form-group textarea {
+            width: 100%; height: 200px; padding: 12px;
+            border: 1px solid #e2e8f0; border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px; resize: vertical;
+        }
+        .form-group textarea:focus {
+            outline: none; border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        
+        .btn {
+            padding: 8px 16px; border: none; border-radius: 8px;
+            font-weight: 500; font-size: 13px; cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+            transition: all 0.25s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        .btn-success:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.3); }
+        
+        .btn-secondary {
+            background: #f1f5f9; color: #475569;
+        }
+        .btn-secondary:hover { background: #e2e8f0; }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 16px; }
+        
+        .alert {
+            display: none; padding: 12px 16px; border-radius: 8px;
+            font-size: 13px; margin-bottom: 16px;
+        }
+        .alert.success { background: rgba(34,197,94,0.1); color: #16a34a; }
+        .alert.error { background: rgba(239,68,68,0.1); color: #ef4444; }
+        
+        .param-table {
+            width: 100%; border-collapse: collapse; margin-top: 12px;
+        }
+        .param-table th, .param-table td {
+            padding: 10px; text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .param-table th {
+            background: #f8fafc; font-weight: 600; color: #475569;
+            font-size: 12px;
+        }
+        .param-table td { font-size: 13px; }
+        
+        .param-table input, .param-table select {
+            padding: 6px 10px; border: 1px solid #e2e8f0;
+            border-radius: 6px; font-size: 12px;
+            width: 100%;
+        }
+        .param-table input:focus, .param-table select:focus {
+            outline: none; border-color: #3b82f6;
+        }
+        
+        .config-summary {
+            background: #f8fafc; border-radius: 10px; padding: 16px;
+            margin-top: 16px;
+        }
+        .config-summary h4 { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+        
+        .summary-item {
+            display: flex; justify-content: space-between;
+            padding: 8px 0; border-bottom: 1px solid #e2e8f0;
+        }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-label { color: #64748b; font-size: 13px; }
+        .summary-value { color: #1e293b; font-weight: 500; font-size: 13px; }
+        
+        .json-preview {
+            background: #1e293b; color: #e2e8f0;
+            padding: 12px; border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            max-height: 200px; overflow-y: auto;
+            margin-top: 12px;
+        }
+        
+        .toggle-switch {
+            width: 44px; height: 24px; background: #e2e8f0;
+            border-radius: 12px; position: relative; cursor: pointer;
+            transition: background 0.25s;
+        }
+        .toggle-switch.active { background: #3b82f6; }
+        .toggle-switch::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            background: white; border-radius: 50%; top: 2px; left: 2px;
+            transition: left 0.25s;
+        }
+        .toggle-switch.active::after { left: 22px; }
+        
+        .type-badge {
+            padding: 2px 8px; border-radius: 4px; font-size: 11px;
+            background: rgba(59,130,246,0.1); color: #3b82f6;
+        }
+        .type-badge.datetime { background: rgba(245,158,11,0.1); color: #f59e0b; }
+        .type-badge.int { background: rgba(34,197,94,0.1); color: #22c55e; }
+        
+        .example-section {
+            background: rgba(59,130,246,0.05);
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+        }
+        .example-title { font-size: 12px; font-weight: 600; color: #3b82f6; margin-bottom: 8px; }
+        .example-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px; color: #475569;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-header">
+            <div class="page-header-title">
+                <i class="fa-solid fa-file-code"></i>
+                SQL配置生成器
+            </div>
+            <div class="page-header-right">
+                <button class="btn-back" onclick="goBack()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    返回主菜单
+                </button>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">📝 SQL输入</span>
+                </div>
+                <div class="panel-body">
+                    <div id="inputAlert" class="alert"></div>
+                    
+                    <div class="form-group">
+                        <label>存储过程SQL定义</label>
+                        <textarea id="sqlInput" placeholder="请输入存储过程定义，例如：&#10;CREATE PROCEDURE proc_RadiologyWorkload&#10;    @StartDate DATE,&#10;    @EndDate DATE,&#10;    @StatisticsType VARCHAR(50) = '报告医生'&#10;AS&#10;BEGIN&#10;    -- 查询逻辑...&#10;END"></textarea>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="parseSql()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            解析SQL
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearInput()">
+                            <i class="fa-solid fa-trash"></i>
+                            清空
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample()">
+                            <i class="fa-solid fa-file-text"></i>
+                            加载示例
+                        </button>
+                    </div>
+                    
+                    <div class="example-section">
+                        <div class="example-title">📌 SQL示例格式</div>
+                        <div class="example-code">CREATE PROCEDURE proc_ExampleName
+    @StartDate DATE,
+    @EndDate DATE,
+    @Department VARCHAR(50) = ''
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- 您的查询逻辑
+END</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">⚙️ 参数配置</span>
+                </div>
+                <div class="panel-body">
+                    <div id="configAlert" class="alert"></div>
+                    
+                    <div class="config-summary">
+                        <h4>📋 配置信息</h4>
+                        <div class="summary-item">
+                            <span class="summary-label">配置ID</span>
+                            <span class="summary-value" id="configId">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">显示名称</span>
+                            <input type="text" id="configName" class="summary-value" style="border: none; background: transparent;" placeholder="输入显示名称">
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">存储过程名</span>
+                            <span class="summary-value" id="procName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">图标</span>
+                            <input type="text" id="configIcon" class="summary-value" style="border: none; background: transparent;" value="fa-chart-bar" placeholder="fa-chart-bar">
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">排序序号</span>
+                            <input type="number" id="configSortOrder" class="summary-value" style="border: none; background: transparent; width: 80px;" value="100">
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 16px;">
+                        <table class="param-table" id="paramTable">
+                            <thead>
+                                <tr>
+                                    <th>参数名</th>
+                                    <th>显示名称</th>
+                                    <th>类型</th>
+                                    <th>默认值</th>
+                                    <th>选项</th>
+                                    <th>必填</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paramTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: #94a3b8;">
+                                        请先解析SQL
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="btn-group" style="margin-top: 20px;">
+                        <button class="btn btn-success" onclick="saveConfig()">
+                            <i class="fa-solid fa-save"></i>
+                            保存配置
+                        </button>
+                        <button class="btn btn-primary" onclick="generateJson()">
+                            <i class="fa-solid fa-code"></i>
+                            生成JSON
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="jsonModal" onclick="closeJsonModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span class="modal-title">生成的配置JSON</span>
+                <button class="modal-close" onclick="closeJsonModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="jsonContent"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="copyJson()">复制到剪贴板</button>
+                <button class="btn btn-secondary" onclick="closeJsonModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var parsedResult = null;
+        
+        function parseSql() {
+            var sql = $('#sqlInput').val();
+            if (!sql.trim()) {
+                showAlert('inputAlert', 'error', '请输入SQL存储过程定义');
+                return;
+            }
+            
+            $.post('/parse-sql-proc', JSON.stringify({ sql: sql }), function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r.success) {
+                    parsedResult = r;
+                    renderConfig(r);
+                    showAlert('inputAlert', 'success', 'SQL解析成功');
+                } else {
+                    showAlert('inputAlert', 'error', r.error || '解析失败');
+                }
+            }).fail(function() {
+                // 如果后端API不可用，使用前端解析
+                parseSqlFrontend(sql);
+            });
+        }
+        
+        function parseSqlFrontend(sql) {
+            var result = parseSqlProcedure(sql);
+            if (result.procName) {
+                parsedResult = {
+                    success: true,
+                    procName: result.procName,
+                    configId: generateConfigId(result.procName),
+                    configName: generateDisplayName(result.procName),
+                    parameters: result.parameters
+                };
+                renderConfig(parsedResult);
+                showAlert('inputAlert', 'success', 'SQL解析成功（前端解析）');
+            } else {
+                showAlert('inputAlert', 'error', '未能识别存储过程定义');
+            }
+        }
+        
+        function parseSqlProcedure(sql) {
+            var result = { procName: '', parameters: [] };
+            
+            var procMatch = sql.match(/CREATE\s+PROC(?:EDURE)?\s+([a-zA-Z_][a-zA-Z0-9_]*)/i);
+            if (procMatch) {
+                result.procName = procMatch[1];
+            }
+            
+            var paramSection = sql.match(/CREATE\s+PROC(?:EDURE)?\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(([\s\S]*?)\)/i);
+            if (paramSection) {
+                var paramsText = paramSection[1];
+                var params = [];
+                var depth = 0;
+                var current = '';
+                
+                for (var i = 0; i < paramsText.length; i++) {
+                    var c = paramsText[i];
+                    if (c === '(' || c === '[') depth++;
+                    else if (c === ')' || c === ']') depth--;
+                    else if (c === ',' && depth === 0) {
+                        params.push(current.trim());
+                        current = '';
+                        continue;
+                    }
+                    current += c;
+                }
+                if (current.trim()) params.push(current.trim());
+                
+                params.forEach(function(p) {
+                    var match = p.match(/(@[a-zA-Z_][a-zA-Z0-9_]*)\s+([a-zA-Z]+(?:\([^)]*\))?)/);
+                    if (match) {
+                        var name = match[1];
+                        var sqlType = match[2].toUpperCase();
+                        var type = 'varchar';
+                        if (sqlType.includes('DATE') || sqlType.includes('TIME')) type = 'datetime';
+                        else if (sqlType.includes('INT') || sqlType.includes('DECIMAL') || sqlType.includes('FLOAT')) type = 'int';
+                        
+                        var defaultValue = '';
+                        var defaultMatch = p.match(/=\s*([^\s,)]+)/);
+                        if (defaultMatch) defaultValue = defaultMatch[1];
+                        
+                        result.parameters.push({
+                            name: name,
+                            displayName: generateDisplayName(name),
+                            type: type,
+                            defaultValue: defaultValue,
+                            options: '',
+                            isRequired: !defaultValue,
+                            isMultiple: false
+                        });
+                    }
+                });
+            }
+            
+            return result;
+        }
+        
+        function generateConfigId(name) {
+            var id = name.replace(/^proc_|^sp_|^usp_/i, '');
+            id = id.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
+            return id;
+        }
+        
+        function generateDisplayName(name) {
+            var mappings = {
+                'StartDate': '开始日期', 'EndDate': '结束日期', 'StatDate': '统计日期',
+                'SystemType': '系统类型', 'Department': '科室', 'Doctor': '医生',
+                'Reporter': '报告医生', 'Reviewer': '审核医生', 'Technician': '技师',
+                'Category': '检查类别', 'Type': '类型', 'Status': '状态'
+            };
+            var cleanName = name.replace('@', '');
+            if (mappings[cleanName]) return mappings[cleanName];
+            
+            var words = cleanName.match(/[A-Z][a-z]*|[a-z]+|[0-9]+/g) || [];
+            var wordMap = { 'Start':'开始','End':'结束','Date':'日期','Stat':'统计','System':'系统',
+                          'Type':'类型','Department':'科室','Doctor':'医生','Reporter':'报告',
+                          'Reviewer':'审核','Technician':'技师','Category':'类别','Status':'状态' };
+            return words.map(w => wordMap[w] || w).join('');
+        }
+        
+        function renderConfig(result) {
+            $('#configId').text(result.configId || '-');
+            $('#configName').val(result.configName || '');
+            $('#procName').text(result.procName || '-');
+            
+            var html = '';
+            if (result.parameters && result.parameters.length > 0) {
+                result.parameters.forEach(function(p) {
+                    var typeClass = p.type === 'datetime' ? 'datetime' : p.type === 'int' ? 'int' : '';
+                    html += '<tr>';
+                    html += '<td><strong>' + p.name + '</strong></td>';
+                    html += '<td><input type="text" value="' + (p.displayName || '') + '" class="param-display" data-name="' + p.name + '"></td>';
+                    html += '<td><span class="type-badge ' + typeClass + '">' + p.type + '</span></td>';
+                    html += '<td><input type="text" value="' + (p.defaultValue || '') + '" class="param-default" data-name="' + p.name + '"></td>';
+                    html += '<td><input type="text" placeholder="选项1,选项2" class="param-options" data-name="' + p.name + '"></td>';
+                    html += '<td><div class="toggle-switch' + (p.isRequired ? ' active' : '') + '" onclick="toggleRequired(this)"></div></td>';
+                    html += '</tr>';
+                });
+            } else {
+                html = '<tr><td colspan="6" style="text-align: center; color: #94a3b8;">该存储过程没有参数</td></tr>';
+            }
+            $('#paramTableBody').html(html);
+        }
+        
+        function toggleRequired(el) {
+            $(el).toggleClass('active');
+        }
+        
+        function clearInput() {
+            $('#sqlInput').val('');
+            $('#paramTableBody').html('<tr><td colspan="6" style="text-align: center; color: #94a3b8;">请先解析SQL</td></tr>');
+            $('#configId').text('-');
+            $('#configName').val('');
+            $('#procName').text('-');
+            $('#configIcon').val('fa-chart-bar');
+            $('#configSortOrder').val('100');
+            parsedResult = null;
+        }
+        
+        function loadExample() {
+            $('#sqlInput').val(`CREATE PROCEDURE proc_RadiologyWorkload
+    @StartDate DATE,
+    @EndDate DATE,
+    @StatisticsType VARCHAR(50) = '报告医生',
+    @SystemType VARCHAR(20) = ''
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT 
+        报告医生,
+        COUNT(*) AS 任务数量,
+        SUM(CASE WHEN 阳性标识 = 1 THEN 1 ELSE 0 END) AS 阳性数
+    FROM 检查记录表
+    WHERE 检查日期 BETWEEN @StartDate AND @EndDate
+    GROUP BY 报告医生;
+END`);
+        }
+        
+        function saveConfig() {
+            if (!parsedResult) {
+                showAlert('configAlert', 'error', '请先解析SQL');
+                return;
+            }
+            
+            var configId = $('#configId').text();
+            var configName = $('#configName').val().trim();
+            var icon = $('#configIcon').val().trim() || 'fa-chart-bar';
+            var sortOrder = parseInt($('#configSortOrder').val()) || 100;
+            
+            if (!configName) {
+                showAlert('configAlert', 'error', '请输入显示名称');
+                return;
+            }
+            
+            var parameters = [];
+            $('#paramTableBody tr').each(function() {
+                var name = $(this).find('td:first strong').text();
+                if (!name) return;
+                
+                var displayName = $(this).find('.param-display').val().trim();
+                var defaultValue = $(this).find('.param-default').val().trim();
+                var options = $(this).find('.param-options').val().trim();
+                var isRequired = $(this).find('.toggle-switch').hasClass('active');
+                
+                parameters.push({
+                    name: name,
+                    displayName: displayName || generateDisplayName(name),
+                    type: $(this).find('.type-badge').text(),
+                    defaultValue: defaultValue,
+                    options: options,
+                    isRequired: isRequired,
+                    isMultiple: false,
+                    description: ''
+                });
+            });
+            
+            var config = {
+                id: configId,
+                name: configName,
+                icon: icon,
+                sortOrder: sortOrder,
+                templateName: '',
+                procName: parsedResult.procName,
+                hasDetailProc: false,
+                detailProcName: '',
+                isActive: true,
+                parameters: parameters,
+                columns: [],
+                description: '',
+                permission: ''
+            };
+            
+            $.post('/save-proc-config', JSON.stringify(config), function(res) {
+                var r = typeof res === 'string' ? JSON.parse(res) : res;
+                if (r.success) {
+                    showAlert('configAlert', 'success', '配置保存成功');
+                } else {
+                    showAlert('configAlert', 'error', r.error || '保存失败');
+                }
+            }).fail(function() {
+                showAlert('configAlert', 'error', '保存失败');
+            });
+        }
+        
+        function generateJson() {
+            if (!parsedResult) {
+                showAlert('configAlert', 'error', '请先解析SQL');
+                return;
+            }
+            
+            var parameters = [];
+            $('#paramTableBody tr').each(function() {
+                var name = $(this).find('td:first strong').text();
+                if (!name) return;
+                
+                parameters.push({
+                    name: name,
+                    displayName: $(this).find('.param-display').val().trim() || generateDisplayName(name),
+                    type: $(this).find('.type-badge').text(),
+                    defaultValue: $(this).find('.param-default').val().trim(),
+                    options: $(this).find('.param-options').val().trim(),
+                    isRequired: $(this).find('.toggle-switch').hasClass('active'),
+                    isMultiple: false,
+                    description: ''
+                });
+            });
+            
+            var config = {
+                id: $('#configId').text(),
+                name: $('#configName').val().trim() || parsedResult.configName,
+                icon: $('#configIcon').val().trim() || 'fa-chart-bar',
+                procName: parsedResult.procName,
+                templateName: '',
+                parameters: parameters,
+                enabled: true,
+                sortOrder: parseInt($('#configSortOrder').val()) || 100,
+                description: '',
+                permission: ''
+            };
+            
+            $('#jsonContent').text(JSON.stringify(config, null, 2));
+            $('#jsonModal').addClass('show');
+        }
+        
+        function copyJson() {
+            var text = $('#jsonContent').text();
+            navigator.clipboard.writeText(text).then(function() {
+                showAlert('configAlert', 'success', '已复制到剪贴板');
+            });
+        }
+        
+        function closeJsonModal() {
+            $('#jsonModal').removeClass('show');
+        }
+        
+        function showAlert(containerId, type, message) {
+            var alert = $('#' + containerId);
+            alert.removeClass('success error');
+            alert.addClass(type);
+            alert.html('<i class="fa-solid fa-' + (type === 'success' ? 'check-circle' : 'x-circle') + '"></i> ' + message);
+            alert.show();
+            setTimeout(function() { alert.hide(); }, 3000);
+        }
+        
+        function goBack() {
+            if (window.parent !== window) {
+                window.parent.closeContent && window.parent.closeContent();
+            } else {
+                window.location.href = '/main';
+            }
+        }
+    </script>
+</body>
+</html>

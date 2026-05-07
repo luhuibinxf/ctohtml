@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块化明细功能方案文档</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #1e293b;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 24px; 
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
+        }
+        
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .section-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #334155;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        
+        .code-block pre { margin: 0; }
+        
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+        }
+        
+        .config-table th, .config-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .config-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .config-table tr:hover { background: #f8fafc; }
+        
+        .module-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        
+        .module-item {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .module-item h4 {
+            color: #334155;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .module-item p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .flow-diagram {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .flow-step:last-child { margin-bottom: 0; }
+        
+        .flow-box {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .flow-arrow {
+            color: #94a3b8;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .feature-item {
+            background: #f0fdf4;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #bbf7d0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-item i {
+            color: #22c55e;
+            font-size: 14px;
+        }
+        
+        .feature-item span {
+            color: #166534;
+            font-size: 13px;
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0;
+        }
+        
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+        
+        .toggle-switch.active { background: #3b82f6; }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.25s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        
+        .toggle-switch.active::after { left: 22px; }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 12px 0;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+        
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        
+        .info-box {
+            background: #fef3c7;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .info-box i {
+            color: #d97706;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .info-box p {
+            color: #b45309;
+            font-size: 13px;
+            margin: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-cubes"></i> 模块化明细功能方案</h1>
+            <p>高度模块化设计，支持自定义显示和多维度明细查询</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">一、方案概述</div>
+            <p>本方案将明细功能拆分为三个核心模块：</p>
+            <div class="module-box">
+                <div class="module-item">
+                    <h4><i class="fa-solid fa-cog"></i> ConfigModule</h4>
+                    <p>配置管理模块，负责读取和提供配置数据</p>
+                </div>
+                <div class="module-item">
+                    <h4><i class="fa-solid fa-database"></i> DetailModule</h4>
+                    <p>明细逻辑模块，负责执行明细查询</p>
+                </div>
+                <div class="module-item">
+                    <h4><i class="fa-solid fa-paintbrush"></i> UIModule</h4>
+                    <p>UI渲染模块，负责渲染可点击单元格和弹窗</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">二、模块架构</div>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-box">配置数据</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box">ConfigModule</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-box">ConfigModule</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box">DetailModule</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box">UIModule</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-box">UIModule</div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box">用户界面</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">三、配置数据结构</div>
+            <div class="code-block">
+<pre>{
+    "id": "rad_workload",
+    "name": "影像中心工作量",
+    "procName": "usp_TJFX_RadiologyWorkload",
+    "templateName": "rad_workload.html",
+    
+    "detail": {
+        "enabled": true,
+        "triggerMode": "multi",
+        "triggerField": "医生姓名",
+        "excludeFields": ["合计"],
+        "customFields": [],
+        "inheritParams": ["@StartDate", "@EndDate", "@StatisticsType"],
+        "customRenderer": null
+    }
+}</pre>
+            </div>
+            
+            <div class="section-subtitle">配置项说明</div>
+            <table class="config-table">
+                <thead>
+                    <tr>
+                        <th>配置项</th>
+                        <th>说明</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>enabled</td>
+                        <td>是否启用明细功能</td>
+                        <td>true / false</td>
+                    </tr>
+                    <tr>
+                        <td>triggerMode</td>
+                        <td>触发模式</td>
+                        <td>single / multi / custom</td>
+                    </tr>
+                    <tr>
+                        <td>triggerField</td>
+                        <td>单字段模式的触发字段</td>
+                        <td>医生姓名</td>
+                    </tr>
+                    <tr>
+                        <td>excludeFields</td>
+                        <td>多字段模式的排除字段</td>
+                        <td>["合计", "序号"]</td>
+                    </tr>
+                    <tr>
+                        <td>inheritParams</td>
+                        <td>继承的参数列表</td>
+                        <td>["@StartDate", "@EndDate"]</td>
+                    </tr>
+                    <tr>
+                        <td>customRenderer</td>
+                        <td>自定义渲染函数名</td>
+                        <td>myCustomRenderer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">四、触发模式说明</div>
+            <div class="module-box">
+                <div class="module-item" style="border-left-color: #22c55e;">
+                    <h4><i class="fa-solid fa-circle-dot"></i> 单字段触发</h4>
+                    <p>只有指定的一个字段可点击，适用于只需医生明细的场景</p>
+                </div>
+                <div class="module-item" style="border-left-color: #f59e0b;">
+                    <h4><i class="fa-solid fa-grid-3x3"></i> 多字段触发</h4>
+                    <p>所有数值列都可点击（排除指定字段），适用于全方位明细查询</p>
+                </div>
+                <div class="module-item" style="border-left-color: #8b5cf6;">
+                    <h4><i class="fa-solid fa-sliders"></i> 自定义触发</h4>
+                    <p>只有指定的多个字段可点击，提供精细控制</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">五、自定义显示机制</div>
+            <p>通过注册全局渲染函数实现自定义显示：</p>
+            <div class="code-block">
+<pre>window.customDetailRenderer = function(data) {
+    return `
+        <div class="custom-detail">
+            <h4>检查明细</h4>
+            <div class="stats">
+                <span>总记录数: ${data.length}</span>
+            </div>
+            <div class="list">
+                ${data.map(item => `
+                    <div>${item.检查日期} - ${item.患者姓名}</div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+};</pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">六、配置界面设计</div>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px;">
+                <div class="form-row">
+                    <div class="toggle-group" style="width: 100%;">
+                        <label style="font-weight: 600;">启用明细功能</label>
+                        <div class="toggle-switch active"></div>
+                        <span style="color: #22c55e; font-weight: 500;">已启用</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>触发模式</label>
+                        <select>
+                            <option value="single">单字段触发</option>
+                            <option value="multi" selected>多字段触发（所有数值列）</option>
+                            <option value="custom">自定义触发字段</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>排除字段（逗号分隔）</label>
+                        <input type="text" placeholder="如: 合计,序号" value="合计" />
+                    </div>
+                    <div class="form-group">
+                        <label>继承参数（逗号分隔）</label>
+                        <input type="text" placeholder="如: @StartDate,@EndDate" value="@StartDate,@EndDate,@StatisticsType" />
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>自定义渲染器（可选）</label>
+                        <input type="text" placeholder="函数名，如: myRenderer" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">七、方案特性</div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>高度模块化设计</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>松耦合架构</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>支持自定义渲染</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>三种触发模式</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>配置驱动</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>参数继承机制</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">八、使用效果预览</div>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                    <div style="background: #fef3c7; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-info-circle" style="color: #d97706;"></i>
+                        <span style="color: #b45309; font-size: 13px;">明细功能已启用 (多字段触发)</span>
+                    </div>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #e2e8f0;">
+                            <th style="padding: 10px; text-align: left; border: 1px solid #cbd5e1;">医生姓名*</th>
+                            <th style="padding: 10px; text-align: center; border: 1px solid #cbd5e1;">DR*</th>
+                            <th style="padding: 10px; text-align: center; border: 1px solid #cbd5e1;">CT*</th>
+                            <th style="padding: 10px; text-align: center; border: 1px solid #cbd5e1;">MRI*</th>
+                            <th style="padding: 10px; text-align: center; border: 1px solid #cbd5e1;">合计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #cbd5e1; color: #3b82f6; cursor: pointer;">沈美娟 ▼</td>
+                            <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: center; color: #3b82f6; cursor: pointer;">334</td>
+                            <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: center; color: #3b82f6; cursor: pointer;">458</td>
+                            <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: center; color: #3b82f6; cursor: pointer;">145</td>
+                            <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: center;">1139</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="color: #64748b; font-size: 13px; margin-top: 8px;">* 表示可点击字段</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">九、存储过程规范</div>
+            <div class="info-box">
+                <i class="fa-solid fa-database"></i>
+                <p><strong>主存储过程命名：</strong>usp_TJFX_{功能名称}</p>
+            </div>
+            <div class="info-box">
+                <i class="fa-solid fa-list"></i>
+                <p><strong>明细存储过程命名：</strong>usp_TJFX_{功能名称}_Detail</p>
+            </div>
+            <div class="code-block">
+<pre>CREATE PROCEDURE usp_TJFX_RadiologyWorkload_Detail
+    @FieldName VARCHAR(100),
+    @FieldValue VARCHAR(200),
+    @StartDate DATE,
+    @EndDate DATE,
+    @StatisticsType VARCHAR(50)
+AS
+BEGIN
+    -- 根据 @FieldName 动态查询
+END</pre>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fa-solid fa-file-text"></i> 模块化明细功能方案文档 v1.0</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>离线图标库 - 图标展示</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 24px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
+        }
+        
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .usage-info {
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .usage-info h4 {
+            color: #166534;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .usage-info code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            display: block;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 16px;
+        }
+        
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .icon-item:hover {
+            background: #f1f5f9;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        
+        .icon-item.selected {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+        
+        .icon-item svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+            color: #475569;
+        }
+        
+        .icon-item:hover svg {
+            color: #3b82f6;
+        }
+        
+        .icon-item span {
+            font-size: 12px;
+            color: #64748b;
+            text-align: center;
+            word-break: break-all;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .search-box input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .selected-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .selected-info.show {
+            display: block;
+        }
+        
+        .selected-info h4 {
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .selected-info code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            display: block;
+        }
+        
+        .preview-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .preview-box svg {
+            width: 64px;
+            height: 64px;
+            color: white;
+        }
+        
+        .preview-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .preview-info-item {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .preview-info-item label {
+            font-size: 12px;
+            color: #64748b;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .preview-info-item code {
+            font-size: 14px;
+            color: #334155;
+            font-weight: 500;
+        }
+        
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #334155;
+            margin: 24px 0 16px;
+            padding-left: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .copy-btn:hover { background: #2563eb; }
+        
+        .size-variants {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+            margin-top: 12px;
+        }
+        
+        .size-variant {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .size-variant span {
+            font-size: 11px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📦 离线图标库</h1>
+        <p>基于 Font Awesome SVG 路径的离线图标集合，无需网络连接</p>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">使用方法</div>
+        <div class="usage-info">
+            <h4>方式1: 使用 SVG Symbol</h4>
+            <code>&lt;!-- 在HTML中引入图标定义 --&gt;
+&lt;link rel="import" href="icon/symbols.svg"&gt;
+
+&lt;!-- 使用图标 --&gt;
+&lt;svg&gt;&lt;use href="icon/symbols.svg#fa-search"&gt;&lt;/use&gt;&lt;/svg&gt;</code>
+            
+            <h4>方式2: 直接使用 SVG 路径</h4>
+            <code>&lt;!-- 直接复制 symbols.svg 中的 symbol 定义到你的 HTML --&gt;</code>
+            
+            <h4>方式3: CSS 背景图方式</h4>
+            <code>/* 在 CSS 中定义图标类 */
+.icon-search::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('data:image/svg+xml,...');
+}</code>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">图标预览</div>
+        
+        <div class="preview-box" id="previewBox">
+            <svg id="previewIcon"><use href="../icon/symbols.svg#fa-search"></use></svg>
+        </div>
+        
+        <div class="preview-info">
+            <div class="preview-info-item">
+                <label>图标ID</label>
+                <code id="iconId">fa-search</code>
+            </div>
+            <div class="preview-info-item">
+                <label>图标名称</label>
+                <code id="iconName">搜索</code>
+            </div>
+            <div class="preview-info-item">
+                <label>SVG引用代码</label>
+                <code id="svgCode">&lt;svg&gt;&lt;use href="icon/symbols.svg#fa-search"&gt;&lt;/use&gt;&lt;/svg&gt;</code>
+            </div>
+        </div>
+        
+        <div class="size-variants">
+            <div class="size-variant">
+                <svg width="16" height="16"><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>16px</span>
+            </div>
+            <div class="size-variant">
+                <svg width="24" height="24"><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>24px</span>
+            </div>
+            <div class="size-variant">
+                <svg width="32" height="32"><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>32px</span>
+            </div>
+            <div class="size-variant">
+                <svg width="48" height="48"><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>48px</span>
+            </div>
+            <div class="size-variant">
+                <svg width="64" height="64"><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>64px</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">所有图标</div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索图标名称或ID..." onkeyup="filterIcons()">
+        </div>
+        
+        <h3 class="category-title">界面通用</h3>
+        <div class="icon-grid" id="iconGrid">
+            <div class="icon-item" data-id="fa-search" data-name="搜索" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-search"></use></svg>
+                <span>fa-search</span>
+            </div>
+            <div class="icon-item" data-id="fa-plus" data-name="加号" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-plus"></use></svg>
+                <span>fa-plus</span>
+            </div>
+            <div class="icon-item" data-id="fa-times" data-name="关闭" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-times"></use></svg>
+                <span>fa-times</span>
+            </div>
+            <div class="icon-item" data-id="fa-check" data-name="成功" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-check"></use></svg>
+                <span>fa-check</span>
+            </div>
+            <div class="icon-item" data-id="fa-info-circle" data-name="信息" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-info-circle"></use></svg>
+                <span>fa-info-circle</span>
+            </div>
+            <div class="icon-item" data-id="fa-exclamation-triangle" data-name="警告" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-exclamation-triangle"></use></svg>
+                <span>fa-exclamation-triangle</span>
+            </div>
+            <div class="icon-item" data-id="fa-bars" data-name="菜单" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-bars"></use></svg>
+                <span>fa-bars</span>
+            </div>
+            <div class="icon-item" data-id="fa-list" data-name="列表" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-list"></use></svg>
+                <span>fa-list</span>
+            </div>
+            <div class="icon-item" data-id="fa-arrow-left" data-name="返回" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-arrow-left"></use></svg>
+                <span>fa-arrow-left</span>
+            </div>
+            <div class="icon-item" data-id="fa-arrow-right" data-name="前进" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-arrow-right"></use></svg>
+                <span>fa-arrow-right</span>
+            </div>
+        </div>
+        
+        <h3 class="category-title">用户与导航</h3>
+        <div class="icon-grid" id="iconGrid2">
+            <div class="icon-item" data-id="fa-user" data-name="用户" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-user"></use></svg>
+                <span>fa-user</span>
+            </div>
+            <div class="icon-item" data-id="fa-home" data-name="首页" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-home"></use></svg>
+                <span>fa-home</span>
+            </div>
+            <div class="icon-item" data-id="fa-lock" data-name="锁" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-lock"></use></svg>
+                <span>fa-lock</span>
+            </div>
+            <div class="icon-item" data-id="fa-eye" data-name="眼睛" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-eye"></use></svg>
+                <span>fa-eye</span>
+            </div>
+        </div>
+        
+        <h3 class="category-title">数据与图表</h3>
+        <div class="icon-grid" id="iconGrid3">
+            <div class="icon-item" data-id="fa-chart-bar" data-name="柱状图" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-chart-bar"></use></svg>
+                <span>fa-chart-bar</span>
+            </div>
+            <div class="icon-item" data-id="fa-chart-pie" data-name="饼图" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-chart-pie"></use></svg>
+                <span>fa-chart-pie</span>
+            </div>
+            <div class="icon-item" data-id="fa-chart-line" data-name="折线图" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-chart-line"></use></svg>
+                <span>fa-chart-line</span>
+            </div>
+            <div class="icon-item" data-id="fa-database" data-name="数据库" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-database"></use></svg>
+                <span>fa-database</span>
+            </div>
+            <div class="icon-item" data-id="fa-server" data-name="服务器" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-server"></use></svg>
+                <span>fa-server</span>
+            </div>
+        </div>
+        
+        <h3 class="category-title">文件与操作</h3>
+        <div class="icon-grid" id="iconGrid4">
+            <div class="icon-item" data-id="fa-file" data-name="文件" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-file"></use></svg>
+                <span>fa-file</span>
+            </div>
+            <div class="icon-item" data-id="fa-folder" data-name="文件夹" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-folder"></use></svg>
+                <span>fa-folder</span>
+            </div>
+            <div class="icon-item" data-id="fa-save" data-name="保存" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-save"></use></svg>
+                <span>fa-save</span>
+            </div>
+            <div class="icon-item" data-id="fa-edit" data-name="编辑" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-edit"></use></svg>
+                <span>fa-edit</span>
+            </div>
+            <div class="icon-item" data-id="fa-download" data-name="导出" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-download"></use></svg>
+                <span>fa-download</span>
+            </div>
+            <div class="icon-item" data-id="fa-play" data-name="播放" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-play"></use></svg>
+                <span>fa-play</span>
+            </div>
+            <div class="icon-item" data-id="fa-refresh" data-name="刷新" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-refresh"></use></svg>
+                <span>fa-refresh</span>
+            </div>
+            <div class="icon-item" data-id="fa-gear" data-name="设置" onclick="selectIcon(this)">
+                <svg><use href="../icon/symbols.svg#fa-gear"></use></svg>
+                <span>fa-gear</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function selectIcon(element) {
+            document.querySelectorAll('.icon-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            const iconId = element.dataset.id;
+            const iconName = element.dataset.name;
+            
+            document.getElementById('previewIcon').innerHTML = '<use href="../icon/symbols.svg#' + iconId + '"></use>';
+            document.getElementById('iconId').textContent = iconId;
+            document.getElementById('iconName').textContent = iconName;
+            document.getElementById('svgCode').textContent = '<svg><use href="icon/symbols.svg#' + iconId + '"></use></svg>';
+        }
+        
+        function filterIcons() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const allIcons = document.querySelectorAll('.icon-item');
+            
+            allIcons.forEach(icon => {
+                const id = icon.dataset.id.toLowerCase();
+                const name = icon.dataset.name.toLowerCase();
+                
+                if (id.includes(searchText) || name.includes(searchText)) {
+                    icon.style.display = 'flex';
+                } else {
+                    icon.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
