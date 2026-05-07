@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计分析系统 - 长期规划</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i {
+            font-size: 16px;
+            color: #667eea;
+        }
+        .priority {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .priority.high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .priority.medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .priority.low {
+            background: #d1fae5;
+            color: #059669;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #475569;
+            font-size: 13px;
+        }
+        td {
+            font-size: 14px;
+            color: #334155;
+        }
+        .phase {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .phase-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .phase-item h3 {
+            font-size: 14px;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .phase-item p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+        .highlight h4 {
+            color: #b45309;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .highlight ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .highlight li {
+            font-size: 13px;
+            color: #92400e;
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+        .highlight li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #d97706;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 统计分析系统 - 长期规划</h1>
+            <p>文档版本: v1.0 | 创建日期: 2026-05-07 | 最后更新: 2026-05-07</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-puzzle-piece"></i> 一、功能整合与去重
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>合并统计分析页面</td>
+                        <td>将 statistics_cs.html 测试功能合并到正式版</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>迁移定制页面</td>
+                        <td>将 rad_workload.html 迁移到通用报表框架</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>统一报表入口</td>
+                        <td>所有报表通过统计分析模块统一访问</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>消除硬编码</td>
+                        <td>将独立页面的业务逻辑转为配置驱动</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-architecture"></i> 二、架构优化
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>微服务化拆分</td>
+                        <td>将报表服务独立为微服务</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>前后端分离</td>
+                        <td>前端使用 Vue/React 重构</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>API 网关统一</td>
+                        <td>统一管理所有 API 请求</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>配置中心建设</td>
+                        <td>集中管理系统配置</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-smile"></i> 三、用户体验提升
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9</td>
+                        <td>响应式设计</td>
+                        <td>支持移动端和多屏幕尺寸</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>深色模式</td>
+                        <td>支持明暗主题切换</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>图表可视化增强</td>
+                        <td>集成 ECharts 等图表库</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>数据导出功能</td>
+                        <td>支持 Excel/PDF 导出</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-zap"></i> 四、性能优化
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>13</td>
+                        <td>缓存策略</td>
+                        <td>添加 Redis 缓存层</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>查询优化</td>
+                        <td>优化数据库查询性能</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>异步处理</td>
+                        <td>支持异步报表生成</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>CDN 加速</td>
+                        <td>静态资源 CDN 分发</td>
+                        <td><span class="priority low">低</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-shield-halved"></i> 五、安全性增强
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>17</td>
+                        <td>权限细化</td>
+                        <td>支持报表级和字段级权限</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>审计日志</td>
+                        <td>完整记录操作日志</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>数据加密</td>
+                        <td>敏感数据加密存储</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>安全审计</td>
+                        <td>定期安全漏洞扫描</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-expand-arrows-alt"></i> 六、扩展性提升
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>21</td>
+                        <td>插件化架构</td>
+                        <td>支持自定义插件扩展</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>多数据源支持</td>
+                        <td>支持多种数据库类型</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>国际化支持</td>
+                        <td>支持多语言切换</td>
+                        <td><span class="priority low">低</span></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>RESTful API</td>
+                        <td>提供标准化 API 接口</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-file-text"></i> 七、文档和测试
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>任务</th>
+                        <th>描述</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>25</td>
+                        <td>API 文档</td>
+                        <td>完善接口文档</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>用户手册</td>
+                        <td>编写详细使用指南</td>
+                        <td><span class="priority medium">中</span></td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>单元测试</td>
+                        <td>完善代码测试覆盖率</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>CI/CD 流程</td>
+                        <td>自动化测试和部署</td>
+                        <td><span class="priority high">高</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-calendar"></i> 时间规划
+            </div>
+            <div class="phase">
+                <div class="phase-item">
+                    <h3>第1季度</h3>
+                    <p>功能整合<br>性能优化</p>
+                </div>
+                <div class="phase-item">
+                    <h3>第2季度</h3>
+                    <p>架构重构<br>前后端分离</p>
+                </div>
+                <div class="phase-item">
+                    <h3>第3季度</h3>
+                    <p>安全性增强<br>扩展性提升</p>
+                </div>
+                <div class="phase-item">
+                    <h3>第4季度</h3>
+                    <p>文档完善<br>测试体系</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-lightbulb"></i> 重点推荐
+            </div>
+            <div class="highlight">
+                <h4>优先推进任务：</h4>
+                <ul>
+                    <li>功能整合（消除重复代码）</li>
+                    <li>性能优化（缓存、查询优化）</li>
+                    <li>安全性增强（权限、审计、加密）</li>
+                    <li>前后端分离（技术债务清理）</li>
+                    <li>响应式设计和图表可视化（用户体验）</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
